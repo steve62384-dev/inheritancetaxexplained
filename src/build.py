@@ -40,6 +40,18 @@ ARTICLES = {
         "George Osborne Killed The Annuity Market With One Sentence. He May Have Just Saved It With Another.",
         "https://www.linkedin.com/pulse/george-osborne-killed-annuity-market-one-sentence-he-steve-hunt-vi1gc",
     ),
+    "certainties": (
+        "There are two certainties in life: death and taxes. After forty-six years in pensions, I think there's a third.",
+        "https://www.linkedin.com/pulse/two-certainties-life-death-taxes-after-forty-six-i-steve-hunt-5yfjf",
+    ),
+    "days86": (
+        "86 days, 10 hours, 5 minutes and 42 seconds",
+        "https://www.linkedin.com/pulse/86-days-10-hours-5-minutes-42-seconds-steve-hunt-i2kze",
+    ),
+    "pastor": (
+        "The Pastor Who Tried to Prove God and Accidentally Predicted Death",
+        "https://www.linkedin.com/pulse/pastor-who-tried-prove-god-accidentally-predicted-steve-hunt-tzase",
+    ),
 }
 
 # ---------------------------------------------------------------------------
@@ -157,8 +169,8 @@ VIDEOS = [
             ("husband", "The worked example, Mrs Miggins and her daughter Amy."),
             ("oneword", "The word \"notional\", and the one clause that takes a pension back out of the net."),
         ],
-        "related": ("Next video", "nominees-annuity",
-                    "Nominees' annuity: what is it, how does it work, and what's the catch?"),
+        "related": [("Next video", "nominees-annuity",
+                     "Nominees' annuity: what is it, how does it work, and what's the catch?")],
         "legislation": "Inheritance Tax Act 1984, s.18, s.8D and s.150A(1), inserted by Finance Act 2026, s.66.",
         "transcript_file": "v1_transcript.tsv",
         "keywords": ["pension inheritance tax 2027", "pensions and inheritance tax", "inheritance tax on pensions",
@@ -301,14 +313,182 @@ VIDEOS = [
             ("jail", "Is buying one a gift? The full detail."),
             ("killed", "Background: where the nominees' annuity came from."),
         ],
-        "related": ("Previous video", "pensions-and-inheritance-tax-from-april-2027",
-                    "How will your pension be taxed when you die after April 2027?"),
+        "related": [("Previous video", "pensions-and-inheritance-tax-from-april-2027",
+                     "How will your pension be taxed when you die after April 2027?"),
+                    ("Next video", "whole-of-life-assurance",
+                     "Whole of life assurance: what is it, why does a whole generation distrust it, and what has changed?")],
         "legislation": "Finance Act 2004, Schedule 28, paragraphs 27A and 27AA(1), inserted by Finance Act 2015; "
                        "Inheritance Tax Act 1984, s.150A(6)(c), inserted by Finance Act 2026.",
         "transcript_file": "v2_transcript.tsv",
         "keywords": ["nominees' annuity", "nominee annuity", "joint life annuity", "pension inheritance tax 2027",
                      "potentially exempt transfer", "whole of life assurance", "Finance Act 2004 Schedule 28",
                      "paragraph 27AA"],
+    },
+    {
+        "slug": "whole-of-life-assurance",
+        "id": "gA2AwqiSg2I",
+        "number": 3,
+        "title": "Whole of life assurance: what is it, why does a whole generation distrust it, and what has changed?",
+        "short_title": "Whole of life assurance",
+        "meta_description": (
+            "Whole of life assurance pays a fixed sum when you die, whenever that is. What it is, why the "
+            "unit-linked plans of the 1980s made a generation distrust it, and what has changed: guaranteed "
+            "premiums and a real quotation showing generational wealth transfer. Video, key facts and full "
+            "transcript by Steve Hunt ACII TEP."
+        ),
+        "published": "2026-09-30",
+        "seconds": 783,
+        "duration_iso": "PT13M3S",
+        "duration_text": "13 min 3 sec",
+        "short_answer": [
+            "Whole of life assurance puts a monetary value on a person's life, the sum assured, and pays it out "
+            "when that person dies, whenever that is, provided the premiums are paid. Since the Life Assurance "
+            "Act 1774 you can only insure a life in which you have an insurable interest, and an individual has "
+            "an unlimited insurable interest in their own life and in the life of their spouse or civil partner.",
+            "A whole generation distrusts it because of the unit-linked whole of life plans of the 1980s, sold "
+            "by the hundreds of thousands by companies like Abbey Life and Allied Dunbar: reviewable premiums, "
+            "cover that could be cut, policies that lapsed with nothing to show for years of premiums, and "
+            "payouts that sometimes fell short of the premiums paid in.",
+            "What has changed: conventional whole of life is whole of life again, with a premium guaranteed from "
+            "day one. On a real quotation, a man of 75 pays £1,555.20 a month for £500,000 written in trust. Die "
+            "at 80 and the trust receives £500,000 for £93,312 of premiums. The same £93,312 left in his estate "
+            "would leave his family £55,987 after 40% inheritance tax, or as little as £37,325 at an effective "
+            "60%. Total premiums only pass the sum assured if he lives to nearly 102. The catch is that age and "
+            "health decide the premium, and whether cover is offered at all.",
+        ],
+        "chapters": [
+            (0, "Today's question"),
+            (26, "What is whole of life assurance?"),
+            (57, "Before 1774: life assurance as gambling"),
+            (86, "Insurable interest and the 1774 Act"),
+            (145, "Why does a whole generation distrust it?"),
+            (179, "The unit-linked companies"),
+            (267, "The wild west before 1988"),
+            (323, "What has changed?"),
+            (346, "Generational wealth transfer: Mr Miggins at 75"),
+            (441, "Keep the money instead: 40% or 60%"),
+            (553, "Car insurance, term insurance, whole of life"),
+            (624, "The answer in three lines"),
+            (644, "The two whens: age and health"),
+            (701, "James Dodson and the Amicable Society"),
+            (737, "What's next, and Roy Jenkins"),
+        ],
+        "key_facts": [
+            "Whole of life assurance puts a monetary value on a life, the sum assured, and pays it when that "
+            "person dies, whenever that is, provided the premiums are paid. On a conventional plan the premium "
+            "is guaranteed from day one and is never reviewed.",
+            "Life Assurance Act 1774, also known as the Gambling Act: a policy on someone's life is void unless "
+            "the person taking it out has an insurable interest in that life (section 1), and the amount "
+            "recoverable is limited to the value of that interest (section 3). An individual has an unlimited "
+            "insurable interest in their own life and in the life of their spouse or civil partner. Beyond that "
+            "the only limits are the insurer accepting the risk and the premiums being affordable.",
+            "The unit-linked whole of life plans of the 1980s were investment policies with a death benefit "
+            "attached. Premiums were reviewable: to keep the same cover the premium could go up, or the cover "
+            "could be cut, and some policies lapsed with nothing to show for years of premiums. The new rules on "
+            "selling investments came in under the Financial Services Act 1986, in force from April 1988.",
+            "The quotation in the video: a man of 75, £500,000 of conventional whole of life assurance, written "
+            "in trust, guaranteed premium £1,555.20 a month, £18,662.40 a year.",
+            "Premiums paid against the £500,000 paid to the trust: death at 80, £93,312; at 85, £186,624; at 90, "
+            "£279,936; at 95, £373,248; at 100, £466,560. Total premiums only pass the sum assured if he lives "
+            "to nearly 102.",
+            "Keep that money in the estate instead and the £93,312 he would have paid by 80 is taxed at 40%, "
+            "leaving £55,987. If it tips the estate over £2 million, the residence nil rate band is reduced by £1 "
+            "for every £2 over (Inheritance Tax Act 1984, s.8D), an effective 60%, leaving £37,325.",
+            "Written in trust, the sum assured is paid to the trustees and does not form part of the estate. "
+            "Premiums paid for a policy held in trust are gifts, usually covered by the normal expenditure out "
+            "of income exemption (Inheritance Tax Act 1984, s.21) or the £3,000 annual exemption (s.19).",
+            "Term insurance, like car or house insurance, is a cost if it does not pay out. Whole of life "
+            "assurance pays out on an event that is certain to happen; the only unknown is when. The premiums "
+            "must be paid for life: stop the premiums and the cover stops.",
+            "Age and health decide the premium, and whether cover is offered at all, and neither stays still. "
+            "Cover available today may not be available after a scan or a blood test tomorrow.",
+            "James Dodson, who worked out the level premium system still used to price whole of life assurance, "
+            "was refused cover by the Amicable Society for being over 45. He died in 1757, before the Equitable "
+            "Society he had planned opened in 1762, leaving three children unprovided for.",
+        ],
+        "assumptions": (
+            "Mr Miggins is fictitious. The quotation is real, obtained in 2026; premiums depend on age, health "
+            "and the insurer, and will differ on the day. The 60% figure applies where an estate sits between "
+            "£2 million and £2.7 million and the residence nil rate band taper applies. Figures are rounded to "
+            "the pound."
+        ),
+        "faq": [
+            ("What is whole of life assurance?",
+             "Whole of life assurance puts a monetary value on a person's life, for example £500,000, which is "
+             "called the sum assured. When that person dies, the insurance company pays the sum assured, "
+             "whenever death occurs, provided the premiums have been paid. In its basic, traditional form it "
+             "is as simple as that, and it has worked that way since the Life Assurance Act 1774."),
+            ("What is insurable interest?",
+             "Before 1774 it was common for the rich to take out life assurance on complete strangers, and even "
+             "on kings and queens, in the coffee houses of London. It was a form of gambling, which is why the "
+             "Life Assurance Act 1774 was also known as the Gambling Act. The Act says you cannot take out a "
+             "life assurance policy on someone unless you have an insurable interest in that person, meaning "
+             "you would suffer a financial loss if they died. An individual has an unlimited insurable interest "
+             "in their own life and in the life of their spouse or civil partner, so a husband could insure his "
+             "wife for £10 million or £100 million. The only limits are an insurer accepting the risk and the "
+             "premiums being paid."),
+            ("Why does a whole generation distrust whole of life assurance?",
+             "For 200 years whole of life assurance did exactly what it was designed to do: pay a lump sum on "
+             "death, often used to cover death duties. Then the unit-linked companies of the 1960s to 1980s, "
+             "Abbey Life, Hambro Life and later Allied Dunbar among them, brought in the unit-linked whole of "
+             "life policy, an investment with a death benefit attached. Premiums could be reviewed, cover could "
+             "be cut, some policies lapsed with nothing to show for years of premiums, and on death the sum "
+             "assured sometimes fell short of the premiums paid in. They were sold by the hundreds of thousands "
+             "in the wild west before the new rules on selling investments arrived in 1988. Boomers watched the "
+             "foot-in-the-door salesman and the mis-selling in real time, and many vowed never to be caught "
+             "again."),
+            ("What has changed with whole of life assurance?",
+             "Today, conventional whole of life assurance is whole of life again: a premium guaranteed from day "
+             "one, and a payout whenever death occurs, provided the premiums are paid. There are no premium "
+             "reviews and the cover is not cut. That is why it can be described as generational wealth "
+             "transfer rather than insurance."),
+            ("How can whole of life assurance be generational wealth transfer?",
+             "Take a real quotation for a man of 75: £500,000 of whole of life assurance, written in trust, at "
+             "a guaranteed premium of £1,555.20 a month, £18,662.40 a year. If he dies at 80 he has paid "
+             "£93,312 in premiums and the trust receives £500,000. At 85, £186,624 paid, £500,000 received. At "
+             "90, £279,936. At 95, £373,248. At 100, £466,560. In every case the trust receives £500,000. Total "
+             "premiums only pass the sum assured if he lives to nearly 102. The premiums he pays today buy "
+             "£500,000 for the next generation tomorrow, and if he dies young the trust gets considerably more "
+             "than he paid in."),
+            ("What happens if the premium money stays in the estate instead?",
+             "Left in his estate, the money is taxed at 40% inheritance tax, or an effective 60% if the estate "
+             "sits in the band between £2 million and £2.7 million where the residence nil rate band is "
+             "tapered away. Die at 80 and the £93,312 he would have paid in premiums leaves his family £55,987 "
+             "after 40% tax, or as little as £37,325 at 60%. Use the same money for premiums on a whole of life "
+             "plan in trust and the family trust receives £500,000."),
+            ("Is whole of life assurance just a cost, like car insurance?",
+             "No. Car insurance, house insurance and term insurance are a cost if they do not pay out, and most "
+             "people with term insurance do not die during the term. Whole of life assurance is different: it "
+             "pays out on an event that is certain to happen, so the premiums are not lost. The trust gets back "
+             "more than is paid in unless the life assured lives to nearly 102. The premiums must be paid for "
+             "life, though: stop the premiums and the cover stops."),
+            ("Can anyone get whole of life assurance?",
+             "No. There are two whens: when the insurer will pay out if you have a policy, and how long cover "
+             "will remain available to you. To get whole of life assurance the insurer looks at your age and "
+             "your health, decides the premium, and decides whether to offer cover at all. Neither age nor "
+             "health stands still, and a future scan that is not clear, or a blood test that needs follow-up, "
+             "could mean this type of cover is no longer available."),
+            ("Who was James Dodson?",
+             "James Dodson was the mathematician who worked out the level premium system, the way whole of "
+             "life assurance is still priced today. He was refused cover by the Amicable Society for being over "
+             "45, and he died in 1757, before the Equitable Society he had planned opened its doors in 1762, "
+             "leaving three children unprovided for. Steve has written about him, and the pastor whose "
+             "mortality tables started it all, in his LinkedIn article The Pastor Who Tried to Prove God and "
+             "Accidentally Predicted Death."),
+        ],
+        "articles": [
+            ("certainties", "How whole of life was hijacked in the 1980s, and Certainty³: guaranteed income funding guaranteed premiums."),
+            ("days86", "The history: Abbey Life, Hambro Life and the first era of mis-selling."),
+            ("pastor", "James Dodson, the Amicable Society and the level premium."),
+        ],
+        "related": [("Previous video", "nominees-annuity",
+                     "Nominees' annuity: what is it, how does it work, and what's the catch?")],
+        "legislation": "Life Assurance Act 1774, ss.1 to 3; Inheritance Tax Act 1984, s.8D, s.19 and s.21; "
+                       "Financial Services Act 1986.",
+        "transcript_file": "v3_transcript.tsv",
+        "keywords": ["whole of life assurance", "whole of life insurance", "whole of life policy",
+                     "generational wealth transfer", "life assurance in trust", "unit-linked whole of life",
+                     "Life Assurance Act 1774", "insurable interest", "guaranteed premiums", "inheritance tax"],
     },
 ]
 
@@ -451,7 +631,7 @@ def header_html(prefix=""):
     home = prefix if prefix else "./"
     return f"""<header class="site"><div class="wrap">
 <a class="brand" href="{home}">{esc(SITE_NAME)} <span>by Steve Hunt ACII TEP</span></a>
-<nav><a href="{home}">Home</a><a href="{prefix}pensions-and-inheritance-tax-from-april-2027/">Pensions and IHT 2027</a><a href="{prefix}nominees-annuity/">Nominees' annuity</a></nav>
+<nav><a href="{home}">Home</a><a href="{prefix}pensions-and-inheritance-tax-from-april-2027/">Pensions and IHT 2027</a><a href="{prefix}nominees-annuity/">Nominees' annuity</a><a href="{prefix}whole-of-life-assurance/">Whole of life</a></nav>
 </div></header>"""
 
 
@@ -627,7 +807,10 @@ def video_page(v):
         )
         transcript_html.extend(f"<p>{esc(p)}</p>" for p in paras)
     transcript_html = "\n".join(transcript_html)
-    rel_label, rel_slug, rel_title = v["related"]
+    related_html = "".join(
+        f'<p><strong>{esc(label)}:</strong> <a href="../{slug}/">{esc(title)}</a></p>'
+        for label, slug, title in v["related"]
+    )
 
     ld = ld_script(video_ld(v))
 
@@ -691,7 +874,7 @@ def video_page(v):
 {articles_html}
 </ul>
 
-<div class="related"><p><strong>{esc(rel_label)}:</strong> <a href="../{rel_slug}/">{esc(rel_title)}</a></p></div>
+<div class="related">{related_html}</div>
 
 <section class="transcript" id="transcript">
 <h2>Full transcript</h2>
