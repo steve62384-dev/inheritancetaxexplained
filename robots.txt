@@ -1,0 +1,6 @@
+# Inheritance Tax Explained, by Steve Hunt ACII TEP.
+# Everything on this site is public education. All crawlers are welcome, including AI assistants.
+User-agent: *
+Allow: /
+
+Sitemap: https://inheritancetaxexplained.co.uk/sitemap.xml
