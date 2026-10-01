@@ -17,7 +17,7 @@ AUTHOR = "Steve Hunt ACII TEP"
 LINKEDIN = "https://www.linkedin.com/in/steve~hunt"
 YOUTUBE_CHANNEL = "https://www.youtube.com/@SteveHuntACIITEP"
 PLAYLIST = "https://www.youtube.com/playlist?list=PLYeD4F-FZfOA"
-TODAY = date(2026, 9, 30)
+TODAY = date(2026, 10, 1)
 AS_AT = "September 2026"
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -336,7 +336,7 @@ VIDEOS = [
             "premiums and a real quotation showing generational wealth transfer. Video, key facts and full "
             "transcript by Steve Hunt ACII TEP."
         ),
-        "published": "2026-09-30",
+        "published": "2026-10-01",
         "seconds": 783,
         "duration_iso": "PT13M3S",
         "duration_text": "13 min 3 sec",
