@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caladea:wght@400;700&display=swap" rel="stylesheet">
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
 <title>Inheritance Tax Explained by Steve Hunt ACII TEP</title>
 <meta name="description" content="Plain English videos and transcripts on UK inheritance tax, pensions from April 2027, annuities and whole of life assurance. By Steve Hunt ACII TEP.">
 <meta name="author" content="Steve Hunt ACII TEP">
@@ -20,7 +20,7 @@
 <meta property="og:locale" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
 <style>
-:root{--navy:#0C192B;--navy2:#182C46;--gold:#C8A564;--ivory:#F3EBDA;--paper:#FFFDF8;--ink:#1B2433;--muted:#5A6577;--rule:#E3DCCB;--link:#0F4C81}
+:root{--navy:#0C192B;--navy2:#182C46;--gold:#C8A564;--ivory:#F3EBDA;--paper:#FFFDF8;--ink:#1B2433;--muted:#5A6577;--rule:#E3DCCB;--link:#0F4C81;--note:#FFF6E3}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
@@ -52,8 +52,19 @@ main{padding:28px 0 40px}
 ol.chapters{padding-left:0;list-style:none;margin:0}
 ol.chapters li{margin:.35em 0}
 ol.chapters .t{display:inline-block;min-width:3.6em;font-variant-numeric:tabular-nums;color:var(--muted)}
-ul.facts li{margin:.6em 0}
+ul.facts li{margin:.7em 0}
 .faq h3{margin-top:1.4em}
+.src{display:block;color:var(--muted);font-size:.86rem;line-height:1.5;margin:.35em 0 1em;max-width:70ch;overflow-wrap:anywhere}
+.src .lead{font-weight:700;color:var(--navy);margin-right:.35em;text-transform:uppercase;font-size:.75rem;letter-spacing:.06em}
+.src .lbl{font-weight:600;color:var(--ink)}
+ul.facts .src{margin:.2em 0 0}
+.correction{background:var(--note);border-left:3px solid var(--gold);padding:10px 14px;margin:.6em 0 1.1em;max-width:70ch}
+.correction p{margin:0 0 .3em;font-size:.95rem}
+.correction .src{margin:.2em 0 0}
+.srclist h3{font-size:1.05rem;margin:1.2em 0 .3em}
+.srclist p.meaning{margin:0 0 .4em;color:var(--muted);font-size:.93rem}
+.srclist ul{margin:.2em 0 .8em;padding-left:1.2em}
+.srclist li{margin:.25em 0;overflow-wrap:anywhere}
 .transcript h3{margin-top:1.8em}
 .transcript h3 .t{font-family:inherit;font-weight:400;color:var(--muted);font-size:.9em;margin-right:.5em;font-variant-numeric:tabular-nums}
 .note{color:var(--muted);font-size:.95rem}
@@ -73,6 +84,7 @@ footer.site a{color:var(--ivory)}
 footer.site p{margin:.3em 0;max-width:none}
 .related{margin-top:1.5em;padding:12px 16px;border:1px solid var(--rule);border-radius:4px}
 .related p{margin:.2em 0}
+.log li{margin:.5em 0}
 </style>
 <script type="application/ld+json">
 {
@@ -83,11 +95,12 @@ footer.site p{margin:.3em 0;max-width:none}
    "@id": "https://inheritancetaxexplained.co.uk/#website",
    "url": "https://inheritancetaxexplained.co.uk/",
    "name": "Inheritance Tax Explained",
-   "description": "Plain English explanations of UK inheritance tax, the April 2027 pension changes, annuities, whole of life assurance and trusts, with videos, key facts and full transcripts. By Steve Hunt ACII TEP. Education only.",
+   "description": "Plain English explanations of UK inheritance tax, the April 2027 pension changes, annuities, whole of life assurance and trusts, with videos, key facts and full transcripts. Every answer links to the law and HMRC guidance it relies on. By Steve Hunt ACII TEP. Education only.",
    "inLanguage": "en-GB",
    "author": {
     "@id": "https://inheritancetaxexplained.co.uk/#steve-hunt"
-   }
+   },
+   "publishingPrinciples": "https://inheritancetaxexplained.co.uk/sources-and-corrections/"
   },
   {
    "@type": "Person",
@@ -129,7 +142,7 @@ footer.site p{margin:.3em 0;max-width:none}
    "@id": "https://inheritancetaxexplained.co.uk/",
    "url": "https://inheritancetaxexplained.co.uk/",
    "name": "Inheritance Tax Explained by Steve Hunt ACII TEP",
-   "description": "Plain English explanations of UK inheritance tax, the April 2027 pension changes, annuities, whole of life assurance and trusts, with videos, key facts and full transcripts. By Steve Hunt ACII TEP. Education only.",
+   "description": "Plain English explanations of UK inheritance tax, the April 2027 pension changes, annuities, whole of life assurance and trusts, with videos, key facts and full transcripts. Every answer links to the law and HMRC guidance it relies on. By Steve Hunt ACII TEP. Education only.",
    "inLanguage": "en-GB",
    "isPartOf": {
     "@id": "https://inheritancetaxexplained.co.uk/#website"
@@ -138,6 +151,7 @@ footer.site p{margin:.3em 0;max-width:none}
     "@id": "https://inheritancetaxexplained.co.uk/#steve-hunt"
    },
    "dateModified": "2026-10-01",
+   "publishingPrinciples": "https://inheritancetaxexplained.co.uk/sources-and-corrections/",
    "mainEntity": {
     "@type": "ItemList",
     "itemListElement": [
@@ -168,39 +182,39 @@ footer.site p{margin:.3em 0;max-width:none}
 </head>
 <body>
 <header class="site"><div class="wrap">
-<a class="brand" href="./">Inheritance Tax Explained <span>by Steve Hunt ACII TEP</span></a>
-<nav><a href="./">Home</a><a href="pensions-and-inheritance-tax-from-april-2027/">Pensions and IHT 2027</a><a href="nominees-annuity/">Nominees' annuity</a><a href="whole-of-life-assurance/">Whole of life</a></nav>
+<a class="brand" href="/">Inheritance Tax Explained <span>by Steve Hunt ACII TEP</span></a>
+<nav><a href="/">Home</a><a href="/pensions-and-inheritance-tax-from-april-2027/">Pensions and IHT 2027</a><a href="/nominees-annuity/">Nominees' annuity</a><a href="/whole-of-life-assurance/">Whole of life</a></nav>
 </div></header>
 <main class="wrap">
 <p class="kicker">Steve Hunt ACII TEP</p>
 <h1>Inheritance tax, explained in plain English</h1>
 <p>Short videos that answer the questions families actually ask about UK inheritance tax: what the rules say, what things cost, and how the pieces fit together. The big one right now is the April 2027 change that brings unused pension funds into inheritance tax for the first time.</p>
-<p>Every video on this site comes with its key facts, the legislation it relies on, the questions it answers, and a full transcript, so you can read it as well as watch it.</p>
+<p>Every video on this site comes with its key facts, the questions it answers and a full transcript, so you can read it as well as watch it. Every answer links to the law and the HMRC guidance it relies on, so you can check it for yourself. <a href="/sources-and-corrections/">How the sources are labelled, and what has been corrected</a>.</p>
 
 <h2 id="videos" style="border:0;margin-top:1.6em">The videos</h2>
 <div class="cards">
 <article class="card">
-<a href="pensions-and-inheritance-tax-from-april-2027/"><img src="images/pensions-and-inheritance-tax-from-april-2027.jpg" alt="How will your pension be taxed when you die after April 2027?" width="1280" height="720" loading="lazy"></a>
+<a href="/pensions-and-inheritance-tax-from-april-2027/"><img src="/images/pensions-and-inheritance-tax-from-april-2027.jpg" alt="How will your pension be taxed when you die after April 2027?" width="1280" height="720" loading="lazy"></a>
 <div class="body">
-<h2><a href="pensions-and-inheritance-tax-from-april-2027/">How will your pension be taxed when you die after April 2027?</a></h2>
+<h2><a href="/pensions-and-inheritance-tax-from-april-2027/">How will your pension be taxed when you die after April 2027?</a></h2>
 <p>From 6 April 2027, most unused pension funds and pension death benefits count as part of your estate for inheritance tax, and can be taxed at 40% on death. Pensions left to a spouse or civil partner stay exempt. Unmarried partners are not covered.</p>
-<p><a href="pensions-and-inheritance-tax-from-april-2027/">Video, key facts and full transcript</a> &middot; 10 min 47 sec</p>
+<p><a href="/pensions-and-inheritance-tax-from-april-2027/">Video, key facts, sources and full transcript</a> &middot; 10 min 47 sec</p>
 </div>
 </article>
 <article class="card">
-<a href="nominees-annuity/"><img src="images/nominees-annuity.jpg" alt="Nominees' annuity: what is it, how does it work, and what's the catch?" width="1280" height="720" loading="lazy"></a>
+<a href="/nominees-annuity/"><img src="/images/nominees-annuity.jpg" alt="Nominees' annuity: what is it, how does it work, and what's the catch?" width="1280" height="720" loading="lazy"></a>
 <div class="body">
-<h2><a href="nominees-annuity/">Nominees' annuity: what is it, how does it work, and what's the catch?</a></h2>
-<p>A nominees' annuity is a joint life annuity where the second life is a child, grandchild or anyone else you nominate, rather than a spouse or civil partner. It is bought by the pension member, in the member's lifetime, together with the member's own lifetime annuity. When the member dies, the income carries on to the nominee for the rest of their life.</p>
-<p><a href="nominees-annuity/">Video, key facts and full transcript</a> &middot; 15 min 19 sec</p>
+<h2><a href="/nominees-annuity/">Nominees' annuity: what is it, how does it work, and what's the catch?</a></h2>
+<p>A nominees' annuity is an annuity paid to a nominee of a pension member: someone the member nominates, such as an adult child or grandchild, who is not a dependant under the pension tax rules. This page is about the version bought in the member's lifetime, together with the member's own lifetime annuity, either as one joint life annuity or as a related separate contract. When the member dies, the income carries on to the nominee for the rest of their life. Nominees' annuities can also be bought after the member's death, but that is a different route, and not the one excluded from inheritance tax.</p>
+<p><a href="/nominees-annuity/">Video, key facts, sources and full transcript</a> &middot; 15 min 19 sec</p>
 </div>
 </article>
 <article class="card">
-<a href="whole-of-life-assurance/"><img src="images/whole-of-life-assurance.jpg" alt="Whole of life assurance: what is it, why does a whole generation distrust it, and what has changed?" width="1280" height="720" loading="lazy"></a>
+<a href="/whole-of-life-assurance/"><img src="/images/whole-of-life-assurance.jpg" alt="Whole of life assurance: what is it, why does a whole generation distrust it, and what has changed?" width="1280" height="720" loading="lazy"></a>
 <div class="body">
-<h2><a href="whole-of-life-assurance/">Whole of life assurance: what is it, why does a whole generation distrust it, and what has changed?</a></h2>
-<p>Whole of life assurance puts a monetary value on a person's life, the sum assured, and pays it out when that person dies, whenever that is, provided the premiums are paid. Since the Life Assurance Act 1774 you can only insure a life in which you have an insurable interest, and an individual has an unlimited insurable interest in their own life and in the life of their spouse or civil partner.</p>
-<p><a href="whole-of-life-assurance/">Video, key facts and full transcript</a> &middot; 13 min 3 sec</p>
+<h2><a href="/whole-of-life-assurance/">Whole of life assurance: what is it, why does a whole generation distrust it, and what has changed?</a></h2>
+<p>Whole of life assurance puts a monetary value on a person's life, the sum assured, and pays it out when that person dies, whenever that is, provided the premiums are paid. Under the Life Assurance Act 1774 you can only insure a life in which you have an insurable interest. An individual has an unlimited insurable interest in their own life and in the life of their spouse or civil partner.</p>
+<p><a href="/whole-of-life-assurance/">Video, key facts, sources and full transcript</a> &middot; 13 min 3 sec</p>
 </div>
 </article>
 </div>
@@ -210,7 +224,7 @@ footer.site p{margin:.3em 0;max-width:none}
 <div>
 <h2>About Steve Hunt ACII TEP</h2>
 <p>Steve Hunt is a Chartered Insurance Risk Manager, an Associate of the Chartered Insurance Institute (ACII), and a Trust and Estate Practitioner (TEP), a full member of STEP. He has worked in UK financial services since 1980, in pensions, protection and estate planning. He writes about inheritance tax, the April 2027 pension changes, annuities, whole of life assurance and trusts.</p>
-<p><a href="https://www.linkedin.com/in/steve~hunt" rel="me">LinkedIn profile and articles</a> &middot; <a href="https://www.youtube.com/@SteveHuntACIITEP" rel="me">YouTube channel</a></p>
+<p><a href="https://www.linkedin.com/in/steve~hunt" rel="me">LinkedIn profile and articles</a> &middot; <a href="https://www.youtube.com/@SteveHuntACIITEP" rel="me">YouTube channel</a> &middot; <a href="/sources-and-corrections/">How these answers are sourced</a></p>
 </div>
 </section>
 <p class="disclaimer">Everything on this site is education only. It is not advice, not a personal recommendation, and not an invitation to do business. Tax rules change, and nothing here takes account of your circumstances.</p>
@@ -218,7 +232,7 @@ footer.site p{margin:.3em 0;max-width:none}
 <footer class="site"><div class="wrap">
 <p>Inheritance Tax Explained. Plain English explanations of UK inheritance tax by Steve Hunt ACII TEP.</p>
 <p>Education only. Not advice, not a personal recommendation, and not an invitation to do business. Tax rules change; check the date on each page.</p>
-<p><a href="https://www.linkedin.com/in/steve~hunt" rel="me">Steve Hunt on LinkedIn</a> &middot; <a href="https://www.youtube.com/@SteveHuntACIITEP" rel="me">YouTube channel</a> &middot; &copy; 2026 Stephen Hunt</p>
+<p><a href="/sources-and-corrections/">Sources, method and corrections</a> &middot; <a href="https://www.linkedin.com/in/steve~hunt" rel="me">Steve Hunt on LinkedIn</a> &middot; <a href="https://www.youtube.com/@SteveHuntACIITEP" rel="me">YouTube channel</a> &middot; &copy; 2026 Stephen Hunt</p>
 </div></footer>
 </body>
 </html>

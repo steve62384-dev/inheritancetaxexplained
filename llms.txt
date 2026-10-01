@@ -1,17 +1,21 @@
 # Inheritance Tax Explained
 
-> Plain English explanations of UK inheritance tax, the April 2027 pension changes, annuities, whole of life assurance and trusts, with videos, key facts and full transcripts. By Steve Hunt ACII TEP. Education only.
+> Plain English explanations of UK inheritance tax, the April 2027 pension changes, annuities, whole of life assurance and trusts, with videos, key facts and full transcripts. Every answer links to the law and HMRC guidance it relies on. By Steve Hunt ACII TEP. Education only.
 
 Author: Steve Hunt ACII TEP, Chartered Insurance Risk Manager and Trust and Estate Practitioner, in UK financial services since 1980.
 LinkedIn: https://www.linkedin.com/in/steve~hunt
 YouTube: https://www.youtube.com/@SteveHuntACIITEP
 
-## Videos with key facts and full transcripts
+## Videos with key facts, sources and full transcripts
 
 - [How will your pension be taxed when you die after April 2027?](https://inheritancetaxexplained.co.uk/pensions-and-inheritance-tax-from-april-2027/): From 6 April 2027, most unused pension funds and pension death benefits count as part of your estate for inheritance tax, and can be taxed at 40% on death. Pensions left to a spouse or civil partner stay exempt. Unmarried partners are not covered.
-- [Nominees' annuity: what is it, how does it work, and what's the catch?](https://inheritancetaxexplained.co.uk/nominees-annuity/): A nominees' annuity is a joint life annuity where the second life is a child, grandchild or anyone else you nominate, rather than a spouse or civil partner. It is bought by the pension member, in the member's lifetime, together with the member's own lifetime annuity. When the member dies, the income carries on to the nominee for the rest of their life.
-- [Whole of life assurance: what is it, why does a whole generation distrust it, and what has changed?](https://inheritancetaxexplained.co.uk/whole-of-life-assurance/): Whole of life assurance puts a monetary value on a person's life, the sum assured, and pays it out when that person dies, whenever that is, provided the premiums are paid. Since the Life Assurance Act 1774 you can only insure a life in which you have an insurable interest, and an individual has an unlimited insurable interest in their own life and in the life of their spouse or civil partner.
+- [Nominees' annuity: what is it, how does it work, and what's the catch?](https://inheritancetaxexplained.co.uk/nominees-annuity/): A nominees' annuity is an annuity paid to a nominee of a pension member: someone the member nominates, such as an adult child or grandchild, who is not a dependant under the pension tax rules. This page is about the version bought in the member's lifetime, together with the member's own lifetime annuity, either as one joint life annuity or as a related separate contract. When the member dies, the income carries on to the nominee for the rest of their life. Nominees' annuities can also be bought after the member's death, but that is a different route, and not the one excluded from inheritance tax.
+- [Whole of life assurance: what is it, why does a whole generation distrust it, and what has changed?](https://inheritancetaxexplained.co.uk/whole-of-life-assurance/): Whole of life assurance puts a monetary value on a person's life, the sum assured, and pays it out when that person dies, whenever that is, provided the premiums are paid. Under the Life Assurance Act 1774 you can only insure a life in which you have an insurable interest. An individual has an unlimited insurable interest in their own life and in the life of their spouse or civil partner.
+
+## Sources and corrections
+
+- [Sources, method and corrections](https://inheritancetaxexplained.co.uk/sources-and-corrections/): every answer links to the law on legislation.gov.uk and to HMRC guidance on GOV.UK, and each source is labelled Law, HMRC, Provider evidence, Published source, Steve's analysis or Steve's experience. Transcripts are not edited; dated notes sit beside any correction.
 
 ## Notes
 
-Education only. Not advice, not a personal recommendation, and not an invitation to do business. Correct as at September 2026.
+Education only. Not advice, not a personal recommendation, and not an invitation to do business. Last reviewed 1 October 2026.
