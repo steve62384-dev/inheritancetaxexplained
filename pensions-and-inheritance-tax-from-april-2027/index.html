@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caladea:wght@400;700&display=swap" rel="stylesheet">
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
 <title>How will your pension be taxed when you die after April 2027?</title>
 <meta name="description" content="From 6 April 2027 unused pensions come into inheritance tax. What changes, what is excluded, and how, in a severe case, £500,000 could cost £516,000.">
 <meta name="author" content="Steve Hunt ACII TEP">
@@ -24,7 +24,7 @@
 <meta name="twitter:description" content="From 6 April 2027 unused pensions come into inheritance tax. What changes, what is excluded, and how, in a severe case, £500,000 could cost £516,000.">
 <meta name="twitter:image" content="https://inheritancetaxexplained.co.uk/images/pensions-and-inheritance-tax-from-april-2027.jpg">
 <style>
-:root{--navy:#0C192B;--navy2:#182C46;--gold:#C8A564;--ivory:#F3EBDA;--paper:#FFFDF8;--ink:#1B2433;--muted:#5A6577;--rule:#E3DCCB;--link:#0F4C81}
+:root{--navy:#0C192B;--navy2:#182C46;--gold:#C8A564;--ivory:#F3EBDA;--paper:#FFFDF8;--ink:#1B2433;--muted:#5A6577;--rule:#E3DCCB;--link:#0F4C81;--note:#FFF6E3}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
@@ -56,8 +56,19 @@ main{padding:28px 0 40px}
 ol.chapters{padding-left:0;list-style:none;margin:0}
 ol.chapters li{margin:.35em 0}
 ol.chapters .t{display:inline-block;min-width:3.6em;font-variant-numeric:tabular-nums;color:var(--muted)}
-ul.facts li{margin:.6em 0}
+ul.facts li{margin:.7em 0}
 .faq h3{margin-top:1.4em}
+.src{display:block;color:var(--muted);font-size:.86rem;line-height:1.5;margin:.35em 0 1em;max-width:70ch;overflow-wrap:anywhere}
+.src .lead{font-weight:700;color:var(--navy);margin-right:.35em;text-transform:uppercase;font-size:.75rem;letter-spacing:.06em}
+.src .lbl{font-weight:600;color:var(--ink)}
+ul.facts .src{margin:.2em 0 0}
+.correction{background:var(--note);border-left:3px solid var(--gold);padding:10px 14px;margin:.6em 0 1.1em;max-width:70ch}
+.correction p{margin:0 0 .3em;font-size:.95rem}
+.correction .src{margin:.2em 0 0}
+.srclist h3{font-size:1.05rem;margin:1.2em 0 .3em}
+.srclist p.meaning{margin:0 0 .4em;color:var(--muted);font-size:.93rem}
+.srclist ul{margin:.2em 0 .8em;padding-left:1.2em}
+.srclist li{margin:.25em 0;overflow-wrap:anywhere}
 .transcript h3{margin-top:1.8em}
 .transcript h3 .t{font-family:inherit;font-weight:400;color:var(--muted);font-size:.9em;margin-right:.5em;font-variant-numeric:tabular-nums}
 .note{color:var(--muted);font-size:.95rem}
@@ -77,6 +88,7 @@ footer.site a{color:var(--ivory)}
 footer.site p{margin:.3em 0;max-width:none}
 .related{margin-top:1.5em;padding:12px 16px;border:1px solid var(--rule);border-radius:4px}
 .related p{margin:.2em 0}
+.log li{margin:.5em 0}
 </style>
 <script type="application/ld+json">
 {
@@ -87,11 +99,12 @@ footer.site p{margin:.3em 0;max-width:none}
    "@id": "https://inheritancetaxexplained.co.uk/#website",
    "url": "https://inheritancetaxexplained.co.uk/",
    "name": "Inheritance Tax Explained",
-   "description": "Plain English explanations of UK inheritance tax, the April 2027 pension changes, annuities, whole of life assurance and trusts, with videos, key facts and full transcripts. By Steve Hunt ACII TEP. Education only.",
+   "description": "Plain English explanations of UK inheritance tax, the April 2027 pension changes, annuities, whole of life assurance and trusts, with videos, key facts and full transcripts. Every answer links to the law and HMRC guidance it relies on. By Steve Hunt ACII TEP. Education only.",
    "inLanguage": "en-GB",
    "author": {
     "@id": "https://inheritancetaxexplained.co.uk/#steve-hunt"
-   }
+   },
+   "publishingPrinciples": "https://inheritancetaxexplained.co.uk/sources-and-corrections/"
   },
   {
    "@type": "Person",
@@ -146,6 +159,11 @@ footer.site p{margin:.3em 0;max-width:none}
    },
    "datePublished": "2026-09-29",
    "dateModified": "2026-10-01",
+   "lastReviewed": "2026-10-01",
+   "reviewedBy": {
+    "@id": "https://inheritancetaxexplained.co.uk/#steve-hunt"
+   },
+   "publishingPrinciples": "https://inheritancetaxexplained.co.uk/sources-and-corrections/",
    "video": {
     "@id": "https://inheritancetaxexplained.co.uk/pensions-and-inheritance-tax-from-april-2027/#video"
    },
@@ -187,6 +205,204 @@ footer.site p{margin:.3em 0;max-width:none}
      "author": {
       "@id": "https://inheritancetaxexplained.co.uk/#steve-hunt"
      }
+    },
+    {
+     "@type": "Legislation",
+     "name": "Inheritance Tax Act 1984, s.150A",
+     "url": "https://www.legislation.gov.uk/ukpga/1984/51/section/150A"
+    },
+    {
+     "@type": "Legislation",
+     "name": "Finance Act 2026, s.71",
+     "url": "https://www.legislation.gov.uk/ukpga/2026/11/section/71"
+    },
+    {
+     "@type": "Legislation",
+     "name": "Inheritance Tax Act 1984, s.18",
+     "url": "https://www.legislation.gov.uk/ukpga/1984/51/section/18"
+    },
+    {
+     "@type": "WebPage",
+     "name": "HMRC technical note, 3.3.1 Dependants' scheme pension",
+     "publisher": {
+      "@type": "GovernmentOrganization",
+      "name": "HM Revenue and Customs"
+     },
+     "url": "https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#dependants-scheme-pension"
+    },
+    {
+     "@type": "WebPage",
+     "name": "HMRC technical note, 3.3.3 Joint life annuities",
+     "publisher": {
+      "@type": "GovernmentOrganization",
+      "name": "HM Revenue and Customs"
+     },
+     "url": "https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#joint-life-annuities"
+    },
+    {
+     "@type": "WebPage",
+     "name": "HMRC technical note, 3.3.4 Death in service benefits",
+     "publisher": {
+      "@type": "GovernmentOrganization",
+      "name": "HM Revenue and Customs"
+     },
+     "url": "https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#death-in-service-benefits"
+    },
+    {
+     "@type": "CreativeWork",
+     "name": "The worked example: arithmetic on the stated assumptions",
+     "author": {
+      "@id": "https://inheritancetaxexplained.co.uk/#steve-hunt"
+     },
+     "description": "Steve's analysis, held on file by the author and not published."
+    },
+    {
+     "@type": "Legislation",
+     "name": "Finance Act 2026, s.66",
+     "url": "https://www.legislation.gov.uk/ukpga/2026/11/section/66"
+    },
+    {
+     "@type": "WebPage",
+     "name": "HMRC technical note: Inheritance Tax on pensions (updated 29 May 2026)",
+     "publisher": {
+      "@type": "GovernmentOrganization",
+      "name": "HM Revenue and Customs"
+     },
+     "url": "https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions"
+    },
+    {
+     "@type": "WebPage",
+     "name": "HMRC technical note, 3.4 Exempt beneficiaries",
+     "publisher": {
+      "@type": "GovernmentOrganization",
+      "name": "HM Revenue and Customs"
+     },
+     "url": "https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#exempt-beneficiaries"
+    },
+    {
+     "@type": "Legislation",
+     "name": "Inheritance Tax Act 1984, s.8D",
+     "url": "https://www.legislation.gov.uk/ukpga/1984/51/section/8D"
+    },
+    {
+     "@type": "WebPage",
+     "name": "HMRC guidance: the residence nil rate band",
+     "publisher": {
+      "@type": "GovernmentOrganization",
+      "name": "HM Revenue and Customs"
+     },
+     "url": "https://www.gov.uk/guidance/inheritance-tax-residence-nil-rate-band"
+    },
+    {
+     "@type": "WebPage",
+     "name": "GOV.UK: Tax on a private pension you inherit",
+     "publisher": {
+      "@type": "GovernmentOrganization",
+      "name": "HM Revenue and Customs"
+     },
+     "url": "https://www.gov.uk/tax-on-pension-death-benefits"
+    },
+    {
+     "@type": "Legislation",
+     "name": "Inheritance Tax Act 1984, s.226",
+     "url": "https://www.legislation.gov.uk/ukpga/1984/51/section/226"
+    },
+    {
+     "@type": "Legislation",
+     "name": "Inheritance Tax Act 1984, s.233",
+     "url": "https://www.legislation.gov.uk/ukpga/1984/51/section/233"
+    },
+    {
+     "@type": "WebPage",
+     "name": "HMRC technical note, 11.2.3 Business and agricultural property relief",
+     "publisher": {
+      "@type": "GovernmentOrganization",
+      "name": "HM Revenue and Customs"
+     },
+     "url": "https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#business-property-relief-and-agricultural-property-relief"
+    },
+    {
+     "@type": "WebPage",
+     "name": "HMRC technical note, 11.2.4 Instalments",
+     "publisher": {
+      "@type": "GovernmentOrganization",
+      "name": "HM Revenue and Customs"
+     },
+     "url": "https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#instalments"
+    },
+    {
+     "@type": "WebPage",
+     "name": "GOV.UK: Pay your Inheritance Tax bill",
+     "publisher": {
+      "@type": "GovernmentOrganization",
+      "name": "HM Revenue and Customs"
+     },
+     "url": "https://www.gov.uk/paying-inheritance-tax"
+    },
+    {
+     "@type": "CreativeWork",
+     "name": "Pensions Age, 23 October 2025: DC pension assets quadruple to £1.2trn (Pensions Policy Institute, DC Future Book)",
+     "url": "https://www.pensionsage.com/pa/DC-pension-asets-quadruple-growth-remains-vulnerable.php"
+    },
+    {
+     "@type": "Legislation",
+     "name": "Inheritance Tax Act 1984, s.265",
+     "url": "https://www.legislation.gov.uk/ukpga/1984/51/section/265"
+    },
+    {
+     "@type": "Legislation",
+     "name": "Income Tax Act 2007, s.35",
+     "url": "https://www.legislation.gov.uk/ukpga/2007/3/section/35"
+    },
+    {
+     "@type": "WebPage",
+     "name": "GOV.UK: Income Tax rates and Personal Allowances",
+     "publisher": {
+      "@type": "GovernmentOrganization",
+      "name": "HM Revenue and Customs"
+     },
+     "url": "https://www.gov.uk/income-tax-rates"
+    },
+    {
+     "@type": "WebPage",
+     "name": "HMRC technical note, 2.2 Liability for Inheritance Tax",
+     "publisher": {
+      "@type": "GovernmentOrganization",
+      "name": "HM Revenue and Customs"
+     },
+     "url": "https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#liability-for-inheritance-tax"
+    },
+    {
+     "@type": "WebPage",
+     "name": "HMRC technical note, 7 Pensions direct payment scheme",
+     "publisher": {
+      "@type": "GovernmentOrganization",
+      "name": "HM Revenue and Customs"
+     },
+     "url": "https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#pensions-direct-payment-scheme"
+    },
+    {
+     "@type": "WebPage",
+     "name": "HMRC technical note, 11.2.1 Loss on sale",
+     "publisher": {
+      "@type": "GovernmentOrganization",
+      "name": "HM Revenue and Customs"
+     },
+     "url": "https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#loss-on-sale"
+    },
+    {
+     "@type": "Legislation",
+     "name": "Inheritance Tax Act 1984, s.8A",
+     "url": "https://www.legislation.gov.uk/ukpga/1984/51/section/8A"
+    },
+    {
+     "@type": "WebPage",
+     "name": "GOV.UK: How Inheritance Tax works",
+     "publisher": {
+      "@type": "GovernmentOrganization",
+      "name": "HM Revenue and Customs"
+     },
+     "url": "https://www.gov.uk/inheritance-tax"
     }
    ]
   },
@@ -199,7 +415,8 @@ footer.site p{margin:.3em 0;max-width:none}
     "https://inheritancetaxexplained.co.uk/images/pensions-and-inheritance-tax-from-april-2027.jpg",
     "https://i.ytimg.com/vi/z5OJGXxvEF4/maxresdefault.jpg"
    ],
-   "uploadDate": "2026-09-29",
+   "uploadDate": "2026-09-29T16:38:32+01:00",
+   "datePublished": "2026-09-29T16:38:32+01:00",
    "duration": "PT10M47S",
    "embedUrl": "https://www.youtube-nocookie.com/embed/z5OJGXxvEF4",
    "url": "https://www.youtube.com/watch?v=z5OJGXxvEF4",
@@ -282,7 +499,24 @@ footer.site p{margin:.3em 0;max-width:none}
      "url": "https://www.youtube.com/watch?v=z5OJGXxvEF4&t=611s"
     }
    ],
-   "transcript": "Today's question, how will your pension be taxed when you die after April 2027? I'm Steve Hunt, a Chartered Insurance Risk Manager and a Trust and Estate Practitioner. And I started my career in 1980. I answer the questions you ask. And this one is a big one because from the 6th of April 2027, an estimated £1 trillion of pension money comes within the scope of inheritance tax for the very first time. From the 6th of April 2027, all and any unused pension money, pension funds from personal pensions, self-invested personal pensions, SIPPs, and money purchase company pension schemes will become part of your estate and potentially taxable at 40% on your death. The usual spouse or civil partner exemptions apply, but those are strict and do not include common law partners. I recently wrote an article on LinkedIn which you can see on screen and in the description below about the widow Miggins and her daughter Amy. In the article, it shows how Mrs Miggins inherited a half a million pound pension from her husband who died before April 2027 and the circumstances where HMRC can end up taking £516,000 because of that pension more than the amount he left to his wife. Because he died before his 75th birthday, the whole lot could have been paid out tax-free. So, we've gone from £500,000 tax-free to £516,000 paid in tax. This is a severe case. Most families will pay far less and some nothing at all. And sorry, this will apply to middle management families living in Slough driving Kias. Not a Porsche in sight. I have spent nearly 50 years encouraging people to get a pension. And I think what a waste when I dive into the weeds of this. From April 2027, you may be taxed on an asset you do not legally own. Oh no, sorry. That is not strictly, technically true. You do own it. \"Notionally.\" For one second before you die. One word changes everything. This time the word is \"notional\". Parliament needed a word for property you do not own that can still be taxed as though you do. And that is the word it chose. It sits there in the 2026 Finance Act in Parliament's own brackets. One word and an estimated £1 trillion comes within the inheritance tax net. You see, for the government to make something you don't own subject to IHT, they had to change the law. The pension that is not yours that technically belongs to a trust mostly. But that is another technicality becomes notionally yours for the one second before you die so that the government can tax you on it. So, what pensions are excluded from inheritance tax from the 6th of April 2027? Three main categories really. Widow's, widower's and other dependants' pensions from a defined benefit scheme, final salary or average salary. Death in service benefits, a late addition, a concession from the government, and joint life annuities bought in your lifetime, including the nominees' annuity. But that's a video in itself. A word of caution though, for annuities, guarantee periods or value protection are included in your estate. So, how exactly does Amy end up having to pay more to HMRC than her dad's pension was worth in the first place? The maths is actually not that complicated. And there are three essential assumptions that would not be particularly out of place in 2027. And they are Mrs Miggins' estate without the pension was £2 million. That Amy works for a bank on gross earnings of £100,000 a year and draws £24,000 a year from her dad's pension. And that when Mrs Miggins dies, she is over age 75. So first of all the inheritance tax due when the pension was added to her estate that took the estate over £2 million. For every £2 that the estate is over £2,000,000, £1 of the residence nil rate band is lost. The mathematics is quite complicated. The effect is simple. The effect of that is that the fund is effectively taxed at a notional rate of 60% resulting in additional tax for Amy to pay of £300,000. 60% of £500,000. But here's a nuance that not a lot of people know, including experts in my field. The pension does not pay the tax that it's responsible for. The pension pays a proportion of the overall tax. So the pension does not pay £300,000. The pension pays its proportion of the entire IHT bill. If the overall estate is £2.5 million and the pension is half a million, then the pension represents one fifth of the estate. The total tax due is the £300,000 on the pension element and 40% tax on the non-pension element being £1 million after allowances. So £400,000. So the total inheritance tax due on this estate would be £700,000 and one fifth of £700,000 is £140,000, and that is the amount that the pension fund has to pay. So that leaves in the pension £360,000 and not the £200,000 the computations would suggest. The problem with this is that because Mrs Miggins died over the age of 75 even though her husband was under the age of 75 the 75 year rule applies to Mr Miggins' old fund, which means that Amy has to draw the income from her dad's pension as income and is taxed for income tax. And if she takes £24,000 a year, then because of the taper on her PAYE, she loses £1 of her personal allowance for every £2 of income above £100,000, which effectively means that that £24,000 that she draws from her dad's pension is also effectively taxed at 60%. And if she continues to do that for the next 15 years, also assuming no growth in the fund and tax allowances stay as they are, then that would result in a further 60% tax on the remaining £360,000 fund, being a further £216,000 in tax added to the original £300,000 the pension was responsible for in the first place. It's a total of £516,000, £16,000 more than the tax-free pension he originally left when he died. And having deemed the pension yours for the second it takes to tax it, the government's own technical note then confirms three separate times that you are not treated as owning the pension's assets. That is the sentence it uses to refuse business property relief, agricultural property relief, loss on sale relief, and the 10-year instalment option. So, the farmer's family and the business owner's family can pay the tax on the farm and the business over 10 years. Mrs Miggins' family must settle the tax on the pension by the end of the sixth month after the month in which she dies with interest running after. So, how will your pension be taxed when you die after April 2027? An estimated 1 trillion pounds of pension money comes into the inheritance tax net for the very first time. Your pension fund will form part of your estate on death, but that does not include a spouse's pension from a final salary scheme, death in service benefits, or joint life annuities, including nominees' annuities. And by how much? If your estate with your pension fund is under the nil rate bands, it will not pay inheritance tax at all. That's £325,000 plus up to £175,000 for your home each up to £1 million for a married couple. But if you are Amy, you could end up paying more in tax than the pension is worth. £516,000 on a £500,000 pension. For every pound her dad put away, the family could hand over £1.03 to the taxman. And not even George Harrison had that. The nominees' annuity will be the subject of my next video. And I will leave you with those famous words from Roy Jenkins that are as true now as they were back in 1986. When talking about inheritance tax, he said that it was a voluntary levy paid by those who distrust their heirs more than they dislike the Inland Revenue."
+   "transcript": "Today's question, how will your pension be taxed when you die after April 2027? I'm Steve Hunt, a Chartered Insurance Risk Manager and a Trust and Estate Practitioner. And I started my career in 1980. I answer the questions you ask. And this one is a big one because from the 6th of April 2027, an estimated £1 trillion of pension money comes within the scope of inheritance tax for the very first time. From the 6th of April 2027, all and any unused pension money, pension funds from personal pensions, self-invested personal pensions, SIPPs, and money purchase company pension schemes will become part of your estate and potentially taxable at 40% on your death. The usual spouse or civil partner exemptions apply, but those are strict and do not include common law partners. I recently wrote an article on LinkedIn which you can see on screen and in the description below about the widow Miggins and her daughter Amy. In the article, it shows how Mrs Miggins inherited a half a million pound pension from her husband who died before April 2027 and the circumstances where HMRC can end up taking £516,000 because of that pension more than the amount he left to his wife. Because he died before his 75th birthday, the whole lot could have been paid out tax-free. So, we've gone from £500,000 tax-free to £516,000 paid in tax. This is a severe case. Most families will pay far less and some nothing at all. And sorry, this will apply to middle management families living in Slough driving Kias. Not a Porsche in sight. I have spent nearly 50 years encouraging people to get a pension. And I think what a waste when I dive into the weeds of this. From April 2027, you may be taxed on an asset you do not legally own. Oh no, sorry. That is not strictly, technically true. You do own it. \"Notionally.\" For one second before you die. One word changes everything. This time the word is \"notional\". Parliament needed a word for property you do not own that can still be taxed as though you do. And that is the word it chose. It sits there in the 2026 Finance Act in Parliament's own brackets. One word and an estimated £1 trillion comes within the inheritance tax net. You see, for the government to make something you don't own subject to IHT, they had to change the law. The pension that is not yours that technically belongs to a trust mostly. But that is another technicality becomes notionally yours for the one second before you die so that the government can tax you on it. So, what pensions are excluded from inheritance tax from the 6th of April 2027? Three main categories really. Widow's, widower's and other dependants' pensions from a defined benefit scheme, final salary or average salary. Death in service benefits, a late addition, a concession from the government, and joint life annuities bought in your lifetime, including the nominees' annuity. But that's a video in itself. A word of caution though, for annuities, guarantee periods or value protection are included in your estate. So, how exactly does Amy end up having to pay more to HMRC than her dad's pension was worth in the first place? The maths is actually not that complicated. And there are three essential assumptions that would not be particularly out of place in 2027. And they are Mrs Miggins' estate without the pension was £2 million. That Amy works for a bank on gross earnings of £100,000 a year and draws £24,000 a year from her dad's pension. And that when Mrs Miggins dies, she is over age 75. So first of all the inheritance tax due when the pension was added to her estate that took the estate over £2 million. For every £2 that the estate is over £2,000,000, £1 of the residence nil rate band is lost. The mathematics is quite complicated. The effect is simple. The effect of that is that the fund is effectively taxed at a notional rate of 60% resulting in additional tax for Amy to pay of £300,000. 60% of £500,000. But here's a nuance that not a lot of people know, including experts in my field. The pension does not pay the tax that it's responsible for. The pension pays a proportion of the overall tax. So the pension does not pay £300,000. The pension pays its proportion of the entire IHT bill. If the overall estate is £2.5 million and the pension is half a million, then the pension represents one fifth of the estate. The total tax due is the £300,000 on the pension element and 40% tax on the non-pension element being £1 million after allowances. So £400,000. So the total inheritance tax due on this estate would be £700,000 and one fifth of £700,000 is £140,000, and that is the amount that the pension fund has to pay. So that leaves in the pension £360,000 and not the £200,000 the computations would suggest. The problem with this is that because Mrs Miggins died over the age of 75 even though her husband was under the age of 75 the 75 year rule applies to Mr Miggins' old fund, which means that Amy has to draw the income from her dad's pension as income and is taxed for income tax. And if she takes £24,000 a year, then because of the taper on her PAYE, she loses £1 of her personal allowance for every £2 of income above £100,000, which effectively means that that £24,000 that she draws from her dad's pension is also effectively taxed at 60%. And if she continues to do that for the next 15 years, also assuming no growth in the fund and tax allowances stay as they are, then that would result in a further 60% tax on the remaining £360,000 fund, being a further £216,000 in tax added to the original £300,000 the pension was responsible for in the first place. It's a total of £516,000, £16,000 more than the tax-free pension he originally left when he died. And having deemed the pension yours for the second it takes to tax it, the government's own technical note then confirms three separate times that you are not treated as owning the pension's assets. That is the sentence it uses to refuse business property relief, agricultural property relief, loss on sale relief, and the 10-year instalment option. So, the farmer's family and the business owner's family can pay the tax on the farm and the business over 10 years. Mrs Miggins' family must settle the tax on the pension by the end of the sixth month after the month in which she dies with interest running after. So, how will your pension be taxed when you die after April 2027? An estimated 1 trillion pounds of pension money comes into the inheritance tax net for the very first time. Your pension fund will form part of your estate on death, but that does not include a spouse's pension from a final salary scheme, death in service benefits, or joint life annuities, including nominees' annuities. And by how much? If your estate with your pension fund is under the nil rate bands, it will not pay inheritance tax at all. That's £325,000 plus up to £175,000 for your home each up to £1 million for a married couple. But if you are Amy, you could end up paying more in tax than the pension is worth. £516,000 on a £500,000 pension. For every pound her dad put away, the family could hand over £1.03 to the taxman. And not even George Harrison had that. The nominees' annuity will be the subject of my next video. And I will leave you with those famous words from Roy Jenkins that are as true now as they were back in 1986. When talking about inheritance tax, he said that it was a voluntary levy paid by those who distrust their heirs more than they dislike the Inland Revenue.",
+   "correction": [
+    {
+     "@type": "CorrectionComment",
+     "text": "Source note: The £1 trillion is an estimate of the defined contribution pension money that comes within the scope of inheritance tax. Pensions Age reported on 23 October 2025 that UK defined contribution pension assets had reached £1.2 trillion (Pensions Policy Institute, DC Future Book). Coming within scope does not mean it will all be taxed.",
+     "datePublished": "2026-10-01"
+    },
+    {
+     "@type": "CorrectionComment",
+     "text": "Clarification: The exclusion covers dependants' scheme pensions from any type of pension arrangement, not only defined benefit schemes. A widow's pension from a final salary scheme is the common example.",
+     "datePublished": "2026-10-01"
+    },
+    {
+     "@type": "CorrectionComment",
+     "text": "Clarification: In the example the pension's share of the tax is paid straight from the pension, under the Pensions Direct Payment Scheme. That is an option, not a rule. The personal representatives are responsible for reporting and paying the tax, and a beneficiary who receives pension property becomes jointly liable for the tax on it.",
+     "datePublished": "2026-10-01"
+    }
+   ]
   },
   {
    "@type": "FAQPage",
@@ -293,7 +527,38 @@ footer.site p{margin:.3em 0;max-width:none}
      "name": "What changes to pensions and inheritance tax on 6 April 2027?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "From 6 April 2027, unused pension money from personal pensions, SIPPs and money purchase company pension schemes becomes part of your estate for inheritance tax, and can be taxed at 40% on your death. The change is made by section 150A of the Inheritance Tax Act 1984, inserted by the Finance Act 2026. Spouse and civil partner exemptions still apply. Common law partners are not covered."
+      "text": "From 6 April 2027, unused pension money from personal pensions, SIPPs and money purchase company pension schemes becomes part of your estate for inheritance tax, and can be taxed at 40% on your death. The change is made by section 150A of the Inheritance Tax Act 1984, inserted by section 66 of the Finance Act 2026, and it applies to deaths on or after 6 April 2027. Spouse and civil partner exemptions still apply. Common law partners are not covered.",
+      "citation": [
+       {
+        "@type": "Legislation",
+        "name": "Inheritance Tax Act 1984, s.150A",
+        "url": "https://www.legislation.gov.uk/ukpga/1984/51/section/150A"
+       },
+       {
+        "@type": "Legislation",
+        "name": "Finance Act 2026, s.66",
+        "url": "https://www.legislation.gov.uk/ukpga/2026/11/section/66"
+       },
+       {
+        "@type": "Legislation",
+        "name": "Finance Act 2026, s.71",
+        "url": "https://www.legislation.gov.uk/ukpga/2026/11/section/71"
+       },
+       {
+        "@type": "Legislation",
+        "name": "Inheritance Tax Act 1984, s.18",
+        "url": "https://www.legislation.gov.uk/ukpga/1984/51/section/18"
+       },
+       {
+        "@type": "WebPage",
+        "name": "HMRC technical note: Inheritance Tax on pensions (updated 29 May 2026)",
+        "publisher": {
+         "@type": "GovernmentOrganization",
+         "name": "HM Revenue and Customs"
+        },
+        "url": "https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions"
+       }
+      ]
      }
     },
     {
@@ -301,15 +566,97 @@ footer.site p{margin:.3em 0;max-width:none}
      "name": "Which pensions are excluded from inheritance tax from April 2027?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "Three main categories: widows', widowers' and other dependants' pensions from a defined benefit (final salary or average salary) scheme; death in service benefits; and joint life annuities bought in the member's lifetime, including the nominees' annuity. Annuity guarantee periods and value protection are not excluded. They count as part of the estate."
+      "text": "Three main categories: dependants' scheme pensions, such as a widow's, widower's or child's pension from a final salary scheme, whatever type of pension arrangement pays them; death in service benefits; and dependants' or nominees' annuities bought together with the member's own lifetime annuity, which includes the nominees' annuity. Annuity guarantee periods and value protection are not excluded. They count as part of the estate.",
+      "citation": [
+       {
+        "@type": "Legislation",
+        "name": "Inheritance Tax Act 1984, s.150A",
+        "url": "https://www.legislation.gov.uk/ukpga/1984/51/section/150A"
+       },
+       {
+        "@type": "WebPage",
+        "name": "HMRC technical note, 3.3.1 Dependants' scheme pension",
+        "publisher": {
+         "@type": "GovernmentOrganization",
+         "name": "HM Revenue and Customs"
+        },
+        "url": "https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#dependants-scheme-pension"
+       },
+       {
+        "@type": "WebPage",
+        "name": "HMRC technical note, 3.3.3 Joint life annuities",
+        "publisher": {
+         "@type": "GovernmentOrganization",
+         "name": "HM Revenue and Customs"
+        },
+        "url": "https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#joint-life-annuities"
+       },
+       {
+        "@type": "WebPage",
+        "name": "HMRC technical note, 3.3.4 Death in service benefits",
+        "publisher": {
+         "@type": "GovernmentOrganization",
+         "name": "HM Revenue and Customs"
+        },
+        "url": "https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#death-in-service-benefits"
+       }
+      ]
      }
     },
     {
      "@type": "Question",
-     "name": "Can inheritance tax on a £500,000 pension really cost more than the pension itself?",
+     "name": "Can the combined family tax cost of a £500,000 pension be more than the pension itself?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "In a severe case, yes. In the worked example, Mrs Miggins inherited a £500,000 pension from her husband, who died before 75, so it could all have been paid out tax free. Because her own estate was already £2 million, adding the pension cost £300,000 in inheritance tax at an effective 60%. Because she died over 75, her daughter Amy then paid income tax on what she drew, also at an effective 60% because of the personal allowance taper, adding £216,000 over 15 years. Total: £516,000, which is £16,000 more than the pension was worth."
+      "text": "In a severe case, yes. In the worked example, Mrs Miggins inherited a £500,000 pension from her husband, who died before 75, so it could all have been paid out tax free. Because her own estate was already £2 million, adding the pension increased the inheritance tax on her estate by £300,000, an effective 60%. Because she died over 75, her daughter Amy then paid income tax on what she drew, also at an effective 60% because of the personal allowance taper, adding £216,000 over 15 years. Total extra tax across the family: £516,000, which is £16,000 more than the pension was worth. The £516,000 is not all taken out of the pension: the pension pays £140,000 of the inheritance tax, the rest of the estate pays the other £160,000 of the increase, and the £216,000 is income tax on Amy's withdrawals. The result depends on the assumptions listed with the example.",
+      "citation": [
+       {
+        "@type": "Legislation",
+        "name": "Inheritance Tax Act 1984, s.150A",
+        "url": "https://www.legislation.gov.uk/ukpga/1984/51/section/150A"
+       },
+       {
+        "@type": "Legislation",
+        "name": "Inheritance Tax Act 1984, s.8D",
+        "url": "https://www.legislation.gov.uk/ukpga/1984/51/section/8D"
+       },
+       {
+        "@type": "Legislation",
+        "name": "Inheritance Tax Act 1984, s.265",
+        "url": "https://www.legislation.gov.uk/ukpga/1984/51/section/265"
+       },
+       {
+        "@type": "Legislation",
+        "name": "Income Tax Act 2007, s.35",
+        "url": "https://www.legislation.gov.uk/ukpga/2007/3/section/35"
+       },
+       {
+        "@type": "WebPage",
+        "name": "GOV.UK: Income Tax rates and Personal Allowances",
+        "publisher": {
+         "@type": "GovernmentOrganization",
+         "name": "HM Revenue and Customs"
+        },
+        "url": "https://www.gov.uk/income-tax-rates"
+       },
+       {
+        "@type": "WebPage",
+        "name": "GOV.UK: Tax on a private pension you inherit",
+        "publisher": {
+         "@type": "GovernmentOrganization",
+         "name": "HM Revenue and Customs"
+        },
+        "url": "https://www.gov.uk/tax-on-pension-death-benefits"
+       },
+       {
+        "@type": "CreativeWork",
+        "name": "The worked example: arithmetic on the stated assumptions",
+        "author": {
+         "@id": "https://inheritancetaxexplained.co.uk/#steve-hunt"
+        },
+        "description": "Steve's analysis, held on file by the author and not published."
+       }
+      ]
      }
     },
     {
@@ -317,7 +664,31 @@ footer.site p{margin:.3em 0;max-width:none}
      "name": "Why is the pension taxed at 60% in the example rather than 40%?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "The residence nil rate band is reduced by £1 for every £2 that an estate is over £2 million (Inheritance Tax Act 1984, s.8D). Adding a £500,000 pension to a £2 million estate loses the residence nil rate band on top of the 40% charge. The effect is an additional £300,000 of tax on the £500,000 pension, which is an effective rate of 60%."
+      "text": "The residence nil rate band is reduced by £1 for every £2 that an estate is over £2 million (Inheritance Tax Act 1984, s.8D). Adding a £500,000 pension to a £2 million estate takes away £250,000 of the residence nil rate band, which costs another £100,000 at 40%, on top of the £200,000 charged on the pension itself. That is an additional £300,000 of tax on the £500,000 pension, an effective rate of 60%. It assumes the full residence nil rate band of £350,000, including the band transferred from Mr Miggins, would otherwise have been available.",
+      "citation": [
+       {
+        "@type": "Legislation",
+        "name": "Inheritance Tax Act 1984, s.8D",
+        "url": "https://www.legislation.gov.uk/ukpga/1984/51/section/8D"
+       },
+       {
+        "@type": "WebPage",
+        "name": "HMRC guidance: the residence nil rate band",
+        "publisher": {
+         "@type": "GovernmentOrganization",
+         "name": "HM Revenue and Customs"
+        },
+        "url": "https://www.gov.uk/guidance/inheritance-tax-residence-nil-rate-band"
+       },
+       {
+        "@type": "CreativeWork",
+        "name": "The worked example: arithmetic on the stated assumptions",
+        "author": {
+         "@id": "https://inheritancetaxexplained.co.uk/#steve-hunt"
+        },
+        "description": "Steve's analysis, held on file by the author and not published."
+       }
+      ]
      }
     },
     {
@@ -325,7 +696,40 @@ footer.site p{margin:.3em 0;max-width:none}
      "name": "Does the pension fund pay the inheritance tax it causes?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "No. The pension pays its proportionate share of the whole estate's bill, not the tax it triggers. In the example the pension is one fifth of a £2.5 million estate. The total tax is £700,000, so the pension pays £140,000, leaving £360,000 in the pension, which Amy then draws as taxable income."
+      "text": "Not in the example. The tax on an estate is shared out in proportion to the value of each part (Inheritance Tax Act 1984, s.265), so the pension bears its proportionate share of the whole estate's bill, not the extra tax it triggers. In the example the pension is one fifth of a £2.5 million estate. The total tax is £700,000, so the pension's share is £140,000, leaving £360,000 in the pension, which Amy then draws as taxable income. Paying that share straight from the pension, under the Pensions Direct Payment Scheme, is an option that the example assumes is used, not a rule. The personal representatives are responsible for reporting and paying the tax, and a beneficiary who receives pension property becomes jointly liable for the tax on it.",
+      "citation": [
+       {
+        "@type": "Legislation",
+        "name": "Inheritance Tax Act 1984, s.265",
+        "url": "https://www.legislation.gov.uk/ukpga/1984/51/section/265"
+       },
+       {
+        "@type": "WebPage",
+        "name": "HMRC technical note, 2.2 Liability for Inheritance Tax",
+        "publisher": {
+         "@type": "GovernmentOrganization",
+         "name": "HM Revenue and Customs"
+        },
+        "url": "https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#liability-for-inheritance-tax"
+       },
+       {
+        "@type": "WebPage",
+        "name": "HMRC technical note, 7 Pensions direct payment scheme",
+        "publisher": {
+         "@type": "GovernmentOrganization",
+         "name": "HM Revenue and Customs"
+        },
+        "url": "https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#pensions-direct-payment-scheme"
+       },
+       {
+        "@type": "CreativeWork",
+        "name": "The worked example: arithmetic on the stated assumptions",
+        "author": {
+         "@id": "https://inheritancetaxexplained.co.uk/#steve-hunt"
+        },
+        "description": "Steve's analysis, held on file by the author and not published."
+       }
+      ]
      }
     },
     {
@@ -333,7 +737,55 @@ footer.site p{margin:.3em 0;max-width:none}
      "name": "Can business property relief, agricultural property relief or the ten-year instalment option apply to pension funds?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "No. The government's technical note says that you are not treated as owning the pension's assets, and uses that sentence to refuse business property relief, agricultural property relief, loss on sale relief and the ten-year instalment option. The tax on the pension must be settled by the end of the sixth month after the month of death, with interest running after that."
+      "text": "No. HMRC's technical note says that you are not treated as owning the pension's assets, and uses that sentence to refuse business property relief, agricultural property relief, loss on sale relief and the ten-year instalment option. The tax on the pension must be settled by the end of the sixth month after the month of death, with interest running after that.",
+      "citation": [
+       {
+        "@type": "WebPage",
+        "name": "HMRC technical note, 11.2.3 Business and agricultural property relief",
+        "publisher": {
+         "@type": "GovernmentOrganization",
+         "name": "HM Revenue and Customs"
+        },
+        "url": "https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#business-property-relief-and-agricultural-property-relief"
+       },
+       {
+        "@type": "WebPage",
+        "name": "HMRC technical note, 11.2.4 Instalments",
+        "publisher": {
+         "@type": "GovernmentOrganization",
+         "name": "HM Revenue and Customs"
+        },
+        "url": "https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#instalments"
+       },
+       {
+        "@type": "WebPage",
+        "name": "HMRC technical note, 11.2.1 Loss on sale",
+        "publisher": {
+         "@type": "GovernmentOrganization",
+         "name": "HM Revenue and Customs"
+        },
+        "url": "https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#loss-on-sale"
+       },
+       {
+        "@type": "Legislation",
+        "name": "Inheritance Tax Act 1984, s.226",
+        "url": "https://www.legislation.gov.uk/ukpga/1984/51/section/226"
+       },
+       {
+        "@type": "Legislation",
+        "name": "Inheritance Tax Act 1984, s.233",
+        "url": "https://www.legislation.gov.uk/ukpga/1984/51/section/233"
+       },
+       {
+        "@type": "WebPage",
+        "name": "GOV.UK: Pay your Inheritance Tax bill",
+        "publisher": {
+         "@type": "GovernmentOrganization",
+         "name": "HM Revenue and Customs"
+        },
+        "url": "https://www.gov.uk/paying-inheritance-tax"
+       }
+      ]
      }
     },
     {
@@ -341,7 +793,42 @@ footer.site p{margin:.3em 0;max-width:none}
      "name": "How will your pension be taxed when you die after April 2027?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "Your pension fund will form part of your estate on death, unless it goes to a spouse or civil partner or is one of the excluded types. If your estate with the pension is under the nil rate bands, £325,000 plus up to £175,000 for your home, each, up to £1 million for a married couple, it pays no inheritance tax at all. Above that, the rate is 40%, rising to an effective 60% where the residence nil rate band tapers away, plus income tax for the person who inherits if you die at 75 or over."
+      "text": "Your pension fund will form part of your estate on death, unless it goes to a spouse or civil partner or is one of the excluded types. If your estate with the pension is under the nil rate bands, £325,000 plus up to £175,000 for a home passing to direct descendants, each, so up to £1 million for a married couple, it pays no inheritance tax at all. Above that, the rate is 40%, rising to an effective 60% where the residence nil rate band tapers away, plus income tax for the person who inherits if you die at 75 or over.",
+      "citation": [
+       {
+        "@type": "Legislation",
+        "name": "Inheritance Tax Act 1984, s.150A",
+        "url": "https://www.legislation.gov.uk/ukpga/1984/51/section/150A"
+       },
+       {
+        "@type": "Legislation",
+        "name": "Inheritance Tax Act 1984, s.8D",
+        "url": "https://www.legislation.gov.uk/ukpga/1984/51/section/8D"
+       },
+       {
+        "@type": "Legislation",
+        "name": "Inheritance Tax Act 1984, s.8A",
+        "url": "https://www.legislation.gov.uk/ukpga/1984/51/section/8A"
+       },
+       {
+        "@type": "WebPage",
+        "name": "GOV.UK: How Inheritance Tax works",
+        "publisher": {
+         "@type": "GovernmentOrganization",
+         "name": "HM Revenue and Customs"
+        },
+        "url": "https://www.gov.uk/inheritance-tax"
+       },
+       {
+        "@type": "WebPage",
+        "name": "GOV.UK: Tax on a private pension you inherit",
+        "publisher": {
+         "@type": "GovernmentOrganization",
+         "name": "HM Revenue and Customs"
+        },
+        "url": "https://www.gov.uk/tax-on-pension-death-benefits"
+       }
+      ]
      }
     }
    ]
@@ -352,18 +839,19 @@ footer.site p{margin:.3em 0;max-width:none}
 </head>
 <body>
 <header class="site"><div class="wrap">
-<a class="brand" href="../">Inheritance Tax Explained <span>by Steve Hunt ACII TEP</span></a>
-<nav><a href="../">Home</a><a href="../pensions-and-inheritance-tax-from-april-2027/">Pensions and IHT 2027</a><a href="../nominees-annuity/">Nominees' annuity</a><a href="../whole-of-life-assurance/">Whole of life</a></nav>
+<a class="brand" href="/">Inheritance Tax Explained <span>by Steve Hunt ACII TEP</span></a>
+<nav><a href="/">Home</a><a href="/pensions-and-inheritance-tax-from-april-2027/">Pensions and IHT 2027</a><a href="/nominees-annuity/">Nominees' annuity</a><a href="/whole-of-life-assurance/">Whole of life</a></nav>
 </div></header>
 <main class="wrap">
 <article>
 <p class="kicker">Video 1 &middot; Inheritance tax explained</p>
 <h1>How will your pension be taxed when you die after April 2027?</h1>
-<p class="byline">By <a href="#about-the-author">Steve Hunt ACII TEP</a> &middot; Published 29 September 2026 &middot; Video 10 min 47 sec &middot; Correct as at September 2026 &middot; Full transcript below</p>
+<p class="byline">By <a href="#about-the-author">Steve Hunt ACII TEP</a> &middot; Published 29 September 2026 &middot; <a href="/sources-and-corrections/">Last reviewed 1 October 2026</a> &middot; Video 10 min 47 sec &middot; Full transcript below</p>
 
 <section class="answer" id="short-answer">
 <h2>The short answer</h2>
-<p>From 6 April 2027, most unused pension funds and pension death benefits count as part of your estate for inheritance tax, and can be taxed at 40% on death. Pensions left to a spouse or civil partner stay exempt. Unmarried partners are not covered.</p><p>Three kinds of pension are excluded: dependants' pensions from a defined benefit scheme, death in service benefits, and joint life annuities bought in your lifetime, including the nominees' annuity.</p><p>If your estate with the pension is under the nil rate bands, there is no inheritance tax at all. In a severe case, with a large estate and a beneficiary who is a higher earner, a £500,000 pension could cost a family £516,000 in inheritance tax and income tax combined. Most families will pay far less, and some nothing.</p>
+<p>From 6 April 2027, most unused pension funds and pension death benefits count as part of your estate for inheritance tax, and can be taxed at 40% on death. Pensions left to a spouse or civil partner stay exempt. Unmarried partners are not covered.</p><p>Three main kinds of pension benefit are excluded: dependants' scheme pensions, such as a widow's pension from a final salary scheme; death in service benefits; and dependants' or nominees' annuities bought together with the member's own lifetime annuity.</p><p>If your estate with the pension is under the nil rate bands, there is no inheritance tax at all. In a severe case, with a large estate and a beneficiary who is a higher earner, a £500,000 pension could cost a family £516,000 in inheritance tax and income tax combined. Most families will pay far less, and some nothing.</p>
+<p class="src"><span class="lead">Sources</span> <span class="lbl">Law:</span> <a href="https://www.legislation.gov.uk/ukpga/1984/51/section/150A" target="_blank" rel="noopener">Inheritance Tax Act 1984, s.150A</a>; <a href="https://www.legislation.gov.uk/ukpga/2026/11/section/71" target="_blank" rel="noopener">Finance Act 2026, s.71</a>; <a href="https://www.legislation.gov.uk/ukpga/1984/51/section/18" target="_blank" rel="noopener">Inheritance Tax Act 1984, s.18</a> &middot; <span class="lbl">HMRC:</span> <a href="https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#dependants-scheme-pension" target="_blank" rel="noopener">HMRC technical note, 3.3.1 Dependants' scheme pension</a>; <a href="https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#joint-life-annuities" target="_blank" rel="noopener">HMRC technical note, 3.3.3 Joint life annuities</a>; <a href="https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#death-in-service-benefits" target="_blank" rel="noopener">HMRC technical note, 3.3.4 Death in service benefits</a> &middot; <span class="lbl">Steve's analysis:</span> The worked example: arithmetic on the stated assumptions</p>
 </section>
 
 <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/z5OJGXxvEF4?rel=0" title="How will your pension be taxed when you die after April 2027?" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
@@ -382,35 +870,60 @@ footer.site p{margin:.3em 0;max-width:none}
 <li><a class="t" href="https://www.youtube.com/watch?v=z5OJGXxvEF4&t=611s" target="_blank" rel="noopener">10:11</a> <a href="#t611">What's next, and Roy Jenkins</a></li>
 </ol>
 
-<h2 id="key-facts">Key facts (as at September 2026)</h2>
+<h2 id="key-facts">Key facts (as at 1 October 2026)</h2>
 <ul class="facts">
-<li>From 6 April 2027, most unused pension funds and pension death benefits count as part of the estate for inheritance tax: Inheritance Tax Act 1984, s.150A, inserted by Finance Act 2026, s.66, for deaths on or after 6 April 2027.</li>
-<li>Pensions left to a spouse or civil partner remain exempt (Inheritance Tax Act 1984, s.18). Unmarried partners are not covered.</li>
-<li>Excluded: dependants' scheme pensions, death in service benefits, and dependants' or nominees' annuities bought together with the member's own annuity. Annuity guarantee periods and value protection are included.</li>
-<li>The residence nil rate band reduces by £1 for every £2 that an estate is over £2 million (Inheritance Tax Act 1984, s.8D).</li>
-<li>If death is at 75 or over, the person who inherits the pension also pays income tax on what they draw.</li>
-<li>Business property relief, agricultural property relief and the ten-year instalment option do not apply to pension funds. The tax is due by the end of the sixth month after the month of death.</li>
-<li>The worked example is a severe case. Most families will pay far less, and some nothing at all.</li>
+<li>From 6 April 2027, most unused pension funds and pension death benefits count as part of the estate for inheritance tax: Inheritance Tax Act 1984, s.150A, inserted by Finance Act 2026, s.66, for deaths on or after 6 April 2027 (Finance Act 2026, s.71).<span class="src"><span class="lead">Sources</span> <span class="lbl">Law:</span> <a href="https://www.legislation.gov.uk/ukpga/1984/51/section/150A" target="_blank" rel="noopener">Inheritance Tax Act 1984, s.150A</a>; <a href="https://www.legislation.gov.uk/ukpga/2026/11/section/66" target="_blank" rel="noopener">Finance Act 2026, s.66</a>; <a href="https://www.legislation.gov.uk/ukpga/2026/11/section/71" target="_blank" rel="noopener">Finance Act 2026, s.71</a> &middot; <span class="lbl">HMRC:</span> <a href="https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions" target="_blank" rel="noopener">HMRC technical note: Inheritance Tax on pensions (updated 29 May 2026)</a></span></li>
+<li>Pensions left to a spouse or civil partner remain exempt (Inheritance Tax Act 1984, s.18). Unmarried partners are not covered.<span class="src"><span class="lead">Sources</span> <span class="lbl">Law:</span> <a href="https://www.legislation.gov.uk/ukpga/1984/51/section/18" target="_blank" rel="noopener">Inheritance Tax Act 1984, s.18</a> &middot; <span class="lbl">HMRC:</span> <a href="https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#exempt-beneficiaries" target="_blank" rel="noopener">HMRC technical note, 3.4 Exempt beneficiaries</a></span></li>
+<li>Excluded: dependants' scheme pensions, from any type of pension arrangement; death in service benefits; and dependants' or nominees' annuities bought together with the member's own lifetime annuity (Inheritance Tax Act 1984, s.150A(6)). Annuity guarantee periods and value protection are included.<span class="src"><span class="lead">Sources</span> <span class="lbl">Law:</span> <a href="https://www.legislation.gov.uk/ukpga/1984/51/section/150A" target="_blank" rel="noopener">Inheritance Tax Act 1984, s.150A</a> &middot; <span class="lbl">HMRC:</span> <a href="https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#dependants-scheme-pension" target="_blank" rel="noopener">HMRC technical note, 3.3.1 Dependants' scheme pension</a>; <a href="https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#joint-life-annuities" target="_blank" rel="noopener">HMRC technical note, 3.3.3 Joint life annuities</a>; <a href="https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#death-in-service-benefits" target="_blank" rel="noopener">HMRC technical note, 3.3.4 Death in service benefits</a></span></li>
+<li>The residence nil rate band reduces by £1 for every £2 that an estate is over £2 million (Inheritance Tax Act 1984, s.8D).<span class="src"><span class="lead">Sources</span> <span class="lbl">Law:</span> <a href="https://www.legislation.gov.uk/ukpga/1984/51/section/8D" target="_blank" rel="noopener">Inheritance Tax Act 1984, s.8D</a> &middot; <span class="lbl">HMRC:</span> <a href="https://www.gov.uk/guidance/inheritance-tax-residence-nil-rate-band" target="_blank" rel="noopener">HMRC guidance: the residence nil rate band</a></span></li>
+<li>If death is at 75 or over, the person who inherits the pension also pays income tax on what they draw.<span class="src"><span class="lead">Sources</span> <span class="lbl">HMRC:</span> <a href="https://www.gov.uk/tax-on-pension-death-benefits" target="_blank" rel="noopener">GOV.UK: Tax on a private pension you inherit</a></span></li>
+<li>Business property relief, agricultural property relief and the ten-year instalment option do not apply to pension funds. The tax is due by the end of the sixth month after the month of death, with interest after that (Inheritance Tax Act 1984, ss.226 and 233).<span class="src"><span class="lead">Sources</span> <span class="lbl">Law:</span> <a href="https://www.legislation.gov.uk/ukpga/1984/51/section/226" target="_blank" rel="noopener">Inheritance Tax Act 1984, s.226</a>; <a href="https://www.legislation.gov.uk/ukpga/1984/51/section/233" target="_blank" rel="noopener">Inheritance Tax Act 1984, s.233</a> &middot; <span class="lbl">HMRC:</span> <a href="https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#business-property-relief-and-agricultural-property-relief" target="_blank" rel="noopener">HMRC technical note, 11.2.3 Business and agricultural property relief</a>; <a href="https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#instalments" target="_blank" rel="noopener">HMRC technical note, 11.2.4 Instalments</a>; <a href="https://www.gov.uk/paying-inheritance-tax" target="_blank" rel="noopener">GOV.UK: Pay your Inheritance Tax bill</a></span></li>
+<li>An estimated £1 trillion of pension money comes within the scope of inheritance tax. Pensions Age reported on 23 October 2025 that UK defined contribution pension assets had reached £1.2 trillion (Pensions Policy Institute, DC Future Book). Coming within scope does not mean it will all be taxed.<span class="src"><span class="lead">Sources</span> <span class="lbl">Published source:</span> <a href="https://www.pensionsage.com/pa/DC-pension-asets-quadruple-growth-remains-vulnerable.php" target="_blank" rel="noopener">Pensions Age, 23 October 2025: DC pension assets quadruple to £1.2trn (Pensions Policy Institute, DC Future Book)</a></span></li>
+<li>The worked example is a severe case. Most families will pay far less, and some nothing at all.<span class="src"><span class="lead">Sources</span> <span class="lbl">Steve's analysis:</span> The worked example: arithmetic on the stated assumptions</span></li>
 </ul>
-<p class="note">Assumptions in the worked example: 2026/27 rates and allowances, frozen; no fund growth; Mr Miggins died under 75 and before 6 April 2027; Mrs Miggins dies in 2029 aged over 75; her estate without the pension is £2 million; Amy earns £100,000 a year; English income tax rates. Mr and Mrs Miggins are fictitious. The arithmetic is not.</p>
-<p class="note">Legislation referred to: Inheritance Tax Act 1984, s.18, s.8D and s.150A(1), inserted by Finance Act 2026, s.66.</p>
+<p class="note">Assumptions in the worked example: Mr Miggins died under 75 and before 6 April 2027, leaving his pension to Mrs Miggins; she dies in 2029, aged over 75; her estate without the pension is £2 million; his unused nil rate band and residence nil rate band are both transferred in full and claimed; a home worth at least £350,000 passes to direct descendants; there are no other gifts, reliefs or deductions; the inheritance tax on the pension is paid straight from the pension, which is an option, not a rule; Amy earns £100,000 a year and draws £24,000 a year from the pension for 15 years; 2026/27 rates and allowances, frozen; no fund growth; English income tax rates. This is a constant-rules illustration, not a forecast of future tax rates. Mr and Mrs Miggins are fictitious. The arithmetic is not.</p>
+<p class="note">Legislation referred to: Inheritance Tax Act 1984, s.8D, s.18, s.150A(1) and (6), s.226 and s.265; s.150A was inserted by Finance Act 2026, s.66, for deaths on or after 6 April 2027 (s.71). Income Tax Act 2007, s.35.</p>
 
 <section class="faq" id="questions">
 <h2>Questions this video answers</h2>
 <h3>What changes to pensions and inheritance tax on 6 April 2027?</h3>
-<p>From 6 April 2027, unused pension money from personal pensions, SIPPs and money purchase company pension schemes becomes part of your estate for inheritance tax, and can be taxed at 40% on your death. The change is made by section 150A of the Inheritance Tax Act 1984, inserted by the Finance Act 2026. Spouse and civil partner exemptions still apply. Common law partners are not covered.</p>
+<p>From 6 April 2027, unused pension money from personal pensions, SIPPs and money purchase company pension schemes becomes part of your estate for inheritance tax, and can be taxed at 40% on your death. The change is made by section 150A of the Inheritance Tax Act 1984, inserted by section 66 of the Finance Act 2026, and it applies to deaths on or after 6 April 2027. Spouse and civil partner exemptions still apply. Common law partners are not covered.</p>
+<p class="src"><span class="lead">Sources</span> <span class="lbl">Law:</span> <a href="https://www.legislation.gov.uk/ukpga/1984/51/section/150A" target="_blank" rel="noopener">Inheritance Tax Act 1984, s.150A</a>; <a href="https://www.legislation.gov.uk/ukpga/2026/11/section/66" target="_blank" rel="noopener">Finance Act 2026, s.66</a>; <a href="https://www.legislation.gov.uk/ukpga/2026/11/section/71" target="_blank" rel="noopener">Finance Act 2026, s.71</a>; <a href="https://www.legislation.gov.uk/ukpga/1984/51/section/18" target="_blank" rel="noopener">Inheritance Tax Act 1984, s.18</a> &middot; <span class="lbl">HMRC:</span> <a href="https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions" target="_blank" rel="noopener">HMRC technical note: Inheritance Tax on pensions (updated 29 May 2026)</a></p>
 <h3>Which pensions are excluded from inheritance tax from April 2027?</h3>
-<p>Three main categories: widows', widowers' and other dependants' pensions from a defined benefit (final salary or average salary) scheme; death in service benefits; and joint life annuities bought in the member's lifetime, including the nominees' annuity. Annuity guarantee periods and value protection are not excluded. They count as part of the estate.</p>
-<h3>Can inheritance tax on a £500,000 pension really cost more than the pension itself?</h3>
-<p>In a severe case, yes. In the worked example, Mrs Miggins inherited a £500,000 pension from her husband, who died before 75, so it could all have been paid out tax free. Because her own estate was already £2 million, adding the pension cost £300,000 in inheritance tax at an effective 60%. Because she died over 75, her daughter Amy then paid income tax on what she drew, also at an effective 60% because of the personal allowance taper, adding £216,000 over 15 years. Total: £516,000, which is £16,000 more than the pension was worth.</p>
+<p>Three main categories: dependants' scheme pensions, such as a widow's, widower's or child's pension from a final salary scheme, whatever type of pension arrangement pays them; death in service benefits; and dependants' or nominees' annuities bought together with the member's own lifetime annuity, which includes the nominees' annuity. Annuity guarantee periods and value protection are not excluded. They count as part of the estate.</p>
+<p class="src"><span class="lead">Sources</span> <span class="lbl">Law:</span> <a href="https://www.legislation.gov.uk/ukpga/1984/51/section/150A" target="_blank" rel="noopener">Inheritance Tax Act 1984, s.150A</a> &middot; <span class="lbl">HMRC:</span> <a href="https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#dependants-scheme-pension" target="_blank" rel="noopener">HMRC technical note, 3.3.1 Dependants' scheme pension</a>; <a href="https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#joint-life-annuities" target="_blank" rel="noopener">HMRC technical note, 3.3.3 Joint life annuities</a>; <a href="https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#death-in-service-benefits" target="_blank" rel="noopener">HMRC technical note, 3.3.4 Death in service benefits</a></p>
+<h3>Can the combined family tax cost of a £500,000 pension be more than the pension itself?</h3>
+<p>In a severe case, yes. In the worked example, Mrs Miggins inherited a £500,000 pension from her husband, who died before 75, so it could all have been paid out tax free. Because her own estate was already £2 million, adding the pension increased the inheritance tax on her estate by £300,000, an effective 60%. Because she died over 75, her daughter Amy then paid income tax on what she drew, also at an effective 60% because of the personal allowance taper, adding £216,000 over 15 years. Total extra tax across the family: £516,000, which is £16,000 more than the pension was worth. The £516,000 is not all taken out of the pension: the pension pays £140,000 of the inheritance tax, the rest of the estate pays the other £160,000 of the increase, and the £216,000 is income tax on Amy's withdrawals. The result depends on the assumptions listed with the example.</p>
+<p class="src"><span class="lead">Sources</span> <span class="lbl">Law:</span> <a href="https://www.legislation.gov.uk/ukpga/1984/51/section/150A" target="_blank" rel="noopener">Inheritance Tax Act 1984, s.150A</a>; <a href="https://www.legislation.gov.uk/ukpga/1984/51/section/8D" target="_blank" rel="noopener">Inheritance Tax Act 1984, s.8D</a>; <a href="https://www.legislation.gov.uk/ukpga/1984/51/section/265" target="_blank" rel="noopener">Inheritance Tax Act 1984, s.265</a>; <a href="https://www.legislation.gov.uk/ukpga/2007/3/section/35" target="_blank" rel="noopener">Income Tax Act 2007, s.35</a> &middot; <span class="lbl">HMRC:</span> <a href="https://www.gov.uk/income-tax-rates" target="_blank" rel="noopener">GOV.UK: Income Tax rates and Personal Allowances</a>; <a href="https://www.gov.uk/tax-on-pension-death-benefits" target="_blank" rel="noopener">GOV.UK: Tax on a private pension you inherit</a> &middot; <span class="lbl">Steve's analysis:</span> The worked example: arithmetic on the stated assumptions</p>
 <h3>Why is the pension taxed at 60% in the example rather than 40%?</h3>
-<p>The residence nil rate band is reduced by £1 for every £2 that an estate is over £2 million (Inheritance Tax Act 1984, s.8D). Adding a £500,000 pension to a £2 million estate loses the residence nil rate band on top of the 40% charge. The effect is an additional £300,000 of tax on the £500,000 pension, which is an effective rate of 60%.</p>
+<p>The residence nil rate band is reduced by £1 for every £2 that an estate is over £2 million (Inheritance Tax Act 1984, s.8D). Adding a £500,000 pension to a £2 million estate takes away £250,000 of the residence nil rate band, which costs another £100,000 at 40%, on top of the £200,000 charged on the pension itself. That is an additional £300,000 of tax on the £500,000 pension, an effective rate of 60%. It assumes the full residence nil rate band of £350,000, including the band transferred from Mr Miggins, would otherwise have been available.</p>
+<p class="src"><span class="lead">Sources</span> <span class="lbl">Law:</span> <a href="https://www.legislation.gov.uk/ukpga/1984/51/section/8D" target="_blank" rel="noopener">Inheritance Tax Act 1984, s.8D</a> &middot; <span class="lbl">HMRC:</span> <a href="https://www.gov.uk/guidance/inheritance-tax-residence-nil-rate-band" target="_blank" rel="noopener">HMRC guidance: the residence nil rate band</a> &middot; <span class="lbl">Steve's analysis:</span> The worked example: arithmetic on the stated assumptions</p>
 <h3>Does the pension fund pay the inheritance tax it causes?</h3>
-<p>No. The pension pays its proportionate share of the whole estate's bill, not the tax it triggers. In the example the pension is one fifth of a £2.5 million estate. The total tax is £700,000, so the pension pays £140,000, leaving £360,000 in the pension, which Amy then draws as taxable income.</p>
+<p>Not in the example. The tax on an estate is shared out in proportion to the value of each part (Inheritance Tax Act 1984, s.265), so the pension bears its proportionate share of the whole estate's bill, not the extra tax it triggers. In the example the pension is one fifth of a £2.5 million estate. The total tax is £700,000, so the pension's share is £140,000, leaving £360,000 in the pension, which Amy then draws as taxable income. Paying that share straight from the pension, under the Pensions Direct Payment Scheme, is an option that the example assumes is used, not a rule. The personal representatives are responsible for reporting and paying the tax, and a beneficiary who receives pension property becomes jointly liable for the tax on it.</p>
+<p class="src"><span class="lead">Sources</span> <span class="lbl">Law:</span> <a href="https://www.legislation.gov.uk/ukpga/1984/51/section/265" target="_blank" rel="noopener">Inheritance Tax Act 1984, s.265</a> &middot; <span class="lbl">HMRC:</span> <a href="https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#liability-for-inheritance-tax" target="_blank" rel="noopener">HMRC technical note, 2.2 Liability for Inheritance Tax</a>; <a href="https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#pensions-direct-payment-scheme" target="_blank" rel="noopener">HMRC technical note, 7 Pensions direct payment scheme</a> &middot; <span class="lbl">Steve's analysis:</span> The worked example: arithmetic on the stated assumptions</p>
 <h3>Can business property relief, agricultural property relief or the ten-year instalment option apply to pension funds?</h3>
-<p>No. The government's technical note says that you are not treated as owning the pension's assets, and uses that sentence to refuse business property relief, agricultural property relief, loss on sale relief and the ten-year instalment option. The tax on the pension must be settled by the end of the sixth month after the month of death, with interest running after that.</p>
+<p>No. HMRC's technical note says that you are not treated as owning the pension's assets, and uses that sentence to refuse business property relief, agricultural property relief, loss on sale relief and the ten-year instalment option. The tax on the pension must be settled by the end of the sixth month after the month of death, with interest running after that.</p>
+<p class="src"><span class="lead">Sources</span> <span class="lbl">Law:</span> <a href="https://www.legislation.gov.uk/ukpga/1984/51/section/226" target="_blank" rel="noopener">Inheritance Tax Act 1984, s.226</a>; <a href="https://www.legislation.gov.uk/ukpga/1984/51/section/233" target="_blank" rel="noopener">Inheritance Tax Act 1984, s.233</a> &middot; <span class="lbl">HMRC:</span> <a href="https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#business-property-relief-and-agricultural-property-relief" target="_blank" rel="noopener">HMRC technical note, 11.2.3 Business and agricultural property relief</a>; <a href="https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#instalments" target="_blank" rel="noopener">HMRC technical note, 11.2.4 Instalments</a>; <a href="https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#loss-on-sale" target="_blank" rel="noopener">HMRC technical note, 11.2.1 Loss on sale</a>; <a href="https://www.gov.uk/paying-inheritance-tax" target="_blank" rel="noopener">GOV.UK: Pay your Inheritance Tax bill</a></p>
 <h3>How will your pension be taxed when you die after April 2027?</h3>
-<p>Your pension fund will form part of your estate on death, unless it goes to a spouse or civil partner or is one of the excluded types. If your estate with the pension is under the nil rate bands, £325,000 plus up to £175,000 for your home, each, up to £1 million for a married couple, it pays no inheritance tax at all. Above that, the rate is 40%, rising to an effective 60% where the residence nil rate band tapers away, plus income tax for the person who inherits if you die at 75 or over.</p>
+<p>Your pension fund will form part of your estate on death, unless it goes to a spouse or civil partner or is one of the excluded types. If your estate with the pension is under the nil rate bands, £325,000 plus up to £175,000 for a home passing to direct descendants, each, so up to £1 million for a married couple, it pays no inheritance tax at all. Above that, the rate is 40%, rising to an effective 60% where the residence nil rate band tapers away, plus income tax for the person who inherits if you die at 75 or over.</p>
+<p class="src"><span class="lead">Sources</span> <span class="lbl">Law:</span> <a href="https://www.legislation.gov.uk/ukpga/1984/51/section/150A" target="_blank" rel="noopener">Inheritance Tax Act 1984, s.150A</a>; <a href="https://www.legislation.gov.uk/ukpga/1984/51/section/8D" target="_blank" rel="noopener">Inheritance Tax Act 1984, s.8D</a>; <a href="https://www.legislation.gov.uk/ukpga/1984/51/section/8A" target="_blank" rel="noopener">Inheritance Tax Act 1984, s.8A</a> &middot; <span class="lbl">HMRC:</span> <a href="https://www.gov.uk/inheritance-tax" target="_blank" rel="noopener">GOV.UK: How Inheritance Tax works</a>; <a href="https://www.gov.uk/tax-on-pension-death-benefits" target="_blank" rel="noopener">GOV.UK: Tax on a private pension you inherit</a></p>
+</section>
+
+<section class="srclist" id="sources">
+<h2>Sources and evidence</h2>
+<p class="note">Every source behind this page, grouped by the kind of authority it carries. <a href="/sources-and-corrections/">How the sources are labelled, and what has been corrected</a>.</p>
+<h3>Law</h3>
+<p class="meaning">The Act and section, linked to the official text on legislation.gov.uk.</p>
+<ul><li><a href="https://www.legislation.gov.uk/ukpga/1984/51/section/150A" target="_blank" rel="noopener">Inheritance Tax Act 1984, s.150A</a></li><li><a href="https://www.legislation.gov.uk/ukpga/2026/11/section/71" target="_blank" rel="noopener">Finance Act 2026, s.71</a></li><li><a href="https://www.legislation.gov.uk/ukpga/1984/51/section/18" target="_blank" rel="noopener">Inheritance Tax Act 1984, s.18</a></li><li><a href="https://www.legislation.gov.uk/ukpga/2026/11/section/66" target="_blank" rel="noopener">Finance Act 2026, s.66</a></li><li><a href="https://www.legislation.gov.uk/ukpga/1984/51/section/8D" target="_blank" rel="noopener">Inheritance Tax Act 1984, s.8D</a></li><li><a href="https://www.legislation.gov.uk/ukpga/1984/51/section/226" target="_blank" rel="noopener">Inheritance Tax Act 1984, s.226</a></li><li><a href="https://www.legislation.gov.uk/ukpga/1984/51/section/233" target="_blank" rel="noopener">Inheritance Tax Act 1984, s.233</a></li><li><a href="https://www.legislation.gov.uk/ukpga/1984/51/section/265" target="_blank" rel="noopener">Inheritance Tax Act 1984, s.265</a></li><li><a href="https://www.legislation.gov.uk/ukpga/2007/3/section/35" target="_blank" rel="noopener">Income Tax Act 2007, s.35</a></li><li><a href="https://www.legislation.gov.uk/ukpga/1984/51/section/8A" target="_blank" rel="noopener">Inheritance Tax Act 1984, s.8A</a></li></ul>
+<h3>HMRC</h3>
+<p class="meaning">HMRC's manuals, technical notes and GOV.UK guidance: HMRC's reading of the law, not the law itself.</p>
+<ul><li><a href="https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#dependants-scheme-pension" target="_blank" rel="noopener">HMRC technical note, 3.3.1 Dependants' scheme pension</a></li><li><a href="https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#joint-life-annuities" target="_blank" rel="noopener">HMRC technical note, 3.3.3 Joint life annuities</a></li><li><a href="https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#death-in-service-benefits" target="_blank" rel="noopener">HMRC technical note, 3.3.4 Death in service benefits</a></li><li><a href="https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions" target="_blank" rel="noopener">HMRC technical note: Inheritance Tax on pensions (updated 29 May 2026)</a></li><li><a href="https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#exempt-beneficiaries" target="_blank" rel="noopener">HMRC technical note, 3.4 Exempt beneficiaries</a></li><li><a href="https://www.gov.uk/guidance/inheritance-tax-residence-nil-rate-band" target="_blank" rel="noopener">HMRC guidance: the residence nil rate band</a></li><li><a href="https://www.gov.uk/tax-on-pension-death-benefits" target="_blank" rel="noopener">GOV.UK: Tax on a private pension you inherit</a></li><li><a href="https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#business-property-relief-and-agricultural-property-relief" target="_blank" rel="noopener">HMRC technical note, 11.2.3 Business and agricultural property relief</a></li><li><a href="https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#instalments" target="_blank" rel="noopener">HMRC technical note, 11.2.4 Instalments</a></li><li><a href="https://www.gov.uk/paying-inheritance-tax" target="_blank" rel="noopener">GOV.UK: Pay your Inheritance Tax bill</a></li><li><a href="https://www.gov.uk/income-tax-rates" target="_blank" rel="noopener">GOV.UK: Income Tax rates and Personal Allowances</a></li><li><a href="https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#liability-for-inheritance-tax" target="_blank" rel="noopener">HMRC technical note, 2.2 Liability for Inheritance Tax</a></li><li><a href="https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#pensions-direct-payment-scheme" target="_blank" rel="noopener">HMRC technical note, 7 Pensions direct payment scheme</a></li><li><a href="https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#loss-on-sale" target="_blank" rel="noopener">HMRC technical note, 11.2.1 Loss on sale</a></li><li><a href="https://www.gov.uk/inheritance-tax" target="_blank" rel="noopener">GOV.UK: How Inheritance Tax works</a></li></ul>
+<h3>Published source</h3>
+<p class="meaning">Figures and history credited to the publication that reported them.</p>
+<ul><li><a href="https://www.pensionsage.com/pa/DC-pension-asets-quadruple-growth-remains-vulnerable.php" target="_blank" rel="noopener">Pensions Age, 23 October 2025: DC pension assets quadruple to £1.2trn (Pensions Policy Institute, DC Future Book)</a></li></ul>
+<h3>Steve's analysis</h3>
+<p class="meaning">Steve's own reading or arithmetic, where it goes beyond settled law or HMRC's published view.</p>
+<ul><li>The worked example: arithmetic on the stated assumptions</li></ul>
 </section>
 
 <h2 id="articles">Steve's LinkedIn articles behind this video</h2>
@@ -419,13 +932,14 @@ footer.site p{margin:.3em 0;max-width:none}
 <li><a href="https://www.linkedin.com/pulse/one-word-dragged-1-trillion-inheritance-tax-clause-steve-hunt-pepee" target="_blank" rel="noopener">One Word Dragged £1 Trillion Into Inheritance Tax. One Clause Lets You Take Yours Back Out.</a> The word &quot;notional&quot;, and the one clause that takes a pension back out of the net.</li>
 </ul>
 
-<div class="related"><p><strong>Next video:</strong> <a href="../nominees-annuity/">Nominees' annuity: what is it, how does it work, and what's the catch?</a></p></div>
+<div class="related"><p><strong>Next video:</strong> <a href="/nominees-annuity/">Nominees' annuity: what is it, how does it work, and what's the catch?</a></p></div>
 
 <section class="transcript" id="transcript">
 <h2>Full transcript</h2>
-<p class="note">This is what is said in the video, with the figures written as numbers. Timestamps open the video at that point. The narration uses a digital clone of Steve Hunt's voice. The words are his own.</p>
+<p class="note">This is what is said in the video, with the figures written as numbers. Timestamps open the video at that point. The words are not changed after publication: where something said needs correcting or qualifying, a dated note sits beside it. The narration uses a digital clone of Steve Hunt's voice. The words are his own.</p>
 <h3 id="t0"><a class="t" href="https://www.youtube.com/watch?v=z5OJGXxvEF4" target="_blank" rel="noopener">0:00</a>How will your pension be taxed after April 2027?</h3>
 <p>Today's question, how will your pension be taxed when you die after April 2027? I'm Steve Hunt, a Chartered Insurance Risk Manager and a Trust and Estate Practitioner. And I started my career in 1980. I answer the questions you ask. And this one is a big one because from the 6th of April 2027, an estimated £1 trillion of pension money comes within the scope of inheritance tax for the very first time.</p>
+<div class="correction" role="note"><p><strong>Source note, 1 October 2026:</strong> The £1 trillion is an estimate of the defined contribution pension money that comes within the scope of inheritance tax. Pensions Age reported on 23 October 2025 that UK defined contribution pension assets had reached £1.2 trillion (Pensions Policy Institute, DC Future Book). Coming within scope does not mean it will all be taxed.</p><p class="src"><span class="lead">Sources</span> <span class="lbl">Published source:</span> <a href="https://www.pensionsage.com/pa/DC-pension-asets-quadruple-growth-remains-vulnerable.php" target="_blank" rel="noopener">Pensions Age, 23 October 2025: DC pension assets quadruple to £1.2trn (Pensions Policy Institute, DC Future Book)</a></p></div>
 <h3 id="t35"><a class="t" href="https://www.youtube.com/watch?v=z5OJGXxvEF4&t=35s" target="_blank" rel="noopener">0:35</a>What changes on 6 April 2027</h3>
 <p>From the 6th of April 2027, all and any unused pension money, pension funds from personal pensions, self-invested personal pensions, SIPPs, and money purchase company pension schemes will become part of your estate and potentially taxable at 40% on your death. The usual spouse or civil partner exemptions apply, but those are strict and do not include common law partners.</p>
 <h3 id="t67"><a class="t" href="https://www.youtube.com/watch?v=z5OJGXxvEF4&t=67s" target="_blank" rel="noopener">1:07</a>Worked example: £516,000 of tax on a £500,000 pension</h3>
@@ -438,10 +952,12 @@ footer.site p{margin:.3em 0;max-width:none}
 <p>But that is another technicality becomes notionally yours for the one second before you die so that the government can tax you on it. So, what pensions are excluded from inheritance</p>
 <h3 id="t207"><a class="t" href="https://www.youtube.com/watch?v=z5OJGXxvEF4&t=207s" target="_blank" rel="noopener">3:27</a>Which pensions are excluded</h3>
 <p>tax from the 6th of April 2027? Three main categories really. Widow's, widower's and other dependants' pensions from a defined benefit scheme, final salary or average salary. Death in service benefits, a late addition, a concession from the government, and joint life annuities bought in your lifetime, including the nominees' annuity. But that's a video in itself. A word of caution though, for annuities, guarantee periods or value protection are included in your estate.</p>
+<div class="correction" role="note"><p><strong>Clarification, 1 October 2026:</strong> The exclusion covers dependants' scheme pensions from any type of pension arrangement, not only defined benefit schemes. A widow's pension from a final salary scheme is the common example.</p><p class="src"><span class="lead">Sources</span> <span class="lbl">Law:</span> <a href="https://www.legislation.gov.uk/ukpga/1984/51/section/150A" target="_blank" rel="noopener">Inheritance Tax Act 1984, s.150A</a> &middot; <span class="lbl">HMRC:</span> <a href="https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#dependants-scheme-pension" target="_blank" rel="noopener">HMRC technical note, 3.3.1 Dependants' scheme pension</a></p></div>
 <h3 id="t249"><a class="t" href="https://www.youtube.com/watch?v=z5OJGXxvEF4&t=249s" target="_blank" rel="noopener">4:09</a>How the £516,000 adds up</h3>
 <p>So, how exactly does Amy end up having to pay more to HMRC than her dad's pension was worth in the first place? The maths is actually not that complicated. And there are three essential assumptions that would not be particularly out of place in 2027. And they are Mrs Miggins' estate without the pension was £2 million.</p>
 <p>That Amy works for a bank on gross earnings of £100,000 a year and draws £24,000 a year from her dad's pension. And that when Mrs Miggins dies, she is over age 75. So first of all the inheritance tax due when the pension was added to her estate that took the estate over £2 million. For every £2 that the estate is over £2,000,000, £1 of the residence nil rate band is lost.</p>
 <p>The mathematics is quite complicated. The effect is simple. The effect of that is that the fund is effectively taxed at a notional rate of 60% resulting in additional tax for Amy to pay of £300,000. 60% of £500,000. But here's a nuance that not a lot of people know, including experts in my field. The pension does not pay the tax that it's responsible for. The pension pays a proportion of the overall tax.</p>
+<div class="correction" role="note"><p><strong>Clarification, 1 October 2026:</strong> In the example the pension's share of the tax is paid straight from the pension, under the Pensions Direct Payment Scheme. That is an option, not a rule. The personal representatives are responsible for reporting and paying the tax, and a beneficiary who receives pension property becomes jointly liable for the tax on it.</p><p class="src"><span class="lead">Sources</span> <span class="lbl">Law:</span> <a href="https://www.legislation.gov.uk/ukpga/1984/51/section/265" target="_blank" rel="noopener">Inheritance Tax Act 1984, s.265</a> &middot; <span class="lbl">HMRC:</span> <a href="https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#liability-for-inheritance-tax" target="_blank" rel="noopener">HMRC technical note, 2.2 Liability for Inheritance Tax</a>; <a href="https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/technical-note-inheritance-tax-on-pensions#pensions-direct-payment-scheme" target="_blank" rel="noopener">HMRC technical note, 7 Pensions direct payment scheme</a></p></div>
 <p>So the pension does not pay £300,000. The pension pays its proportion of the entire IHT bill. If the overall estate is £2.5 million and the pension is half a million, then the pension represents one fifth of the estate. The total tax due is the £300,000 on the pension element and 40% tax on the non-pension element being £1 million after allowances. So £400,000.</p>
 <p>So the total inheritance tax due on this estate would be £700,000 and one fifth of £700,000 is £140,000, and that is the amount that the pension fund has to pay. So that leaves in the pension £360,000 and not the £200,000 the computations would suggest.</p>
 <p>The problem with this is that because Mrs Miggins died over the age of 75 even though her husband was under the age of 75 the 75 year rule applies to Mr Miggins' old fund, which means that Amy has to draw the income from her dad's pension as income and is taxed for income tax.</p>
@@ -463,16 +979,16 @@ footer.site p{margin:.3em 0;max-width:none}
 <div>
 <h2>About Steve Hunt ACII TEP</h2>
 <p>Steve Hunt is a Chartered Insurance Risk Manager, an Associate of the Chartered Insurance Institute (ACII), and a Trust and Estate Practitioner (TEP), a full member of STEP. He has worked in UK financial services since 1980, in pensions, protection and estate planning. He writes about inheritance tax, the April 2027 pension changes, annuities, whole of life assurance and trusts.</p>
-<p><a href="https://www.linkedin.com/in/steve~hunt" rel="me">LinkedIn profile and articles</a> &middot; <a href="https://www.youtube.com/@SteveHuntACIITEP" rel="me">YouTube channel</a></p>
+<p><a href="https://www.linkedin.com/in/steve~hunt" rel="me">LinkedIn profile and articles</a> &middot; <a href="https://www.youtube.com/@SteveHuntACIITEP" rel="me">YouTube channel</a> &middot; <a href="/sources-and-corrections/">How these answers are sourced</a></p>
 </div>
 </section>
-<p class="disclaimer">This page and the video are education only. They are not advice, not a personal recommendation, and not an invitation to do business. They describe the law and HMRC's published position as at September 2026, which can change. Nothing here takes account of your circumstances. The narration in the video uses a digital clone of Steve Hunt's voice. The words are his own.</p>
+<p class="disclaimer">This page and the video are education only. They are not advice, not a personal recommendation, and not an invitation to do business. They describe the law and HMRC's published position as at 1 October 2026, which can change. Nothing here takes account of your circumstances. The narration in the video uses a digital clone of Steve Hunt's voice. The words are his own.</p>
 </article>
 </main>
 <footer class="site"><div class="wrap">
 <p>Inheritance Tax Explained. Plain English explanations of UK inheritance tax by Steve Hunt ACII TEP.</p>
 <p>Education only. Not advice, not a personal recommendation, and not an invitation to do business. Tax rules change; check the date on each page.</p>
-<p><a href="https://www.linkedin.com/in/steve~hunt" rel="me">Steve Hunt on LinkedIn</a> &middot; <a href="https://www.youtube.com/@SteveHuntACIITEP" rel="me">YouTube channel</a> &middot; &copy; 2026 Stephen Hunt</p>
+<p><a href="/sources-and-corrections/">Sources, method and corrections</a> &middot; <a href="https://www.linkedin.com/in/steve~hunt" rel="me">Steve Hunt on LinkedIn</a> &middot; <a href="https://www.youtube.com/@SteveHuntACIITEP" rel="me">YouTube channel</a> &middot; &copy; 2026 Stephen Hunt</p>
 </div></footer>
 </body>
 </html>
