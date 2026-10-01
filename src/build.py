@@ -19,6 +19,8 @@ YOUTUBE_CHANNEL = "https://www.youtube.com/@SteveHuntACIITEP"
 PLAYLIST = "https://www.youtube.com/playlist?list=PLYeD4F-FZfOA"
 TODAY = date(2026, 10, 1)
 AS_AT = "September 2026"
+HOME_DESCRIPTION = ("Plain English videos and transcripts on UK inheritance tax, pensions from April 2027, "
+                    "annuities and whole of life assurance. By Steve Hunt ACII TEP.")
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "out")
@@ -65,6 +67,8 @@ VIDEOS = [
         "number": 1,
         "title": "How will your pension be taxed when you die after April 2027?",
         "short_title": "Pensions and inheritance tax from April 2027",
+        "seo_title": "How will your pension be taxed when you die after April 2027?",
+        "seo_description": "From 6 April 2027 unused pensions come into inheritance tax. What changes, what is excluded, and how, in a severe case, £500,000 could cost £516,000.",
         "meta_description": (
             "From 6 April 2027, unused pension funds come within the scope of UK inheritance tax "
             "for the first time. What changes, which pensions are excluded, and how a £500,000 "
@@ -183,6 +187,8 @@ VIDEOS = [
         "number": 2,
         "title": "Nominees' annuity: what is it, how does it work, and what's the catch?",
         "short_title": "The nominees' annuity",
+        "seo_title": "What is a nominees' annuity, and what's the catch?",
+        "seo_description": "A joint life annuity for a child or grandchild, bought with your own annuity and outside inheritance tax from April 2027. Real quotes, and the catches.",
         "meta_description": (
             "A nominees' annuity is a joint life annuity where the second life is a child, grandchild or "
             "anyone else you nominate. How it works, with two real quotations, and the catches, including "
@@ -330,6 +336,8 @@ VIDEOS = [
         "number": 3,
         "title": "Whole of life assurance: what is it, why does a whole generation distrust it, and what has changed?",
         "short_title": "Whole of life assurance",
+        "seo_title": "Whole of life assurance: what is it, and what has changed?",
+        "seo_description": "Whole of life assurance pays out whenever death occurs, if the premiums are paid. Why a generation distrusts it, and what has changed since the 1980s.",
         "meta_description": (
             "Whole of life assurance pays a fixed sum when you die, whenever that is. What it is, why the "
             "unit-linked plans of the 1980s made a generation distrust it, and what has changed: guaranteed "
@@ -497,7 +505,8 @@ VIDEOS = [
 # ---------------------------------------------------------------------------
 
 def esc(s):
-    return html.escape(s, quote=True)
+    # Escape &, <, > and double quotes only; apostrophes stay readable.
+    return html.escape(s, quote=False).replace('"', "&quot;")
 
 
 def mmss(seconds):
@@ -817,21 +826,21 @@ def video_page(v):
     return f"""<!doctype html>
 <html lang="en-GB">
 <head>
-{HEAD_COMMON}<title>{esc(v['title'])} | {esc(SITE_NAME)}</title>
-<meta name="description" content="{esc(v['meta_description'])}">
+{HEAD_COMMON}<title>{esc(v['seo_title'])}</title>
+<meta name="description" content="{esc(v['seo_description'])}">
 <meta name="author" content="{esc(AUTHOR)}">
 <link rel="canonical" href="{url}">
 <meta property="og:type" content="video.other">
 <meta property="og:site_name" content="{esc(SITE_NAME)}">
 <meta property="og:title" content="{esc(v['title'])}">
-<meta property="og:description" content="{esc(v['meta_description'])}">
+<meta property="og:description" content="{esc(v['seo_description'])}">
 <meta property="og:url" content="{url}">
 <meta property="og:image" content="{thumb}">
 <meta property="og:video:url" content="https://www.youtube-nocookie.com/embed/{v['id']}">
 <meta property="og:locale" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{esc(v['title'])}">
-<meta name="twitter:description" content="{esc(v['meta_description'])}">
+<meta name="twitter:description" content="{esc(v['seo_description'])}">
 <meta name="twitter:image" content="{thumb}">
 <style>{CSS}</style>
 {ld}
@@ -905,7 +914,7 @@ def home_page():
 </article>""")
     cards_html = "\n".join(cards)
     ld = ld_script(home_ld())
-    desc = website_ld()["description"]
+    desc = HOME_DESCRIPTION
     return f"""<!doctype html>
 <html lang="en-GB">
 <head>
