@@ -4,6 +4,14 @@
 Output goes to site/out/. Every page is self-contained HTML with inline CSS,
 plain semantic markup and JSON-LD, so that search engines and AI crawlers can
 read the whole thing without running any JavaScript.
+
+House rules built into this script:
+- Every answer carries a Sources line. Each source is labelled Law, HMRC,
+  Provider evidence, Published source, Steve's analysis or Steve's experience.
+- The visible answers and their JSON-LD copies come from the same data, so
+  they always change together.
+- Transcripts record what is said in the videos and are never edited. Dated
+  notes sit beside any words that need correcting or qualifying.
 """
 import html
 import json
@@ -18,7 +26,12 @@ LINKEDIN = "https://www.linkedin.com/in/steve~hunt"
 YOUTUBE_CHANNEL = "https://www.youtube.com/@SteveHuntACIITEP"
 PLAYLIST = "https://www.youtube.com/playlist?list=PLYeD4F-FZfOA"
 TODAY = date(2026, 10, 1)
-AS_AT = "September 2026"
+REVIEWED = date(2026, 10, 1)
+AS_AT = "1 October 2026"
+NOTE_DATE = "1 October 2026"
+CORRECTIONS_SLUG = "sources-and-corrections"
+CORRECTIONS_PATH = f"/{CORRECTIONS_SLUG}/"
+CORRECTIONS_URL = f"{SITE}{CORRECTIONS_PATH}"
 HOME_DESCRIPTION = ("Plain English videos and transcripts on UK inheritance tax, pensions from April 2027, "
                     "annuities and whole of life assurance. By Steve Hunt ACII TEP.")
 
@@ -57,6 +70,98 @@ ARTICLES = {
 }
 
 # ---------------------------------------------------------------------------
+# Sources. Every link below was opened and checked on 1 October 2026.
+# ---------------------------------------------------------------------------
+
+LEG = "https://www.legislation.gov.uk"
+TN = ("https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/"
+      "technical-note-inheritance-tax-on-pensions")
+
+LABEL_ORDER = ["Law", "HMRC", "Provider evidence", "Published source", "Steve's analysis", "Steve's experience"]
+
+LABEL_MEANING = {
+    "Law": "the Act and section, linked to the official text on legislation.gov.uk",
+    "HMRC": "HMRC's manuals, technical notes and GOV.UK guidance: HMRC's reading of the law, not the law itself",
+    "Provider evidence": "real quotations and insurers' answers, dated and held on file, with no client information",
+    "Published source": "figures and history credited to the publication that reported them",
+    "Steve's analysis": "Steve's own reading or arithmetic, where it goes beyond settled law or HMRC's published view",
+    "Steve's experience": "Steve's recollection of more than 45 years in UK financial services",
+}
+
+SOURCES = {
+    # Law
+    "ihta150A": ("Law", "Inheritance Tax Act 1984, s.150A", f"{LEG}/ukpga/1984/51/section/150A"),
+    "fa2026s66": ("Law", "Finance Act 2026, s.66", f"{LEG}/ukpga/2026/11/section/66"),
+    "fa2026s71": ("Law", "Finance Act 2026, s.71", f"{LEG}/ukpga/2026/11/section/71"),
+    "ihta18": ("Law", "Inheritance Tax Act 1984, s.18", f"{LEG}/ukpga/1984/51/section/18"),
+    "ihta8A": ("Law", "Inheritance Tax Act 1984, s.8A", f"{LEG}/ukpga/1984/51/section/8A"),
+    "ihta8D": ("Law", "Inheritance Tax Act 1984, s.8D", f"{LEG}/ukpga/1984/51/section/8D"),
+    "ihta3A": ("Law", "Inheritance Tax Act 1984, s.3A", f"{LEG}/ukpga/1984/51/section/3A"),
+    "ihta7": ("Law", "Inheritance Tax Act 1984, s.7", f"{LEG}/ukpga/1984/51/section/7"),
+    "ihta19": ("Law", "Inheritance Tax Act 1984, s.19", f"{LEG}/ukpga/1984/51/section/19"),
+    "ihta21": ("Law", "Inheritance Tax Act 1984, s.21", f"{LEG}/ukpga/1984/51/section/21"),
+    "ihta226": ("Law", "Inheritance Tax Act 1984, s.226", f"{LEG}/ukpga/1984/51/section/226"),
+    "ihta233": ("Law", "Inheritance Tax Act 1984, s.233", f"{LEG}/ukpga/1984/51/section/233"),
+    "ihta265": ("Law", "Inheritance Tax Act 1984, s.265", f"{LEG}/ukpga/1984/51/section/265"),
+    "fa2004p27AA": ("Law", "Finance Act 2004, Sch. 28, para. 27AA", f"{LEG}/ukpga/2004/12/schedule/28/paragraph/27AA"),
+    "fa2004p27A": ("Law", "Finance Act 2004, Sch. 28, para. 27A", f"{LEG}/ukpga/2004/12/schedule/28/paragraph/27A"),
+    "fa2015": ("Law", "Finance Act 2015, Sch. 4, para. 3", f"{LEG}/ukpga/2015/11/schedule/4/paragraph/3"),
+    "tpa2014": ("Law", "Taxation of Pensions Act 2014, Sch. 2, para. 3", f"{LEG}/ukpga/2014/30/schedule/2/paragraph/3"),
+    "itepa646B": ("Law", "Income Tax (Earnings and Pensions) Act 2003, s.646B", f"{LEG}/ukpga/2003/1/section/646B"),
+    "ita35": ("Law", "Income Tax Act 2007, s.35", f"{LEG}/ukpga/2007/3/section/35"),
+    "nics2026": ("Law", "National Insurance Contributions (Employer Pensions Contributions) Act 2026, s.1",
+                 f"{LEG}/ukpga/2026/15/section/1"),
+    "laa1774": ("Law", "Life Assurance Act 1774", f"{LEG}/apgb/Geo3/14/48"),
+    "cpa253": ("Law", "Civil Partnership Act 2004, s.253", f"{LEG}/ukpga/2004/33/section/253"),
+    "fsa1986": ("Law", "Financial Services Act 1986 (since repealed)", f"{LEG}/ukpga/1986/60/contents"),
+    "si1988": ("Law", "Financial Services Act 1986 (Commencement) (No. 8) Order 1988", f"{LEG}/uksi/1988/740/made"),
+    # HMRC
+    "tn": ("HMRC", "HMRC technical note: Inheritance Tax on pensions (updated 29 May 2026)", TN),
+    "tn22": ("HMRC", "HMRC technical note, 2.2 Liability for Inheritance Tax", TN + "#liability-for-inheritance-tax"),
+    "tn331": ("HMRC", "HMRC technical note, 3.3.1 Dependants' scheme pension", TN + "#dependants-scheme-pension"),
+    "tn333": ("HMRC", "HMRC technical note, 3.3.3 Joint life annuities", TN + "#joint-life-annuities"),
+    "tn334": ("HMRC", "HMRC technical note, 3.3.4 Death in service benefits", TN + "#death-in-service-benefits"),
+    "tn34": ("HMRC", "HMRC technical note, 3.4 Exempt beneficiaries", TN + "#exempt-beneficiaries"),
+    "tn7": ("HMRC", "HMRC technical note, 7 Pensions direct payment scheme", TN + "#pensions-direct-payment-scheme"),
+    "tn1121": ("HMRC", "HMRC technical note, 11.2.1 Loss on sale", TN + "#loss-on-sale"),
+    "tn1123": ("HMRC", "HMRC technical note, 11.2.3 Business and agricultural property relief",
+               TN + "#business-property-relief-and-agricultural-property-relief"),
+    "tn1124": ("HMRC", "HMRC technical note, 11.2.4 Instalments", TN + "#instalments"),
+    "tn1125": ("HMRC", "HMRC technical note, 11.2.5 Lifetime transfers",
+               TN + "#lifetime-transfers-and-normal-expenditure-out-of-income-exemption"),
+    "ptm072210": ("HMRC", "HMRC Pensions Tax Manual, PTM072210",
+                  "https://www.gov.uk/hmrc-internal-manuals/pensions-tax-manual/ptm072210"),
+    "ptm072200": ("HMRC", "HMRC Pensions Tax Manual, PTM072200",
+                  "https://www.gov.uk/hmrc-internal-manuals/pensions-tax-manual/ptm072200"),
+    "rnrb": ("HMRC", "HMRC guidance: the residence nil rate band",
+             "https://www.gov.uk/guidance/inheritance-tax-residence-nil-rate-band"),
+    "inherit": ("HMRC", "GOV.UK: Tax on a private pension you inherit", "https://www.gov.uk/tax-on-pension-death-benefits"),
+    "payiht": ("HMRC", "GOV.UK: Pay your Inheritance Tax bill", "https://www.gov.uk/paying-inheritance-tax"),
+    "ihtgov": ("HMRC", "GOV.UK: How Inheritance Tax works", "https://www.gov.uk/inheritance-tax"),
+    "itrates": ("HMRC", "GOV.UK: Income Tax rates and Personal Allowances", "https://www.gov.uk/income-tax-rates"),
+    # Provider evidence (dated, held on file, not published)
+    "q_nominees": ("Provider evidence", "Quotations from Just (11 August 2026) and Canada Life (10 August 2026), held on file", None),
+    "q_age40": ("Provider evidence", "Insurers' answers on the nominee's age, August 2026, held on file", None),
+    "q_wol": ("Provider evidence", "Whole of life quotation obtained in 2026, held on file", None),
+    # Published sources
+    "pa1trn": ("Published source",
+               "Pensions Age, 23 October 2025: DC pension assets quadruple to £1.2trn (Pensions Policy Institute, DC Future Book)",
+               "https://www.pensionsage.com/pa/DC-pension-asets-quadruple-growth-remains-vulnerable.php"),
+    "fos": ("Published source", "Financial Ombudsman Service: whole-of-life policies",
+            "https://www.financial-ombudsman.org.uk/businesses/resolving-complaint/complaints-deal/investments/whole-life-policies"),
+    "mg": ("Published source", "M&G Tech Matters: why life assurance policies require insurable interest",
+           "https://www.mandg.com/wealth/adviser-services/tech-matters/investments-and-taxation/taxation-of-investment-bonds/life-assurance-insurable-interest"),
+    "dnb": ("Published source", "Dictionary of National Biography (1885 to 1900): Dodson, James",
+            "https://en.wikisource.org/wiki/Dictionary_of_National_Biography,_1885-1900/Dodson,_James"),
+    "actuary": ("Published source", "The Actuary magazine, April 2024: The history of actuarial science",
+                "https://www.theactuarymagazine.org/the-history-of-actuarial-science/"),
+    # Steve
+    "steve_pet": ("Steve's analysis", "Osborne's Get Out of Jail Card Under Attack (LinkedIn article)", ARTICLES["jail"][1]),
+    "steve_example": ("Steve's analysis", "The worked example: arithmetic on the stated assumptions", None),
+    "steve_history": ("Steve's experience", "Steve Hunt, in UK financial services since 1980", None),
+}
+
+# ---------------------------------------------------------------------------
 # Video data
 # ---------------------------------------------------------------------------
 
@@ -76,6 +181,7 @@ VIDEOS = [
             "by Steve Hunt ACII TEP."
         ),
         "published": "2026-09-29",
+        "published_iso": "2026-09-29T16:38:32+01:00",
         "seconds": 647,
         "duration_iso": "PT10M47S",
         "duration_text": "10 min 47 sec",
@@ -83,14 +189,15 @@ VIDEOS = [
             "From 6 April 2027, most unused pension funds and pension death benefits count as part of "
             "your estate for inheritance tax, and can be taxed at 40% on death. Pensions left to a "
             "spouse or civil partner stay exempt. Unmarried partners are not covered.",
-            "Three kinds of pension are excluded: dependants' pensions from a defined benefit scheme, "
-            "death in service benefits, and joint life annuities bought in your lifetime, including the "
-            "nominees' annuity.",
+            "Three main kinds of pension benefit are excluded: dependants' scheme pensions, such as a "
+            "widow's pension from a final salary scheme; death in service benefits; and dependants' or "
+            "nominees' annuities bought together with the member's own lifetime annuity.",
             "If your estate with the pension is under the nil rate bands, there is no inheritance tax at "
             "all. In a severe case, with a large estate and a beneficiary who is a higher earner, a "
             "£500,000 pension could cost a family £516,000 in inheritance tax and income tax combined. "
             "Most families will pay far less, and some nothing.",
         ],
+        "short_sources": ["ihta150A", "fa2026s71", "ihta18", "tn331", "tn333", "tn334", "steve_example"],
         "chapters": [
             (0, "How will your pension be taxed after April 2027?"),
             (35, "What changes on 6 April 2027"),
@@ -103,71 +210,107 @@ VIDEOS = [
             (611, "What's next, and Roy Jenkins"),
         ],
         "key_facts": [
-            "From 6 April 2027, most unused pension funds and pension death benefits count as part of the "
-            "estate for inheritance tax: Inheritance Tax Act 1984, s.150A, inserted by Finance Act 2026, "
-            "s.66, for deaths on or after 6 April 2027.",
-            "Pensions left to a spouse or civil partner remain exempt (Inheritance Tax Act 1984, s.18). "
-            "Unmarried partners are not covered.",
-            "Excluded: dependants' scheme pensions, death in service benefits, and dependants' or nominees' "
-            "annuities bought together with the member's own annuity. Annuity guarantee periods and value "
-            "protection are included.",
-            "The residence nil rate band reduces by £1 for every £2 that an estate is over £2 million "
-            "(Inheritance Tax Act 1984, s.8D).",
-            "If death is at 75 or over, the person who inherits the pension also pays income tax on what "
-            "they draw.",
-            "Business property relief, agricultural property relief and the ten-year instalment option do "
-            "not apply to pension funds. The tax is due by the end of the sixth month after the month of "
-            "death.",
-            "The worked example is a severe case. Most families will pay far less, and some nothing at all.",
+            ("From 6 April 2027, most unused pension funds and pension death benefits count as part of the "
+             "estate for inheritance tax: Inheritance Tax Act 1984, s.150A, inserted by Finance Act 2026, "
+             "s.66, for deaths on or after 6 April 2027 (Finance Act 2026, s.71).",
+             ["ihta150A", "fa2026s66", "fa2026s71", "tn"]),
+            ("Pensions left to a spouse or civil partner remain exempt (Inheritance Tax Act 1984, s.18). "
+             "Unmarried partners are not covered.",
+             ["ihta18", "tn34"]),
+            ("Excluded: dependants' scheme pensions, from any type of pension arrangement; death in service "
+             "benefits; and dependants' or nominees' annuities bought together with the member's own lifetime "
+             "annuity (Inheritance Tax Act 1984, s.150A(6)). Annuity guarantee periods and value protection "
+             "are included.",
+             ["ihta150A", "tn331", "tn333", "tn334"]),
+            ("The residence nil rate band reduces by £1 for every £2 that an estate is over £2 million "
+             "(Inheritance Tax Act 1984, s.8D).",
+             ["ihta8D", "rnrb"]),
+            ("If death is at 75 or over, the person who inherits the pension also pays income tax on what "
+             "they draw.",
+             ["inherit"]),
+            ("Business property relief, agricultural property relief and the ten-year instalment option do "
+             "not apply to pension funds. The tax is due by the end of the sixth month after the month of "
+             "death, with interest after that (Inheritance Tax Act 1984, ss.226 and 233).",
+             ["ihta226", "ihta233", "tn1123", "tn1124", "payiht"]),
+            ("An estimated £1 trillion of pension money comes within the scope of inheritance tax. Pensions "
+             "Age reported on 23 October 2025 that UK defined contribution pension assets had reached "
+             "£1.2 trillion (Pensions Policy Institute, DC Future Book). Coming within scope does not mean "
+             "it will all be taxed.",
+             ["pa1trn"]),
+            ("The worked example is a severe case. Most families will pay far less, and some nothing at all.",
+             ["steve_example"]),
         ],
         "assumptions": (
-            "Assumptions in the worked example: 2026/27 rates and allowances, frozen; no fund growth; "
-            "Mr Miggins died under 75 and before 6 April 2027; Mrs Miggins dies in 2029 aged over 75; "
-            "her estate without the pension is £2 million; Amy earns £100,000 a year; English income "
-            "tax rates. Mr and Mrs Miggins are fictitious. The arithmetic is not."
+            "Assumptions in the worked example: Mr Miggins died under 75 and before 6 April 2027, leaving his "
+            "pension to Mrs Miggins; she dies in 2029, aged over 75; her estate without the pension is "
+            "£2 million; his unused nil rate band and residence nil rate band are both transferred in full and "
+            "claimed; a home worth at least £350,000 passes to direct descendants; there are no other gifts, "
+            "reliefs or deductions; the inheritance tax on the pension is paid straight from the pension, which "
+            "is an option, not a rule; Amy earns £100,000 a year and draws £24,000 a year from the pension for "
+            "15 years; 2026/27 rates and allowances, frozen; no fund growth; English income tax rates. This is "
+            "a constant-rules illustration, not a forecast of future tax rates. Mr and Mrs Miggins are "
+            "fictitious. The arithmetic is not."
         ),
         "faq": [
             ("What changes to pensions and inheritance tax on 6 April 2027?",
              "From 6 April 2027, unused pension money from personal pensions, SIPPs and money purchase "
              "company pension schemes becomes part of your estate for inheritance tax, and can be taxed at "
              "40% on your death. The change is made by section 150A of the Inheritance Tax Act 1984, "
-             "inserted by the Finance Act 2026. Spouse and civil partner exemptions still apply. Common law "
-             "partners are not covered."),
+             "inserted by section 66 of the Finance Act 2026, and it applies to deaths on or after 6 April "
+             "2027. Spouse and civil partner exemptions still apply. Common law partners are not covered.",
+             ["ihta150A", "fa2026s66", "fa2026s71", "ihta18", "tn"]),
             ("Which pensions are excluded from inheritance tax from April 2027?",
-             "Three main categories: widows', widowers' and other dependants' pensions from a defined "
-             "benefit (final salary or average salary) scheme; death in service benefits; and joint life "
-             "annuities bought in the member's lifetime, including the nominees' annuity. Annuity guarantee "
-             "periods and value protection are not excluded. They count as part of the estate."),
-            ("Can inheritance tax on a £500,000 pension really cost more than the pension itself?",
+             "Three main categories: dependants' scheme pensions, such as a widow's, widower's or child's "
+             "pension from a final salary scheme, whatever type of pension arrangement pays them; death in "
+             "service benefits; and dependants' or nominees' annuities bought together with the member's own "
+             "lifetime annuity, which includes the nominees' annuity. Annuity guarantee periods and value "
+             "protection are not excluded. They count as part of the estate.",
+             ["ihta150A", "tn331", "tn333", "tn334"]),
+            ("Can the combined family tax cost of a £500,000 pension be more than the pension itself?",
              "In a severe case, yes. In the worked example, Mrs Miggins inherited a £500,000 pension from "
              "her husband, who died before 75, so it could all have been paid out tax free. Because her own "
-             "estate was already £2 million, adding the pension cost £300,000 in inheritance tax at an "
-             "effective 60%. Because she died over 75, her daughter Amy then paid income tax on what she "
-             "drew, also at an effective 60% because of the personal allowance taper, adding £216,000 over "
-             "15 years. Total: £516,000, which is £16,000 more than the pension was worth."),
+             "estate was already £2 million, adding the pension increased the inheritance tax on her estate "
+             "by £300,000, an effective 60%. Because she died over 75, her daughter Amy then paid income tax "
+             "on what she drew, also at an effective 60% because of the personal allowance taper, adding "
+             "£216,000 over 15 years. Total extra tax across the family: £516,000, which is £16,000 more "
+             "than the pension was worth. The £516,000 is not all taken out of the pension: the pension pays "
+             "£140,000 of the inheritance tax, the rest of the estate pays the other £160,000 of the increase, "
+             "and the £216,000 is income tax on Amy's withdrawals. The result depends on the assumptions "
+             "listed with the example.",
+             ["ihta150A", "ihta8D", "ihta265", "ita35", "itrates", "inherit", "steve_example"]),
             ("Why is the pension taxed at 60% in the example rather than 40%?",
              "The residence nil rate band is reduced by £1 for every £2 that an estate is over £2 million "
-             "(Inheritance Tax Act 1984, s.8D). Adding a £500,000 pension to a £2 million estate loses the "
-             "residence nil rate band on top of the 40% charge. The effect is an additional £300,000 of "
-             "tax on the £500,000 pension, which is an effective rate of 60%."),
+             "(Inheritance Tax Act 1984, s.8D). Adding a £500,000 pension to a £2 million estate takes away "
+             "£250,000 of the residence nil rate band, which costs another £100,000 at 40%, on top of the "
+             "£200,000 charged on the pension itself. That is an additional £300,000 of tax on the £500,000 "
+             "pension, an effective rate of 60%. It assumes the full residence nil rate band of £350,000, "
+             "including the band transferred from Mr Miggins, would otherwise have been available.",
+             ["ihta8D", "rnrb", "steve_example"]),
             ("Does the pension fund pay the inheritance tax it causes?",
-             "No. The pension pays its proportionate share of the whole estate's bill, not the tax it "
-             "triggers. In the example the pension is one fifth of a £2.5 million estate. The total tax is "
-             "£700,000, so the pension pays £140,000, leaving £360,000 in the pension, which Amy then draws "
-             "as taxable income."),
+             "Not in the example. The tax on an estate is shared out in proportion to the value of each part "
+             "(Inheritance Tax Act 1984, s.265), so the pension bears its proportionate share of the whole "
+             "estate's bill, not the extra tax it triggers. In the example the pension is one fifth of a "
+             "£2.5 million estate. The total tax is £700,000, so the pension's share is £140,000, leaving "
+             "£360,000 in the pension, which Amy then draws as taxable income. Paying that share straight "
+             "from the pension, under the Pensions Direct Payment Scheme, is an option that the example "
+             "assumes is used, not a rule. The personal representatives are responsible for reporting and "
+             "paying the tax, and a beneficiary who receives pension property becomes jointly liable for the "
+             "tax on it.",
+             ["ihta265", "tn22", "tn7", "steve_example"]),
             ("Can business property relief, agricultural property relief or the ten-year instalment option apply to pension funds?",
-             "No. The government's technical note says that you are not treated as owning the pension's "
-             "assets, and uses that sentence to refuse business property relief, agricultural property "
-             "relief, loss on sale relief and the ten-year instalment option. The tax on the pension must "
-             "be settled by the end of the sixth month after the month of death, with interest running "
-             "after that."),
+             "No. HMRC's technical note says that you are not treated as owning the pension's assets, and "
+             "uses that sentence to refuse business property relief, agricultural property relief, loss on "
+             "sale relief and the ten-year instalment option. The tax on the pension must be settled by the "
+             "end of the sixth month after the month of death, with interest running after that.",
+             ["tn1123", "tn1124", "tn1121", "ihta226", "ihta233", "payiht"]),
             ("How will your pension be taxed when you die after April 2027?",
              "Your pension fund will form part of your estate on death, unless it goes to a spouse or civil "
-             "partner or is one of the excluded types. If your estate with the pension is under the nil "
-             "rate bands, £325,000 plus up to £175,000 for your home, each, up to £1 million for a married "
-             "couple, it pays no inheritance tax at all. Above that, the rate is 40%, rising to an "
-             "effective 60% where the residence nil rate band tapers away, plus income tax for the person "
-             "who inherits if you die at 75 or over."),
+             "partner or is one of the excluded types. If your estate with the pension is under the nil rate "
+             "bands, £325,000 plus up to £175,000 for a home passing to direct descendants, each, so up to "
+             "£1 million for a married couple, it pays no inheritance tax at all. Above that, the rate is 40%, "
+             "rising to an effective 60% where the residence nil rate band tapers away, plus income tax for "
+             "the person who inherits if you die at 75 or over.",
+             ["ihta150A", "ihta8D", "ihta8A", "ihtgov", "inherit"]),
         ],
         "articles": [
             ("husband", "The worked example, Mrs Miggins and her daughter Amy."),
@@ -175,7 +318,31 @@ VIDEOS = [
         ],
         "related": [("Next video", "nominees-annuity",
                      "Nominees' annuity: what is it, how does it work, and what's the catch?")],
-        "legislation": "Inheritance Tax Act 1984, s.18, s.8D and s.150A(1), inserted by Finance Act 2026, s.66.",
+        "legislation": "Inheritance Tax Act 1984, s.8D, s.18, s.150A(1) and (6), s.226 and s.265; s.150A was "
+                       "inserted by Finance Act 2026, s.66, for deaths on or after 6 April 2027 (s.71). Income Tax "
+                       "Act 2007, s.35.",
+        "notes": [
+            {"phrase": "an estimated £1 trillion",
+             "kind": "Source note",
+             "text": "The £1 trillion is an estimate of the defined contribution pension money that comes within "
+                     "the scope of inheritance tax. Pensions Age reported on 23 October 2025 that UK defined "
+                     "contribution pension assets had reached £1.2 trillion (Pensions Policy Institute, DC Future "
+                     "Book). Coming within scope does not mean it will all be taxed.",
+             "sources": ["pa1trn"]},
+            {"phrase": "dependants' pensions from a defined benefit scheme",
+             "kind": "Clarification",
+             "text": "The exclusion covers dependants' scheme pensions from any type of pension arrangement, not "
+                     "only defined benefit schemes. A widow's pension from a final salary scheme is the common "
+                     "example.",
+             "sources": ["ihta150A", "tn331"]},
+            {"phrase": "The pension does not pay the tax that it's responsible for.",
+             "kind": "Clarification",
+             "text": "In the example the pension's share of the tax is paid straight from the pension, under the "
+                     "Pensions Direct Payment Scheme. That is an option, not a rule. The personal representatives "
+                     "are responsible for reporting and paying the tax, and a beneficiary who receives pension "
+                     "property becomes jointly liable for the tax on it.",
+             "sources": ["ihta265", "tn22", "tn7"]},
+        ],
         "transcript_file": "v1_transcript.tsv",
         "keywords": ["pension inheritance tax 2027", "pensions and inheritance tax", "inheritance tax on pensions",
                      "unused pension funds", "residence nil rate band taper", "notional estate", "Finance Act 2026",
@@ -190,27 +357,35 @@ VIDEOS = [
         "seo_title": "What is a nominees' annuity, and what's the catch?",
         "seo_description": "A joint life annuity for a child or grandchild, bought with your own annuity and outside inheritance tax from April 2027. Real quotes, and the catches.",
         "meta_description": (
-            "A nominees' annuity is a joint life annuity where the second life is a child, grandchild or "
-            "anyone else you nominate. How it works, with two real quotations, and the catches, including "
-            "whether buying one is a gift. Video, key facts and full transcript by Steve Hunt ACII TEP."
+            "A nominees' annuity pays an income to someone the pension member nominates, such as an adult "
+            "child, after the member dies. How the version bought in the member's lifetime works, with two "
+            "real quotations, and the catches, including whether buying one is a gift. Video, key facts and "
+            "full transcript by Steve Hunt ACII TEP."
         ),
         "published": "2026-09-29",
+        "published_iso": "2026-09-29T18:27:44+01:00",
         "seconds": 919,
         "duration_iso": "PT15M19S",
         "duration_text": "15 min 19 sec",
         "short_answer": [
-            "A nominees' annuity is a joint life annuity where the second life is a child, grandchild or "
-            "anyone else you nominate, rather than a spouse or civil partner. It is bought by the pension "
-            "member, in the member's lifetime, together with the member's own lifetime annuity. When the "
-            "member dies, the income carries on to the nominee for the rest of their life.",
-            "Bought that way, it is excluded from the member's estate for inheritance tax from 6 April "
-            "2027. On a real quotation from August 2026, a £500,000 pension fund was offered a joint life "
-            "annuity of £29,153.64 a year for a father of 75, with 100% continuation to his daughter of 45.",
-            "The catches: only the member can set it up, and only while alive; it is normally bought with "
-            "no guarantee period and no value protection; insurers currently want the nominee to be at "
-            "least 40; and whether the purchase counts as a lifetime gift for inheritance tax is not yet "
-            "settled.",
+            "A nominees' annuity is an annuity paid to a nominee of a pension member: someone the member "
+            "nominates, such as an adult child or grandchild, who is not a dependant under the pension tax "
+            "rules. This page is about the version bought in the member's lifetime, together with the "
+            "member's own lifetime annuity, either as one joint life annuity or as a related separate "
+            "contract. When the member dies, the income carries on to the nominee for the rest of their "
+            "life. Nominees' annuities can also be bought after the member's death, but that is a different "
+            "route, and not the one excluded from inheritance tax.",
+            "Bought in the member's lifetime with the member's own annuity, it is excluded from the member's "
+            "estate for inheritance tax from 6 April 2027. On a real quotation from August 2026, a £500,000 "
+            "pension fund was offered a joint life annuity of £29,153.64 a year for a father of 75, with 100% "
+            "continuation to his daughter of 45.",
+            "The catches: this route can only be set up by the member, while alive; it is normally bought with "
+            "no guarantee period and no value protection; the two insurers who quoted in August 2026 wanted the "
+            "nominee to be aged 40 or over; the nominee's income is taxable when the member dies at 75 or over; "
+            "and whether the purchase counts as a lifetime gift for inheritance tax is not settled.",
         ],
+        "short_sources": ["fa2004p27AA", "fa2004p27A", "ihta150A", "itepa646B", "tn333", "ptm072200", "q_nominees",
+                          "q_age40"],
         "chapters": [
             (0, "Today's question"),
             (24, "What is a nominees' annuity?"),
@@ -226,93 +401,138 @@ VIDEOS = [
             (879, "Next video, and Roy Jenkins"),
         ],
         "key_facts": [
-            "Legal definition: Finance Act 2004, Schedule 28, paragraph 27AA(1), inserted by Finance Act 2015. "
-            "A nominee must not be a dependant under the pension tax rules (paragraph 27A).",
-            "From 6 April 2027, a nominees' annuity bought together with the member's own lifetime annuity is "
-            "excluded from the estate for inheritance tax: Inheritance Tax Act 1984, s.150A(6)(c), inserted "
-            "by Finance Act 2026, for deaths on or after 6 April 2027. Nominees' annuities bought after the "
-            "member's death are also allowed, but that is not the route that qualifies for this exclusion.",
-            "Remaining guarantee payments and value protection death benefits come within inheritance tax "
-            "from 6 April 2027. The example in the video leaves both out.",
-            "The quotations: Just, 11 August 2026, 5.83%, £29,153.64 a year. Canada Life, 10 August 2026, "
-            "5.79%, £28,925.76 a year. Both on £500,000, parent 75, nominee 45, level, no guarantee, no value "
-            "protection, monthly in arrears, 100% continuation, standard rates, no adviser charge.",
-            "Age 40 or over, including age 40, is a provider condition (Just and Canada Life, August 2026), "
-            "not a legal minimum.",
-            "Whether buying one is a gift for inheritance tax is not settled. The £50,000 in Bill's example is "
-            "an assumed value for illustration: halving the income does not by itself set the tax value. The "
-            "£20,000 assumes death within 3 years and no nil rate band or exemptions available. Taper relief "
-            "reduces the tax after 3 years.",
-            "Whole of life cover continues beyond 7 years, and term cover can cover the 7-year risk. Premiums "
-            "must be maintained and claim conditions met, and total premiums can exceed the payout.",
-            "The annuity income is taxable. Salary sacrifice means Amy gives up salary in return for employer "
-            "pension contributions; the annuity itself stays taxable, and any saving depends on her "
-            "circumstances and pension limits. From 6 April 2029, the National Insurance exemption is limited "
-            "to £2,000 a year of pension salary sacrifice.",
-            "A level income loses buying power with inflation, and the purchase normally cannot be reversed "
-            "after the cancellation period.",
+            ("Legal definition: Finance Act 2004, Schedule 28, paragraph 27AA(1), inserted by the Finance Act "
+             "2015, Schedule 4, paragraph 3(2). A nominee must not be a dependant under the pension tax rules: "
+             "paragraph 27A, inserted by the Taxation of Pensions Act 2014, Schedule 2, paragraph 3.",
+             ["fa2004p27AA", "fa2015", "fa2004p27A", "tpa2014"]),
+            ("Bought together with the member's own lifetime annuity means related to it: one joint life "
+             "contract, or a separate contract with the same or another insurer bought within 7 days before or "
+             "after the member's annuity (paragraph 27AA(2); HMRC PTM072200).",
+             ["fa2004p27AA", "ptm072200"]),
+            ("From 6 April 2027, a nominees' annuity bought together with the member's own lifetime annuity is "
+             "excluded from the estate for inheritance tax: Inheritance Tax Act 1984, s.150A(6)(c), inserted "
+             "by Finance Act 2026, for deaths on or after 6 April 2027. Nominees' annuities bought after the "
+             "member's death are also allowed, but that is not the route that qualifies for this exclusion.",
+             ["ihta150A", "fa2026s66", "fa2026s71", "tn333"]),
+            ("Remaining guarantee payments and value protection death benefits come within inheritance tax "
+             "from 6 April 2027. The example in the video leaves both out.",
+             ["ihta150A"]),
+            ("The quotations: Just, 11 August 2026, 5.83%, £29,153.64 a year. Canada Life, 10 August 2026, "
+             "5.79%, £28,925.76 a year. Both on £500,000, parent 75, nominee 45, level, no guarantee, no value "
+             "protection, monthly in arrears, 100% continuation, standard rates, no adviser charge. Naming the "
+             "insurers records where the quotations came from. It is not a recommendation.",
+             ["q_nominees"]),
+            ("Age 40 or over, including age 40, is a provider condition (Just and Canada Life, August 2026), "
+             "not a legal minimum. The other insurers asked in August 2026 said no at that time, though some "
+             "were reviewing. The market may have changed since.",
+             ["q_age40", "fa2004p27AA"]),
+            ("Whether buying one is a gift for inheritance tax is not settled. That it may be is Steve's "
+             "analysis, not HMRC's published position. The £50,000 in Bill's example is an assumed value for "
+             "illustration: halving the income does not by itself set the tax value. The £20,000 assumes death "
+             "within 3 years and no nil rate band or exemptions available. Taper relief reduces the tax after "
+             "3 years.",
+             ["ihta3A", "ihta7", "tn1125", "steve_pet"]),
+            ("Whole of life cover continues beyond 7 years, and term cover protects only for its term. Premiums "
+             "must be maintained and claim conditions met, and total premiums can exceed the payout.",
+             []),
+            ("In this example the annuity income is taxable, because Mr Miggins is 75 or over when he dies. If "
+             "the member dies under 75, a nominees' annuity bought together with the member's own annuity is "
+             "paid free of income tax (Income Tax (Earnings and Pensions) Act 2003, s.646B(3)). Salary sacrifice "
+             "means Amy gives up salary in return for employer pension contributions; the annuity itself stays "
+             "taxable, and any saving depends on her circumstances and pension limits. From 6 April 2029, the "
+             "National Insurance exemption is limited to £2,000 a year of pension salary sacrifice.",
+             ["itepa646B", "ptm072210", "nics2026"]),
+            ("A level income loses buying power with inflation, and the purchase normally cannot be reversed "
+             "after the cancellation period.",
+             []),
         ],
         "assumptions": (
             "Mr Miggins, his brother Bill, and Amy are fictitious. The quotations are real, obtained in "
-            "August 2026 for a LinkedIn article, and will have changed since."
+            "August 2026 for a LinkedIn article, and will have changed since. The original quotations and the "
+            "insurers' answers are held on file. No client information is used."
         ),
         "faq": [
             ("What is a nominees' annuity?",
-             "A nominees' annuity is a joint life annuity where, instead of the second life being a spouse, "
-             "civil partner or common law partner, the second life is a child or grandchild, or anyone else "
-             "that the pension member nominates. It came out of George Osborne's 2015 pension freedoms and "
-             "has been available for over a decade, but insurers have only recently started to write them."),
+             "A nominees' annuity is an annuity paid to a nominee of a pension member: an individual nominated "
+             "by the member, or by the scheme administrator, who is not a dependant under the pension tax rules, "
+             "often an adult child or grandchild. The version on this page is bought in the member's lifetime "
+             "together with the member's own lifetime annuity, so that when the member dies the income carries "
+             "on to the nominee for the rest of their life. Nominees' annuities can also be bought after the "
+             "member's death, but that is a different route, and not the one excluded from inheritance tax. The "
+             "nominees' annuity came in with George Osborne's 2015 pension freedoms and has been possible since "
+             "6 April 2015, but insurers have only recently started to write the lifetime version.",
+             ["fa2004p27AA", "fa2004p27A", "fa2015", "ihta150A", "q_age40"]),
             ("What is the legal definition of a nominees' annuity?",
              "Finance Act 2004, Schedule 28, paragraph 27AA(1), inserted by the Finance Act 2015. An annuity "
              "payable to a nominee is a nominees' annuity if either it is purchased together with a lifetime "
              "annuity payable to the member, and the member becomes entitled to that lifetime annuity on or "
              "after 6 April 2015; or it is purchased after the member's death, the member dies on or after "
-             "3 December 2014, and the nominee becomes entitled to the annuity on or after 6 April 2015. "
-             "Only the first route, bought together with the member's own annuity, is excluded from "
-             "inheritance tax under section 150A(6)(c) of the Inheritance Tax Act 1984."),
+             "3 December 2014, and the nominee becomes entitled to the annuity on or after 6 April 2015. Under "
+             "paragraph 27AA(2), it is purchased together with the member's lifetime annuity if it is related "
+             "to it. Only the first route, bought together with the member's own annuity, is excluded from "
+             "inheritance tax under section 150A(6)(c) of the Inheritance Tax Act 1984. A nominee is defined in "
+             "paragraph 27A, inserted by the Taxation of Pensions Act 2014, and must not be a dependant.",
+             ["fa2004p27AA", "fa2015", "fa2004p27A", "tpa2014", "ihta150A"]),
             ("Why is the nominees' annuity in the Finance Act 2004 if it came from the 2015 pension freedoms?",
              "Because the Finance Act 2015 inserted the new wording into the Finance Act 2004, which is the "
-             "Act that holds the pension tax rules. So it appears in the 2004 Act, but it did not exist "
-             "until the 2015 Act put it there."),
+             "Act that holds the pension tax rules. So it appears in the 2004 Act, but it did not exist until "
+             "the 2015 Act put it there. The definition of a nominee, in paragraph 27A, had been inserted a few "
+             "months earlier by the Taxation of Pensions Act 2014.",
+             ["fa2015", "tpa2014", "fa2004p27AA"]),
             ("How does a nominees' annuity work in practice?",
              "Take a father of 75 with a £500,000 pension fund and a daughter of 45. On real quotations from "
              "August 2026, Just offered £29,153.64 a year (£2,429.47 a month) at 5.83%, and Canada Life "
              "£28,925.76 a year at 5.79%. Both were level, with no guarantee period, no value protection, "
              "paid monthly in arrears, with 100% continuation to the daughter for the rest of her life. When "
              "the father dies, the same monthly income carries on to her. Bought together with his own "
-             "annuity, it is excluded from his estate for inheritance tax."),
+             "annuity, it is excluded from his estate for inheritance tax from 6 April 2027. These are dated "
+             "examples, not recommendations, and rates will have changed since.",
+             ["q_nominees", "ihta150A", "tn333"]),
             ("What is the catch with a nominees' annuity?",
-             "It can only be set up by the pension member, and only while the member is alive, because the "
-             "law says it must be purchased together with a lifetime annuity payable to the member. The "
-             "option dies with the member: a widow who inherits her husband's pension cannot buy one with "
-             "it. It is normally bought with no guarantee and no value protection, because both of those "
-             "would count for inheritance tax. Insurers currently want the nominee to be at least 40, which "
-             "is a provider condition rather than a legal one. And whether buying one is a lifetime gift for "
-             "inheritance tax has not been settled."),
+             "The version excluded from inheritance tax can only be set up by the pension member, while alive, "
+             "because it must be purchased together with a lifetime annuity payable to the member. So the "
+             "opportunity to arrange this lifetime-purchased related annuity ends when the member dies. A widow "
+             "who inherits her husband's pension cannot use that inherited pension to buy one, although she can "
+             "use her own pension. It is normally bought with no guarantee and no value protection, because "
+             "both of those would count for inheritance tax. The insurers who quoted in August 2026 wanted the "
+             "nominee to be aged 40 or over, which is a provider condition rather than a legal one. If the "
+             "member dies at 75 or over, the nominee pays income tax on the income. And whether buying one is a "
+             "lifetime gift for inheritance tax has not been settled.",
+             ["fa2004p27AA", "ihta150A", "tn333", "itepa646B", "q_age40"]),
             ("Is buying a nominees' annuity a gift for inheritance tax?",
-             "Nobody has settled it yet. The logic of the argument: if a £100,000 pot would buy a single "
-             "life annuity of £10,000 a year, and the member takes £5,000 a year instead so that 100% "
-             "continues to his son, he has given away half his pension income. If the same proportion is "
-             "applied to the pot, that could be treated as a gift of £50,000, a potentially exempt transfer. "
-             "If he lives seven years, nothing is taxed. If he dies within seven years, the failed gift "
-             "could be counted against his estate, up to £20,000 of tax at 40% in the worst case. Steve's "
-             "reading of the law as written: buy one before 6 April 2027 and it may be a gift; buy one after "
-             "6 April 2027 out of a pension trust and it may not be a gift at all. The full argument is in "
-             "his article Osborne's Get Out of Jail Card Under Attack."),
+             "Nobody has settled it. What follows is Steve's analysis, not HMRC's published position. The "
+             "argument: if a £100,000 pot would buy a single life annuity of £10,000 a year, and the member "
+             "takes £5,000 a year instead so that 100% continues to his son, he has given up half his pension "
+             "income. Applying the same proportion to the pot is one way to illustrate a value, £50,000; it is "
+             "not the statutory valuation method, and the real figure would depend on the facts. If it were a "
+             "gift, it would be a potentially exempt transfer: nothing to pay if he lives seven years, and if "
+             "he dies within seven years, up to £20,000 of tax at 40% on that illustrative figure in the worst "
+             "case, with no nil rate band or exemptions available. Steve's reading of the law as written: buy "
+             "one before 6 April 2027 and it may be a gift; buy one after 6 April 2027 out of a pension trust "
+             "and it may not be a gift at all. Read alongside it HMRC's technical note, which says in its "
+             "section on lifetime transfers that the pension changes 'do not alter the existing position for "
+             "lifetime transfers'. The full argument is in his article Osborne's Get Out of Jail Card Under "
+             "Attack.",
+             ["ihta3A", "ihta7", "tn1125", "steve_pet"]),
             ("How can the seven-year gift risk be covered?",
-             "With a whole of life assurance plan, written in trust. It pays out exactly when the gift "
-             "fails, which is on death within seven years, so it is the hedge. Whole of life is assurance "
-             "rather than insurance: it pays on an event that will happen, the only unknown being when. "
-             "There is one more risk, both lives ending early. If the nominee were to die soon after the "
-             "member, the continuation dies with them, so the nominee can take out a ten-year term policy "
-             "on their own life, in trust. Premiums must be kept up and claim conditions met, and total "
-             "premiums can exceed the payout."),
+             "One way is life assurance on the member's life, written in trust. A whole of life plan pays out "
+             "whenever death happens, so it would pay if the gift failed through death within seven years; "
+             "seven-year term cover would protect only that period. There is one more risk, both lives ending "
+             "early. If the nominee were to die soon after the member, the continuation ends with them, so the "
+             "nominee could take out a term policy on their own life, in trust, which protects only for its "
+             "term, for example ten years. Premiums must be kept up and claim conditions met, and total "
+             "premiums can exceed the payout. Whether any of this is worth doing depends on the person's "
+             "circumstances.",
+             []),
             ("Is the income from a nominees' annuity taxable?",
-             "Yes. The income to the nominee is taxable as income. A nominee who is employed may be able to "
-             "get some or all of that tax back by paying more into their own pension through salary "
-             "sacrifice, but the annuity itself stays taxable, and any saving depends on their "
-             "circumstances and pension limits. From 6 April 2029, the National Insurance exemption is "
-             "limited to £2,000 a year of pension salary sacrifice."),
+             "It depends on the member's age at death and the applicable conditions. In this example, Mr "
+             "Miggins is already 75, so Amy's annuity income is taxable. Where the member dies under 75, a "
+             "qualifying related nominees' annuity can instead be paid free of income tax. A nominee who pays "
+             "tax on the income and is employed may be able to get some or all of that tax back by paying more "
+             "into their own pension through salary sacrifice, but the annuity itself stays taxable, and any "
+             "saving depends on their circumstances and pension limits. From 6 April 2029, the National "
+             "Insurance exemption is limited to £2,000 a year of pension salary sacrifice.",
+             ["itepa646B", "ptm072210", "nics2026"]),
         ],
         "articles": [
             ("oneword", "The Mr Miggins and Amy nominees' annuity figures."),
@@ -323,8 +543,47 @@ VIDEOS = [
                      "How will your pension be taxed when you die after April 2027?"),
                     ("Next video", "whole-of-life-assurance",
                      "Whole of life assurance: what is it, why does a whole generation distrust it, and what has changed?")],
-        "legislation": "Finance Act 2004, Schedule 28, paragraphs 27A and 27AA(1), inserted by Finance Act 2015; "
-                       "Inheritance Tax Act 1984, s.150A(6)(c), inserted by Finance Act 2026.",
+        "legislation": "Finance Act 2004, Schedule 28, paragraph 27A (inserted by the Taxation of Pensions Act 2014, "
+                       "Schedule 2, paragraph 3) and paragraph 27AA (inserted by the Finance Act 2015, Schedule 4, "
+                       "paragraph 3(2)); Income Tax (Earnings and Pensions) Act 2003, s.646B(3); Inheritance Tax Act "
+                       "1984, s.3A, s.7(4) and s.150A(6)(c), the last inserted by Finance Act 2026, s.66.",
+        "notes": [
+            {"phrase": "A nominees' annuity is a joint life annuity",
+             "kind": "Clarification",
+             "text": "This describes the version bought in the member's lifetime with the member's own annuity, "
+                     "which is the one this video is about. In law a nominees' annuity is an annuity paid to a "
+                     "nominee who is not a dependant of the member, and it can also be bought after the member's "
+                     "death, but that route is not excluded from inheritance tax.",
+             "sources": ["fa2004p27AA", "fa2004p27A", "ihta150A"]},
+            {"phrase": "currently needs to be over the age of 40.",
+             "kind": "Correction",
+             "text": "The insurers' rule is age 40 or over. As the video goes on to say, they would not accept a "
+                     "nominee under 40. This was a provider condition in August 2026, not the law.",
+             "sources": ["q_age40"]},
+            {"phrase": "The rest of the market is, at the time of writing,",
+             "kind": "Note",
+             "text": "At the time of writing means August 2026, when the insurers were asked. The market may have "
+                     "changed since.",
+             "sources": ["q_age40"]},
+            {"phrase": "as one joint life annuity.",
+             "kind": "Clarification",
+             "text": "It can be one joint life contract, or a separate contract with the same or another insurer "
+                     "bought within 7 days before or after the member's own annuity. Either way it counts as "
+                     "related, which is what purchased together means in the law.",
+             "sources": ["fa2004p27AA", "ptm072200"]},
+            {"phrase": "The nominees' annuity option dies with the member.",
+             "kind": "Clarification",
+             "text": "This means the opportunity to arrange this lifetime-purchased, related nominees' annuity, the "
+                     "route that is excluded from inheritance tax, ends when the member dies. Nominees' annuities "
+                     "can also be bought after the member's death, but that route is not excluded. The widow in the "
+                     "example cannot use her inherited pension to buy one, but she can use her own pension.",
+             "sources": ["fa2004p27AA", "ihta150A"]},
+            {"phrase": "The income to Amy is taxable, yes,",
+             "kind": "Clarification",
+             "text": "Taxable in this example because Mr Miggins is 75. If the member dies under 75, a nominees' "
+                     "annuity bought together with the member's own annuity is paid free of income tax.",
+             "sources": ["itepa646B", "ptm072210"]},
+        ],
         "transcript_file": "v2_transcript.tsv",
         "keywords": ["nominees' annuity", "nominee annuity", "joint life annuity", "pension inheritance tax 2027",
                      "potentially exempt transfer", "whole of life assurance", "Finance Act 2004 Schedule 28",
@@ -339,31 +598,35 @@ VIDEOS = [
         "seo_title": "Whole of life assurance: what is it, and what has changed?",
         "seo_description": "Whole of life assurance pays out whenever death occurs, if the premiums are paid. Why a generation distrusts it, and what has changed since the 1980s.",
         "meta_description": (
-            "Whole of life assurance pays a fixed sum when you die, whenever that is. What it is, why the "
-            "unit-linked plans of the 1980s made a generation distrust it, and what has changed: guaranteed "
-            "premiums and a real quotation showing generational wealth transfer. Video, key facts and full "
-            "transcript by Steve Hunt ACII TEP."
+            "Whole of life assurance pays a fixed sum when you die, whenever that is, provided the premiums are "
+            "paid. What it is, why the unit-linked plans of the 1980s made a generation distrust it, and what "
+            "has changed: guaranteed premiums, and a real quotation showing how it can be used for "
+            "generational wealth transfer. Video, key facts and full transcript by Steve Hunt ACII TEP."
         ),
         "published": "2026-10-01",
+        "published_iso": "2026-10-01T07:06:59+01:00",
         "seconds": 783,
         "duration_iso": "PT13M3S",
         "duration_text": "13 min 3 sec",
         "short_answer": [
             "Whole of life assurance puts a monetary value on a person's life, the sum assured, and pays it out "
-            "when that person dies, whenever that is, provided the premiums are paid. Since the Life Assurance "
-            "Act 1774 you can only insure a life in which you have an insurable interest, and an individual has "
-            "an unlimited insurable interest in their own life and in the life of their spouse or civil partner.",
-            "A whole generation distrusts it because of the unit-linked whole of life plans of the 1980s, sold "
-            "by the hundreds of thousands by companies like Abbey Life and Allied Dunbar: reviewable premiums, "
-            "cover that could be cut, policies that lapsed with nothing to show for years of premiums, and "
-            "payouts that sometimes fell short of the premiums paid in.",
-            "What has changed: conventional whole of life is whole of life again, with a premium guaranteed from "
-            "day one. On a real quotation, a man of 75 pays £1,555.20 a month for £500,000 written in trust. Die "
-            "at 80 and the trust receives £500,000 for £93,312 of premiums. The same £93,312 left in his estate "
-            "would leave his family £55,987 after 40% inheritance tax, or as little as £37,325 at an effective "
-            "60%. Total premiums only pass the sum assured if he lives to nearly 102. The catch is that age and "
-            "health decide the premium, and whether cover is offered at all.",
+            "when that person dies, whenever that is, provided the premiums are paid. Under the Life Assurance "
+            "Act 1774 you can only insure a life in which you have an insurable interest. An individual has an "
+            "unlimited insurable interest in their own life and in the life of their spouse or civil partner.",
+            "In Steve's experience, a generation distrusts it because of the unit-linked whole of life plans of "
+            "the 1980s, sold by the hundreds of thousands by companies like Abbey Life and Allied Dunbar: "
+            "reviewable premiums, cover that could be cut, policies that lapsed with nothing to show for years "
+            "of premiums, and payouts that sometimes fell short of the premiums paid in.",
+            "What has changed: a conventional whole of life policy with guaranteed, non-reviewable premiums is "
+            "whole of life again, with the premium fixed from day one. Reviewable policies also exist. On a real "
+            "quotation, a man of 75 pays £1,555.20 a month for £500,000 written in trust. Die at 80 and the "
+            "trust receives £500,000 for £93,312 of premiums. The same £93,312 left in his estate would leave "
+            "his family £55,987 after 40% inheritance tax, or as little as £37,325 at an effective 60%, "
+            "ignoring investment returns and inflation. In this quotation, total premiums only pass the sum "
+            "assured if he lives to nearly 102. The catch is that age and health decide the premium, and "
+            "whether cover is offered at all.",
         ],
+        "short_sources": ["laa1774", "cpa253", "mg", "fos", "ihta8D", "q_wol", "steve_history"],
         "chapters": [
             (0, "Today's question"),
             (26, "What is whole of life assurance?"),
@@ -382,107 +645,148 @@ VIDEOS = [
             (737, "What's next, and Roy Jenkins"),
         ],
         "key_facts": [
-            "Whole of life assurance puts a monetary value on a life, the sum assured, and pays it when that "
-            "person dies, whenever that is, provided the premiums are paid. On a conventional plan the premium "
-            "is guaranteed from day one and is never reviewed.",
-            "Life Assurance Act 1774, also known as the Gambling Act: a policy on someone's life is void unless "
-            "the person taking it out has an insurable interest in that life (section 1), and the amount "
-            "recoverable is limited to the value of that interest (section 3). An individual has an unlimited "
-            "insurable interest in their own life and in the life of their spouse or civil partner. Beyond that "
-            "the only limits are the insurer accepting the risk and the premiums being affordable.",
-            "The unit-linked whole of life plans of the 1980s were investment policies with a death benefit "
-            "attached. Premiums were reviewable: to keep the same cover the premium could go up, or the cover "
-            "could be cut, and some policies lapsed with nothing to show for years of premiums. The new rules on "
-            "selling investments came in under the Financial Services Act 1986, in force from April 1988.",
-            "The quotation in the video: a man of 75, £500,000 of conventional whole of life assurance, written "
-            "in trust, guaranteed premium £1,555.20 a month, £18,662.40 a year.",
-            "Premiums paid against the £500,000 paid to the trust: death at 80, £93,312; at 85, £186,624; at 90, "
-            "£279,936; at 95, £373,248; at 100, £466,560. Total premiums only pass the sum assured if he lives "
-            "to nearly 102.",
-            "Keep that money in the estate instead and the £93,312 he would have paid by 80 is taxed at 40%, "
-            "leaving £55,987. If it tips the estate over £2 million, the residence nil rate band is reduced by £1 "
-            "for every £2 over (Inheritance Tax Act 1984, s.8D), an effective 60%, leaving £37,325.",
-            "Written in trust, the sum assured is paid to the trustees and does not form part of the estate. "
-            "Premiums paid for a policy held in trust are gifts, usually covered by the normal expenditure out "
-            "of income exemption (Inheritance Tax Act 1984, s.21) or the £3,000 annual exemption (s.19).",
-            "Term insurance, like car or house insurance, is a cost if it does not pay out. Whole of life "
-            "assurance pays out on an event that is certain to happen; the only unknown is when. The premiums "
-            "must be paid for life: stop the premiums and the cover stops.",
-            "Age and health decide the premium, and whether cover is offered at all, and neither stays still. "
-            "Cover available today may not be available after a scan or a blood test tomorrow.",
-            "James Dodson, who worked out the level premium system still used to price whole of life assurance, "
-            "was refused cover by the Amicable Society for being over 45. He died in 1757, before the Equitable "
-            "Society he had planned opened in 1762, leaving three children unprovided for.",
+            ("Whole of life assurance puts a monetary value on a life, the sum assured, and pays it when that "
+             "person dies, whenever that is, provided the premiums are paid. On a conventional guaranteed-premium "
+             "plan the premium is fixed from day one and is never reviewed. Reviewable whole of life policies "
+             "also exist, and on those the premium or the cover can change at a review.",
+             ["fos"]),
+            ("Life Assurance Act 1774, also known as the Gambling Act: a policy on someone's life is void unless "
+             "the person taking it out has an insurable interest in that life (section 1), and the amount "
+             "recoverable is limited to the value of that interest (section 3). An individual has an unlimited "
+             "insurable interest in their own life and in the life of their spouse, and civil partners have one "
+             "in each other by statute (Civil Partnership Act 2004, s.253). Beyond that the only limits are the "
+             "insurer accepting the risk and the premiums being affordable.",
+             ["laa1774", "cpa253", "mg"]),
+            ("In Steve's experience, the unit-linked whole of life plans of the 1980s were investment policies "
+             "with a death benefit attached. Premiums were reviewable: to keep the same cover the premium could "
+             "go up, or the cover could be cut, and some policies lapsed with nothing to show for years of "
+             "premiums. The new rules on selling investments came in under the Financial Services Act 1986, "
+             "with the main provisions in force from 29 April 1988.",
+             ["fsa1986", "si1988", "fos", "steve_history"]),
+            ("The quotation in the video: a man of 75, £500,000 of conventional whole of life assurance with "
+             "guaranteed premiums, written in trust, premium £1,555.20 a month, £18,662.40 a year.",
+             ["q_wol"]),
+            ("Premiums paid against the £500,000 paid to the trust: death at 80, £93,312; at 85, £186,624; at 90, "
+             "£279,936; at 95, £373,248; at 100, £466,560. In this quotation, total premiums pass the sum assured "
+             "only after about 26 years and 10 months, when he would be nearly 102. A different age or premium "
+             "gives a different answer, and total premiums can exceed the payout.",
+             ["q_wol"]),
+            ("Keep that money in the estate instead and the £93,312 he would have paid by 80 is taxed at 40%, "
+             "leaving £55,987. Where it falls within the residence nil rate band taper, because the estate is "
+             "over £2 million and enough residence nil rate band is still there to be lost, the band is reduced "
+             "by £1 for every £2 over (Inheritance Tax Act 1984, s.8D), an effective 60%, leaving £37,325. These "
+             "figures ignore investment returns and inflation.",
+             ["ihta8D", "rnrb"]),
+            ("Written in trust, the sum assured is paid to the trustees and does not form part of the estate. "
+             "Premiums paid for a policy held in trust are gifts, exempt only where an exemption applies. The "
+             "£3,000 annual exemption (s.19) covers only £3,000 a year, far less than this £18,662.40 premium. "
+             "Normal expenditure out of income (s.21) applies only if the payments are part of the person's "
+             "normal expenditure, are made out of income, and leave enough income to keep their usual standard "
+             "of living, and section 21 has a special rule where an annuity has been bought on the same life. "
+             "The example assumes the premiums qualify in full, which has to be shown on the facts.",
+             ["ihta19", "ihta21"]),
+            ("Term insurance, like car or house insurance, is a cost if it does not pay out. Whole of life "
+             "assurance pays out on an event that is certain to happen, provided the premiums are kept up; the "
+             "only unknown is when. That does not mean the premiums are refunded. The premiums must be paid for "
+             "life: stop the premiums and the cover stops.",
+             []),
+            ("Age and health decide the premium, and whether cover is offered at all, and neither stays still. "
+             "Cover available today may not be available after a scan or a blood test tomorrow.",
+             []),
+            ("James Dodson, who worked out the level premium system still used to price whole of life assurance, "
+             "was refused admission by the Amicable Society, which admitted no one over 45. He died in 1757, "
+             "before the Equitable Society he had planned opened in 1762, leaving three children unprovided for.",
+             ["dnb", "actuary"]),
         ],
         "assumptions": (
-            "Mr Miggins is fictitious. The quotation is real, obtained in 2026; premiums depend on age, health "
-            "and the insurer, and will differ on the day. The 60% figure applies where an estate sits between "
-            "£2 million and £2.7 million and the residence nil rate band taper applies. Figures are rounded to "
-            "the pound."
+            "Mr Miggins is fictitious. The quotation is real, obtained in 2026 and held on file; premiums depend "
+            "on age, health and the insurer, and will differ on the day. The comparisons use the amounts as "
+            "paid, with no investment returns or inflation, and assume the premiums are exempt gifts in full. "
+            "The 60% figure assumes the extra money falls entirely within the residence nil rate band taper: "
+            "the estate is over £2 million and enough residence nil rate band, up to £350,000 with a full "
+            "transferred band, is still there to be lost. The whole band has gone once an estate reaches "
+            "£2.7 million. Figures are rounded to the pound."
         ),
         "faq": [
             ("What is whole of life assurance?",
              "Whole of life assurance puts a monetary value on a person's life, for example £500,000, which is "
              "called the sum assured. When that person dies, the insurance company pays the sum assured, "
              "whenever death occurs, provided the premiums have been paid. In its basic, traditional form it "
-             "is as simple as that, and it has worked that way since the Life Assurance Act 1774."),
+             "is as simple as that, and it has worked that way since the Life Assurance Act 1774.",
+             ["laa1774"]),
             ("What is insurable interest?",
              "Before 1774 it was common for the rich to take out life assurance on complete strangers, and even "
-             "on kings and queens, in the coffee houses of London. It was a form of gambling, which is why the "
-             "Life Assurance Act 1774 was also known as the Gambling Act. The Act says you cannot take out a "
-             "life assurance policy on someone unless you have an insurable interest in that person, meaning "
-             "you would suffer a financial loss if they died. An individual has an unlimited insurable interest "
-             "in their own life and in the life of their spouse or civil partner, so a husband could insure his "
-             "wife for £10 million or £100 million. The only limits are an insurer accepting the risk and the "
-             "premiums being paid."),
+             "on kings and queens, in the coffee houses of London. It was a form of gambling: the preamble to the "
+             "Life Assurance Act 1774, also known as the Gambling Act, says such insurances had introduced 'a "
+             "mischievous kind of gaming'. The Act says you cannot take out a life assurance policy on someone "
+             "unless you have an insurable interest in that person, meaning you would suffer a financial loss if "
+             "they died. An individual has an unlimited insurable interest in their own life and in the life of "
+             "their spouse or civil partner, so a husband could insure his wife for £10 million or £100 million. "
+             "The only limits are an insurer accepting the risk and the premiums being paid.",
+             ["laa1774", "cpa253", "mg"]),
             ("Why does a whole generation distrust whole of life assurance?",
-             "For 200 years whole of life assurance did exactly what it was designed to do: pay a lump sum on "
-             "death, often used to cover death duties. Then the unit-linked companies of the 1960s to 1980s, "
-             "Abbey Life, Hambro Life and later Allied Dunbar among them, brought in the unit-linked whole of "
-             "life policy, an investment with a death benefit attached. Premiums could be reviewed, cover could "
-             "be cut, some policies lapsed with nothing to show for years of premiums, and on death the sum "
-             "assured sometimes fell short of the premiums paid in. They were sold by the hundreds of thousands "
-             "in the wild west before the new rules on selling investments arrived in 1988. Boomers watched the "
-             "foot-in-the-door salesman and the mis-selling in real time, and many vowed never to be caught "
-             "again."),
+             "This is Steve's account, from working in the industry since 1980. For 200 years whole of life "
+             "assurance did exactly what it was designed to do: pay a lump sum on death, often used to cover "
+             "death duties. Then the unit-linked companies of the 1960s to 1980s, Abbey Life, Hambro Life and "
+             "later Allied Dunbar among them, brought in the unit-linked whole of life policy, an investment with "
+             "a death benefit attached. Premiums could be reviewed, cover could be cut, some policies lapsed with "
+             "nothing to show for years of premiums, and on death the sum assured sometimes fell short of the "
+             "premiums paid in. They were sold by the hundreds of thousands in the wild west before the new rules "
+             "on selling investments arrived in 1988. Boomers watched the foot-in-the-door salesman and the "
+             "mis-selling in real time, and many vowed never to be caught again.",
+             ["steve_history", "fos", "fsa1986", "si1988"]),
             ("What has changed with whole of life assurance?",
-             "Today, conventional whole of life assurance is whole of life again: a premium guaranteed from day "
-             "one, and a payout whenever death occurs, provided the premiums are paid. There are no premium "
-             "reviews and the cover is not cut. That is why it can be described as generational wealth "
-             "transfer rather than insurance."),
-            ("How can whole of life assurance be generational wealth transfer?",
-             "Take a real quotation for a man of 75: £500,000 of whole of life assurance, written in trust, at "
-             "a guaranteed premium of £1,555.20 a month, £18,662.40 a year. If he dies at 80 he has paid "
-             "£93,312 in premiums and the trust receives £500,000. At 85, £186,624 paid, £500,000 received. At "
-             "90, £279,936. At 95, £373,248. At 100, £466,560. In every case the trust receives £500,000. Total "
-             "premiums only pass the sum assured if he lives to nearly 102. The premiums he pays today buy "
-             "£500,000 for the next generation tomorrow, and if he dies young the trust gets considerably more "
-             "than he paid in."),
+             "Today, a conventional whole of life policy with guaranteed, non-reviewable premiums is whole of life "
+             "again: a premium fixed from day one, and a payout whenever death occurs, provided the premiums are "
+             "paid. That type of policy has no premium reviews and the cover is not cut. Reviewable whole of life "
+             "policies also exist, so the type matters. That is why a guaranteed-premium policy can be used for "
+             "generational wealth transfer. Using it that way does not make it an investment: it is an insurance "
+             "contract that pays the sum assured on death, subject to its terms.",
+             ["fos", "q_wol"]),
+            ("How can whole of life assurance be used for generational wealth transfer?",
+             "Take a real quotation for a man of 75: £500,000 of whole of life assurance with guaranteed premiums, "
+             "written in trust, at £1,555.20 a month, £18,662.40 a year. If he dies at 80 he has paid £93,312 in "
+             "premiums and the trust receives £500,000. At 85, £186,624 paid, £500,000 received. At 90, £279,936. "
+             "At 95, £373,248. At 100, £466,560. In every case the trust receives £500,000. In this quotation, "
+             "total premiums pass the sum assured only if he lives to nearly 102, after about 26 years and "
+             "10 months of premiums. The premiums he pays today buy £500,000 for the next generation, provided "
+             "they are kept up, and if he dies young the trust gets considerably more than he paid in. If he "
+             "lives long enough, he pays in more than the trust receives.",
+             ["q_wol"]),
             ("What happens if the premium money stays in the estate instead?",
-             "Left in his estate, the money is taxed at 40% inheritance tax, or an effective 60% if the estate "
-             "sits in the band between £2 million and £2.7 million where the residence nil rate band is "
-             "tapered away. Die at 80 and the £93,312 he would have paid in premiums leaves his family £55,987 "
-             "after 40% tax, or as little as £37,325 at 60%. Use the same money for premiums on a whole of life "
-             "plan in trust and the family trust receives £500,000."),
+             "Left in his estate, the money is taxed at 40% inheritance tax, or an effective 60% where it falls "
+             "within the residence nil rate band taper, which needs an estate over £2 million with enough "
+             "residence nil rate band still there to be lost. Die at 80 and the £93,312 he would have paid in "
+             "premiums leaves his family £55,987 after 40% tax, or as little as £37,325 at 60%. Use the same "
+             "money for premiums on a whole of life plan in trust and, if he dies at 80, the family trust "
+             "receives £500,000. This compares the amounts as paid, ignoring investment returns and inflation, "
+             "and assumes the premiums are exempt gifts.",
+             ["ihta8D", "rnrb", "ihta21", "q_wol"]),
             ("Is whole of life assurance just a cost, like car insurance?",
-             "No. Car insurance, house insurance and term insurance are a cost if they do not pay out, and most "
-             "people with term insurance do not die during the term. Whole of life assurance is different: it "
-             "pays out on an event that is certain to happen, so the premiums are not lost. The trust gets back "
-             "more than is paid in unless the life assured lives to nearly 102. The premiums must be paid for "
-             "life, though: stop the premiums and the cover stops."),
+             "Not in the same way. Car insurance, house insurance and term insurance are a cost if they do not "
+             "pay out, and most people with term insurance do not die during the term. Whole of life assurance "
+             "pays out on an event that is certain to happen, provided the premiums are kept up, so the policy "
+             "will pay its sum assured. That does not mean the premiums are refunded. In the particular age-75 "
+             "quotation used here, total premiums would exceed the £500,000 sum assured only after about 26 years "
+             "and 10 months. Different premiums and starting ages produce different results, and total premiums "
+             "can exceed the payout. The premiums must be paid for life, though: stop the premiums and the cover "
+             "stops.",
+             ["q_wol"]),
             ("Can anyone get whole of life assurance?",
              "No. There are two whens: when the insurer will pay out if you have a policy, and how long cover "
              "will remain available to you. To get whole of life assurance the insurer looks at your age and "
              "your health, decides the premium, and decides whether to offer cover at all. Neither age nor "
              "health stands still, and a future scan that is not clear, or a blood test that needs follow-up, "
-             "could mean this type of cover is no longer available."),
+             "could mean this type of cover is no longer available.",
+             []),
             ("Who was James Dodson?",
              "James Dodson was the mathematician who worked out the level premium system, the way whole of "
-             "life assurance is still priced today. He was refused cover by the Amicable Society for being over "
-             "45, and he died in 1757, before the Equitable Society he had planned opened its doors in 1762, "
-             "leaving three children unprovided for. Steve has written about him, and the pastor whose "
-             "mortality tables started it all, in his LinkedIn article The Pastor Who Tried to Prove God and "
-             "Accidentally Predicted Death."),
+             "life assurance is still priced today. He was refused admission by the Amicable Society, which "
+             "admitted no one over 45, and he died in 1757, before the Equitable Society he had planned opened "
+             "its doors in 1762, leaving three children unprovided for. Steve has written about him, and the "
+             "pastor whose mortality tables started it all, in his LinkedIn article The Pastor Who Tried to "
+             "Prove God and Accidentally Predicted Death.",
+             ["dnb", "actuary"]),
         ],
         "articles": [
             ("certainties", "How whole of life was hijacked in the 1980s, and Certainty³: guaranteed income funding guaranteed premiums."),
@@ -491,13 +795,88 @@ VIDEOS = [
         ],
         "related": [("Previous video", "nominees-annuity",
                      "Nominees' annuity: what is it, how does it work, and what's the catch?")],
-        "legislation": "Life Assurance Act 1774, ss.1 to 3; Inheritance Tax Act 1984, s.8D, s.19 and s.21; "
-                       "Financial Services Act 1986.",
+        "legislation": "Life Assurance Act 1774, ss.1 to 3; Civil Partnership Act 2004, s.253; Inheritance Tax Act "
+                       "1984, s.8D, s.19 and s.21; Financial Services Act 1986, since repealed.",
+        "notes": [
+            {"phrase": "Today, whole of life assurance is whole of life again:",
+             "kind": "Clarification",
+             "text": "This describes conventional whole of life policies with guaranteed, non-reviewable premiums, "
+                     "the type in this video. Reviewable whole of life policies also exist, and on those the "
+                     "premium or the cover can change at a review.",
+             "sources": ["fos"]},
+            {"phrase": "then the net amount to the family could be as little as £37,325.",
+             "kind": "Clarification",
+             "text": "The 60% case assumes the extra money falls entirely within the residence nil rate band "
+                     "taper, with enough of the band, including a full transferred band, still there to be lost. "
+                     "These comparisons use the amounts as paid and ignore investment returns and inflation.",
+             "sources": ["ihta8D", "rnrb"]},
+            {"phrase": "The premiums are not lost.",
+             "kind": "Clarification",
+             "text": "This means the policy pays its sum assured on death, whenever that is, provided the premiums "
+                     "have been kept up. It does not mean the premiums are refunded. In this quotation, total "
+                     "premiums would pass the £500,000 sum assured after about 26 years and 10 months, and total "
+                     "premiums can exceed the payout.",
+             "sources": ["q_wol"]},
+        ],
         "transcript_file": "v3_transcript.tsv",
         "keywords": ["whole of life assurance", "whole of life insurance", "whole of life policy",
                      "generational wealth transfer", "life assurance in trust", "unit-linked whole of life",
                      "Life Assurance Act 1774", "insurable interest", "guaranteed premiums", "inheritance tax"],
     },
+]
+
+# What changed on each page at the 1 October 2026 review, shown on the corrections page.
+CORRECTIONS_LOG = [
+    ("1 October 2026", [
+        ("nominees-annuity", [
+            "The answer to 'Is the income from a nominees' annuity taxable?' used to begin 'Yes'. It now explains "
+            "that the income is taxable where the member dies at 75 or over, as in the example, and can be paid "
+            "free of income tax where the member dies under 75 (Income Tax (Earnings and Pensions) Act 2003, "
+            "s.646B(3)).",
+            "The page now makes clear that it is about the nominees' annuity bought in the member's lifetime, which "
+            "is the version excluded from inheritance tax, and that nominees' annuities can also be bought after "
+            "the member's death by a different route. It also explains that the related annuity can be a separate "
+            "contract bought within 7 days of the member's own annuity.",
+            "Paragraph 27A of Schedule 28 to the Finance Act 2004, which defines a nominee, was said to have been "
+            "inserted by the Finance Act 2015. It was inserted by the Taxation of Pensions Act 2014. The Finance "
+            "Act 2015 inserted paragraph 27AA.",
+            "The question whether buying one is a gift is labelled as Steve's analysis, with HMRC's technical note "
+            "quoted alongside, and the £50,000 figure is described as an illustration, not the statutory valuation.",
+            "The nominee's minimum age is stated as 40 or over throughout, tied to the insurers' answers in August "
+            "2026.",
+            "Dated notes were added to the transcript on the definition, the nominee's age, the separate-contract "
+            "route, the after-death route and income tax.",
+        ]),
+        ("pensions-and-inheritance-tax-from-april-2027", [
+            "The worked example now lists all of its assumptions, including the transferred nil rate bands, the "
+            "home passing to direct descendants, and Amy drawing £24,000 a year for 15 years.",
+            "The question 'Can inheritance tax on a £500,000 pension really cost more than the pension itself?' is "
+            "now 'Can the combined family tax cost of a £500,000 pension be more than the pension itself?', because "
+            "the £516,000 includes income tax and is not all taken from the pension.",
+            "The exclusion for dependants' scheme pensions is now described the same way everywhere: it is not "
+            "limited to defined benefit schemes.",
+            "Paying the inheritance tax straight from the pension is shown as an option that the example uses, not "
+            "a rule.",
+            "The source of the £1 trillion estimate is given, and dated notes were added to the transcript on the "
+            "same points.",
+        ]),
+        ("whole-of-life-assurance", [
+            "'The trust gets back more than is paid in unless the life assured lives to nearly 102' is now tied to "
+            "the particular age-75 quotation, with the warning that total premiums can exceed the payout.",
+            "The page now names the type of policy it describes, a conventional policy with guaranteed, "
+            "non-reviewable premiums, and says that 'the premiums are not lost' does not mean they are refunded.",
+            "Premiums paid into a trust are now explained as gifts that are exempt only where an exemption "
+            "applies, and the example's assumption that they qualify is stated.",
+            "The 60% comparison now carries its assumptions, and the history of the 1980s is labelled as Steve's "
+            "experience.",
+            "Dated notes were added to the transcript on the same points.",
+        ]),
+        ("", [
+            "Every answer now has a Sources line linking to the law on legislation.gov.uk and to HMRC's guidance "
+            "on GOV.UK, with each source labelled.",
+            "This page was added.",
+        ]),
+    ]),
 ]
 
 # ---------------------------------------------------------------------------
@@ -518,6 +897,10 @@ def yt_watch(vid, t=None):
     if t:
         u += f"&t={t}s"
     return u
+
+
+def nice_date(d):
+    return d.strftime("%-d %B %Y")
 
 
 def load_transcript(name):
@@ -567,12 +950,76 @@ def plain_transcript(video):
     return re.sub(r"\s+", " ", " ".join(t for _, t in cues)).strip()
 
 
+def unique(seq):
+    out = []
+    for x in seq:
+        if x not in out:
+            out.append(x)
+    return out
+
+
+def page_source_keys(v):
+    keys = list(v["short_sources"])
+    for _, ks in v["key_facts"]:
+        keys += ks
+    for _, _, ks in v["faq"]:
+        keys += ks
+    for n in v["notes"]:
+        keys += n["sources"]
+    return unique(keys)
+
+
+def source_link(key):
+    label, name, url = SOURCES[key]
+    if url:
+        return f'<a href="{esc(url)}" target="_blank" rel="noopener">{esc(name)}</a>'
+    return esc(name)
+
+
+def sources_html(keys, tag="p"):
+    """One compact line: Sources, grouped by label, in a fixed order."""
+    keys = unique(keys)
+    if not keys:
+        return ""
+    groups = {}
+    for k in keys:
+        groups.setdefault(SOURCES[k][0], []).append(k)
+    parts = []
+    for label in LABEL_ORDER:
+        if label in groups:
+            parts.append(f'<span class="lbl">{esc(label)}:</span> ' + "; ".join(source_link(k) for k in groups[label]))
+    return f'<{tag} class="src"><span class="lead">Sources</span> ' + " &middot; ".join(parts) + f"</{tag}>"
+
+
+def source_ld(key):
+    label, name, url = SOURCES[key]
+    if label == "Law":
+        d = {"@type": "Legislation", "name": name}
+    elif label == "HMRC":
+        d = {"@type": "WebPage", "name": name,
+             "publisher": {"@type": "GovernmentOrganization", "name": "HM Revenue and Customs"}}
+    elif label.startswith("Steve's"):
+        d = {"@type": "CreativeWork", "name": name, "author": {"@id": f"{SITE}/#steve-hunt"}}
+    else:
+        d = {"@type": "CreativeWork", "name": name}
+    if url:
+        d["url"] = url
+    else:
+        d["description"] = f"{label}, held on file by the author and not published."
+    return d
+
+
+def note_html(n):
+    return (f'<div class="correction" role="note"><p><strong>{esc(n["kind"])}, {NOTE_DATE}:</strong> '
+            f'{esc(n["text"])}</p>{sources_html(n["sources"])}</div>')
+
+
 # ---------------------------------------------------------------------------
 # CSS (shared, inlined into every page)
 # ---------------------------------------------------------------------------
 
 CSS = """
-:root{--navy:#0C192B;--navy2:#182C46;--gold:#C8A564;--ivory:#F3EBDA;--paper:#FFFDF8;--ink:#1B2433;--muted:#5A6577;--rule:#E3DCCB;--link:#0F4C81}
+:root{--navy:#0C192B;--navy2:#182C46;--gold:#C8A564;--ivory:#F3EBDA;--paper:#FFFDF8;--ink:#1B2433;--muted:#5A6577;--rule:#E3DCCB;--link:#0F4C81;--note:#FFF6E3}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
@@ -604,8 +1051,19 @@ main{padding:28px 0 40px}
 ol.chapters{padding-left:0;list-style:none;margin:0}
 ol.chapters li{margin:.35em 0}
 ol.chapters .t{display:inline-block;min-width:3.6em;font-variant-numeric:tabular-nums;color:var(--muted)}
-ul.facts li{margin:.6em 0}
+ul.facts li{margin:.7em 0}
 .faq h3{margin-top:1.4em}
+.src{display:block;color:var(--muted);font-size:.86rem;line-height:1.5;margin:.35em 0 1em;max-width:70ch;overflow-wrap:anywhere}
+.src .lead{font-weight:700;color:var(--navy);margin-right:.35em;text-transform:uppercase;font-size:.75rem;letter-spacing:.06em}
+.src .lbl{font-weight:600;color:var(--ink)}
+ul.facts .src{margin:.2em 0 0}
+.correction{background:var(--note);border-left:3px solid var(--gold);padding:10px 14px;margin:.6em 0 1.1em;max-width:70ch}
+.correction p{margin:0 0 .3em;font-size:.95rem}
+.correction .src{margin:.2em 0 0}
+.srclist h3{font-size:1.05rem;margin:1.2em 0 .3em}
+.srclist p.meaning{margin:0 0 .4em;color:var(--muted);font-size:.93rem}
+.srclist ul{margin:.2em 0 .8em;padding-left:1.2em}
+.srclist li{margin:.25em 0;overflow-wrap:anywhere}
 .transcript h3{margin-top:1.8em}
 .transcript h3 .t{font-family:inherit;font-weight:400;color:var(--muted);font-size:.9em;margin-right:.5em;font-variant-numeric:tabular-nums}
 .note{color:var(--muted);font-size:.95rem}
@@ -625,22 +1083,23 @@ footer.site a{color:var(--ivory)}
 footer.site p{margin:.3em 0;max-width:none}
 .related{margin-top:1.5em;padding:12px 16px;border:1px solid var(--rule);border-radius:4px}
 .related p{margin:.2em 0}
+.log li{margin:.5em 0}
 """
 
-HEAD_COMMON = """<meta charset="utf-8">
+HEAD_BASE = """<meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caladea:wght@400;700&display=swap" rel="stylesheet">
 """
+ROBOTS_INDEX = '<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">\n'
+HEAD_COMMON = HEAD_BASE + ROBOTS_INDEX
 
 
-def header_html(prefix=""):
-    home = prefix if prefix else "./"
+def header_html():
     return f"""<header class="site"><div class="wrap">
-<a class="brand" href="{home}">{esc(SITE_NAME)} <span>by Steve Hunt ACII TEP</span></a>
-<nav><a href="{home}">Home</a><a href="{prefix}pensions-and-inheritance-tax-from-april-2027/">Pensions and IHT 2027</a><a href="{prefix}nominees-annuity/">Nominees' annuity</a><a href="{prefix}whole-of-life-assurance/">Whole of life</a></nav>
+<a class="brand" href="/">{esc(SITE_NAME)} <span>by Steve Hunt ACII TEP</span></a>
+<nav><a href="/">Home</a><a href="/pensions-and-inheritance-tax-from-april-2027/">Pensions and IHT 2027</a><a href="/nominees-annuity/">Nominees' annuity</a><a href="/whole-of-life-assurance/">Whole of life</a></nav>
 </div></header>"""
 
 
@@ -648,7 +1107,7 @@ def footer_html():
     return f"""<footer class="site"><div class="wrap">
 <p>{esc(SITE_NAME)}. Plain English explanations of UK inheritance tax by Steve Hunt ACII TEP.</p>
 <p>Education only. Not advice, not a personal recommendation, and not an invitation to do business. Tax rules change; check the date on each page.</p>
-<p><a href="{LINKEDIN}" rel="me">Steve Hunt on LinkedIn</a> &middot; <a href="{YOUTUBE_CHANNEL}" rel="me">YouTube channel</a> &middot; &copy; 2026 Stephen Hunt</p>
+<p><a href="{CORRECTIONS_PATH}">Sources, method and corrections</a> &middot; <a href="{LINKEDIN}" rel="me">Steve Hunt on LinkedIn</a> &middot; <a href="{YOUTUBE_CHANNEL}" rel="me">YouTube channel</a> &middot; &copy; 2026 Stephen Hunt</p>
 </div></footer>"""
 
 
@@ -657,7 +1116,7 @@ def author_box():
 <div>
 <h2>About Steve Hunt ACII TEP</h2>
 <p>Steve Hunt is a Chartered Insurance Risk Manager, an Associate of the Chartered Insurance Institute (ACII), and a Trust and Estate Practitioner (TEP), a full member of STEP. He has worked in UK financial services since 1980, in pensions, protection and estate planning. He writes about inheritance tax, the April 2027 pension changes, annuities, whole of life assurance and trusts.</p>
-<p><a href="{LINKEDIN}" rel="me">LinkedIn profile and articles</a> &middot; <a href="{YOUTUBE_CHANNEL}" rel="me">YouTube channel</a></p>
+<p><a href="{LINKEDIN}" rel="me">LinkedIn profile and articles</a> &middot; <a href="{YOUTUBE_CHANNEL}" rel="me">YouTube channel</a> &middot; <a href="{CORRECTIONS_PATH}">How these answers are sourced</a></p>
 </div>
 </section>"""
 
@@ -695,9 +1154,10 @@ def website_ld():
         "@id": f"{SITE}/#website",
         "url": SITE + "/",
         "name": SITE_NAME,
-        "description": "Plain English explanations of UK inheritance tax, the April 2027 pension changes, annuities, whole of life assurance and trusts, with videos, key facts and full transcripts. By Steve Hunt ACII TEP. Education only.",
+        "description": "Plain English explanations of UK inheritance tax, the April 2027 pension changes, annuities, whole of life assurance and trusts, with videos, key facts and full transcripts. Every answer links to the law and HMRC guidance it relies on. By Steve Hunt ACII TEP. Education only.",
         "inLanguage": "en-GB",
         "author": {"@id": f"{SITE}/#steve-hunt"},
+        "publishingPrinciples": CORRECTIONS_URL,
     }
 
 
@@ -719,7 +1179,8 @@ def video_ld(v):
         "name": v["title"],
         "description": v["meta_description"],
         "thumbnailUrl": [f"{SITE}/images/{v['slug']}.jpg", f"https://i.ytimg.com/vi/{v['id']}/maxresdefault.jpg"],
-        "uploadDate": v["published"],
+        "uploadDate": v["published_iso"],
+        "datePublished": v["published_iso"],
         "duration": v["duration_iso"],
         "embedUrl": f"https://www.youtube-nocookie.com/embed/{v['id']}",
         "url": yt_watch(v["id"]),
@@ -733,15 +1194,24 @@ def video_ld(v):
         "educationalUse": "self-study",
         "hasPart": clips,
         "transcript": plain_transcript(v),
+        "correction": [
+            {"@type": "CorrectionComment", "text": f"{n['kind']}: {n['text']}", "datePublished": REVIEWED.isoformat()}
+            for n in v["notes"]
+        ],
     }
     faq = {
         "@type": "FAQPage",
         "@id": f"{url}#faq",
         "mainEntity": [
-            {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}}
-            for q, a in v["faq"]
+            {"@type": "Question", "name": q,
+             "acceptedAnswer": dict({"@type": "Answer", "text": a},
+                                    **({"citation": [source_ld(k) for k in unique(ks)]} if ks else {}))}
+            for q, a, ks in v["faq"]
         ],
     }
+    citations = [{"@type": "CreativeWork", "name": ARTICLES[k][0], "url": ARTICLES[k][1],
+                  "author": {"@id": f"{SITE}/#steve-hunt"}} for k, _ in v["articles"]]
+    citations += [source_ld(k) for k in page_source_keys(v)]
     page = {
         "@type": ["WebPage", "LearningResource"],
         "@id": url,
@@ -753,11 +1223,14 @@ def video_ld(v):
         "author": {"@id": f"{SITE}/#steve-hunt"},
         "datePublished": v["published"],
         "dateModified": TODAY.isoformat(),
+        "lastReviewed": REVIEWED.isoformat(),
+        "reviewedBy": {"@id": f"{SITE}/#steve-hunt"},
+        "publishingPrinciples": CORRECTIONS_URL,
         "video": {"@id": f"{url}#video"},
         "mainEntity": {"@id": f"{url}#video"},
         "learningResourceType": "Concept overview",
         "about": [{"@type": "Thing", "name": k} for k in v["keywords"][:4]],
-        "citation": [{"@type": "CreativeWork", "name": ARTICLES[k][0], "url": ARTICLES[k][1], "author": {"@id": f"{SITE}/#steve-hunt"}} for k, _ in v["articles"]],
+        "citation": citations,
     }
     return {"@context": "https://schema.org", "@graph": [website_ld(), person_ld(), page, video, faq]}
 
@@ -776,6 +1249,7 @@ def home_ld():
         "isPartOf": {"@id": f"{SITE}/#website"},
         "author": {"@id": f"{SITE}/#steve-hunt"},
         "dateModified": TODAY.isoformat(),
+        "publishingPrinciples": CORRECTIONS_URL,
         "mainEntity": {"@type": "ItemList", "itemListElement": items},
     }
     return {"@context": "https://schema.org", "@graph": [website_ld(), person_ld(), page]}
@@ -791,36 +1265,69 @@ def ld_script(obj):
 # Pages
 # ---------------------------------------------------------------------------
 
+def page_sources_section(v):
+    keys = page_source_keys(v)
+    groups = {}
+    for k in keys:
+        groups.setdefault(SOURCES[k][0], []).append(k)
+    out = ['<section class="srclist" id="sources">', "<h2>Sources and evidence</h2>",
+           f'<p class="note">Every source behind this page, grouped by the kind of authority it carries. '
+           f'<a href="{CORRECTIONS_PATH}">How the sources are labelled, and what has been corrected</a>.</p>']
+    for label in LABEL_ORDER:
+        if label not in groups:
+            continue
+        out.append(f"<h3>{esc(label)}</h3>")
+        out.append(f'<p class="meaning">{esc(LABEL_MEANING[label][0].upper() + LABEL_MEANING[label][1:])}.</p>')
+        out.append("<ul>" + "".join(f"<li>{source_link(k)}</li>" for k in groups[label]) + "</ul>")
+    out.append("</section>")
+    return "\n".join(out)
+
+
+def transcript_html_for(v):
+    sections = transcript_sections(v)
+    placed = set()
+    parts = []
+    for start, name, paras in sections:
+        link = yt_watch(v["id"], start) if start else yt_watch(v["id"])
+        parts.append(
+            f'<h3 id="t{start}"><a class="t" href="{link}" target="_blank" rel="noopener">{mmss(start)}</a>{esc(name)}</h3>'
+        )
+        for p in paras:
+            parts.append(f"<p>{esc(p)}</p>")
+            for i, n in enumerate(v["notes"]):
+                if i not in placed and n["phrase"] in p:
+                    parts.append(note_html(n))
+                    placed.add(i)
+    missing = [v["notes"][i]["phrase"] for i in range(len(v["notes"])) if i not in placed]
+    assert not missing, f"transcript note phrases not found in {v['slug']}: {missing}"
+    return "\n".join(parts)
+
+
 def video_page(v):
     url = f"{SITE}/{v['slug']}/"
     thumb = f"{SITE}/images/{v['slug']}.jpg"
-    pub_text = date.fromisoformat(v["published"]).strftime("%-d %B %Y")
+    pub_text = nice_date(date.fromisoformat(v["published"]))
 
     chapters_html = "\n".join(
         f'<li><a class="t" href="{yt_watch(v["id"], s) if s else yt_watch(v["id"])}" target="_blank" rel="noopener">{mmss(s)}</a> '
         f'<a href="#t{s}">{esc(n)}</a></li>'
         for s, n in v["chapters"]
     )
-    facts_html = "\n".join(f"<li>{esc(f)}</li>" for f in v["key_facts"])
-    faq_html = "\n".join(f"<h3>{esc(q)}</h3>\n<p>{esc(a)}</p>" for q, a in v["faq"])
+    facts_html = "\n".join(
+        f"<li>{esc(f)}{sources_html(ks, tag='span')}</li>" for f, ks in v["key_facts"]
+    )
+    faq_html = "\n".join(
+        f"<h3>{esc(q)}</h3>\n<p>{esc(a)}</p>\n{sources_html(ks)}" for q, a, ks in v["faq"]
+    )
     articles_html = "\n".join(
         f'<li><a href="{ARTICLES[k][1]}" target="_blank" rel="noopener">{esc(ARTICLES[k][0])}</a> {esc(note)}</li>'
         for k, note in v["articles"]
     )
-    sections = transcript_sections(v)
-    transcript_html = []
-    for start, name, paras in sections:
-        link = yt_watch(v["id"], start) if start else yt_watch(v["id"])
-        transcript_html.append(
-            f'<h3 id="t{start}"><a class="t" href="{link}" target="_blank" rel="noopener">{mmss(start)}</a>{esc(name)}</h3>'
-        )
-        transcript_html.extend(f"<p>{esc(p)}</p>" for p in paras)
-    transcript_html = "\n".join(transcript_html)
     related_html = "".join(
-        f'<p><strong>{esc(label)}:</strong> <a href="../{slug}/">{esc(title)}</a></p>'
+        f'<p><strong>{esc(label)}:</strong> <a href="/{slug}/">{esc(title)}</a></p>'
         for label, slug, title in v["related"]
     )
-
+    transcript_html = transcript_html_for(v)
     ld = ld_script(video_ld(v))
 
     return f"""<!doctype html>
@@ -846,16 +1353,17 @@ def video_page(v):
 {ld}
 </head>
 <body>
-{header_html("../")}
+{header_html()}
 <main class="wrap">
 <article>
 <p class="kicker">Video {v['number']} &middot; Inheritance tax explained</p>
 <h1>{esc(v['title'])}</h1>
-<p class="byline">By <a href="#about-the-author">Steve Hunt ACII TEP</a> &middot; Published {pub_text} &middot; Video {v['duration_text']} &middot; Correct as at {AS_AT} &middot; Full transcript below</p>
+<p class="byline">By <a href="#about-the-author">Steve Hunt ACII TEP</a> &middot; Published {pub_text} &middot; <a href="{CORRECTIONS_PATH}">Last reviewed {nice_date(REVIEWED)}</a> &middot; Video {v['duration_text']} &middot; Full transcript below</p>
 
 <section class="answer" id="short-answer">
 <h2>The short answer</h2>
 {''.join(f'<p>{esc(p)}</p>' for p in v['short_answer'])}
+{sources_html(v['short_sources'])}
 </section>
 
 <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/{v['id']}?rel=0" title="{esc(v['title'])}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
@@ -878,6 +1386,8 @@ def video_page(v):
 {faq_html}
 </section>
 
+{page_sources_section(v)}
+
 <h2 id="articles">Steve's LinkedIn articles behind this video</h2>
 <ul>
 {articles_html}
@@ -887,7 +1397,7 @@ def video_page(v):
 
 <section class="transcript" id="transcript">
 <h2>Full transcript</h2>
-<p class="note">This is what is said in the video, with the figures written as numbers. Timestamps open the video at that point. The narration uses a digital clone of Steve Hunt's voice. The words are his own.</p>
+<p class="note">This is what is said in the video, with the figures written as numbers. Timestamps open the video at that point. The words are not changed after publication: where something said needs correcting or qualifying, a dated note sits beside it. The narration uses a digital clone of Steve Hunt's voice. The words are his own.</p>
 {transcript_html}
 </section>
 
@@ -905,11 +1415,11 @@ def home_page():
     cards = []
     for v in VIDEOS:
         cards.append(f"""<article class="card">
-<a href="{v['slug']}/"><img src="images/{v['slug']}.jpg" alt="{esc(v['title'])}" width="1280" height="720" loading="lazy"></a>
+<a href="/{v['slug']}/"><img src="/images/{v['slug']}.jpg" alt="{esc(v['title'])}" width="1280" height="720" loading="lazy"></a>
 <div class="body">
-<h2><a href="{v['slug']}/">{esc(v['title'])}</a></h2>
+<h2><a href="/{v['slug']}/">{esc(v['title'])}</a></h2>
 <p>{esc(v['short_answer'][0])}</p>
-<p><a href="{v['slug']}/">Video, key facts and full transcript</a> &middot; {v['duration_text']}</p>
+<p><a href="/{v['slug']}/">Video, key facts, sources and full transcript</a> &middot; {v['duration_text']}</p>
 </div>
 </article>""")
     cards_html = "\n".join(cards)
@@ -939,7 +1449,7 @@ def home_page():
 <p class="kicker">Steve Hunt ACII TEP</p>
 <h1>Inheritance tax, explained in plain English</h1>
 <p>Short videos that answer the questions families actually ask about UK inheritance tax: what the rules say, what things cost, and how the pieces fit together. The big one right now is the April 2027 change that brings unused pension funds into inheritance tax for the first time.</p>
-<p>Every video on this site comes with its key facts, the legislation it relies on, the questions it answers, and a full transcript, so you can read it as well as watch it.</p>
+<p>Every video on this site comes with its key facts, the questions it answers and a full transcript, so you can read it as well as watch it. Every answer links to the law and the HMRC guidance it relies on, so you can check it for yourself. <a href="{CORRECTIONS_PATH}">How the sources are labelled, and what has been corrected</a>.</p>
 
 <h2 id="videos" style="border:0;margin-top:1.6em">The videos</h2>
 <div class="cards">
@@ -956,12 +1466,103 @@ def home_page():
 """
 
 
+def corrections_page():
+    url = CORRECTIONS_URL
+    title = "Sources, method and corrections"
+    seo_title = f"{title} | {SITE_NAME}"
+    desc = ("How each answer on this site is backed up: the law first, then HMRC's published view, dated "
+            "evidence and clearly labelled analysis. Plus a corrections log.")
+    labels_html = "\n".join(
+        f"<li><strong>{esc(label)}:</strong> {esc(LABEL_MEANING[label])}.</li>" for label in LABEL_ORDER
+    )
+    titles = {v["slug"]: v["short_title"] for v in VIDEOS}
+    log_html = []
+    for when, groups in CORRECTIONS_LOG:
+        log_html.append(f"<h3>{esc(when)}</h3>")
+        log_html.append("<p>All three video pages were reviewed against the law and HMRC's published guidance. "
+                        "These are the changes.</p>")
+        for slug, items in groups:
+            heading = (f'<a href="/{slug}/">{esc(titles[slug])}</a>' if slug else "All pages")
+            log_html.append(f"<p><strong>{heading}</strong></p>")
+            log_html.append('<ul class="log">' + "".join(f"<li>{esc(i)}</li>" for i in items) + "</ul>")
+    log_html = "\n".join(log_html)
+    ld = {
+        "@context": "https://schema.org",
+        "@graph": [website_ld(), person_ld(), {
+            "@type": "WebPage",
+            "@id": url,
+            "url": url,
+            "name": title,
+            "description": desc,
+            "inLanguage": "en-GB",
+            "isPartOf": {"@id": f"{SITE}/#website"},
+            "author": {"@id": f"{SITE}/#steve-hunt"},
+            "about": {"@id": f"{SITE}/#website"},
+            "datePublished": TODAY.isoformat(),
+            "dateModified": TODAY.isoformat(),
+            "lastReviewed": REVIEWED.isoformat(),
+        }],
+    }
+    return f"""<!doctype html>
+<html lang="en-GB">
+<head>
+{HEAD_COMMON}<title>{esc(seo_title)}</title>
+<meta name="description" content="{esc(desc)}">
+<meta name="author" content="{esc(AUTHOR)}">
+<link rel="canonical" href="{url}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{esc(SITE_NAME)}">
+<meta property="og:title" content="{esc(title)}">
+<meta property="og:description" content="{esc(desc)}">
+<meta property="og:url" content="{url}">
+<meta property="og:locale" content="en_GB">
+<style>{CSS}</style>
+{ld_script(ld)}
+</head>
+<body>
+{header_html()}
+<main class="wrap">
+<article>
+<p class="kicker">About this site</p>
+<h1>{esc(title)}</h1>
+<p class="byline">By <a href="#about-the-author">Steve Hunt ACII TEP</a> &middot; Last updated {nice_date(TODAY)}</p>
+<p>Every answer on this site is written by Steve Hunt ACII TEP, a Chartered Insurance Risk Manager and Trust and Estate Practitioner who has worked in UK financial services since 1980. This page explains where the answers come from, how they are backed up, and what has been corrected.</p>
+
+<h2 id="how">How each answer is backed up</h2>
+<p>Beside each answer is a Sources line, and each page ends with a full list of its sources. Every source carries one of these labels, so you can see what kind of authority stands behind each statement:</p>
+<ul>
+{labels_html}
+</ul>
+<p>Where the law is clear, it comes first, linked to the official text. Where HMRC's published view and Steve's reading differ, both are shown and labelled.</p>
+
+<h2 id="transcripts">Videos and transcripts</h2>
+<p>Each video page carries the full transcript of its video. The transcript records what is said in the video, and its words are not changed after publication. If something said in a video needs correcting or qualifying, a dated note is added beside the words it relates to.</p>
+
+<h2 id="dates">Dates</h2>
+<p>Each page shows when it was published and when it was last reviewed. The review date changes only when the page has actually been reviewed, not to make it look fresh. Tax rules change, so always check the date.</p>
+
+<h2 id="corrections">Corrections and updates</h2>
+{log_html}
+
+<h2 id="errors">Spotted an error?</h2>
+<p>Comment on the video on <a href="{YOUTUBE_CHANNEL}" rel="me">YouTube</a> or on the article on <a href="{LINKEDIN}" rel="me">LinkedIn</a>. Comments are read, and anything wrong will be put right and logged here.</p>
+
+{author_box()}
+<p class="disclaimer">Everything on this site is education only. It is not advice, not a personal recommendation, and not an invitation to do business. Tax rules change, and nothing here takes account of your circumstances.</p>
+</article>
+</main>
+{footer_html()}
+</body>
+</html>
+"""
+
+
 def not_found_page():
     return f"""<!doctype html>
 <html lang="en-GB">
 <head>
-{HEAD_COMMON}<title>Page not found | {esc(SITE_NAME)}</title>
-<meta name="robots" content="noindex">
+{HEAD_BASE}<meta name="robots" content="noindex">
+<title>Page not found | {esc(SITE_NAME)}</title>
 <style>{CSS}</style>
 </head>
 <body>
@@ -977,7 +1578,9 @@ def not_found_page():
 
 
 def sitemap():
-    urls = [(SITE + "/", TODAY.isoformat())] + [(f"{SITE}/{v['slug']}/", TODAY.isoformat()) for v in VIDEOS]
+    urls = ([(SITE + "/", TODAY.isoformat())]
+            + [(f"{SITE}/{v['slug']}/", TODAY.isoformat()) for v in VIDEOS]
+            + [(CORRECTIONS_URL, TODAY.isoformat())])
     body = "\n".join(f"  <url><loc>{u}</loc><lastmod>{d}</lastmod></url>" for u, d in urls)
     return f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{body}\n</urlset>\n'
 
@@ -1002,12 +1605,24 @@ def llms_txt():
         f"LinkedIn: {LINKEDIN}",
         f"YouTube: {YOUTUBE_CHANNEL}",
         "",
-        "## Videos with key facts and full transcripts",
+        "## Videos with key facts, sources and full transcripts",
         "",
     ]
     for v in VIDEOS:
         lines.append(f"- [{v['title']}]({SITE}/{v['slug']}/): {v['short_answer'][0]}")
-    lines += ["", "## Notes", "", "Education only. Not advice, not a personal recommendation, and not an invitation to do business. Correct as at " + AS_AT + "."]
+    lines += [
+        "",
+        "## Sources and corrections",
+        "",
+        f"- [Sources, method and corrections]({CORRECTIONS_URL}): every answer links to the law on legislation.gov.uk "
+        "and to HMRC guidance on GOV.UK, and each source is labelled Law, HMRC, Provider evidence, Published source, "
+        "Steve's analysis or Steve's experience. Transcripts are not edited; dated notes sit beside any correction.",
+        "",
+        "## Notes",
+        "",
+        "Education only. Not advice, not a personal recommendation, and not an invitation to do business. "
+        "Last reviewed " + AS_AT + ".",
+    ]
     return "\n".join(lines) + "\n"
 
 
@@ -1019,9 +1634,18 @@ def write(path, content):
 
 
 def main():
+    for k in SOURCES:
+        assert SOURCES[k][0] in LABEL_ORDER, k
     write("index.html", home_page())
     for v in VIDEOS:
+        for _, ks in v["key_facts"]:
+            for k in ks:
+                assert k in SOURCES, k
+        for _, _, ks in v["faq"]:
+            for k in ks:
+                assert k in SOURCES, k
         write(f"{v['slug']}/index.html", video_page(v))
+    write(f"{CORRECTIONS_SLUG}/index.html", corrections_page())
     write("404.html", not_found_page())
     write("sitemap.xml", sitemap())
     write("robots.txt", robots())
