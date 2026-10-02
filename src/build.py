@@ -19,13 +19,15 @@ import os
 import re
 from datetime import date
 
+from guides import GUIDES
+
 SITE = "https://inheritancetaxexplained.co.uk"
 SITE_NAME = "Inheritance Tax Explained"
 AUTHOR = "Steve Hunt ACII TEP"
 LINKEDIN = "https://www.linkedin.com/in/steve~hunt"
 YOUTUBE_CHANNEL = "https://www.youtube.com/@SteveHuntACIITEP"
 PLAYLIST = "https://www.youtube.com/playlist?list=PLYeD4F-FZfOA"
-TODAY = date(2026, 10, 1)
+TODAY = date(2026, 10, 2)
 REVIEWED = date(2026, 10, 1)
 AS_AT = "1 October 2026"
 NOTE_DATE = "1 October 2026"
@@ -157,6 +159,35 @@ SOURCES = {
                 "https://www.theactuarymagazine.org/the-history-of-actuarial-science/"),
     # Steve
     "steve_pet": ("Steve's analysis", "Osborne's Get Out of Jail Card Under Attack (LinkedIn article)", ARTICLES["jail"][1]),
+    "ihta3": ("Law", "Inheritance Tax Act 1984, s.3", f"{LEG}/ukpga/1984/51/section/3"),
+    "ihta5": ("Law", "Inheritance Tax Act 1984, s.5", f"{LEG}/ukpga/1984/51/section/5"),
+    "ihta151": ("Law", "Inheritance Tax Act 1984, s.151 (showing the 2027 changes)", f"{LEG}/ukpga/1984/51/section/151"),
+    "ihta151old": ("Law", "Inheritance Tax Act 1984, s.151 as in force until 5 April 2027", f"{LEG}/ukpga/1984/51/section/151/2011-07-19"),
+    "ihta272": ("Law", "Inheritance Tax Act 1984, s.272", f"{LEG}/ukpga/1984/51/section/272"),
+    "fa2026s69": ("Law", "Finance Act 2026, s.69", f"{LEG}/ukpga/2026/11/section/69"),
+    "fa2004p15": ("Law", "Finance Act 2004, Sch. 28, para. 15", f"{LEG}/ukpga/2004/12/schedule/28/paragraph/15"),
+    "tn322": ("HMRC", "HMRC technical note, 3.2.2 (guarantee payments)", TN + "#defined-benefit-arrangements"),
+    "ihtm17041": ("HMRC", "HMRC Inheritance Tax Manual, IHTM17041",
+                  "https://www.gov.uk/hmrc-internal-manuals/inheritance-tax-manual/ihtm17041"),
+    "ihtm17070": ("HMRC", "HMRC Inheritance Tax Manual, IHTM17070",
+                  "https://www.gov.uk/hmrc-internal-manuals/inheritance-tax-manual/ihtm17070"),
+    "ihtm20375": ("HMRC", "HMRC Inheritance Tax Manual, IHTM20375 (Statement of Practice E4)",
+                  "https://www.gov.uk/hmrc-internal-manuals/inheritance-tax-manual/ihtm20375"),
+    "iht403": ("HMRC", "GOV.UK: form IHT403, gifts and other transfers of value",
+               "https://www.gov.uk/government/publications/inheritance-tax-gifts-and-other-transfers-of-value-iht403"),
+    "iht409": ("HMRC", "GOV.UK: form IHT409, pensions",
+               "https://www.gov.uk/government/publications/inheritance-tax-pensions-iht409"),
+    "q_sept": ("Provider evidence", "Annuity quotations run on 19 September 2026, held on file", None),
+    "ptm071200": ("HMRC", "HMRC Pensions Tax Manual, PTM071200 (definition of dependant)",
+                  "https://www.gov.uk/hmrc-internal-manuals/pensions-tax-manual/ptm071200"),
+    "iht400notes": ("HMRC", "HMRC IHT400 Notes (April 2026), pages 30 to 31",
+                    "https://assets.publishing.service.gov.uk/media/69cd0ecfb5210036050bc61f/IHT400_2022__Notes_04-26final.pdf"),
+    "gifts": ("HMRC", "GOV.UK: Work out Inheritance Tax due on gifts", "https://www.gov.uk/guidance/work-out-inheritance-tax-due-on-gifts"),
+    "salsac": ("HMRC", "GOV.UK: Salary sacrifice reform for pension contributions from 6 April 2029",
+               "https://www.gov.uk/government/publications/salary-sacrifice-reform-for-pension-contributions-effective-from-6-april-2029/salary-sacrifice-reform-for-pension-contributions"),
+    "parry": ("Law", "HMRC v Parry and others [2020] UKSC 35 (Supreme Court)", "https://supremecourt.uk/cases/uksc-2018-0208"),
+    "steve_p1": ("Steve's analysis", "George Osborne Killed The Annuity Market With One Sentence (LinkedIn article)", ARTICLES["killed"][1]),
+    "steve_p2": ("Steve's analysis", "One Word Dragged £1 Trillion Into Inheritance Tax (LinkedIn article)", ARTICLES["oneword"][1]),
     "steve_example": ("Steve's analysis", "The worked example: arithmetic on the stated assumptions", None),
     "steve_history": ("Steve's experience", "Steve Hunt, in UK financial services since 1980", None),
 }
@@ -181,6 +212,7 @@ VIDEOS = [
             "by Steve Hunt ACII TEP."
         ),
         "published": "2026-09-29",
+        "modified": "2026-10-01",
         "published_iso": "2026-09-29T16:38:32+01:00",
         "seconds": 647,
         "duration_iso": "PT10M47S",
@@ -363,6 +395,8 @@ VIDEOS = [
             "full transcript by Steve Hunt ACII TEP."
         ),
         "published": "2026-09-29",
+        "modified": "2026-10-02",
+        "guide": ("nominees-annuity/guide", "The nominees' annuity: every question answered"),
         "published_iso": "2026-09-29T18:27:44+01:00",
         "seconds": 919,
         "duration_iso": "PT15M19S",
@@ -604,6 +638,7 @@ VIDEOS = [
             "generational wealth transfer. Video, key facts and full transcript by Steve Hunt ACII TEP."
         ),
         "published": "2026-10-01",
+        "modified": "2026-10-01",
         "published_iso": "2026-10-01T07:06:59+01:00",
         "seconds": 783,
         "duration_iso": "PT13M3S",
@@ -827,7 +862,17 @@ VIDEOS = [
 
 # What changed on each page at the 1 October 2026 review, shown on the corrections page.
 CORRECTIONS_LOG = [
-    ("1 October 2026", [
+    ("2 October 2026", "A new page was added. No answers were changed.", [
+        ("nominees-annuity/guide", [
+            "The nominees' annuity: every question answered. A guide of 25 questions drawn from Steve's four LinkedIn "
+            "articles on the subject and the video, each answer with its sources. Steve's reading of the gift question "
+            "is labelled as his analysis, with HMRC's published position beside it.",
+        ]),
+        ("nominees-annuity", [
+            "A link to the full guide was added below the questions. Nothing else changed.",
+        ]),
+    ]),
+    ("1 October 2026", "All three video pages were reviewed against the law and HMRC's published guidance. These are the changes.", [
         ("nominees-annuity", [
             "The answer to 'Is the income from a nominees' annuity taxable?' used to begin 'Yes'. It now explains "
             "that the income is taxable where the member dies at 75 or over, as in the example, and can be paid "
@@ -960,11 +1005,11 @@ def unique(seq):
 
 def page_source_keys(v):
     keys = list(v["short_sources"])
-    for _, ks in v["key_facts"]:
+    for _, ks in v.get("key_facts", []):
         keys += ks
-    for _, _, ks in v["faq"]:
+    for _, _, ks in v.get("faq", []) + v.get("qa", []):
         keys += ks
-    for n in v["notes"]:
+    for n in v.get("notes", []):
         keys += n["sources"]
     return unique(keys)
 
@@ -1222,7 +1267,7 @@ def video_ld(v):
         "isPartOf": {"@id": f"{SITE}/#website"},
         "author": {"@id": f"{SITE}/#steve-hunt"},
         "datePublished": v["published"],
-        "dateModified": TODAY.isoformat(),
+        "dateModified": v["modified"],
         "lastReviewed": REVIEWED.isoformat(),
         "reviewedBy": {"@id": f"{SITE}/#steve-hunt"},
         "publishingPrinciples": CORRECTIONS_URL,
@@ -1327,6 +1372,12 @@ def video_page(v):
         f'<p><strong>{esc(label)}:</strong> <a href="/{slug}/">{esc(title)}</a></p>'
         for label, slug, title in v["related"]
     )
+    guide_note = ""
+    if v.get("guide"):
+        gslug, gtitle = v["guide"]
+        guide_note = (f'\n<p class="note"><strong>More questions are answered in the full guide:</strong> '
+                      f'<a href="/{gslug}/">{esc(gtitle)}</a>.</p>')
+        related_html = f'<p><strong>Full guide:</strong> <a href="/{gslug}/">{esc(gtitle)}</a></p>' + related_html
     transcript_html = transcript_html_for(v)
     ld = ld_script(video_ld(v))
 
@@ -1383,7 +1434,7 @@ def video_page(v):
 
 <section class="faq" id="questions">
 <h2>Questions this video answers</h2>
-{faq_html}
+{faq_html}{guide_note}
 </section>
 
 {page_sources_section(v)}
@@ -1411,6 +1462,137 @@ def video_page(v):
 """
 
 
+def slugify(text):
+    s = re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")
+    return s[:70].rstrip("-")
+
+
+def guide_ld(g):
+    url = f"{SITE}/{g['slug']}/"
+    parent = next(v for v in VIDEOS if v["slug"] == g["parent"])
+    faq = {
+        "@type": "FAQPage",
+        "@id": f"{url}#faq",
+        "mainEntity": [
+            {"@type": "Question", "name": q, "url": f"{url}#{slugify(q)}",
+             "acceptedAnswer": dict({"@type": "Answer", "text": a},
+                                    **({"citation": [source_ld(k) for k in unique(ks)]} if ks else {}))}
+            for q, a, ks in g["qa"]
+        ],
+    }
+    citations = [{"@type": "CreativeWork", "name": ARTICLES[k][0], "url": ARTICLES[k][1],
+                  "author": {"@id": f"{SITE}/#steve-hunt"}} for k, _ in g["articles"]]
+    citations += [source_ld(k) for k in page_source_keys(g)]
+    page = {
+        "@type": ["WebPage", "LearningResource", "Article"],
+        "@id": url,
+        "url": url,
+        "name": g["title"],
+        "headline": g["title"],
+        "description": g["meta_description"],
+        "inLanguage": "en-GB",
+        "isPartOf": {"@id": f"{SITE}/#website"},
+        "author": {"@id": f"{SITE}/#steve-hunt"},
+        "publisher": {"@id": f"{SITE}/#steve-hunt"},
+        "datePublished": g["published"],
+        "dateModified": g["modified"],
+        "lastReviewed": g["reviewed"],
+        "reviewedBy": {"@id": f"{SITE}/#steve-hunt"},
+        "publishingPrinciples": CORRECTIONS_URL,
+        "mainEntity": {"@id": f"{url}#faq"},
+        "learningResourceType": "Reference guide",
+        "about": [{"@type": "Thing", "name": k} for k in g["keywords"][:4]],
+        "keywords": ", ".join(g["keywords"]),
+        "video": {"@id": f"{SITE}/{parent['slug']}/#video"},
+        "citation": citations,
+    }
+    return {"@context": "https://schema.org", "@graph": [website_ld(), person_ld(), page, faq]}
+
+
+def guide_page(g):
+    url = f"{SITE}/{g['slug']}/"
+    parent = next(v for v in VIDEOS if v["slug"] == g["parent"])
+    thumb = f"{SITE}/images/{parent['slug']}.jpg"
+    pub_text = nice_date(date.fromisoformat(g["published"]))
+    contents_html = "\n".join(
+        f'<li><a href="#{slugify(q)}">{esc(q)}</a></li>' for q, _, _ in g["qa"]
+    )
+    qa_html = "\n".join(
+        f'<h3 id="{slugify(q)}">{esc(q)}</h3>\n<p>{esc(a)}</p>\n{sources_html(ks)}' for q, a, ks in g["qa"]
+    )
+    articles_html = "\n".join(
+        f'<li><a href="{ARTICLES[k][1]}" target="_blank" rel="noopener">{esc(ARTICLES[k][0])}</a> {esc(note)}</li>'
+        for k, note in g["articles"]
+    )
+    ld = ld_script(guide_ld(g))
+    return f"""<!doctype html>
+<html lang="en-GB">
+<head>
+{HEAD_COMMON}<title>{esc(g['seo_title'])}</title>
+<meta name="description" content="{esc(g['seo_description'])}">
+<meta name="author" content="{esc(AUTHOR)}">
+<link rel="canonical" href="{url}">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="{esc(SITE_NAME)}">
+<meta property="og:title" content="{esc(g['title'])}">
+<meta property="og:description" content="{esc(g['seo_description'])}">
+<meta property="og:url" content="{url}">
+<meta property="og:image" content="{thumb}">
+<meta property="og:locale" content="en_GB">
+<meta property="article:published_time" content="{g['published']}">
+<meta property="article:modified_time" content="{g['modified']}">
+<meta property="article:author" content="{LINKEDIN}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{esc(g['title'])}">
+<meta name="twitter:description" content="{esc(g['seo_description'])}">
+<meta name="twitter:image" content="{thumb}">
+<style>{CSS}</style>
+{ld}
+</head>
+<body>
+{header_html()}
+<main class="wrap">
+<article>
+<p class="kicker">Guide &middot; Inheritance tax explained</p>
+<h1>{esc(g['title'])}</h1>
+<p class="byline">By <a href="#about-the-author">Steve Hunt ACII TEP</a> &middot; Published {pub_text} &middot; <a href="{CORRECTIONS_PATH}">Last reviewed {nice_date(date.fromisoformat(g['reviewed']))}</a> &middot; {len(g['qa'])} questions</p>
+<p>{esc(g['intro'])}</p>
+
+<section class="answer" id="short-answer">
+<h2>The short answer</h2>
+{''.join(f'<p>{esc(p)}</p>' for p in g['short_answer'])}
+{sources_html(g['short_sources'])}
+</section>
+
+<div class="related"><p><strong>The video:</strong> <a href="/{parent['slug']}/">{esc(parent['title'])}</a>, with key facts and the full transcript.</p></div>
+
+<h2 id="contents">The questions</h2>
+<ol class="chapters">
+{contents_html}
+</ol>
+
+<section class="faq" id="questions">
+<h2>The answers</h2>
+{qa_html}
+</section>
+
+{page_sources_section(g)}
+
+<h2 id="articles">Steve's LinkedIn articles behind this guide</h2>
+<ul>
+{articles_html}
+</ul>
+
+{author_box()}
+<p class="disclaimer">This guide is education only. It is not advice, not a personal recommendation, and not an invitation to do business. It describes the law and HMRC's published position as at {esc(nice_date(date.fromisoformat(g['reviewed'])))}, which can change, and it says where an answer is Steve's own reading rather than settled law. Nothing here takes account of your circumstances.</p>
+</article>
+</main>
+{footer_html()}
+</body>
+</html>
+"""
+
+
 def home_page():
     cards = []
     for v in VIDEOS:
@@ -1420,6 +1602,7 @@ def home_page():
 <h2><a href="/{v['slug']}/">{esc(v['title'])}</a></h2>
 <p>{esc(v['short_answer'][0])}</p>
 <p><a href="/{v['slug']}/">Video, key facts, sources and full transcript</a> &middot; {v['duration_text']}</p>
+{(f'<p><a href="/{v["guide"][0]}/">Full guide: {esc(v["guide"][1])}</a></p>' if v.get("guide") else "")}
 </div>
 </article>""")
     cards_html = "\n".join(cards)
@@ -1477,10 +1660,10 @@ def corrections_page():
     )
     titles = {v["slug"]: v["short_title"] for v in VIDEOS}
     log_html = []
-    for when, groups in CORRECTIONS_LOG:
+    titles.update({g["slug"]: g["short_title"] for g in GUIDES})
+    for when, intro, groups in CORRECTIONS_LOG:
         log_html.append(f"<h3>{esc(when)}</h3>")
-        log_html.append("<p>All three video pages were reviewed against the law and HMRC's published guidance. "
-                        "These are the changes.</p>")
+        log_html.append(f"<p>{esc(intro)}</p>")
         for slug, items in groups:
             heading = (f'<a href="/{slug}/">{esc(titles[slug])}</a>' if slug else "All pages")
             log_html.append(f"<p><strong>{heading}</strong></p>")
@@ -1579,7 +1762,8 @@ def not_found_page():
 
 def sitemap():
     urls = ([(SITE + "/", TODAY.isoformat())]
-            + [(f"{SITE}/{v['slug']}/", TODAY.isoformat()) for v in VIDEOS]
+            + [(f"{SITE}/{v['slug']}/", v["modified"]) for v in VIDEOS]
+            + [(f"{SITE}/{g['slug']}/", g["modified"]) for g in GUIDES]
             + [(CORRECTIONS_URL, TODAY.isoformat())])
     body = "\n".join(f"  <url><loc>{u}</loc><lastmod>{d}</lastmod></url>" for u, d in urls)
     return f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{body}\n</urlset>\n'
@@ -1610,6 +1794,9 @@ def llms_txt():
     ]
     for v in VIDEOS:
         lines.append(f"- [{v['title']}]({SITE}/{v['slug']}/): {v['short_answer'][0]}")
+    lines += ["", "## Guides: one subject, every question answered, with sources", ""]
+    for g in GUIDES:
+        lines.append(f"- [{g['title']}]({SITE}/{g['slug']}/): {g['short_answer'][0]}")
     lines += [
         "",
         "## Sources and corrections",
@@ -1645,6 +1832,11 @@ def main():
             for k in ks:
                 assert k in SOURCES, k
         write(f"{v['slug']}/index.html", video_page(v))
+    for g in GUIDES:
+        for _, _, ks in g["qa"]:
+            for k in ks:
+                assert k in SOURCES, k
+        write(f"{g['slug']}/index.html", guide_page(g))
     write(f"{CORRECTIONS_SLUG}/index.html", corrections_page())
     write("404.html", not_found_page())
     write("sitemap.xml", sitemap())
