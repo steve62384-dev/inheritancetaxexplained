@@ -79,10 +79,12 @@ LEG = "https://www.legislation.gov.uk"
 TN = ("https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/"
       "technical-note-inheritance-tax-on-pensions")
 
-LABEL_ORDER = ["Law", "HMRC", "Provider evidence", "Published source", "Steve's analysis", "Steve's experience"]
+LABEL_ORDER = ["Law", "Case law", "HMRC", "Provider evidence", "Published source", "Steve's analysis",
+               "Steve's experience"]
 
 LABEL_MEANING = {
     "Law": "the Act and section, linked to the official text on legislation.gov.uk",
+    "Case law": "court judgments, linked to the published judgment",
     "HMRC": "HMRC's manuals, technical notes and GOV.UK guidance: HMRC's reading of the law, not the law itself",
     "Provider evidence": "real quotations and insurers' answers, dated and held on file, with no client information",
     "Published source": "figures and history credited to the publication that reported them",
@@ -185,7 +187,13 @@ SOURCES = {
     "gifts": ("HMRC", "GOV.UK: Work out Inheritance Tax due on gifts", "https://www.gov.uk/guidance/work-out-inheritance-tax-due-on-gifts"),
     "salsac": ("HMRC", "GOV.UK: Salary sacrifice reform for pension contributions from 6 April 2029",
                "https://www.gov.uk/government/publications/salary-sacrifice-reform-for-pension-contributions-effective-from-6-april-2029/salary-sacrifice-reform-for-pension-contributions"),
-    "parry": ("Law", "HMRC v Parry and others [2020] UKSC 35 (Supreme Court)", "https://supremecourt.uk/cases/uksc-2018-0208"),
+    "parry": ("Case law", "HMRC v Parry and others [2020] UKSC 35 (Supreme Court)", "https://supremecourt.uk/cases/uksc-2018-0208"),
+    "ihta263": ("Law", "Inheritance Tax Act 1984, s.263", f"{LEG}/ukpga/1984/51/section/263"),
+    "ihta268": ("Law", "Inheritance Tax Act 1984, s.268", f"{LEG}/ukpga/1984/51/section/268"),
+    "ihtm20211": ("HMRC", "HMRC Inheritance Tax Manual, IHTM20211 (a policy on the deceased's own life, not in trust)",
+                  "https://www.gov.uk/hmrc-internal-manuals/inheritance-tax-manual/ihtm20211"),
+    "pensions_example": ("Steve's analysis", "The worked example on the pensions page, with its assumptions",
+                         f"{SITE}/pensions-and-inheritance-tax-from-april-2027/#key-facts"),
     "steve_p1": ("Steve's analysis", "George Osborne Killed The Annuity Market With One Sentence (LinkedIn article)", ARTICLES["killed"][1]),
     "steve_p2": ("Steve's analysis", "One Word Dragged £1 Trillion Into Inheritance Tax (LinkedIn article)", ARTICLES["oneword"][1]),
     "steve_example": ("Steve's analysis", "The worked example: arithmetic on the stated assumptions", None),
@@ -862,11 +870,24 @@ VIDEOS = [
 
 # What changed on each page at the 1 October 2026 review, shown on the corrections page.
 CORRECTIONS_LOG = [
-    ("2 October 2026", "A new page was added. No answers were changed.", [
+    ("2 October 2026", "A new page was published. Later the same day, after a further review, the published page "
+                       "was corrected. The corrections are listed below. No answers on the video pages were changed.", [
         ("nominees-annuity/guide", [
-            "The nominees' annuity: every question answered. A guide of 25 questions drawn from Steve's four LinkedIn "
-            "articles on the subject and the video, each answer with its sources. Steve's reading of the gift question "
-            "is labelled as his analysis, with HMRC's published position beside it.",
+            "Published: The nominees' annuity: every question answered. A guide of 25 questions drawn from Steve's "
+            "four LinkedIn articles on the subject and the video, each answer with its sources. Steve's reading of the "
+            "gift question is labelled as his analysis, with HMRC's published position beside it.",
+            "Corrected the same day: the answer to 'Who can be a nominee?' used to say that a scheme administrator "
+            "can only nominate where the member has left no dependant and made no nomination of their own. It now "
+            "follows the Act: a scheme administrator's nomination only counts while there is no dependant and no "
+            "individual or charity nominated by the member for the relevant benefits (Finance Act 2004, Sch. 28, "
+            "para. 27A(2)).",
+            "Corrected the same day: the answer to 'How can the seven-year risk be covered?' used to begin 'Life "
+            "assurance can provide money following a covered death.' It now says that the relevant cover is on the "
+            "member's life, and that a policy held in a suitable trust can provide money to the trustees outside the "
+            "member's estate. Sections 263 and 268 of the Inheritance Tax Act 1984 and HMRC's manual at IHTM20211 "
+            "were added to its sources.",
+            "Corrected the same day: the Supreme Court judgment in HMRC v Parry was labelled Law and is now labelled "
+            "Case law, and the worked example behind the £516,000 figure is now linked from the answer that uses it.",
         ]),
         ("nominees-annuity", [
             "A link to the full guide was added below the questions. Nothing else changed.",
@@ -1016,6 +1037,8 @@ def page_source_keys(v):
 
 def source_link(key):
     label, name, url = SOURCES[key]
+    if url and url.startswith(SITE + "/"):
+        return f'<a href="{esc(url[len(SITE):])}">{esc(name)}</a>'
     if url:
         return f'<a href="{esc(url)}" target="_blank" rel="noopener">{esc(name)}</a>'
     return esc(name)
@@ -1040,6 +1063,8 @@ def source_ld(key):
     label, name, url = SOURCES[key]
     if label == "Law":
         d = {"@type": "Legislation", "name": name}
+    elif label == "Case law":
+        d = {"@type": "CreativeWork", "genre": "Court judgment", "name": name}
     elif label == "HMRC":
         d = {"@type": "WebPage", "name": name,
              "publisher": {"@type": "GovernmentOrganization", "name": "HM Revenue and Customs"}}

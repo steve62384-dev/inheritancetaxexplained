@@ -49,8 +49,8 @@ GUIDES = [
              "than the member's children, financial dependence on the member, mutual financial dependence, or "
              "dependence because of impairment can make them a dependant rather than a nominee. A spouse or civil "
              "partner is a dependant, not a nominee. A nominee need not be related to the member. A scheme "
-             "administrator can only nominate where the member has left no dependant and made no nomination of their "
-             "own.",
+             "administrator's nomination only counts while there is no dependant and no individual or charity "
+             "nominated by the member for the relevant benefits.",
              ["fa2004p27A", "fa2004p15", "ptm071200", "tn333"]),
             ("What is the difference between one bought in the member's lifetime and one bought after death?",
              "Only the lifetime version is excluded from inheritance tax. A nominees' annuity bought in the member's "
@@ -229,7 +229,9 @@ GUIDES = [
              "annuity in good health, well before death, is a different thing from a change made on a deathbed.",
              ["ihtm17070", "ihtm17041", "iht409", "steve_p1"]),
             ("How can the seven-year risk be covered?",
-             "Life assurance can provide money following a covered death. Cover for a fixed term and whole of life "
+             "For the possible failed-gift liability discussed here, the relevant cover is on the member's life. A "
+             "policy held in a suitable trust can provide money to the trustees outside the member's estate following "
+             "a covered death, subject to the conditions below. Cover for a fixed term and whole of life "
              "cover last for different periods: term cover ends when the term ends, while whole of life pays "
              "whenever death occurs, including after the seven years when a PET would no longer fail. So whole of "
              "life would pay in the seven-year window and beyond it; its payout is not confined to a failed gift. "
@@ -243,7 +245,7 @@ GUIDES = [
              "standard of living; and section 21 has a special rule where an annuity has been bought on the same "
              "life. Whether cover suits a family, the amount, the exclusions and keeping up the premiums all need "
              "separate consideration. Whole of life assurance has its own page on this site.",
-             ["ihta21", "ihtm20375", "steve_pet"]),
+             ["ihta263", "ihta268", "ihta21", "ihtm20211", "ihtm20375", "steve_pet"]),
             ("Does a nominees' annuity lose value with inflation, and can it be undone?",
              "A level annuity pays the same amount for life, so its buying power falls with inflation; escalating "
              "versions start lower. Once the cancellation period has passed, an annuity purchase normally cannot be "
@@ -261,7 +263,7 @@ GUIDES = [
              "the member died at 75 or over. The price is that the capital becomes an income for two lives, with no "
              "lump sum, and in the example no guarantee, no value protection and no inflation protection. The "
              "unsettled gift question sits on top.",
-             ["ihta150A", "ihta8D", "rnrb", "itepa646B", "steve_example"]),
+             ["ihta150A", "ihta8D", "rnrb", "itepa646B", "pensions_example"]),
             ("Where did the nominees' annuity come from?",
              "From George Osborne. In March 2014 he said no one would have to buy an annuity, and annuity sales fell "
              "sharply over the next two years. On 29 September 2014 he announced that anyone dying under 75 could "
