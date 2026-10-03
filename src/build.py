@@ -19,21 +19,41 @@ import os
 import re
 from datetime import date
 
-from guides import GUIDES
+from guides import GUIDES as ALL_GUIDES
+
+# Draft guides are built only when INCLUDE_DRAFTS=1, so a publishable build never links to an unapproved page.
+INCLUDE_DRAFTS = os.environ.get("INCLUDE_DRAFTS") == "1"
+GUIDES = [g for g in ALL_GUIDES if INCLUDE_DRAFTS or not g.get("draft")]
 
 SITE = "https://inheritancetaxexplained.co.uk"
 SITE_NAME = "Inheritance Tax Explained"
 AUTHOR = "Steve Hunt ACII TEP"
 LINKEDIN = "https://www.linkedin.com/in/steve~hunt"
 YOUTUBE_CHANNEL = "https://www.youtube.com/@SteveHuntACIITEP"
+X_PROFILE = "https://x.com/SHunt_ACII_TEP"
 PLAYLIST = "https://www.youtube.com/playlist?list=PLYeD4F-FZfOA"
-TODAY = date(2026, 10, 2)
+ABOUT_SLUG = "about-steve-hunt"
+ABOUT_PATH = f"/{ABOUT_SLUG}/"
+ABOUT_URL = f"{SITE}{ABOUT_PATH}"
+ABOUT_PUBLISHED = "2026-10-03"
+CII_TITLES = "https://www.cii.co.uk/about-us/professional-standards/using-cii-designations-and-titles/"
+CIRM_REGISTER = "https://www.regulated-professions.service.gov.uk/professions/chartered-insurance-risk-manager"
+STEP_SITE = "https://www.step.org/"
+TODAY = date(2026, 10, 3)
 REVIEWED = date(2026, 10, 1)
 AS_AT = "1 October 2026"
 NOTE_DATE = "1 October 2026"
 CORRECTIONS_SLUG = "sources-and-corrections"
 CORRECTIONS_PATH = f"/{CORRECTIONS_SLUG}/"
 CORRECTIONS_URL = f"{SITE}{CORRECTIONS_PATH}"
+# Evidence extract for the nominees' annuity quotations. Draft until Clara has reviewed it and Steve says go:
+# while EVIDENCE_DRAFT is True it is built only with INCLUDE_DRAFTS=1, and q_nominees stays "held on file".
+EVIDENCE_SLUG = "nominees-annuity/quotations"
+EVIDENCE_PATH = f"/{EVIDENCE_SLUG}/"
+EVIDENCE_URL = f"{SITE}{EVIDENCE_PATH}"
+EVIDENCE_DRAFT = True
+EVIDENCE_PUBLISHED = "2026-10-02"  # set to the actual publication date at publish
+INCLUDE_EVIDENCE = INCLUDE_DRAFTS or os.environ.get("INCLUDE_EVIDENCE") == "1" or not EVIDENCE_DRAFT
 HOME_DESCRIPTION = ("Plain English videos and transcripts on UK inheritance tax, pensions from April 2027, "
                     "annuities and whole of life assurance. By Steve Hunt ACII TEP.")
 
@@ -78,6 +98,8 @@ ARTICLES = {
 LEG = "https://www.legislation.gov.uk"
 TN = ("https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note/"
       "technical-note-inheritance-tax-on-pensions")
+TN2 = ("https://www.gov.uk/government/publications/inheritance-tax-on-pensions-technical-note-2/"
+       "technical-note-2-further-information-on-inheritance-tax-and-pensions")
 
 LABEL_ORDER = ["Law", "Case law", "HMRC", "Provider evidence", "Published source", "Steve's analysis",
                "Steve's experience"]
@@ -194,11 +216,93 @@ SOURCES = {
                   "https://www.gov.uk/hmrc-internal-manuals/inheritance-tax-manual/ihtm20211"),
     "pensions_example": ("Steve's analysis", "The worked example on the pensions page, with its assumptions",
                          f"{SITE}/pensions-and-inheritance-tax-from-april-2027/#key-facts"),
+    # Added for the pensions guide (each opened and checked on 2 October 2026)
+    "fa2026s67": ("Law", "Finance Act 2026, s.67", f"{LEG}/ukpga/2026/11/section/67"),
+    "fa2026s68": ("Law", "Finance Act 2026, s.68", f"{LEG}/ukpga/2026/11/section/68"),
+    "fa2026s70": ("Law", "Finance Act 2026, s.70", f"{LEG}/ukpga/2026/11/section/70"),
+    "fa2026s72": ("Law", "Finance Act 2026, s.72", f"{LEG}/ukpga/2026/11/section/72"),
+    "fa2021s86": ("Law", "Finance Act 2021, s.86", f"{LEG}/ukpga/2021/26/section/86"),
+    "ihta23": ("Law", "Inheritance Tax Act 1984, s.23", f"{LEG}/ukpga/1984/51/section/23"),
+    "ihta141": ("Law", "Inheritance Tax Act 1984, s.141", f"{LEG}/ukpga/1984/51/section/141"),
+    "ihta226A": ("Law", "Inheritance Tax Act 1984, s.226A", f"{LEG}/ukpga/1984/51/section/226A"),
+    "ihta226B": ("Law", "Inheritance Tax Act 1984, s.226B", f"{LEG}/ukpga/1984/51/section/226B"),
+    "ihtasch1A": ("Law", "Inheritance Tax Act 1984, Sch. 1A", f"{LEG}/ukpga/1984/51/schedule/1A"),
+    "itepa567B": ("Law", "Income Tax (Earnings and Pensions) Act 2003, s.567B", f"{LEG}/ukpga/2003/1/section/567B"),
+    "fa2004s151": ("Law", "Finance Act 2004, s.151", f"{LEG}/ukpga/2004/12/section/151"),
+    "ihtm17051": ("HMRC", "HMRC Inheritance Tax Manual, IHTM17051",
+                  "https://www.gov.uk/hmrc-internal-manuals/inheritance-tax-manual/ihtm17051"),
+    "ihtm17052": ("HMRC", "HMRC Inheritance Tax Manual, IHTM17052",
+                  "https://www.gov.uk/hmrc-internal-manuals/inheritance-tax-manual/ihtm17052"),
+    "tn12": ("HMRC", "HMRC technical note, 1.2 When does this change come into effect?",
+             TN + "#when-does-this-change-come-into-effect"),
+    "tn21": ("HMRC", "HMRC technical note, 2.1 When notional pension property is vested in a beneficiary",
+             TN + "#when-notional-pension-property-is-vested-in-a-beneficiary"),
+    "tn23": ("HMRC", "HMRC technical note, 2.3 Collection of Inheritance Tax", TN + "#collection-of-inheritance-tax"),
+    "tn25": ("HMRC", "HMRC technical note, 2.5 Identifying pensions", TN + "#identifying-pensions"),
+    "tn26": ("HMRC", "HMRC technical note, 2.6 Qualifying non-UK pension schemes and section 615(3) schemes",
+             TN + "#qualifying-non-uk-pension-schemes-and-section-6153-schemes"),
+    "tn321": ("HMRC", "HMRC technical note, 3.2.1 Money purchase arrangements", TN + "#money-purchase-arrangements"),
+    "tn332": ("HMRC", "HMRC technical note, 3.3.2 Trivial commutation", TN + "#trivial-commutation"),
+    "tn351": ("HMRC", "HMRC technical note, 3.5.1 Long-term and non-long-term UK residents",
+              TN + "#long-term-and-non-long-term-uk-residents"),
+    "tn4": ("HMRC", "HMRC technical note, 4 Valuations", TN + "#valuations"),
+    "tn522": ("HMRC", "HMRC technical note, 5.2.2 Valuation information and timing",
+              TN + "#valuation-information-and-timing"),
+    "tn6": ("HMRC", "HMRC technical note, 6 Withholding", TN + "#withholding"),
+    "tn732": ("HMRC", "HMRC technical note, 7.3.2 What should be included in a valid notice",
+              TN + "#what-should-be-included-in-a-valid-notice-1"),
+    "tn74": ("HMRC", "HMRC technical note, 7.4 Deducting Inheritance Tax from benefits",
+             TN + "#deducting-inheritance-tax-from-benefits"),
+    "tn8": ("HMRC", "HMRC technical note, 8 Income Tax on death benefits from pensions",
+            TN + "#income-tax-on-death-benefits-from-pensions"),
+    "tn82": ("HMRC", "HMRC technical note, 8.2 Reducing taxable pension income", TN + "#reducing-taxable-pension-income"),
+    "tn10": ("HMRC", "HMRC technical note, 10 Probate and discharge certificates",
+             TN + "#probate-and-discharge-certificates"),
+    "tn111": ("HMRC", "HMRC technical note, 11.1 Charities and the general component",
+              TN + "#charities-and-the-general-component"),
+    "tn1122": ("HMRC", "HMRC technical note, 11.2.2 Quick succession relief", TN + "#quick-succession-relief"),
+    "steve_p3": ("Steve's analysis", "Your Husband Left You A £500,000 Pension. It Could Cost Your Family £516,000 In Tax. (LinkedIn article)",
+                 ARTICLES["husband"][1]),
+    # Added after Clara's review of guide 2 (each opened and checked on 2 October 2026)
+    "si2026818": ("Law", "SI 2026/818, the Registered Pension Schemes (Provision of Information) (Miscellaneous "
+                  "Amendments) Regulations 2026", "https://www.legislation.gov.uk/uksi/2026/818/made"),
+    "fa1986s102": ("Law", "Finance Act 1986, s.102", f"{LEG}/ukpga/1986/41/section/102"),
+    "tn2_ex1": ("HMRC", "HMRC technical note 2 (27 August 2026), example 1: an annuity that ceased on death",
+                TN2 + "#introduction"),
+    "tn2_basic": ("HMRC", "HMRC technical note 2, 4.1 Basic information sharing requirements", TN2 + "#introduction-1"),
+    "tn2_pexempt": ("HMRC", "HMRC technical note 2, 4.3 The basic information: reporting potentially exempt "
+                    "beneficiaries", TN2 + "#the-basic-information--reporting-potentially-exempt-beneficiaries"),
+    "tn2_further": ("HMRC", "HMRC technical note 2, 6 Further information: when an Inheritance Tax account is required",
+                    TN2 + "#further-information--when-an-inheritance-tax-account-is-required"),
+    "tn2_dsp": ("HMRC", "HMRC technical note 2, Dependants' scheme pensions", TN2 + "#dependants-scheme-pensions"),
+    "tn2_deferment": ("HMRC", "HMRC technical note 2, Death in deferment", TN2 + "#death-in-deferment"),
+    "tn2_beneficiary": ("HMRC", "HMRC technical note 2, Death of a beneficiary (example 8)", TN2 + "#death-of-a-beneficiary"),
+    "tn2_amount": ("HMRC", "HMRC technical note 2, 7.6 Amount withheld", TN2 + "#amount-withheld"),
+    "tn2_validity": ("HMRC", "HMRC technical note 2, 8.2 Validity of a payment notice", TN2 + "#validity-of-a-payment-notice"),
+    "ihtm05120": ("HMRC", "HMRC Inheritance Tax Manual, IHTM05120 (postponing payment of tax)",
+                  "https://www.gov.uk/hmrc-internal-manuals/inheritance-tax-manual/ihtm05120"),
+    "ihtm45009": ("HMRC", "HMRC Inheritance Tax Manual, IHTM45009 (the baseline amount for the 36% rate)",
+                  "https://www.gov.uk/hmrc-internal-manuals/inheritance-tax-manual/ihtm45009"),
+    "ptm072430": ("HMRC", "HMRC Pensions Tax Manual, PTM072430 (beneficiaries' drawdown and income tax)",
+                  "https://www.gov.uk/hmrc-internal-manuals/pensions-tax-manual/ptm072430"),
+    "ptm073400": ("HMRC", "HMRC Pensions Tax Manual, PTM073400 (annuity protection lump sum death benefit)",
+                  "https://www.gov.uk/hmrc-internal-manuals/pensions-tax-manual/ptm073400"),
+    "ptm073700": ("HMRC", "HMRC Pensions Tax Manual, PTM073700 (trivial commutation lump sum death benefit)",
+                  "https://www.gov.uk/hmrc-internal-manuals/pensions-tax-manual/ptm073700"),
+    "ptm073900": ("HMRC", "HMRC Pensions Tax Manual, PTM073900 (charity lump sum death benefit)",
+                  "https://www.gov.uk/hmrc-internal-manuals/pensions-tax-manual/ptm073900"),
+    "ppi2025": ("Published source", "Pensions Policy Institute: The DC Future Book 2025",
+                "https://www.pensionspolicyinstitute.org.uk/media/x3tjj4od/20251021-the-dc-future-book-final.pdf"),
     "steve_p1": ("Steve's analysis", "George Osborne Killed The Annuity Market With One Sentence (LinkedIn article)", ARTICLES["killed"][1]),
     "steve_p2": ("Steve's analysis", "One Word Dragged £1 Trillion Into Inheritance Tax (LinkedIn article)", ARTICLES["oneword"][1]),
     "steve_example": ("Steve's analysis", "The worked example: arithmetic on the stated assumptions", None),
     "steve_history": ("Steve's experience", "Steve Hunt, in UK financial services since 1980", None),
 }
+
+if INCLUDE_EVIDENCE:
+    SOURCES["q_nominees"] = ("Provider evidence",
+                             "Quotations from Just (11 August 2026) and Canada Life (10 August 2026): evidence extract",
+                             EVIDENCE_URL)
 
 # ---------------------------------------------------------------------------
 # Video data
@@ -220,7 +324,10 @@ VIDEOS = [
             "by Steve Hunt ACII TEP."
         ),
         "published": "2026-09-29",
-        "modified": "2026-10-01",
+        "modified": "2026-10-03",
+        "modified_without_guide": "2026-10-01",
+        "guide": ("pensions-and-inheritance-tax-from-april-2027/guide",
+                  "Pensions and inheritance tax from April 2027: every question answered"),
         "published_iso": "2026-09-29T16:38:32+01:00",
         "seconds": 647,
         "duration_iso": "PT10M47S",
@@ -403,7 +510,7 @@ VIDEOS = [
             "full transcript by Steve Hunt ACII TEP."
         ),
         "published": "2026-09-29",
-        "modified": "2026-10-02",
+        "modified": "2026-10-03",
         "guide": ("nominees-annuity/guide", "The nominees' annuity: every question answered"),
         "published_iso": "2026-09-29T18:27:44+01:00",
         "seconds": 919,
@@ -868,8 +975,39 @@ VIDEOS = [
     },
 ]
 
+# Drop links to guides that are not in this build (drafts), and keep those pages' dates as they were.
+_LIVE_GUIDE_SLUGS = {g["slug"] for g in GUIDES}
+for _v in VIDEOS:
+    if _v.get("guide") and _v["guide"][0] not in _LIVE_GUIDE_SLUGS:
+        del _v["guide"]
+        if "modified_without_guide" in _v:
+            _v["modified"] = _v["modified_without_guide"]
+
 # What changed on each page at the 1 October 2026 review, shown on the corrections page.
 CORRECTIONS_LOG = [
+    ("3 October 2026", "Two new pages were published, and the existing pages gained links to them. No answers on "
+                       "the existing pages were changed.", [
+        ("pensions-and-inheritance-tax-from-april-2027/guide", [
+            "Published: Pensions and inheritance tax from April 2027: every question answered. A guide of 28 "
+            "questions drawn from Steve's LinkedIn articles and the video, each answer with its sources, checked "
+            "against the Finance Act 2026, the information regulations made in July 2026 (SI 2026/818) and HMRC's "
+            "technical notes of May and August 2026.",
+        ]),
+        ("pensions-and-inheritance-tax-from-april-2027", [
+            "Links to the new guide were added, near the top and below the questions. Nothing else changed.",
+        ]),
+        ("nominees-annuity", [
+            "The link to the guide now also appears near the top, after the short answer. Nothing else changed.",
+        ]),
+        ("nominees-annuity/guide", [
+            "The introduction now also gives the question in everyday terms: whether a pension annuity can keep "
+            "paying a son, daughter or grandchild after the parent dies. The page title shown in search results now "
+            "reads 'Nominees' annuity: UK rules and inheritance tax from 2027'. No answers changed.",
+        ]),
+        ("", [
+            "An About page was added, linked from the menu, the footer and the author box on every page.",
+        ]),
+    ]),
     ("2 October 2026", "A new page was published. Later the same day, after a further review, the published page "
                        "was corrected. The corrections are listed below. No answers on the video pages were changed.", [
         ("nominees-annuity/guide", [
@@ -1169,7 +1307,7 @@ HEAD_COMMON = HEAD_BASE + ROBOTS_INDEX
 def header_html():
     return f"""<header class="site"><div class="wrap">
 <a class="brand" href="/">{esc(SITE_NAME)} <span>by Steve Hunt ACII TEP</span></a>
-<nav><a href="/">Home</a><a href="/pensions-and-inheritance-tax-from-april-2027/">Pensions and IHT 2027</a><a href="/nominees-annuity/">Nominees' annuity</a><a href="/whole-of-life-assurance/">Whole of life</a></nav>
+<nav><a href="/">Home</a><a href="/pensions-and-inheritance-tax-from-april-2027/">Pensions and IHT 2027</a><a href="/nominees-annuity/">Nominees' annuity</a><a href="/whole-of-life-assurance/">Whole of life</a><a href="{ABOUT_PATH}">About Steve</a></nav>
 </div></header>"""
 
 
@@ -1177,7 +1315,7 @@ def footer_html():
     return f"""<footer class="site"><div class="wrap">
 <p>{esc(SITE_NAME)}. Plain English explanations of UK inheritance tax by Steve Hunt ACII TEP.</p>
 <p>Education only. Not advice, not a personal recommendation, and not an invitation to do business. Tax rules change; check the date on each page.</p>
-<p><a href="{CORRECTIONS_PATH}">Sources, method and corrections</a> &middot; <a href="{LINKEDIN}" rel="me">Steve Hunt on LinkedIn</a> &middot; <a href="{YOUTUBE_CHANNEL}" rel="me">YouTube channel</a> &middot; &copy; 2026 Stephen Hunt</p>
+<p><a href="{ABOUT_PATH}">About Steve Hunt</a> &middot; <a href="{CORRECTIONS_PATH}">Sources, method and corrections</a> &middot; <a href="{LINKEDIN}" rel="me">Steve Hunt on LinkedIn</a> &middot; <a href="{YOUTUBE_CHANNEL}" rel="me">YouTube channel</a> &middot; <a href="{X_PROFILE}" rel="me">X</a> &middot; &copy; 2026 Stephen Hunt</p>
 </div></footer>"""
 
 
@@ -1186,7 +1324,7 @@ def author_box():
 <div>
 <h2>About Steve Hunt ACII TEP</h2>
 <p>Steve Hunt is a Chartered Insurance Risk Manager, an Associate of the Chartered Insurance Institute (ACII), and a Trust and Estate Practitioner (TEP), a full member of STEP. He has worked in UK financial services since 1980, in pensions, protection and estate planning. He writes about inheritance tax, the April 2027 pension changes, annuities, whole of life assurance and trusts.</p>
-<p><a href="{LINKEDIN}" rel="me">LinkedIn profile and articles</a> &middot; <a href="{YOUTUBE_CHANNEL}" rel="me">YouTube channel</a> &middot; <a href="{CORRECTIONS_PATH}">How these answers are sourced</a></p>
+<p><a href="{ABOUT_PATH}">More about Steve</a> &middot; <a href="{LINKEDIN}" rel="me">LinkedIn profile and articles</a> &middot; <a href="{YOUTUBE_CHANNEL}" rel="me">YouTube channel</a> &middot; <a href="{X_PROFILE}" rel="me">X</a> &middot; <a href="{CORRECTIONS_PATH}">How these answers are sourced</a></p>
 </div>
 </section>"""
 
@@ -1206,14 +1344,29 @@ def person_ld():
         "alternateName": ["Steve Hunt ACII TEP", "Stephen Hunt"],
         "honorificSuffix": "ACII TEP",
         "jobTitle": "Chartered Insurance Risk Manager and Trust and Estate Practitioner",
-        "description": "UK financial services professional since 1980. Chartered Insurance Risk Manager (ACII) and Trust and Estate Practitioner (TEP). Writes and presents plain English explanations of inheritance tax, the April 2027 pension changes, annuities, whole of life assurance and trusts.",
-        "url": SITE + "/",
-        "sameAs": [LINKEDIN, YOUTUBE_CHANNEL],
+        "description": "UK financial services professional since 1980. Chartered Insurance Risk Manager, Associate of the Chartered Insurance Institute (ACII) and Trust and Estate Practitioner (TEP). Writes and presents plain English explanations of inheritance tax, the April 2027 pension changes, annuities, whole of life assurance and trusts.",
+        "url": ABOUT_URL,
+        "mainEntityOfPage": ABOUT_URL,
+        "sameAs": [LINKEDIN, YOUTUBE_CHANNEL, X_PROFILE],
         "knowsAbout": ["Inheritance tax", "Pensions and inheritance tax from April 2027", "Nominees' annuities",
                        "Joint life annuities", "Whole of life assurance", "Trusts and estate planning"],
+        "memberOf": [
+            {"@type": "Organization", "name": "The Chartered Insurance Institute", "url": "https://www.cii.co.uk/"},
+            {"@type": "Organization", "name": "STEP, the Society of Trust and Estate Practitioners", "url": STEP_SITE},
+        ],
         "hasCredential": [
-            {"@type": "EducationalOccupationalCredential", "name": "ACII, Associate of the Chartered Insurance Institute"},
-            {"@type": "EducationalOccupationalCredential", "name": "TEP, Trust and Estate Practitioner (STEP)"},
+            {"@type": "EducationalOccupationalCredential", "name": "ACII, Associate of the Chartered Insurance Institute",
+             "credentialCategory": "Professional membership",
+             "recognizedBy": {"@type": "Organization", "name": "The Chartered Insurance Institute",
+                              "url": "https://www.cii.co.uk/"}},
+            {"@type": "EducationalOccupationalCredential", "name": "Chartered Insurance Risk Manager",
+             "credentialCategory": "Chartered title",
+             "recognizedBy": {"@type": "Organization", "name": "The Chartered Insurance Institute",
+                              "url": "https://www.cii.co.uk/"}},
+            {"@type": "EducationalOccupationalCredential", "name": "TEP, Trust and Estate Practitioner (STEP)",
+             "credentialCategory": "Professional membership",
+             "recognizedBy": {"@type": "Organization", "name": "STEP, the Society of Trust and Estate Practitioners",
+                              "url": STEP_SITE}},
         ],
     }
 
@@ -1398,10 +1551,13 @@ def video_page(v):
         for label, slug, title in v["related"]
     )
     guide_note = ""
+    guide_top = ""
     if v.get("guide"):
         gslug, gtitle = v["guide"]
         guide_note = (f'\n<p class="note"><strong>More questions are answered in the full guide:</strong> '
                       f'<a href="/{gslug}/">{esc(gtitle)}</a>.</p>')
+        guide_top = (f'\n<div class="related"><p><strong>Read the full guide:</strong> '
+                     f'<a href="/{gslug}/">{esc(gtitle)}</a>, each answer with its sources.</p></div>\n')
         related_html = f'<p><strong>Full guide:</strong> <a href="/{gslug}/">{esc(gtitle)}</a></p>' + related_html
     transcript_html = transcript_html_for(v)
     ld = ld_script(video_ld(v))
@@ -1441,7 +1597,7 @@ def video_page(v):
 {''.join(f'<p>{esc(p)}</p>' for p in v['short_answer'])}
 {sources_html(v['short_sources'])}
 </section>
-
+{guide_top}
 <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/{v['id']}?rel=0" title="{esc(v['title'])}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
 <p class="watch"><a href="{yt_watch(v['id'])}" target="_blank" rel="noopener">Watch on YouTube</a> &middot; <a href="{PLAYLIST}" target="_blank" rel="noopener">All videos in the series</a></p>
 
@@ -1765,6 +1921,111 @@ def corrections_page():
 """
 
 
+def about_page():
+    url = ABOUT_URL
+    title = "About Steve Hunt ACII TEP"
+    seo_title = f"{title} | {SITE_NAME}"
+    desc = ("Steve Hunt ACII TEP is a Chartered Insurance Risk Manager and Trust and Estate Practitioner, in UK "
+            "financial services since 1980. What he writes about here.")
+    bio = ("Steve Hunt is a Chartered Insurance Risk Manager, an Associate of the Chartered Insurance Institute "
+           "(ACII), and a Trust and Estate Practitioner (TEP), a full member of STEP. He has worked in UK financial "
+           "services since 1980, in pensions, protection and estate planning. He writes about inheritance tax, the "
+           "April 2027 pension changes, annuities, whole of life assurance and trusts.")
+    pages = [f'<li><a href="/{g["slug"]}/">{esc(g["title"])}</a>: a guide, every question answered with its sources</li>'
+             for g in GUIDES]
+    pages += [f'<li><a href="/{v["slug"]}/">{esc(v["title"])}</a>: the video, its key facts and the full transcript</li>'
+              for v in VIDEOS]
+    articles = [f'<li><a href="{esc(u)}" target="_blank" rel="noopener">{esc(t)}</a></li>' for t, u in ARTICLES.values()]
+    page = {
+        "@type": "ProfilePage",
+        "@id": url,
+        "url": url,
+        "name": title,
+        "description": desc,
+        "inLanguage": "en-GB",
+        "isPartOf": {"@id": f"{SITE}/#website"},
+        "mainEntity": {"@id": f"{SITE}/#steve-hunt"},
+        "about": {"@id": f"{SITE}/#steve-hunt"},
+        "dateCreated": ABOUT_PUBLISHED,
+        "datePublished": ABOUT_PUBLISHED,
+        "dateModified": TODAY.isoformat(),
+        "publishingPrinciples": CORRECTIONS_URL,
+    }
+    ld = {"@context": "https://schema.org", "@graph": [website_ld(), person_ld(), page]}
+    return f"""<!doctype html>
+<html lang="en-GB">
+<head>
+{HEAD_COMMON}<title>{esc(seo_title)}</title>
+<meta name="description" content="{esc(desc)}">
+<meta name="author" content="{esc(AUTHOR)}">
+<link rel="canonical" href="{url}">
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="{esc(SITE_NAME)}">
+<meta property="og:title" content="{esc(title)}">
+<meta property="og:description" content="{esc(desc)}">
+<meta property="og:url" content="{url}">
+<meta property="og:locale" content="en_GB">
+<meta property="profile:first_name" content="Steve">
+<meta property="profile:last_name" content="Hunt">
+<style>{CSS}</style>
+{ld_script(ld)}
+</head>
+<body>
+{header_html()}
+<main class="wrap">
+<article>
+<p class="kicker">About the author</p>
+<h1>Steve Hunt ACII TEP</h1>
+<p class="byline">Chartered Insurance Risk Manager and Trust and Estate Practitioner &middot; Last updated {nice_date(TODAY)}</p>
+<p>{esc(bio)}</p>
+
+<h2 id="qualifications">Qualifications</h2>
+<ul>
+<li><strong>ACII:</strong> Associate of the Chartered Insurance Institute, the professional body for the insurance and financial planning profession. <a href="{CII_TITLES}" target="_blank" rel="noopener">The Institute's designations and titles</a>.</li>
+<li><strong>Chartered Insurance Risk Manager:</strong> a chartered title awarded by the Chartered Insurance Institute to qualified members. <a href="{CIRM_REGISTER}" target="_blank" rel="noopener">The title on the GOV.UK register of regulated professions</a>.</li>
+<li><strong>TEP:</strong> Trust and Estate Practitioner. Only full members of STEP, the Society of Trust and Estate Practitioners, can use these letters. <a href="{STEP_SITE}" target="_blank" rel="noopener">STEP</a>.</li>
+</ul>
+
+<h2 id="experience">Experience</h2>
+<p>Steve has worked in UK financial services since 1980, in pensions, protection and estate planning. Where an answer on this site draws on that experience rather than on the law or HMRC's published guidance, its source is labelled Steve's experience.</p>
+
+<h2 id="writing">What he writes about here</h2>
+<p>Plain English explanations of UK inheritance tax: the April 2027 change that brings unused pension funds into the estate, the nominees' annuity, whole of life assurance and trusts. Each subject has a page built around a video, with its key facts, the questions it answers and a full transcript. The biggest subjects also have a guide that answers every question, each answer with its sources.</p>
+<ul>
+{chr(10).join(pages)}
+</ul>
+
+<h2 id="articles">LinkedIn articles behind these pages</h2>
+<p>The pages draw on Steve's LinkedIn articles, which set out his reasoning at greater length.</p>
+<ul>
+{chr(10).join(articles)}
+</ul>
+<p><a href="{LINKEDIN}" rel="me">All of Steve's articles on LinkedIn</a></p>
+
+<h2 id="method">How the answers are backed up</h2>
+<p>Every answer gives its sources, each labelled by the kind of authority it carries: the law, case law, HMRC's published view, dated provider evidence, published sources, or Steve's own analysis or experience. Where his reading goes beyond settled law, it is labelled as his analysis, with HMRC's published position beside it. Corrections are dated and logged. <a href="{CORRECTIONS_PATH}">Sources, method and corrections</a>.</p>
+
+<h2 id="elsewhere">Elsewhere</h2>
+<ul>
+<li><a href="{LINKEDIN}" rel="me">Steve Hunt on LinkedIn</a></li>
+<li><a href="{YOUTUBE_CHANNEL}" rel="me">Steve Hunt ACII TEP on YouTube</a></li>
+<li><a href="{X_PROFILE}" rel="me">Steve Hunt ACII TEP on X</a></li>
+</ul>
+
+<p class="disclaimer">Everything on this site is education only. It is not advice, not a personal recommendation, and not an invitation to do business. Tax rules change, and nothing here takes account of your circumstances.</p>
+</article>
+</main>
+{footer_html()}
+</body>
+</html>
+"""
+
+
+def evidence_page():
+    # The quotation evidence page is held back until it is approved for publication.
+    raise RuntimeError("The evidence page is not published yet.")
+
+
 def not_found_page():
     return f"""<!doctype html>
 <html lang="en-GB">
@@ -1789,6 +2050,8 @@ def sitemap():
     urls = ([(SITE + "/", TODAY.isoformat())]
             + [(f"{SITE}/{v['slug']}/", v["modified"]) for v in VIDEOS]
             + [(f"{SITE}/{g['slug']}/", g["modified"]) for g in GUIDES]
+            + [(ABOUT_URL, TODAY.isoformat())]
+            + ([(EVIDENCE_URL, EVIDENCE_PUBLISHED)] if INCLUDE_EVIDENCE else [])
             + [(CORRECTIONS_URL, TODAY.isoformat())])
     body = "\n".join(f"  <url><loc>{u}</loc><lastmod>{d}</lastmod></url>" for u, d in urls)
     return f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{body}\n</urlset>\n'
@@ -1811,8 +2074,10 @@ def llms_txt():
         f"> {website_ld()['description']}",
         "",
         "Author: Steve Hunt ACII TEP, Chartered Insurance Risk Manager and Trust and Estate Practitioner, in UK financial services since 1980.",
+        f"About the author: {ABOUT_URL}",
         f"LinkedIn: {LINKEDIN}",
         f"YouTube: {YOUTUBE_CHANNEL}",
+        f"X: {X_PROFILE}",
         "",
         "## Videos with key facts, sources and full transcripts",
         "",
@@ -1827,8 +2092,14 @@ def llms_txt():
         "## Sources and corrections",
         "",
         f"- [Sources, method and corrections]({CORRECTIONS_URL}): every answer links to the law on legislation.gov.uk "
-        "and to HMRC guidance on GOV.UK, and each source is labelled Law, HMRC, Provider evidence, Published source, "
-        "Steve's analysis or Steve's experience. Transcripts are not edited; dated notes sit beside any correction.",
+        "and to HMRC guidance on GOV.UK, and each source is labelled " + ", ".join(LABEL_ORDER[:-1]) + " or "
+        + LABEL_ORDER[-1] + ". Transcripts are not edited; dated notes sit beside any correction.",
+        f"- [About Steve Hunt ACII TEP]({ABOUT_URL}): who writes these answers, his qualifications and experience, "
+        "and his LinkedIn articles.",
+    ] + ([
+        f"- [The nominees' annuity example: what two insurers quoted in August 2026]({EVIDENCE_URL}): the figures "
+        "and terms in the Just and Canada Life quotations, and what was withheld. Dated evidence; the rates have expired.",
+    ] if INCLUDE_EVIDENCE else []) + [
         "",
         "## Notes",
         "",
@@ -1846,6 +2117,8 @@ def write(path, content):
 
 
 def main():
+    import shutil
+    shutil.rmtree(OUT, ignore_errors=True)  # start clean so no draft page is ever left behind in out/
     for k in SOURCES:
         assert SOURCES[k][0] in LABEL_ORDER, k
     write("index.html", home_page())
@@ -1863,6 +2136,9 @@ def main():
                 assert k in SOURCES, k
         write(f"{g['slug']}/index.html", guide_page(g))
     write(f"{CORRECTIONS_SLUG}/index.html", corrections_page())
+    write(f"{ABOUT_SLUG}/index.html", about_page())
+    if INCLUDE_EVIDENCE:
+        write(f"{EVIDENCE_SLUG}/index.html", evidence_page())
     write("404.html", not_found_page())
     write("sitemap.xml", sitemap())
     write("robots.txt", robots())

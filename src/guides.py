@@ -7,7 +7,7 @@ GUIDES = [
         "parent": "nominees-annuity",
         "title": "The nominees' annuity: every question answered",
         "short_title": "Nominees' annuity guide",
-        "seo_title": "What is a nominees' annuity? Every question answered",
+        "seo_title": "Nominees' annuity: UK rules and inheritance tax from 2027",
         "seo_description": "The nominees' annuity explained: who can have one, the inheritance tax exclusion from April 2027, income tax, real quotations, and whether buying one is a gift.",
         "meta_description": (
             "The nominees' annuity, explained by Steve Hunt ACII TEP: what it is, who can be a nominee, how the "
@@ -15,12 +15,14 @@ GUIDES = [
             "the unsettled question of whether buying one is a lifetime gift. Every answer links to the law."
         ),
         "published": "2026-10-02",
-        "modified": "2026-10-02",
+        "modified": "2026-10-03",
         "reviewed": "2026-10-02",
         "intro": (
-            "This guide answers the questions people ask about the nominees' annuity, drawing on Steve's LinkedIn "
-            "articles, his video, the Acts and HMRC's published guidance. Each answer stands on its own and ends "
-            "with its sources. Where an answer is Steve's own reading of the law rather than settled law, it says so."
+            "This guide answers the questions people ask about the nominees' annuity. In everyday terms, that is "
+            "whether a pension annuity can keep paying a son, daughter or grandchild after the parent dies, and what "
+            "that means for inheritance tax from April 2027. It draws on Steve's LinkedIn articles, his video, the "
+            "Acts and HMRC's published guidance. Each answer stands on its own and ends with its sources. Where an "
+            "answer is Steve's own reading of the law rather than settled law, it says so."
         ),
         "short_answer": [
             "A nominees' annuity is an annuity paid to someone a pension member nominates, such as an adult child or "
@@ -285,5 +287,289 @@ GUIDES = [
         "keywords": ["nominees' annuity", "nominee annuity", "joint life annuity", "pension inheritance tax 2027",
                      "potentially exempt transfer", "Finance Act 2004 Schedule 28 paragraph 27AA",
                      "Inheritance Tax Act 1984 section 150A", "section 151(4)"],
+    },
+    {
+        "slug": "pensions-and-inheritance-tax-from-april-2027/guide",
+        "parent": "pensions-and-inheritance-tax-from-april-2027",
+        "title": "Pensions and inheritance tax from April 2027: every question answered",
+        "short_title": "Pensions and IHT 2027 guide",
+        "seo_title": "Pensions and inheritance tax from April 2027: every question answered",
+        "seo_description": "From 6 April 2027 unused pensions count for inheritance tax. What is caught, what is excluded, who pays, income tax on top, and the £516,000 example.",
+        "meta_description": (
+            "Pensions and inheritance tax from 6 April 2027, explained by Steve Hunt ACII TEP: what is caught, what "
+            "is excluded, who pays and when, the Pensions Direct Payment Scheme, income tax on top, and the £516,000 "
+            "worked example. Every answer links to the law."
+        ),
+        "published": "2026-10-03",
+        "modified": "2026-10-03",
+        "reviewed": "2026-10-03",
+        "intro": (
+            "This guide answers the questions people ask about pensions and inheritance tax from 6 April 2027, such "
+            "as whether a family will pay inheritance tax on a parent's unspent pension, and who pays it. It draws "
+            "on Steve's LinkedIn articles, his video, the Finance Act 2026 and HMRC's two technical notes of May and "
+            "August 2026. Each answer stands on its own and ends with its sources. Where an answer is Steve's own "
+            "reading rather than settled law, it says so. HMRC expects to publish a third technical note in the "
+            "autumn and its detailed guidance by April 2027, and this guide will be reviewed against them."
+        ),
+        "short_answer": [
+            "From 6 April 2027, most unused pension funds and pension death benefits count as part of the estate for "
+            "inheritance tax, under section 150A of the Inheritance Tax Act 1984. Pensions left to a spouse, civil "
+            "partner or charity are usually exempt, subject to the conditions of those exemptions, and four kinds of "
+            "benefit are excluded altogether, including qualifying death in service benefits and joint life "
+            "annuities bought together with the member's own annuity.",
+            "The personal representatives report the pension and are liable for the tax, which is due by the end of "
+            "the sixth month after the month of death and which the scheme can pay straight to HMRC on a valid "
+            "request. If the member died at 75 or over, the beneficiary also pays income tax on what they draw, but "
+            "not on the part that pays the inheritance tax on the pension. Where a pension takes an estate over £2 "
+            "million the combined cost can be severe: in the site's worked example, on its stated assumptions, a "
+            "£500,000 pension costs a family £516,000.",
+        ],
+        "short_sources": ["ihta150A", "fa2026s71", "ihta18", "ihta23", "tn22", "ihta226", "ihta226B", "itepa567B", "pensions_example"],
+        "qa": [
+            ("What changes for pensions and inheritance tax on 6 April 2027?",
+             "For deaths on or after 6 April 2027, most unused pension funds and pension death benefits count as part "
+             "of the estate for inheritance tax. Section 150A of the Inheritance Tax Act 1984, inserted by the "
+             "Finance Act 2026, treats a member of a registered pension scheme (or of a qualifying non-UK or section "
+             "615(3) scheme) as beneficially entitled, immediately before death, to what it calls notional pension "
+             "property. Above the nil rate bands that can mean tax at 40%. Pensions left to a spouse or civil partner "
+             "are usually exempt, subject to the conditions of the spouse exemption, and some benefits are excluded "
+             "altogether.",
+             ["ihta150A", "fa2026s66", "fa2026s71", "tn12", "ihta18"]),
+            ("Why were most pensions outside inheritance tax before April 2027?",
+             "Because most pension schemes pay death benefits at the discretion of the scheme's trustees or provider. "
+             "Until they decide, nobody is entitled to the money, so in most cases it was not part of anyone's "
+             "estate. It already counted where it was payable to the estate as of right, or where the member could "
+             "make a binding nomination or otherwise had a general power over it. From 6 April 2027 trustee "
+             "discretion no longer decides whether a pension is in scope, although it still matters for who receives "
+             "it and when.",
+             ["ihtm17051", "ihtm17052", "tn21"]),
+            ("What is notional pension property?",
+             "It is the Act's name for the pension value that section 150A treats the member as owning, immediately "
+             "before death, for inheritance tax. For a money purchase pension it is broadly the fund that may or must "
+             "be used to provide benefits on death; for a defined benefit scheme it is the lump sum death benefits "
+             "and guaranteed continuing payments; excluded benefits are taken off. In Steve's analysis the word "
+             "notional carries the whole change: the member is treated as owning the pension for the charge, yet "
+             "HMRC's technical note says the member is not treated as owning the pension's assets when it rules out "
+             "business property relief, agricultural property relief, loss on sale relief and payment by instalments.",
+             ["ihta150A", "tn321", "tn322", "tn1121", "tn1123", "tn1124", "steve_p2"]),
+            ("Does it apply if someone dies before 6 April 2027?",
+             "No. The change applies to deaths on or after 6 April 2027. If the member dies before that date, the "
+             "current rules apply, even if the benefits are paid to the beneficiaries after it.",
+             ["fa2026s71", "tn12"]),
+            ("Which pensions are caught?",
+             "Unused money in personal pensions, SIPPs and money purchase workplace schemes, including drawdown "
+             "funds, and lump sum death benefits and guaranteed continuing payments from defined benefit schemes. "
+             "Qualifying non-UK pension schemes and section 615(3) schemes are caught too. For money purchase "
+             "pensions the count also includes amounts not held in the member's own pot where they can reasonably be "
+             "expected to be used to pay death benefits, such as cash balance benefits or an expected augmentation.",
+             ["ihta150A", "tn321", "tn322", "tn26"]),
+            ("Which pension benefits are excluded?",
+             "Four kinds, listed in section 150A(6): a dependants' scheme pension, from any type of arrangement; a "
+             "trivial commutation lump sum that replaces a dependants' scheme pension; a dependants' or nominees' "
+             "annuity bought together with the member's own lifetime annuity; and death in service benefits, meaning "
+             "benefits payable only because the member was in employment or other work immediately before death. The "
+             "test is what the scheme allows, not only what is chosen after the death: a benefit is excluded only "
+             "where it may only be paid in one of those forms. HMRC's August 2026 note says that if a dependant could "
+             "have used the fund to buy a dependants' annuity but chooses a dependants' scheme pension, that pension "
+             "is not excluded. Other benefits payable on death are counted, valued as section 150A sets out.",
+             ["ihta150A", "tn331", "tn332", "tn333", "tn334", "tn2_dsp"]),
+            ("Are annuity guarantee periods and value protection included?",
+             "Yes. Where payments carry on to someone else after death under a guarantee period, they are brought "
+             "into scope, and value protection, which returns unused capital as a lump sum death benefit, is not an "
+             "excluded benefit either. A single life annuity with neither has no death benefit, so there is nothing "
+             "left in it to count when the annuitant dies. HMRC's August 2026 note gives the example of an annuity "
+             "that ceased on death, valued at nil.",
+             ["ihta150A", "tn322", "tn2_ex1"]),
+            ("Are death in service benefits included?",
+             "Not if they qualify for the exclusion. It covers benefits payable because the member was employed, or "
+             "in other work of a particular description, immediately before death, and that would not be payable "
+             "otherwise. A refund of contributions that would have been paid anyway is not covered. Lump sums from "
+             "the scheme of a previous job, where the member was a deferred member, normally are not covered either, "
+             "although someone who left under a redundancy package may still count as employed under its terms or the "
+             "scheme rules. Employers and schemes decide whether people on career breaks or long-term sickness "
+             "absence count as in employment.",
+             ["ihta150A", "tn334", "tn2_deferment"]),
+            ("Is a pension left to a husband, wife or civil partner taxed?",
+             "Usually there is no inheritance tax, subject to the spouse-exemption conditions. Benefits that go to a "
+             "spouse or civil partner are exempt under section 18. The main exception: where the person who died was "
+             "a long-term UK resident and their spouse or civil partner is not, the exemption is capped at the nil "
+             "rate band limit, less any amount already used. Unmarried partners are not covered. The exemption defers "
+             "the tax rather than removing it: if the survivor still holds the money when they die on or after 6 "
+             "April 2027, it can count in their estate then, and unless they have remarried there is no spouse "
+             "exemption to use. It is an inheritance tax exemption only, and does not make the pension income free of "
+             "income tax.",
+             ["ihta18", "tn34", "steve_p2"]),
+            ("Does an inherited pension count in the estate of the person who inherited it?",
+             "Yes, remaining inherited drawdown can count on the beneficiary's death on or after 6 April 2027. HMRC's "
+             "August 2026 technical note expressly illustrates money inherited before April 2027 being included when "
+             "the beneficiary later dies. In its example a mother dies in July 2026, her son puts his share into "
+             "beneficiary drawdown, and when he dies in November 2030 what is left in that account counts as his "
+             "notional pension property, alongside his own pensions. The site's worked example rests on the same "
+             "point: Mrs Miggins inherits her husband's pension before April 2027 and dies in 2029 with it still in "
+             "drawdown. Money already paid out of the scheme to the beneficiary is part of their ordinary estate "
+             "instead.",
+             ["ihta150A", "tn2_beneficiary", "pensions_example"]),
+            ("Who is responsible for paying the inheritance tax on a pension?",
+             "The personal representatives. They report the pension and are liable for the tax on it. Once the "
+             "pension is vested in a beneficiary, meaning the trustees have decided who receives it (or, in a "
+             "non-discretionary scheme, the beneficiary is identified under the scheme rules), that beneficiary "
+             "becomes jointly and severally liable with them for the tax attributable to it. The pension scheme "
+             "administrator is not normally liable, unless it fails to act on a valid withholding notice or payment "
+             "notice.",
+             ["fa2026s67", "tn21", "tn22"]),
+            ("When must the tax be paid?",
+             "By the end of the sixth month after the month of death, as for the rest of the estate. Interest runs on "
+             "anything unpaid after that. The ten-year instalment option is not available for pension funds.",
+             ["ihta226", "ihta233", "tn23", "tn1124"]),
+            ("Does the tax on the pension have to be paid before probate?",
+             "Normally, yes. HMRC's note says personal representatives must pay the inheritance tax due at that "
+             "stage, including on pensions, and submit an account before they can apply for probate. In some cases "
+             "HMRC will agree to postpone payment of some of the tax, with interest still running. The pension's "
+             "share can be paid by the scheme under a payment notice, which can be used before probate is granted.",
+             ["tn10", "ihtm05120", "tn7"]),
+            ("Can the pension scheme pay the tax straight to HMRC?",
+             "Yes, on a valid request. Under the Pensions Direct Payment Scheme, the personal representatives, or a "
+             "beneficiary (including the trustees of a trust that benefits), can give the scheme administrator a "
+             "payment notice for the tax they are liable for on the pension. The scheme must pay HMRC within 35 days "
+             "of receiving a valid notice. The notice must be for at least £1,000, cannot exceed the tax and interest "
+             "the person giving it is liable for on the pension in that scheme, and cannot exceed the benefits still "
+             "unpaid, after deducting anything already paid out or already covered by an earlier payment notice. It "
+             "is optional, a prospective personal representative cannot give one, and money already "
+             "used to secure an annuity counts as paid out, so it is not available.",
+             ["ihta226B", "fa2026s68", "tn7", "tn732", "tn2_validity", "tn74"]),
+            ("Can the personal representatives hold back the pension until the tax is paid?",
+             "Partly. A personal representative, or a prospective one, meaning someone with reason to believe they "
+             "will become a personal representative, who knows or has reason to believe they may be liable for "
+             "inheritance tax on the pension can give a withholding notice. While it has effect, the scheme cannot "
+             "pay a beneficiary more than half of their entitlement, counting anything already paid. It lasts until "
+             "the tax and interest are paid, the notice is withdrawn, or 15 months after the end of the month of "
+             "death, whichever comes first. It does not change when the tax is due, and it does not apply to excluded "
+             "benefits or to exempt beneficiaries such as a spouse.",
+             ["ihta226A", "fa2026s68", "tn6", "tn2_amount"]),
+            ("Does the pension pay the inheritance tax it causes?",
+             "Not necessarily. The tax on an estate is shared across the parts that bear it, in proportion to their "
+             "values, so the pension bears its proportionate share of the whole bill. That share is a different "
+             "calculation from the extra tax that adding the pension caused, and the two need not match. A payment "
+             "notice is limited to the tax on the pension. In the site's worked example the pension's share is "
+             "£140,000 of a £300,000 increase in the estate's tax, so £160,000 falls on the rest of the estate.",
+             ["ihta265", "ihta226B", "tn732", "pensions_example"]),
+            ("How do personal representatives find the pensions and their values?",
+             "They should take reasonable steps to identify every scheme, then ask each one for the basic "
+             "information. Regulations made on 13 July 2026 (SI 2026/818) set the timetable from 6 April 2027. The "
+             "value of the pension, or an estimate with an explanation of how it was reached, is due within 28 "
+             "days of a valid request, and an estimate must be followed by the actual value within 14 days of it "
+             "being known. Information dependent on deciding the beneficiaries is due by the later of the "
+             "applicable 28-day deadline and the end of the 14-day period beginning when all beneficiaries are "
+             "decided. Further information is required where an inheritance tax account must be filed, even if no "
+             "tax is due. If a pension turns up after the account has gone in, a corrective account is needed.",
+             ["si2026818", "tn25", "tn2_basic", "tn2_pexempt", "tn2_further", "tn4"]),
+            ("Will the people who inherit also pay income tax?",
+             "It depends on the type of benefit and on whose death it follows. As a general rule, if the person died "
+             "at 75 or over, death benefits paid to people are taxable as the recipient's income. If they died under "
+             "75, survivors' annuities and beneficiary drawdown are usually tax free, and many lump sums are tax free "
+             "within the deceased's lump sum and death benefit allowance, some only if paid within two years. There "
+             "are exceptions: a trivial commutation lump sum death benefit is taxable whatever the age, and "
+             "dependants' scheme pensions are always taxable as pension income, even where they are excluded from "
+             "inheritance tax. "
+             "Where a pension passes on a second time, the successor's position depends on the age at death of the "
+             "previous beneficiary, not the original saver. That is why Amy's withdrawals in the site's example are "
+             "taxable after her mother dies at 75 or over, even though her father died under 75.",
+             ["tn8", "inherit", "ptm072430", "ptm073700", "ptm073400"]),
+            ("Is income tax charged on the part of the pension used to pay inheritance tax?",
+             "No. Where the statutory conditions are met, pension income can be reduced by the inheritance tax and "
+             "interest attributable to those pension death benefits and borne by the beneficiary. This is not a "
+             "deduction for the extra inheritance tax attributable to other estate assets. If the scheme pays the "
+             "tax under a payment notice, the benefits are reduced first, so income tax falls only on what is "
+             "left. If the beneficiary bears the tax another way, they can reduce their taxable pension income by "
+             "working with HMRC.",
+             ["itepa567B", "fa2026s70", "tn82"]),
+            ("Why do people say an inherited pension can be taxed at 87% or more?",
+             "The 87% is a simplified illustration of the combined family tax, not a tax rate in law, and it is not "
+             "all taken from the pension. It adds three layers for each pound of pension that takes an estate over £2 "
+             "million: 40% inheritance tax; a further 20% because the residence nil rate band is withdrawn at £1 for "
+             "every £2, a cost that can fall on the rest of the estate; and, if death was at 75 or over, income tax "
+             "at 45% for an additional rate taxpayer on the 60% assumed to be left in the pension. So 40% + 20% + "
+             "(45% × 60%) = 87%. In a real estate the pension's own share of the tax is worked out under section 265 "
+             "and can be smaller, which leaves more in the fund to be taxed as income, and a beneficiary in the "
+             "£100,000 to £125,140 band pays an effective 60% on it (rates outside Scotland). In Steve's analysis "
+             "that is how the site's worked example reaches £516,000 on a £500,000 pension.",
+             ["ihta8D", "ita35", "itrates", "ihta265", "steve_p3"]),
+            ("Can the tax on a £500,000 pension really come to £516,000?",
+             "In a specific case built on stated assumptions, yes, and the site's worked example shows every step. "
+             "Mrs Miggins inherits a £500,000 pension from her husband, who died under 75 before April 2027, and "
+             "dies in 2029, aged 75 or over, with an estate of £2 million before the pension, both their nil rate "
+             "bands available in full and a home passing to her daughter. The pension raises her estate's "
+             "inheritance tax from £400,000 to £700,000, an extra £300,000, of which the pension's own share is "
+             "£140,000. Her daughter Amy, earning £100,000, draws the remaining £360,000 at £24,000 a year for 15 "
+             "years and pays £216,000 of income tax at an effective 60%. That is £516,000 across the family. The "
+             "example assumes the full transferable ordinary and residence nil rate bands before tapering, "
+             "sufficient qualifying residential inheritance, no other material gifts or reliefs, and no investment "
+             "growth or other changes. It holds today's tax rules and Amy's earnings constant for 15 years, so it "
+             "is an illustration, not a forecast or a typical result.",
+             ["pensions_example", "ihta8D", "ihta265", "ita35", "steve_p3"]),
+            ("Can business property relief, agricultural property relief or instalments apply to a pension?",
+             "No. HMRC's technical note says the member is not treated as owning the pension's assets, and on that "
+             "basis rules out business property relief, agricultural property relief, loss on sale relief and payment "
+             "by instalments for pension funds. Quick succession relief does apply where the same money is taxed "
+             "again within five years.",
+             ["tn1121", "tn1122", "tn1123", "tn1124", "ihta141"]),
+            ("Does leaving pension money to charity reduce the tax?",
+             "Yes. Pension death benefits paid to a UK charity are exempt, as other gifts to charity are. "
+             "Separately, if at least 10% of the baseline amount of the relevant part of the estate goes to "
+             "charity, that part is taxed at 36% instead of 40%. Broadly, the baseline allows for the available "
+             "ordinary nil rate band and relevant reliefs and exemptions, but adds back the charitable gift and "
+             "does not deduct the residence nil rate band. Pension money counts in the general part of the estate "
+             "for this test, with charity lump sum death benefits counting towards the 10%. A charity lump sum "
+             "death benefit is free of income tax even if the member was 75 or over, but it is only available from "
+             "money purchase funds where there are no dependants when it is paid, and it must go to a charity "
+             "nominated by the member or, for an inherited fund, by the deceased beneficiary.",
+             ["ihta23", "ihtasch1A", "ihtm45009", "tn34", "tn111", "ptm073900"]),
+            ("Are overseas pensions caught?",
+             "Yes, for long-term UK residents: notional pension property in registered schemes, qualifying non-UK "
+             "pension schemes and section 615(3) schemes counts, wherever the scheme is established. For someone who "
+             "is not a long-term UK resident, only schemes established in the UK count. Withholding notices and "
+             "payment notices cannot be given to qualifying non-UK pension schemes or section 615(3) schemes.",
+             ["ihta150A", "tn26", "tn351"]),
+            ("Will the nil rate bands go up?",
+             "Not under the current law before April 2031. The nil rate band of £325,000, the residence nil rate band "
+             "of £175,000 and the £2 million taper threshold are frozen, with no indexation, up to and including the "
+             "2030-31 tax year. The Finance Act 2026 extended the freeze by a year.",
+             ["fa2021s86", "fa2026s72", "ihtgov", "rnrb"]),
+            ("Can money drawn from a pension be given away free of inheritance tax?",
+             "It can, if the gift is exempt or, for an outright gift to another person, the giver survives seven "
+             "years. HMRC's note confirms the April 2027 changes do not alter the existing rules for lifetime gifts. "
+             "The exemption for normal expenditure out of income has three conditions, tested on the facts, taking "
+             "one year with another: part of the giver's normal expenditure, made out of income, and leaving enough "
+             "income to keep their usual standard of living. How the withdrawal was taxed does not by itself decide "
+             "that. Money drawn from your own pension is normally taxed as income beyond any tax-free cash, while "
+             "withdrawals from an inherited pension can be tax free where the person who died was under 75. An "
+             "outright gift to an individual that is not exempt is normally a potentially exempt transfer, free of "
+             "inheritance tax if the giver survives seven years and keeps no benefit from it. A gift into most trusts "
+             "is a chargeable lifetime transfer instead, and surviving seven years does not simply make it exempt.",
+             ["tn1125", "ihta21", "ihta3A", "ihta7", "fa1986s102", "inherit"]),
+            ("What can people do about it in their lifetime?",
+             "This guide does not recommend anything, and what suits one family can cost another. The routes most "
+             "discussed are: keeping the pension to meet retirement needs; spending or drawing it, which brings "
+             "income tax forward; giving away money drawn from it, under the normal gift rules; leaving it to a "
+             "spouse, civil partner or charity; buying an annuity, where a single life annuity with no guarantee or "
+             "value protection leaves nothing to count, as HMRC's August 2026 note illustrates, and a dependants' or "
+             "nominees' annuity bought with the member's own is excluded; and life cover written in trust to provide "
+             "money for the tax. Each has its own conditions and costs, some cannot be undone, and whether any is "
+             "worth doing depends on the person's circumstances.",
+             ["ihta3A", "ihta21", "ihta18", "ihta23", "ihta150A", "tn333", "tn2_ex1", "steve_p2"]),
+            ("How much pension money comes within inheritance tax?",
+             "The scale of UK defined contribution pension assets is over £1 trillion. The Pensions Policy "
+             "Institute's DC Future Book 2025 reports aggregate assets of £1.2 trillion in 2024. Steve uses that "
+             "published figure to illustrate the scale of the pension category affected by section 150A; it is not "
+             "an official estimate of the precise value newly taxable in April 2027 or of tax to be collected. "
+             "Amounts may be spent, pass to exempt recipients or fall within available allowances, so being within "
+             "the rules does not mean every pound is taxed.",
+             ["ppi2025", "pa1trn", "ihta150A", "ihta18", "ihta23", "steve_p2"]),
+        ],
+        "articles": [
+            ("husband", "The £516,000 worked example, Mrs Miggins and her daughter Amy."),
+            ("oneword", "The word \"notional\", and why the reliefs do not apply."),
+        ],
+        "keywords": ["pensions inheritance tax April 2027", "inheritance tax on pensions", "notional pension property", "Inheritance Tax Act 1984 section 150A", "Finance Act 2026", "Pensions Direct Payment Scheme", "pension death benefits income tax", "residence nil rate band taper"],
     },
 ]
