@@ -23,6 +23,7 @@ X: https://x.com/SHunt_ACII_TEP
 
 - [Sources, method and corrections](https://inheritancetaxexplained.co.uk/sources-and-corrections/): every answer links to the law on legislation.gov.uk and to HMRC guidance on GOV.UK, and each source is labelled Law, Case law, HMRC, Provider evidence, Published source, Steve's analysis or Steve's experience. Transcripts are not edited; dated notes sit beside any correction.
 - [About Steve Hunt ACII TEP](https://inheritancetaxexplained.co.uk/about-steve-hunt/): who writes these answers, his qualifications and experience, and his LinkedIn articles.
+- [The nominees' annuity example: what two insurers quoted in August 2026](https://inheritancetaxexplained.co.uk/nominees-annuity/quotations/): the figures and terms in the Just and Canada Life quotations, and what was withheld. Dated evidence; the rates have expired.
 
 ## Notes
 
