@@ -54,8 +54,8 @@ CORRECTIONS_URL = f"{SITE}{CORRECTIONS_PATH}"
 EVIDENCE_SLUG = "nominees-annuity/quotations"
 EVIDENCE_PATH = f"/{EVIDENCE_SLUG}/"
 EVIDENCE_URL = f"{SITE}{EVIDENCE_PATH}"
-EVIDENCE_DRAFT = True
-EVIDENCE_PUBLISHED = "2026-10-02"  # set to the actual publication date at publish
+EVIDENCE_DRAFT = False  # published 3 October 2026 on Steve's go
+EVIDENCE_PUBLISHED = "2026-10-03"  # actual first publication date; never moves
 INCLUDE_EVIDENCE = INCLUDE_DRAFTS or os.environ.get("INCLUDE_EVIDENCE") == "1" or not EVIDENCE_DRAFT
 HOME_DESCRIPTION = ("Plain English videos and transcripts on UK inheritance tax, pensions from April 2027, "
                     "annuities and whole of life assurance. By Steve Hunt ACII TEP.")
@@ -172,6 +172,22 @@ SOURCES = {
     "q_nominees": ("Provider evidence", "Quotations from Just (11 August 2026) and Canada Life (10 August 2026), held on file", None),
     "q_age40": ("Provider evidence", "Insurers' answers on the nominee's age, August 2026, held on file", None),
     "q_wol": ("Provider evidence", "Whole of life quotation obtained in 2026, held on file", None),
+    "q_just_doc": ("Provider evidence", "Just Retirement Limited, Pension Annuity Personal Quotation, 11 August 2026, "
+                   "held on file", None),
+    "q_cl_doc": ("Provider evidence", "Canada Life Limited, Your Lifetime Annuity Quotation, 10 August 2026, "
+                 "held on file", None),
+    "q_just_aug": ("Provider evidence", "Just correspondence, 8 and 11 August 2026: the request, the basis of the "
+                   "figures and permission to publish them, held on file", None),
+    "q_just_sep": ("Provider evidence", "Just correspondence, 14 September 2026: the dependant label and the "
+                   "nomination, held on file", None),
+    "q_cl_aug": ("Provider evidence", "Canada Life correspondence, 4 to 10 August 2026: the request, the basis of "
+                 "the quotation and permission to name Canada Life, held on file", None),
+    "q_cl_sep": ("Provider evidence", "Canada Life correspondence, 15 September 2026: the nominee age condition, "
+                 "held on file", None),
+    "just_terms": ("Provider evidence", "Just: Terms of the Pension Annuity, conditions 3.1 and 6.2.1 (published "
+                   "conditions, retrieved 3 October 2026)",
+                   "https://www.justadviser.com/globalassets/just-adviser/documents/"
+                   "729-terms-of-the-just-retirement-pension-annuity.pdf"),
     # Published sources
     "pa1trn": ("Published source",
                "Pensions Age, 23 October 2025: DC pension assets quadruple to £1.2trn (Pensions Policy Institute, DC Future Book)",
@@ -1022,6 +1038,22 @@ for _v in VIDEOS:
 
 # What changed on each page at the 1 October 2026 review, shown on the corrections page.
 CORRECTIONS_LOG = [
+    ("3 October 2026", "A new evidence page was published, and the nominees' pages now link to it. No answers "
+                       "changed.", [
+        ("nominees-annuity/quotations", [
+            "Published: an evidence extract for the two nominees' annuity quotations used on this site. It sets out "
+            "the figures and terms each insurer quoted, what each was asked for, how long the second life's income "
+            "lasts and what was withheld. The quotations have expired and are not current offers.",
+        ]),
+        ("nominees-annuity", [
+            "The Provider evidence source for the two quotations now links to the evidence page, in the source "
+            "lists and the structured data. Nothing else changed.",
+        ]),
+        ("nominees-annuity/guide", [
+            "The Provider evidence source for the two quotations now links to the evidence page, in the source "
+            "lists and the structured data. No answers changed.",
+        ]),
+    ]),
     ("3 October 2026", "Further corrections: fixed the sources page's original publication date at 1 October "
                        "2026; aligned the pensions video-page and description summaries with the guide's "
                        "exclusion conditions, spouse-exemption conditions and worked-example assumptions; "
@@ -1918,6 +1950,8 @@ def corrections_page():
     titles = {v["slug"]: v["short_title"] for v in VIDEOS}
     log_html = []
     titles.update({g["slug"]: g["short_title"] for g in GUIDES})
+    if INCLUDE_EVIDENCE:
+        titles[EVIDENCE_SLUG] = "Nominees' annuity quotations"
     for when, intro, groups in CORRECTIONS_LOG:
         log_html.append(f"<h3>{esc(when)}</h3>")
         log_html.append(f"<p>{esc(intro)}</p>")
@@ -2097,12 +2131,179 @@ def about_page():
 """
 
 
-EVIDENCE_CSS = ""  # the evidence page is not published yet
+EVIDENCE_CSS = """
+.tablewrap{overflow-x:auto;margin:1em 0 .4em}
+table.ev{border-collapse:collapse;width:100%;font-size:.95rem}
+table.ev th,table.ev td{border-bottom:1px solid var(--rule);padding:8px 10px;text-align:left;vertical-align:top}
+table.ev thead th{border-bottom:2px solid var(--gold)}
+table.ev tbody th{font-weight:600;width:36%}
+table.ev caption{caption-side:top;text-align:left;color:var(--muted);font-size:.9rem;padding:0 0 .4em}
+"""
 
 
 def evidence_page():
-    # The quotation evidence page is held back until it is approved for publication.
-    raise RuntimeError("The evidence page is not published yet.")
+    url = EVIDENCE_URL
+    guide = next(g for g in ALL_GUIDES if g["slug"] == "nominees-annuity/guide")
+    video = next(v for v in VIDEOS if v["slug"] == "nominees-annuity")
+    pay_q = next(q for q, _, _ in guide["qa"] if q.startswith("What does a nominees' annuity pay?"))
+    who_q = next(q for q, _, _ in guide["qa"] if q == "Who can be a nominee?")
+    guide_live = guide["slug"] in _LIVE_GUIDE_SLUGS
+    title = "The nominees' annuity example: what two insurers quoted in August 2026"
+    seo_title = f"Nominees' annuity example: the quotations | {SITE_NAME}"
+    desc = ("What Just and Canada Life quoted in August 2026 for the nominees' annuity example: £500,000, "
+            "lives aged 75 and 45. Expired rates, not a recommendation.")
+    doc_sources = ["q_just_doc", "q_cl_doc"]
+    further_sources = ["q_just_aug", "just_terms", "q_cl_doc", "q_cl_aug"]
+    nominee_sources = ["q_age40", "q_just_sep", "q_cl_sep", "fa2004p15", "fa2004p27A", "fa2004p27AA", "ptm071200"]
+    duration_sources = ["q_just_doc", "q_just_aug", "just_terms", "q_cl_doc", "q_cl_aug", "fa2004p27AA", "ptm072200"]
+    pub = nice_date(date.fromisoformat(EVIDENCE_PUBLISHED))
+    rows = [
+        ("Purchase price", "£500,000.00", "£500,000.00"),
+        ("Income a year, before tax", "£29,153.64", "£28,925.76"),
+        ("Income a month (the yearly income divided by 12)", "£2,429.47", "£2,410.48"),
+        ("Annuity rate (the yearly income divided by the price)", "5.83%", "5.79%"),
+        ("Income to the second life if the first life dies first", "100%: £29,153.64 a year",
+         "100%: £28,925.76 a year"),
+        ("Rate guaranteed", "Until 24 August 2026, extended to 24 September 2026 if Just received the "
+         "application by 24 August", "If Canada Life received the completed application by 24 August 2026 "
+         "and the money by 24 September 2026"),
+    ]
+    rows_html = "\n".join(f'<tr><th scope="row">{esc(a)}</th><td>{esc(b)}</td><td>{esc(c)}</td></tr>'
+                          for a, b, c in rows)
+    if guide_live:
+        guide_pay = f'<a href="/{guide["slug"]}/#{slugify(pay_q)}">{esc(pay_q)}</a>'
+        guide_who = f' The guide explains <a href="/{guide["slug"]}/#{slugify(who_q)}">who can be a nominee</a>.'
+        used_in = (f'The <a href="/{guide["slug"]}/">nominees\' annuity guide</a> and the '
+                   f'<a href="/{video["slug"]}/">nominees\' annuity video page</a> use')
+        related = (f'<div class="related"><p><strong>Where these figures are used:</strong> the guide answer '
+                   f'{guide_pay}, and the <a href="/{video["slug"]}/">nominees\' annuity video page</a>.</p></div>')
+    else:
+        guide_who = ""
+        used_in = f'The <a href="/{video["slug"]}/">nominees\' annuity video page</a> uses'
+        related = (f'<div class="related"><p><strong>Where these figures are used:</strong> the '
+                   f'<a href="/{video["slug"]}/">nominees\' annuity video page</a>.</p></div>')
+    page = {
+        "@type": "WebPage",
+        "@id": url,
+        "url": url,
+        "name": title,
+        "headline": title,
+        "description": desc,
+        "inLanguage": "en-GB",
+        "isPartOf": {"@id": f"{SITE}/#website"},
+        "author": {"@id": f"{SITE}/#steve-hunt"},
+        "publisher": {"@id": f"{SITE}/#steve-hunt"},
+        "datePublished": EVIDENCE_PUBLISHED,
+        "dateModified": EVIDENCE_PUBLISHED,
+        "publishingPrinciples": CORRECTIONS_URL,
+        "about": [{"@type": "Thing", "name": "Nominees' annuity"}, {"@type": "Thing", "name": "Joint life annuity"}],
+        "mentions": [{"@type": "Organization", "name": "Just Retirement Limited"},
+                     {"@type": "Organization", "name": "Canada Life Limited"}],
+        "citation": [source_ld(k) for k in unique(doc_sources + further_sources + nominee_sources
+                                                  + duration_sources)],
+    }
+    ld = {"@context": "https://schema.org", "@graph": [website_ld(), person_ld(), page]}
+    return f"""<!doctype html>
+<html lang="en-GB">
+<head>
+{HEAD_COMMON}<title>{esc(seo_title)}</title>
+<meta name="description" content="{esc(desc)}">
+<meta name="author" content="{esc(AUTHOR)}">
+<link rel="canonical" href="{url}">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="{esc(SITE_NAME)}">
+<meta property="og:title" content="{esc(title)}">
+<meta property="og:description" content="{esc(desc)}">
+<meta property="og:url" content="{url}">
+<meta property="og:locale" content="en_GB">
+<style>{CSS}{EVIDENCE_CSS}</style>
+{ld_script(ld)}
+</head>
+<body>
+{header_html()}
+<main class="wrap">
+<article>
+<p class="kicker">Provider evidence &middot; Nominees' annuity</p>
+<h1>{esc(title)}</h1>
+<p class="byline">By <a href="#about-the-author">Steve Hunt ACII TEP</a> &middot; Quotations dated 10 and 11 August 2026 &middot; Extract published {pub}</p>
+<p>{used_in} two quotations obtained in August 2026. This page sets out what those two documents say, so that readers can see exactly what the figures rest on. The rates have expired, and nothing here is a recommendation.</p>
+<p>These were quotation illustrations for a fictitious example, not records of policies purchased. The Just illustration was supplied by Just itself. The amounts and the guarantee wording below are recorded as historical documentary evidence, not as offers open for acceptance now.</p>
+
+<section class="answer" id="in-short">
+<h2>In short</h2>
+<p>On 11 August 2026 Just quoted £29,153.64 a year, and on 10 August 2026 Canada Life quoted £28,925.76 a year. Each was for a lifetime annuity on two lives, bought with £500,000 of pension money. The first life was a man aged 75. If he dies first, 100% of the income is then paid to the second life, a woman aged 45. Neither quotation uses the word nominee; that point is explained below. Both rates were guaranteed for a few weeks only, until 24 September 2026 at the latest, and have expired.</p>
+</section>
+
+<h2 id="the-quotations">The two quotations</h2>
+<div class="tablewrap"><table class="ev">
+<caption>Quoted in August 2026. These rates have expired.</caption>
+<thead><tr><th scope="col"></th><th scope="col">Just, 11 August 2026</th><th scope="col">Canada Life, 10 August 2026</th></tr></thead>
+<tbody>
+{rows_html}
+</tbody>
+</table></div>
+<p class="note">The monthly figures and the annuity rates are worked out from the yearly income. Every other figure is as printed on the quotations.</p>
+{sources_html(doc_sources)}
+
+<h2 id="terms">What the quotations say</h2>
+<ul class="facts">
+<li>Product: a lifetime annuity, as both quotations call it, bought with £500,000 from a registered pension scheme. Just's quotation shows no tax-free lump sum taken; Canada Life's does not mention one.</li>
+<li>First life: male, aged 75 on the date of the quotation. Second life: female, aged 45. In the guide and the video they are a fictitious father and his daughter.</li>
+<li>Level income: it never increases, so its buying power falls as prices rise. Canada Life's quotation warns of this.</li>
+<li>Paid monthly in arrears, without proportion: no part payment is made for the days between the last payment and a death.</li>
+<li>If the first life dies first, 100% of the income is then paid to the second life. Canada Life's quotation says this starts only after the first life's death. Neither quotation says how long it lasts: see below.</li>
+<li>No guarantee period. Canada Life's quotation shows none, and under that heading Just's says only that the income will continue throughout the first life's lifetime.</li>
+<li>No value protection on either, and no cash-in or surrender value at any time, so nothing more would be paid once both lives had died. Canada Life's quotation adds that once the cancellation period has passed, the policy cannot be changed in any way.</li>
+<li>No adviser charge paid out of the purchase price. Canada Life's quotation shows an adviser charge of £0.00, and Just's says it has not been asked to make any adviser charge payment.</li>
+<li>The income is taxable. Both quotations say income tax is normally taken off before the income is paid.</li>
+<li>Both quotations say the income could be changed if any of the details given were wrong or changed.</li>
+</ul>
+<p>Both quotations say they should be read with the insurer's Key Features Document. The quotation alone is not the full contract; the applicable policy conditions and schedule must also be checked. The supporting evidence used for the second life's payment duration is distinguished below.</p>
+
+<h2 id="further-evidence">Further evidence held</h2>
+<ul class="facts">
+<li>Just: the request for its illustration, sent on 8 August 2026, asked for 100% of the income to continue to the daughter for the rest of her life, and for the standard rate rather than an enhanced one, with both lives in good health. Just supplied the figures on 11 August 2026 as non-underwritten rates on the basis requested, and the same day confirmed that the figure could be published.</li>
+<li>Just's published policy conditions say the contract is formed by the application, any medical statements, the policy conditions and the policy schedule (condition 3.1), and that the dependant's income shown in the policy schedule is paid to the surviving dependant "for the remainder of their life" (condition 6.2.1). These are Just's current published conditions, retrieved on 3 October 2026, not a policy schedule issued for this example.</li>
+<li>Canada Life: the request for its quotation, sent on 9 August 2026, asked for 100% of the income to continue to the daughter for the rest of her life, and for the standard rate rather than an enhanced one, with both lives in good health. Canada Life supplied the quotation on 10 August 2026 on that request, described the continuing income as a dependant's pension nominated at outset, and the same day confirmed it was happy to be named.</li>
+</ul>
+{sources_html(further_sources)}
+
+<h2 id="nominee-or-dependant">Nominee or dependant?</h2>
+<p>Neither quotation uses the word nominee. Just's quotation calls the second life the dependant, and Canada Life's calls her the second annuitant, with "Dependant's income" in its summary. So the nominee point does not come from these documents. It comes from the pension tax rules and from the insurers' separate answers.</p>
+<p>For the annuity and nominee rules discussed here, a member's child aged 23 or over is not a dependant merely because the member supports them financially. Impairment and certain older-scheme protections can change that. The fictitious daughter is assumed to fall outside those exceptions and to be nominated by her father. On those assumptions, a qualifying related annuity for her is a nominees' annuity.</p>
+<p>In August 2026 both insurers said they would write a nominees' annuity where the nominee is aged 40 or over. In September 2026 Just told Steve that its documents use the word dependant for both dependants and nominees, and that its application form is the member's binding nomination.{guide_who}</p>
+{sources_html(nominee_sources)}
+
+<h2 id="how-long">How long the second life's income lasts</h2>
+<p>Neither quotation sheet expressly states how long the second life's income lasts. For the Just example, Steve requested lifetime continuation and Just replied on the requested basis. Just's separately published policy conditions, condition 6.2.1, also provide for the surviving named second life's income for the remainder of that person's life. For the Canada Life example, Steve likewise requested lifetime continuation, and Canada Life quoted on that request. The pension tax rules permit a nominees' annuity to last for life or to end earlier on marriage or civil partnership. That permitted alternative does not establish that either illustration contains such an ending condition.</p>
+{sources_html(duration_sources)}
+
+<h2 id="withheld">What this page leaves out, and why</h2>
+<ul>
+<li>The names and dates of birth on the quotations. The two lives were fictitious, and their ages on the date of the quotation are given instead.</li>
+<li>The postcode Canada Life used to price its quotation.</li>
+<li>The name and address of the adviser firm that requested Canada Life's quotation.</li>
+<li>The intermediary details on Just's quotation. Just produced that quotation itself, so they show one of Just's own accounts, not an adviser firm.</li>
+<li>The insurers' reference numbers.</li>
+<li>The documents themselves. They are the insurers' documents, so this page describes them rather than reproducing them. The originals are held on file.</li>
+</ul>
+
+<h2 id="why-named">Why the insurers are named</h2>
+<p>Naming the insurers records where the quotations came from. It is not a recommendation of either insurer or of this kind of annuity. The other insurers asked in August 2026 said no at that time, though some were reviewing, and the market may have changed since.</p>
+
+<h2 id="today">Today's rates</h2>
+<p>The quotation guarantees expired by 24 September 2026. These are historical illustrations, not current offers. A new quotation would need to be obtained; its income and terms could differ according to the rates and case details at that time. Canada Life's quotation points readers to MoneyHelper, the free guidance service backed by government, to compare annuities from different insurers: <a href="https://www.moneyhelper.org.uk/en/pensions-and-retirement/taking-your-pension/compare-annuities" target="_blank" rel="noopener">MoneyHelper: Compare annuities</a>.</p>
+
+{related}
+
+{author_box()}
+<p class="disclaimer">This page is education only. It records dated quotations that have expired. It is not advice, not a personal recommendation, and not an invitation to do business, and nothing here takes account of your circumstances.</p>
+</article>
+</main>
+{footer_html()}
+</body>
+</html>
+"""
 
 
 def not_found_page():
