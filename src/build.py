@@ -43,6 +43,9 @@ TODAY = date(2026, 10, 3)
 REVIEWED = date(2026, 10, 1)
 AS_AT = "1 October 2026"
 NOTE_DATE = "1 October 2026"
+# Date of the consistency pass after Clara's release review (R01 to R08). New notes carry it;
+# old notes keep NOTE_DATE and REVIEWED, which must not be moved on.
+FIX_DATE = date(2026, 10, 3)
 CORRECTIONS_SLUG = "sources-and-corrections"
 CORRECTIONS_PATH = f"/{CORRECTIONS_SLUG}/"
 CORRECTIONS_URL = f"{SITE}{CORRECTIONS_PATH}"
@@ -308,6 +311,26 @@ if INCLUDE_EVIDENCE:
 # Video data
 # ---------------------------------------------------------------------------
 
+# R02 (Clara, 3 October 2026): the exclusions and their condition, used word for word wherever the
+# pensions page summarises them.
+EXCLUSIONS_TEXT = (
+    "The excluded categories are dependants' scheme pensions; trivial commutation lump sum death benefits "
+    "replacing those pensions; dependants' or nominees' annuities bought together with the member's own "
+    "lifetime annuity; and qualifying death in service benefits. The benefit must be payable only in one or "
+    "more of those excluded forms. Having a choice of a non-excluded benefit can prevent the exclusion, even "
+    "if an excluded form is chosen after death. Annuity guarantee payments and value protection need their "
+    "own inheritance tax assessment."
+)
+EXCLUSIONS_SOURCES = ["ihta150A", "tn331", "tn332", "tn333", "tn334", "tn2_dsp"]
+
+# R05 (Clara, 3 October 2026): the pension asset figure, carrying C05's distinction to the video page.
+TRILLION_TEXT = (
+    "The Pensions Policy Institute's DC Future Book 2025 reports UK defined contribution pension assets of "
+    "£1.2 trillion in 2024. This shows the scale of the pension category affected, not the precise value "
+    "newly taxable from April 2027 or the amount of tax to be collected. Being within the rules does not "
+    "mean every pound is taxed."
+)
+
 VIDEOS = [
     {
         "slug": "pensions-and-inheritance-tax-from-april-2027",
@@ -318,14 +341,15 @@ VIDEOS = [
         "seo_title": "How will your pension be taxed when you die after April 2027?",
         "seo_description": "From 6 April 2027 unused pensions come into inheritance tax. What changes, what is excluded, and how, in a severe case, £500,000 could cost £516,000.",
         "meta_description": (
-            "From 6 April 2027, unused pension funds come within the scope of UK inheritance tax "
-            "for the first time. What changes, which pensions are excluded, and how a £500,000 "
+            "From 6 April 2027, most unused pension funds and pension death benefits count as part of "
+            "the estate for UK inheritance tax. What changes, which pensions are excluded, and how a £500,000 "
             "pension could cost a family £516,000 in tax. Video, key facts and full transcript "
             "by Steve Hunt ACII TEP."
         ),
         "published": "2026-09-29",
         "modified": "2026-10-03",
-        "modified_without_guide": "2026-10-01",
+        "modified_without_guide": "2026-10-03",
+        "as_at": "3 October 2026",
         "guide": ("pensions-and-inheritance-tax-from-april-2027/guide",
                   "Pensions and inheritance tax from April 2027: every question answered"),
         "published_iso": "2026-09-29T16:38:32+01:00",
@@ -335,16 +359,16 @@ VIDEOS = [
         "short_answer": [
             "From 6 April 2027, most unused pension funds and pension death benefits count as part of "
             "your estate for inheritance tax, and can be taxed at 40% on death. Pensions left to a "
-            "spouse or civil partner stay exempt. Unmarried partners are not covered.",
-            "Three main kinds of pension benefit are excluded: dependants' scheme pensions, such as a "
-            "widow's pension from a final salary scheme; death in service benefits; and dependants' or "
-            "nominees' annuities bought together with the member's own lifetime annuity.",
+            "spouse or civil partner are usually exempt, subject to the conditions of the spouse "
+            "exemption. Unmarried partners are not covered.",
+            EXCLUSIONS_TEXT,
             "If your estate with the pension is under the nil rate bands, there is no inheritance tax at "
             "all. In a severe case, with a large estate and a beneficiary who is a higher earner, a "
             "£500,000 pension could cost a family £516,000 in inheritance tax and income tax combined. "
-            "Most families will pay far less, and some nothing.",
+            "The result depends on the stated assumptions and is not a typical pension tax rate.",
         ],
-        "short_sources": ["ihta150A", "fa2026s71", "ihta18", "tn331", "tn333", "tn334", "steve_example"],
+        "short_sources": ["ihta150A", "fa2026s71", "ihta18", "tn331", "tn332", "tn333", "tn334", "tn2_dsp",
+                          "steve_example"],
         "chapters": [
             (0, "How will your pension be taxed after April 2027?"),
             (35, "What changes on 6 April 2027"),
@@ -361,14 +385,11 @@ VIDEOS = [
              "estate for inheritance tax: Inheritance Tax Act 1984, s.150A, inserted by Finance Act 2026, "
              "s.66, for deaths on or after 6 April 2027 (Finance Act 2026, s.71).",
              ["ihta150A", "fa2026s66", "fa2026s71", "tn"]),
-            ("Pensions left to a spouse or civil partner remain exempt (Inheritance Tax Act 1984, s.18). "
-             "Unmarried partners are not covered.",
+            ("Pensions left to a spouse or civil partner are usually exempt, subject to the conditions in "
+             "section 18 of the Inheritance Tax Act 1984. Unmarried partners are not covered.",
              ["ihta18", "tn34"]),
-            ("Excluded: dependants' scheme pensions, from any type of pension arrangement; death in service "
-             "benefits; and dependants' or nominees' annuities bought together with the member's own lifetime "
-             "annuity (Inheritance Tax Act 1984, s.150A(6)). Annuity guarantee periods and value protection "
-             "are included.",
-             ["ihta150A", "tn331", "tn333", "tn334"]),
+            (EXCLUSIONS_TEXT,
+             EXCLUSIONS_SOURCES),
             ("The residence nil rate band reduces by £1 for every £2 that an estate is over £2 million "
              "(Inheritance Tax Act 1984, s.8D).",
              ["ihta8D", "rnrb"]),
@@ -379,12 +400,10 @@ VIDEOS = [
              "not apply to pension funds. The tax is due by the end of the sixth month after the month of "
              "death, with interest after that (Inheritance Tax Act 1984, ss.226 and 233).",
              ["ihta226", "ihta233", "tn1123", "tn1124", "payiht"]),
-            ("An estimated £1 trillion of pension money comes within the scope of inheritance tax. Pensions "
-             "Age reported on 23 October 2025 that UK defined contribution pension assets had reached "
-             "£1.2 trillion (Pensions Policy Institute, DC Future Book). Coming within scope does not mean "
-             "it will all be taxed.",
-             ["pa1trn"]),
-            ("The worked example is a severe case. Most families will pay far less, and some nothing at all.",
+            (TRILLION_TEXT,
+             ["ppi2025", "pa1trn"]),
+            ("This is a severe, assumption-dependent illustration, not a typical pension tax rate. Other families "
+             "may pay less or no tax.",
              ["steve_example"]),
         ],
         "assumptions": (
@@ -407,12 +426,8 @@ VIDEOS = [
              "2027. Spouse and civil partner exemptions still apply. Common law partners are not covered.",
              ["ihta150A", "fa2026s66", "fa2026s71", "ihta18", "tn"]),
             ("Which pensions are excluded from inheritance tax from April 2027?",
-             "Three main categories: dependants' scheme pensions, such as a widow's, widower's or child's "
-             "pension from a final salary scheme, whatever type of pension arrangement pays them; death in "
-             "service benefits; and dependants' or nominees' annuities bought together with the member's own "
-             "lifetime annuity, which includes the nominees' annuity. Annuity guarantee periods and value "
-             "protection are not excluded. They count as part of the estate.",
-             ["ihta150A", "tn331", "tn333", "tn334"]),
+             EXCLUSIONS_TEXT,
+             EXCLUSIONS_SOURCES),
             ("Can the combined family tax cost of a £500,000 pension be more than the pension itself?",
              "In a severe case, yes. In the worked example, Mrs Miggins inherited a £500,000 pension from "
              "her husband, who died before 75, so it could all have been paid out tax free. Because her own "
@@ -476,12 +491,25 @@ VIDEOS = [
                      "contribution pension assets had reached £1.2 trillion (Pensions Policy Institute, DC Future "
                      "Book). Coming within scope does not mean it will all be taxed.",
              "sources": ["pa1trn"]},
+            {"phrase": "an estimated £1 trillion",
+             "kind": "Source clarification",
+             "id": "pension-assets-note",
+             "date": FIX_DATE,
+             "text": TRILLION_TEXT + " The guide answers this in full: [How much pension money comes within "
+                     "inheritance tax?](/pensions-and-inheritance-tax-from-april-2027/guide/"
+                     "#how-much-pension-money-comes-within-inheritance-tax)",
+             "sources": ["ppi2025", "pa1trn"]},
             {"phrase": "dependants' pensions from a defined benefit scheme",
              "kind": "Clarification",
              "text": "The exclusion covers dependants' scheme pensions from any type of pension arrangement, not "
                      "only defined benefit schemes. A widow's pension from a final salary scheme is the common "
                      "example.",
              "sources": ["ihta150A", "tn331"]},
+            {"phrase": "dependants' pensions from a defined benefit scheme",
+             "kind": "Clarification",
+             "date": FIX_DATE,
+             "text": EXCLUSIONS_TEXT,
+             "sources": EXCLUSIONS_SOURCES},
             {"phrase": "The pension does not pay the tax that it's responsible for.",
              "kind": "Clarification",
              "text": "In the example the pension's share of the tax is paid straight from the pension, under the "
@@ -489,6 +517,13 @@ VIDEOS = [
                      "are responsible for reporting and paying the tax, and a beneficiary who receives pension "
                      "property becomes jointly liable for the tax on it.",
              "sources": ["ihta265", "tn22", "tn7"]},
+            {"phrase": "joint life annuities, including nominees' annuities.",
+             "kind": "Clarification",
+             "date": FIX_DATE,
+             "text": "The exclusions and their conditions are set out in the updated [key facts](#key-facts) "
+                     "and the [note at 3:27](#t207). The pension-asset figure is explained in the "
+                     "[source clarification at 0:00](#pension-assets-note).",
+             "sources": []},
         ],
         "transcript_file": "v1_transcript.tsv",
         "keywords": ["pension inheritance tax 2027", "pensions and inheritance tax", "inheritance tax on pensions",
@@ -528,8 +563,8 @@ VIDEOS = [
             "estate for inheritance tax from 6 April 2027. On a real quotation from August 2026, a £500,000 "
             "pension fund was offered a joint life annuity of £29,153.64 a year for a father of 75, with 100% "
             "continuation to his daughter of 45.",
-            "The catches: this route can only be set up by the member, while alive; it is normally bought with "
-            "no guarantee period and no value protection; the two insurers who quoted in August 2026 wanted the "
+            "The catches: this route can only be set up by the member, while alive; the quotations illustrated "
+            "have no guarantee period and no value protection; the two insurers who quoted in August 2026 wanted the "
             "nominee to be aged 40 or over; the nominee's income is taxable when the member dies at 75 or over; "
             "and whether the purchase counts as a lifetime gift for inheritance tax is not settled.",
         ],
@@ -597,8 +632,8 @@ VIDEOS = [
         ],
         "assumptions": (
             "Mr Miggins, his brother Bill, and Amy are fictitious. The quotations are real, obtained in "
-            "August 2026 for a LinkedIn article, and will have changed since. The original quotations and the "
-            "insurers' answers are held on file. No client information is used."
+            "August 2026 for a LinkedIn article. Their guarantees have expired; they are not current offers. "
+            "The original quotations and the insurers' answers are held on file. No client information is used."
         ),
         "faq": [
             ("What is a nominees' annuity?",
@@ -635,15 +670,16 @@ VIDEOS = [
              "paid monthly in arrears, with 100% continuation to the daughter for the rest of her life. When "
              "the father dies, the same monthly income carries on to her. Bought together with his own "
              "annuity, it is excluded from his estate for inheritance tax from 6 April 2027. These are dated "
-             "examples, not recommendations, and rates will have changed since.",
+             "examples, not recommendations or current offers. A fresh quotation could give a different rate.",
              ["q_nominees", "ihta150A", "tn333"]),
             ("What is the catch with a nominees' annuity?",
              "The version excluded from inheritance tax can only be set up by the pension member, while alive, "
              "because it must be purchased together with a lifetime annuity payable to the member. So the "
              "opportunity to arrange this lifetime-purchased related annuity ends when the member dies. A widow "
              "who inherits her husband's pension cannot use that inherited pension to buy one, although she can "
-             "use her own pension. It is normally bought with no guarantee and no value protection, because "
-             "both of those would count for inheritance tax. The insurers who quoted in August 2026 wanted the "
+             "use her own pension. The quotations illustrated have no guarantee period or value protection. "
+             "Having neither is not a condition of the survivor-annuity exclusion; any such additional benefits "
+             "need their own inheritance tax assessment. The insurers who quoted in August 2026 wanted the "
              "nominee to be aged 40 or over, which is a provider condition rather than a legal one. If the "
              "member dies at 75 or over, the nominee pays income tax on the income. And whether buying one is a "
              "lifetime gift for inheritance tax has not been settled.",
@@ -653,8 +689,9 @@ VIDEOS = [
              "argument: if a £100,000 pot would buy a single life annuity of £10,000 a year, and the member "
              "takes £5,000 a year instead so that 100% continues to his son, he has given up half his pension "
              "income. Applying the same proportion to the pot is one way to illustrate a value, £50,000; it is "
-             "not the statutory valuation method, and the real figure would depend on the facts. If it were a "
-             "gift, it would be a potentially exempt transfer: nothing to pay if he lives seven years, and if "
+             "not the statutory valuation method, and the real figure would depend on the facts. If the "
+             "purchase met the conditions for a potentially exempt transfer: nothing to pay if he lives seven "
+             "years, and if "
              "he dies within seven years, up to £20,000 of tax at 40% on that illustrative figure in the worst "
              "case, with no nil rate band or exemptions available. Steve's reading of the law as written: buy "
              "one before 6 April 2027 and it may be a gift; buy one after 6 April 2027 out of a pension trust "
@@ -753,7 +790,7 @@ VIDEOS = [
             "generational wealth transfer. Video, key facts and full transcript by Steve Hunt ACII TEP."
         ),
         "published": "2026-10-01",
-        "modified": "2026-10-01",
+        "modified": "2026-10-03",
         "published_iso": "2026-10-01T07:06:59+01:00",
         "seconds": 783,
         "duration_iso": "PT13M3S",
@@ -850,7 +887,7 @@ VIDEOS = [
         ],
         "assumptions": (
             "Mr Miggins is fictitious. The quotation is real, obtained in 2026 and held on file; premiums depend "
-            "on age, health and the insurer, and will differ on the day. The comparisons use the amounts as "
+            "on age, health and the insurer, and could differ on the day. The comparisons use the amounts as "
             "paid, with no investment returns or inflation, and assume the premiums are exempt gifts in full. "
             "The 60% figure assumes the extra money falls entirely within the residence nil rate band taper: "
             "the estate is over £2 million and enough residence nil rate band, up to £350,000 with a full "
@@ -985,6 +1022,19 @@ for _v in VIDEOS:
 
 # What changed on each page at the 1 October 2026 review, shown on the corrections page.
 CORRECTIONS_LOG = [
+    ("3 October 2026", "Further corrections: fixed the sources page's original publication date at 1 October "
+                       "2026; aligned the pensions video-page and description summaries with the guide's "
+                       "exclusion conditions, spouse-exemption conditions and worked-example assumptions; "
+                       "clarified the pension-asset estimate and dated quotation wording; retained the nominees' "
+                       "guide's contractual and lifetime-transfer qualifications in the shorter video-page "
+                       "answers; and added the nominees' guide link to the video's description. The guides' "
+                       "existing answers and the recorded transcript text were not changed. New dated transcript "
+                       "annotations identify the clarifications. In the same release, the pensions page and its "
+                       "video description now describe the worked example as a severe, assumption-dependent "
+                       "illustration rather than saying most families will pay far less; the home page "
+                       "introduction and the pensions page description no longer say pensions come into "
+                       "inheritance tax for the first time; and the nominees' video description now says when "
+                       "the annuity income is taxable.", []),
     ("3 October 2026", "Two new pages were published, and the existing pages gained links to them. No answers on "
                        "the existing pages were changed.", [
         ("pensions-and-inheritance-tax-from-april-2027/guide", [
@@ -994,15 +1044,18 @@ CORRECTIONS_LOG = [
             "technical notes of May and August 2026.",
         ]),
         ("pensions-and-inheritance-tax-from-april-2027", [
-            "Links to the new guide were added, near the top and below the questions. Nothing else changed.",
+            "Guide links were added near the top, below the questions and under the related articles. Apart from "
+            "the site-wide navigation and author updates listed below, the existing answers and transcript were "
+            "unchanged.",
         ]),
         ("nominees-annuity", [
-            "The link to the guide now also appears near the top, after the short answer. Nothing else changed.",
+            "The guide link was also added near the top, after the short answer. Apart from the site-wide "
+            "navigation and author updates listed below, the existing answers and transcript were unchanged.",
         ]),
         ("nominees-annuity/guide", [
             "The introduction now also gives the question in everyday terms: whether a pension annuity can keep "
-            "paying a son, daughter or grandchild after the parent dies. The page title shown in search results now "
-            "reads 'Nominees' annuity: UK rules and inheritance tax from 2027'. No answers changed.",
+            "paying a son, daughter or grandchild after the parent dies. The page's HTML title is now "
+            "'Nominees' annuity: UK rules and inheritance tax from 2027'. No answers changed.",
         ]),
         ("", [
             "An About page was added, linked from the menu, the footer and the author box on every page.",
@@ -1217,9 +1270,31 @@ def source_ld(key):
     return d
 
 
+NOTE_LINK = re.compile(r"\[([^\]]+)\]\(([^)\s]+)\)")
+
+
+def note_plain(text):
+    """Note text without link markup, for structured data."""
+    return NOTE_LINK.sub(r"\1", text)
+
+
+def note_rich(text):
+    """Note text with [words](href) turned into links, everything else escaped."""
+    out, pos = [], 0
+    for m in NOTE_LINK.finditer(text):
+        out.append(esc(text[pos:m.start()]))
+        out.append(f'<a href="{esc(m.group(2))}">{esc(m.group(1))}</a>')
+        pos = m.end()
+    out.append(esc(text[pos:]))
+    return "".join(out)
+
+
 def note_html(n):
-    return (f'<div class="correction" role="note"><p><strong>{esc(n["kind"])}, {NOTE_DATE}:</strong> '
-            f'{esc(n["text"])}</p>{sources_html(n["sources"])}</div>')
+    # Notes added after 1 October 2026 carry their own date; the older notes keep NOTE_DATE.
+    when = nice_date(n["date"]) if "date" in n else NOTE_DATE
+    anchor = f' id="{esc(n["id"])}"' if n.get("id") else ""
+    return (f'<div class="correction" role="note"{anchor}><p><strong>{esc(n["kind"])}, {when}:</strong> '
+            f'{note_rich(n["text"])}</p>{sources_html(n["sources"])}</div>')
 
 
 # ---------------------------------------------------------------------------
@@ -1418,7 +1493,8 @@ def video_ld(v):
         "hasPart": clips,
         "transcript": plain_transcript(v),
         "correction": [
-            {"@type": "CorrectionComment", "text": f"{n['kind']}: {n['text']}", "datePublished": REVIEWED.isoformat()}
+            {"@type": "CorrectionComment", "text": f"{n['kind']}: {note_plain(n['text'])}",
+             "datePublished": n.get("date", REVIEWED).isoformat()}
             for n in v["notes"]
         ],
     }
@@ -1606,7 +1682,7 @@ def video_page(v):
 {chapters_html}
 </ol>
 
-<h2 id="key-facts">Key facts (as at {AS_AT})</h2>
+<h2 id="key-facts">Key facts (as at {v.get('as_at', AS_AT)})</h2>
 <ul class="facts">
 {facts_html}
 </ul>
@@ -1634,7 +1710,7 @@ def video_page(v):
 </section>
 
 {author_box()}
-{DISCLAIMER.format(asat=AS_AT)}
+{DISCLAIMER.format(asat=v.get('as_at', AS_AT))}
 </article>
 </main>
 {footer_html()}
@@ -1812,7 +1888,7 @@ def home_page():
 <main class="wrap">
 <p class="kicker">Steve Hunt ACII TEP</p>
 <h1>Inheritance tax, explained in plain English</h1>
-<p>Short videos that answer the questions families actually ask about UK inheritance tax: what the rules say, what things cost, and how the pieces fit together. The big one right now is the April 2027 change that brings unused pension funds into inheritance tax for the first time.</p>
+<p>Short videos that answer the questions families actually ask about UK inheritance tax: what the rules say, what things cost, and how the pieces fit together. The big one right now is the April 2027 change that brings most unused pension funds and pension death benefits into inheritance tax.</p>
 <p>Every video on this site comes with its key facts, the questions it answers and a full transcript, so you can read it as well as watch it. Every answer links to the law and the HMRC guidance it relies on, so you can check it for yourself. <a href="{CORRECTIONS_PATH}">How the sources are labelled, and what has been corrected</a>.</p>
 
 <h2 id="videos" style="border:0;margin-top:1.6em">The videos</h2>
@@ -1862,7 +1938,7 @@ def corrections_page():
             "isPartOf": {"@id": f"{SITE}/#website"},
             "author": {"@id": f"{SITE}/#steve-hunt"},
             "about": {"@id": f"{SITE}/#website"},
-            "datePublished": TODAY.isoformat(),
+            "datePublished": "2026-10-01",  # first published 1 October 2026; never moves (R01)
             "dateModified": TODAY.isoformat(),
             "lastReviewed": REVIEWED.isoformat(),
         }],
@@ -2019,6 +2095,9 @@ def about_page():
 </body>
 </html>
 """
+
+
+EVIDENCE_CSS = ""  # the evidence page is not published yet
 
 
 def evidence_page():
