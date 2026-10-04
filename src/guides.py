@@ -1,6 +1,11 @@
 # Guide pages: one deep question-and-answer page per subject, drawn from Steve's
 # LinkedIn articles and videos. Imported by build.py.
 
+# Guide 3 was a draft (built only with INCLUDE_DRAFTS=1) until Steve said go on 4 October 2026. The release date is the
+# actual first-publication date and never moves.
+WOL_GUIDE_DRAFT = False  # published 4 October 2026 on Steve's go
+WOL_GUIDE_RELEASE = "2026-10-04"
+
 GUIDES = [
     {
         "slug": "nominees-annuity/guide",
@@ -571,5 +576,495 @@ GUIDES = [
             ("oneword", "The word \"notional\", and why the reliefs do not apply."),
         ],
         "keywords": ["pensions inheritance tax April 2027", "inheritance tax on pensions", "notional pension property", "Inheritance Tax Act 1984 section 150A", "Finance Act 2026", "Pensions Direct Payment Scheme", "pension death benefits income tax", "residence nil rate band taper"],
+    },
+    {
+        "slug": "whole-of-life-assurance/guide",
+        "parent": "whole-of-life-assurance",
+        "draft": WOL_GUIDE_DRAFT,
+        "title": "Whole of life assurance: every question answered",
+        "short_title": "Whole of life guide",
+        "seo_title": "Whole of life assurance: trusts, premiums and inheritance tax",
+        "seo_description": "Whole of life assurance explained: guaranteed and reviewable premiums, whose life you can insure, trusts, premiums as gifts and tax on the payout.",
+        "meta_description": (
+            'Whole of life assurance, explained by Steve Hunt ACII TEP. It covers guaranteed and reviewable '
+            'premiums, whose life you can insure, trusts, premiums as gifts, tax on the payout and a dated '
+            'example quotation.'
+        ),
+        "published": WOL_GUIDE_RELEASE,
+        "modified": WOL_GUIDE_RELEASE,
+        "reviewed": "2026-10-04",
+        "intro": (
+            'This guide answers the questions people ask about whole of life assurance:\n\n- what it is;\n- whose '
+            'life can be insured;\n- how it works with trusts and inheritance tax;\n- how the premiums and the '
+            "payout are taxed;\n- why a generation came to distrust it.\n\nIt draws on Steve's LinkedIn articles, "
+            "his video, the Acts and HMRC's published guidance. Each answer stands on its own and ends with its "
+            "sources. Where an answer is Steve's own reading or experience rather than settled law, it says so.\n\n"
+            'The main example is an indicative, non-underwritten quotation for whole of life cover with a level '
+            'sum assured and guaranteed level premiums; an actual application would require medical underwriting. '
+            'Other whole of life products can have different premium periods, benefit terms or acceptance '
+            'conditions. The tax discussion concerns UK inheritance tax; the insurable-interest and '
+            'statutory-trust examples use England and Wales unless stated otherwise.'
+        ),
+        "short_answer": [
+            (
+                'Whole of life assurance provides a death benefit whenever the life assured dies, subject to the '
+                'policy terms and payment of premiums when due. On the guaranteed level-cover policy illustrated '
+                'here, both the premium and sum assured are fixed. Reviewable policies work differently: a review can '
+                'result in higher premiums or lower cover. Insurable interest is required when a policy is taken out '
+                'on another life; spouses and civil partners have a recognised interest, while other relationships '
+                'usually need a recognised financial interest or a specific statutory basis. An unlimited legal '
+                'interest in your own life does not mean an insurer must offer unlimited cover.'
+            ),
+            (
+                "A suitable trust can keep the policy outside the life assured's estate and normally let trustees "
+                "claim without waiting for the estate's grant. Premium gifts still need an exemption or the "
+                'appropriate lifetime-transfer treatment, and the trust can have tax obligations of its own. An '
+                'ordinary protection policy with no cash-in value normally produces no income-tax or '
+                'capital-gains-tax charge on its death benefit. The main quotation uses non-underwritten standard '
+                'rates for cover that would require medical underwriting, so age and health affect price and '
+                'availability. Guaranteed-acceptance products have different terms and are not the same illustration.'
+            ),
+        ],
+        "short_sources": ['laa1774', 'cpa253', 'mwpa11', 'ihta19', 'ihta21', 'ihta64', 'ittoia493', 'tcga210', 'iht410', 'fos', 'mh_life', 'mh_trust', 'lawcom_ii_7'],
+        "qa": [
+            # 1
+            ('What is whole of life assurance?',
+             (
+                 "Whole of life assurance puts a monetary value on a person's life, for example £500,000, called the "
+                 'sum assured. When that person dies, whenever that is, the insurer pays the sum assured, provided the '
+                 'premiums have been paid. In its basic form there are three parts:\n\n- the policyholder, who owns the '
+                 'policy;\n- the life assured, whose death triggers the payment;\n- the sum assured.\n\nIt has worked that '
+                 'way since the eighteenth century.'
+             ),
+             ['laa1774', 'mh_life', 'steve_86']),
+            # 2
+            ('Why is it called assurance rather than insurance?',
+             (
+                 "In Steve's explanation, you insure against something that might happen, and you assure against "
+                 'something that will happen. Term insurance covers a death that might happen within a set period. '
+                 'Whole of life assurance covers a death that will happen; the only unknown is when. The law does not '
+                 'turn on the label. The Life Assurance Act 1774 itself speaks of insurances on lives.'
+             ),
+             ['laa1774', 'steve_86']),
+            # 3
+            ('How is it different from term insurance?',
+             (
+                 "Term insurance pays only if death happens within a fixed term, such as 10 or 20 years. In Steve's "
+                 'experience, most people with term cover outlive the term, so for them it is a cost, like car or '
+                 'house insurance. Whole of life assurance has no end date. It pays on a death that is certain to '
+                 'happen, provided the premiums are kept up. That does not mean the premiums come back. On a long '
+                 'enough life, total premiums can exceed the payout.'
+             ),
+             ['mh_life', 'steve_history']),
+            # 4
+            ('What is the difference between guaranteed and reviewable premiums?',
+             (
+                 'On a policy with guaranteed level premiums and guaranteed level cover, neither is changed at a '
+                 'routine policy review. An agreed increase in cover or other contractual change is a different '
+                 'matter.\n\nOn a reviewable policy, the price rests on assumptions about the future. At each review, '
+                 'often every five or ten years, the insurer can ask for a higher premium or offer a lower sum '
+                 'assured.\n\nThe Financial Ombudsman Service says it receives very few complaints about non-reviewable '
+                 'policies. The type of policy matters more than its name.'
+             ),
+             ['fos', 'mh_life']),
+            # 5
+            ('What happens if the premiums stop? Is there a cash-in value?',
+             (
+                 'Failing to pay a premium that is due can cause cover to end under the policy terms. That is '
+                 'different from reaching an agreed age or date when no more premiums are due but cover continues. '
+                 'Cancelling protection-only cover normally does not return the premiums already paid, as MoneyHelper '
+                 "explains. In Steve's experience, guaranteed-premium policies bought for protection usually have no "
+                 'cash-in value, so nothing is paid out when they stop. Some older policies and unit-linked policies '
+                 'do have a surrender value.'
+             ),
+             ['mh_life', 'mh_o50', 'steve_history']),
+            # 6
+            ('Is whole of life assurance an investment?',
+             (
+                 'A protection-only whole of life policy with no investment fund or cash-in value is not a savings '
+                 'investment. It remains a regulated insurance contract. For the no-surrender-value policies discussed '
+                 "here, the FCA's pure protection definition requires benefits to be payable only on death or "
+                 'incapacity due to injury, sickness or infirmity, and no ability to convert or extend the contract so '
+                 'that it ceases to meet the definition.\n\nUnit-linked whole of life policies are different. They '
+                 'invest the premiums in funds, so their pricing depends on how the fund performs. Using a protection '
+                 'policy to pass money to the next generation does not make it an investment.'
+             ),
+             ['fca_ppc', 'fca_perg', 'fos']),
+            # 7
+            ('Whose life can be insured?',
+             (
+                 'Only a life in which the person taking out the policy has an insurable interest. The Life Assurance '
+                 'Act 1774 does two things:\n\n- it makes a policy void without that interest;\n- it limits what can be '
+                 'recovered to the value of the interest.\n\nThe courts recognise an unlimited insurable interest in '
+                 "your own life and in your husband's or wife's life. Civil partners have the same interest in each "
+                 'other by statute. For other relationships, a legally recognised financial interest or a specific '
+                 'statutory rule is normally needed; affection or an expectation of inheritance alone is not enough. '
+                 'The interest is tested when the policy is taken out, as question 9 explains. The insurer must also '
+                 'be willing to accept the risk and amount of cover.'
+             ),
+             ['laa1774', 'cpa253', 'lawcom_ii_7']),
+            # 8
+            ("Can a child insure a parent's life?",
+             (
+                 "Not as of right. The Law Commission's account of the current law in England and Wales says there is "
+                 "no general right for a child to insure a parent's life. That applies even to a child under 18. Nor "
+                 "is there a general right for a parent to insure a child's life. In Halford v Kymer (1830), a father "
+                 "was held to have no insurable interest in his son's life. Scots law differs.\n\nThe Law Commission "
+                 "published a draft Bill in 2018 to reform insurable interest, but it has not become law.\n\nIn Steve's "
+                 'experience, the usual arrangement is for the parent to insure their own life and write the policy in '
+                 'trust for the children.'
+             ),
+             ['lawcom_ii_8', 'lawcom_proj', 'steve_history']),
+            # 9
+            ('Does the insurable interest have to last until death?',
+             (
+                 'No. Case law requires the interest when the policy is taken out, not when the claim arises: Dalby v '
+                 'India and London Life Assurance Company (1854). So a policy that was valid when it started does not '
+                 'become void, for this purpose, just because the interest ends later, for example after a divorce.'
+             ),
+             ['lawcom_ii_9']),
+            # 10
+            ('What is joint life second death cover, and why is it used for inheritance tax?',
+             (
+                 'A joint life second death policy covers two lives and pays when the last survivor dies. Where it '
+                 'covers spouses or civil partners, it is often used for inheritance tax for two reasons:\n\n- what '
+                 'passes to a surviving spouse or civil partner is usually exempt;\n- an unused nil rate band can be '
+                 "transferred to the survivor.\n\nSo the tax bill often arises only on the second death.\n\nSteve's own "
+                 'view, set out in his Certainty³ article, is that separate single life policies in trust can do the '
+                 'job more flexibly. They build a pool of money, ready for the tax if and when it arises. If good '
+                 'planning means the tax never arises, the money goes to the children instead. Which suits a couple '
+                 'depends on their circumstances.'
+             ),
+             ['ihta18', 'ihta8A', 'steve_cert']),
+            # 11
+            ('Is a whole of life payout subject to inheritance tax?',
+             (
+                 'It depends on who owns the policy.\n\n- **Not in trust:** if the person who died owned a policy on '
+                 'their own life, and it was not in trust, HMRC says the proceeds form part of their estate.\n- '
+                 "**Written in trust for other people:** the proceeds belong to the trust, not the estate. HMRC's form "
+                 'IHT410 describes these as policies payable to the beneficiaries under a trust that do not form part '
+                 'of the estate.\n\nRetained benefits can change the result. If the gifts-with-reservation rules apply, '
+                 'the relevant policy interest or property representing it can be brought into account on death; the '
+                 'issue is not confined to the amount of premiums paid. The actual trust terms, exemptions and any '
+                 "separately retained benefits must be checked. Being outside the life assured's estate also does not "
+                 "remove a trust's own possible inheritance tax charges."
+             ),
+             ['mwpa11', 'fa1986s102', 'ihta43', 'ihta58', 'ihtm20211', 'ihtm20045', 'iht410']),
+            # 12
+            ('What does writing the policy in trust do?',
+             (
+                 'With an effective trust, the trustees hold the policy for the beneficiaries under its terms. A valid '
+                 'death claim is normally paid to the trustees without waiting for a grant of representation to the '
+                 "life assured's estate. Payment still depends on the insurer's claim requirements and the proper "
+                 "trustees being able to receive it.\n\nIn England and Wales, under the Married Women's Property Act "
+                 '1882, a policy on your own life that is expressed to be for your spouse, civil partner or children '
+                 "creates a trust. The money does not form part of your estate.\n\nIn Steve's experience, most insurers "
+                 'provide their own trust forms. The choice of trust and trustees matters.'
+             ),
+             ['mwpa11', 'cpa70', 'mh_trust', 'steve_history']),
+            # 13
+            ('Which kind of trust is used?',
+             (
+                 'The two main kinds are bare trusts and discretionary trusts.\n\n- **Bare (absolute) trust:** the '
+                 'beneficiaries are fixed and entitled outright. For inheritance tax purposes, a bare trust is not '
+                 'treated as settled property.\n- **Discretionary trust:** the trustees decide who benefits. That gives '
+                 'flexibility, but it brings the trust within the relevant property rules, with possible charges every '
+                 'ten years and when property leaves the trust.\n\nThe two kinds treat the premiums differently, as the '
+                 'next answer explains.'
+             ),
+             ['ihta43', 'ihta58', 'ihta64', 'ihta65', 'ihtm16030', 'govtrusts']),
+            # 14
+            ('Are the premiums gifts for inheritance tax?',
+             (
+                 'Yes, where the policy is held in trust for other people. HMRC treats setting up a policy for someone '
+                 'else as a transfer of value, and each later premium as another one.\n\nA premium can be exempt where '
+                 'the available annual exemption or normal expenditure out of income exemption covers it. The £3,000 '
+                 "annual exemption is shared across the giver's gifts, not available afresh for each policy or trust; "
+                 'unused exemption can be carried forward for one tax year. The £250 small-gifts exemption is not '
+                 'available for a discretionary settlement. It can cover an outright gift, including an absolute gift '
+                 'in trust for a minor, if the statutory conditions are met. It does not exempt the first £250 of a '
+                 'larger gift.\n\nAny part that no exemption covers is treated in one of two ways:\n\n- **Bare trust:** it '
+                 'is a potentially exempt transfer, free of inheritance tax if the giver survives seven years.\n- '
+                 '**Discretionary trust:** a non-exempt premium is normally a chargeable lifetime transfer. The '
+                 'available nil rate band depends on chargeable transfers in the preceding seven years. Above that '
+                 'band, the lifetime rate is normally 20% where the tax is borne by the recipient. If the giver pays '
+                 "the tax as well, the calculation must include that additional loss to the giver's estate. Further "
+                 'tax can arise if the giver dies within seven years.\n\nGiving an existing policy to a trust is a '
+                 "separate transfer of the policy's value, not simply a gift of its next premium. The special "
+                 'policy-valuation rule in question 19 can matter.'
+             ),
+             ['ihta3', 'ihta3A', 'ihta5_4', 'ihta7', 'ihta19', 'ihta20', 'ihta21', 'ihta167', 'ihtm20251', 'ihtm20012', 'ihtm14180', 'ihtm20241', 'govtrusts', 'govtrusts2']),
+            # 15
+            ('Can the premiums be normal expenditure out of income?',
+             (
+                 'They can, if all three conditions in section 21 are met. The payments must:\n\n- be part of the '
+                 "person's normal expenditure;\n- be made out of income, taking one year with another;\n- leave enough "
+                 'income to keep their usual standard of living.\n\nHMRC says "normal" means normal for that person. '
+                 "HMRC's manual reports that the court in Bennett v IRC (1995) described it as a settled pattern of "
+                 'expenditure. A commitment to pay annual premiums on a policy for someone else can set that pattern.\n\n'
+                 'HMRC works with income after income tax. Its guidance says accumulated income will normally become '
+                 'capital after about two years unless the evidence shows otherwise; two years is not a statutory '
+                 'cut-off. HMRC also takes a restrictive view where a policy can be made paid-up after the first '
+                 'premium, because the evidence must establish normal expenditure rather than a one-off capital gift.\n\n'
+                 'Section 21(3) expressly excludes from income the income-tax-exempt capital element of a purchased '
+                 "life annuity, subject to the provision's historical exception. That is different from treating "
+                 'regular pension income as income.\n\nThe exemption is not available only after death. HMRC can '
+                 'consider a lifetime claim, sometimes provisionally, and executors may need to establish it after '
+                 'death. Records of income, ordinary spending and premium gifts are therefore important.'
+             ),
+             ['ihta21_134', 'ihtm14235', 'ihtm14241', 'ihtm14242', 'ihtm14244', 'ihtm14250', 'ihtm14255', 'iht403']),
+            # 16
+            ('What is the special rule when an annuity has been bought on the same life?',
+             (
+                 'There are two separate inheritance tax rules, and they do different jobs.\n\n**Section 21(2)** can '
+                 'prevent premiums, or gifts used directly or indirectly to pay them, from qualifying as normal '
+                 "expenditure out of income where an annuity has been purchased on the giver's life. The annuity can "
+                 'be bought before or after the insurance. The restriction does not apply if it is shown that the '
+                 'relevant operations were not associated.\n\n**Section 263** can deem the annuity purchaser to make a '
+                 'transfer when the benefit of the life policy becomes vested in somebody else, if its conditions are '
+                 'met and the operations are associated. Its valuation rule can bring in the cost of the annuity, not '
+                 'just the premiums. This is a different question from whether each ordinary premium is an exempt '
+                 "gift.\n\nHMRC's Statement of Practice E4 treats the operations as not associated where the life policy "
+                 'was issued on full medical evidence and would have been issued on the same terms without the '
+                 "annuity. HMRC says the medical evidence must include, as a minimum, a private medical attendant's "
+                 'report used in the normal underwriting process, with a medical examination where that process '
+                 'requires one. Answering health questions alone does not establish that this test has been met.\n\nE4 '
+                 "is HMRC's published practice, not wording in the Act and not the only possible evidence that "
+                 'operations were not associated. Different insurers or different purchase dates do not, by '
+                 'themselves, settle the question.'
+             ),
+             ['ihta21_2', 'ihta263', 'ihta268', 'ihtm20374', 'ihtm20375', 'ihtm20376']),
+            # 17
+            ('Can pension income pay the premiums?',
+             (
+                 'Regular pension income, including a defined benefit pension or pension annuity income, can fund the '
+                 'premiums. Gifts can qualify under section 21 if the normal-expenditure, income and '
+                 'standard-of-living conditions are met, subject to the same-life annuity restriction in question 16. '
+                 'A pension withdrawal that is capital does not become income for this purpose merely because it came '
+                 'from a pension.\n\nFor deaths on or after 6 April 2027, most unused pension funds are within the new '
+                 "inheritance tax rules. An annuity that ends on the annuitant's death with no continuing death "
+                 'benefits leaves no such benefit to include. That does not, by itself, settle any separate '
+                 'lifetime-transfer question.\n\nSteve calls the combination Certainty³: "guaranteed income funding '
+                 'guaranteed premiums to create a guaranteed outcome". The income and cover are contractual guarantees '
+                 'subject to their terms. The tax treatment, continuing affordability and amount ultimately available '
+                 'to the family are not guaranteed by that description.\n\nThe same-life provisions contain no express '
+                 'exemption simply because pension money bought the annuity. The particular contracts, purchaser, '
+                 'trust and associated operations must be checked. Do not assume that a pension-funded annuity escapes '
+                 'the rules, or that ordinary underwriting automatically satisfies E4.'
+             ),
+             ['ihta21', 'ihta150A', 'ihta263', 'ihta268', 'tn2_ex1', 'ihtm20374', 'ihtm20375', 'ihtm20376', 'steve_cert']),
+            # 18
+            ('Is this the same as the back-to-back plans of the 1980s?',
+             (
+                 "In Steve's account, the engineering is the same, though the products differ. When he started in the "
+                 'industry in 1980, a common plan used savings to buy a fixed-term annuity whose income paid the '
+                 'premiums on an endowment. Those plans sold on the strength of life assurance premium relief. The '
+                 'relief was withdrawn for policies made after 13 March 1984, removing the new-policy tax relief on '
+                 'which this version of the arrangement depended. Certainty³ applies the same idea, with guaranteed '
+                 'income meeting guaranteed whole of life premiums.'
+             ),
+             ['icta266', 'hansard1984', 'steve_cert_exp']),
+            # 19
+            ('Does a trust holding a policy pay the ten-year charge?',
+             (
+                 'A discretionary policy trust can fall within the relevant property regime, with possible ten-year '
+                 "and exit charges. The amount depends on the trust's value and tax history, the available nil rate "
+                 'band and the statutory calculation. The maximum rate is normally 6%; it is not automatically 6% of '
+                 "every policy or payout.\n\nFor the policy's value, start with open-market value, but also check "
+                 'section 167. Where that rule applies, it imposes a minimum broadly equal to premiums or other '
+                 'consideration paid, less amounts already paid out under the policy, with statutory exceptions and '
+                 'adjustments. Section 167(5) extends the rule to relevant-property charge events. A whole of life '
+                 'policy is not outside that rule merely because it has no cash-in value.\n\nAge and health can make the '
+                 'market value higher, especially after a serious diagnosis. After death, proceeds retained in the '
+                 "trust are trust property. Being outside the life assured's estate does not make them exempt from the "
+                 "trust's own charges.\n\nA bare trust is not settled property for inheritance tax purposes, so the "
+                 'relevant-property ten-year and exit charges do not apply to it.'
+             ),
+             ['ihta58', 'ihta64', 'ihta65', 'ihta66', 'ihta67', 'ihta68', 'ihta69', 'ihta160', 'ihta167_15', 'ihtm20241', 'ihtm20029', 'ihtm42081', 'ihtm16030']),
+            # 20
+            ('Does the trust have to be registered with HMRC?',
+             (
+                 'A trust holding only qualifying insurance policies can be excluded from registration as a '
+                 'non-taxable express trust. The permitted benefits include payments on death, terminal or critical '
+                 'illness, disablement or to meet healthcare costs. A potential surrender value does not itself remove '
+                 'the exclusion, although actually surrendering a policy and retaining the cash can change the '
+                 'position.\n\nThis is not an exemption from the registration rules for taxable trusts. A relevant UK '
+                 'tax liability can require registration even while a policy-related exclusion would otherwise apply.\n\n'
+                 'The separate exclusion for holding qualifying death proceeds lasts for two years from the death, not '
+                 "from the insurer's payment. A tax liability can require registration sooner. If proceeds are still "
+                 'held after the two years, the trustees must check the registration requirement and whether any other '
+                 'exclusion applies. Holding other assets can also change the answer.'
+             ),
+             ['mlr45', 'mlr45ZA', 'mlrsch3A', 'trsm23010', 'trsm23030']),
+            # 21
+            ('Is the payout taxed as income or as a capital gain?',
+             (
+                 'Normally not.\n\n**Income tax.** A death that gives rise to benefits under a life policy is a '
+                 'chargeable event, but on a qualifying policy only in limited cases. Any gain is worked out from the '
+                 "policy's surrender value immediately before death, not from the sum assured. HMRC says this confines "
+                 'the gain to investment growth and leaves out the life cover. A protection policy with no surrender '
+                 'value therefore produces no gain.\n\n**Capital gains tax.** No chargeable gain arises on a life policy '
+                 'unless the rights were acquired for actual consideration. Paying the premiums does not count as '
+                 'actual consideration.'
+             ),
+             ['ittoia484', 'ittoia485', 'ittoia493', 'tcga210', 'iptm3515']),
+            # 22
+            ('How much cover would pay the inheritance tax?',
+             (
+                 'That depends on the estate the policy is meant to cover. The main figures are:\n\n- **Rate:** the '
+                 'ordinary nil rate band is £325,000 before any transferable amount. The normal death rate is 40% '
+                 'after the available nil rate bands, exemptions and reliefs. Earlier gifts can affect the remaining '
+                 'band, and a reduced 36% rate can apply where the charitable-giving conditions are met.\n- **Residence '
+                 'nil rate band:** up to £175,000 more can apply where a home passes to direct descendants, such as '
+                 'children or grandchildren. It is reduced by £1 for every £2 that the estate is over £2 million.\n- '
+                 '**Freeze:** both bands are frozen up to and including the 2030-31 tax year.\n- **Pensions:** from 6 '
+                 'April 2027, most unused pension funds also count.\n\nWhere the policy is validly held for others '
+                 "outside the life assured's estate, as described in question 11, the payout does not itself enlarge "
+                 'that estate. The required cover still depends on the actual estate calculation and any trust costs '
+                 'or taxes.'
+             ),
+             ['ihta7', 'ihtasch1', 'ihtasch1A', 'ihta8D', 'ihta150A', 'fa2021s86', 'fa2026s72', 'ihtgov', 'rnrb']),
+            # 23
+            ('Can the payout help pay the inheritance tax before probate?',
+             (
+                 'It can. Inheritance tax on death is normally due six months after the end of the month in which the '
+                 'death occurred. GOV.UK says you usually need to make a payment towards any inheritance tax due '
+                 'before you can get probate. A policy in trust is paid to the trustees without waiting for probate, '
+                 'so the money can be available sooner, although the trust does not guarantee that an insurer will '
+                 "settle a claim by a particular date.\n\nHow the trustees use it depends on the trust's terms and their "
+                 "powers. In Steve's experience, they might lend it to the executors or buy assets from the estate."
+             ),
+             ['ihta226', 'payiht', 'mh_trust', 'steve_history']),
+            # 24
+            ('How can whole of life assurance be used for generational wealth transfer?',
+             (
+                 "The site's illustration uses an indicative standard-rate quotation obtained on 10 August 2026 for a "
+                 'man aged 75: £500,000 of level whole of life cover at £1,555.20 a month, or £18,662.40 a year. It '
+                 'was a non-underwritten, nil-commission comparison, not a policy issued for Mr Miggins or a current '
+                 'offer. A real application would require underwriting and could produce different terms or premiums. '
+                 'The illustration assumes the quoted premium remains due and unchanged throughout each period shown '
+                 'and a valid £500,000 death claim is paid to the trustees.\n\n| If he dies at | Premiums paid | Gross '
+                 'policy payment to the trust |\n|---|---|---|\n| 80 | £93,312 | £500,000 |\n| 85 | £186,624 | £500,000 |\n'
+                 '| 90 | £279,936 | £500,000 |\n| 95 | £373,248 | £500,000 |\n| 100 | £466,560 | £500,000 |\n\nThese are '
+                 'gross policy proceeds, before any tax or costs of the trust. The table is not a promise that '
+                 'beneficiaries receive £500,000 net.\n\nOn that continuing-premium assumption, total premiums pass the '
+                 'sum assured only if he lives to nearly 102, after about 26 years and 10 months of premiums. If he '
+                 'dies young, the gross payment to the trust is far more than he paid in. If he lives long enough, he '
+                 'pays in more than that payment.'
+             ),
+             ['q_wol_aug']),
+            # 25
+            ('What happens if the premium money stays in the estate instead?',
+             (
+                 'For this comparison, assume the retained money falls wholly within a slice of the estate taxed at '
+                 '40%. A 60% marginal effect can arise where every pound of that money also removes 50p of otherwise '
+                 'available residence nil rate band and the normal 40% rate applies. That requires enough qualifying '
+                 'residential inheritance and available band, and the whole amount being compared must fall within the '
+                 'taper slice. An estate merely exceeding £2 million does not establish that result.\n\nSay he dies at '
+                 '80, having kept the £93,312 instead of paying premiums. That money leaves his family £55,987 after '
+                 '40% tax, or as little as £37,325 at 60%. Under the quotation assumptions in question 24, paying '
+                 'those premiums instead produces a gross policy payment of £500,000 to the trustees on a valid death '
+                 "claim, before the trust's own tax or costs.\n\nThis compares the amounts as paid, ignoring investment "
+                 'returns and inflation, and assumes the premiums are exempt gifts.'
+             ),
+             ['ihta8D', 'ihta21', 'rnrb', 'q_wol_aug']),
+            # 26
+            ('Is whole of life assurance worth it?',
+             (
+                 'That depends on the person, and this guide does not recommend it. Three important considerations '
+                 'are:\n\n- **How long the person lives.** In the age-75 quotation used here, total premiums pass the '
+                 '£500,000 sum assured only after about 26 years and 10 months.\n- **Whether required premiums remain '
+                 'affordable.** Missing a payment that remains due can end the cover under the policy terms. Some '
+                 'contracts stop requiring premiums at a specified age while cover continues.\n- **What the money would '
+                 'otherwise face.** The inheritance tax effect depends on the actual estate. The 40% and 60% examples '
+                 'in question 25 apply only with their stated assumptions.\n\nFor the medically underwritten cover '
+                 'illustrated here, age and health also affect whether cover is offered at all.'
+             ),
+             ['ihta8D', 'mh_life', 'mh_o50', 'q_wol_aug']),
+            # 27
+            ('Can anyone get whole of life assurance?',
+             (
+                 'Not every type. The medically underwritten cover illustrated here is not available to everyone. '
+                 'There are two whens:\n\n- when the insurer will pay out, if you have a policy;\n- how long cover will '
+                 'stay available to you.\n\nTo decide on whole of life assurance, the insurer looks at your age and your '
+                 'health. It sets the premium, and decides whether to offer cover at all. Neither age nor health '
+                 'stands still. A future scan that is not clear, or a blood test that needs follow-up, could mean this '
+                 'type of cover is no longer available.\n\nGuaranteed-acceptance whole of life products also exist, '
+                 'generally with restricted cover and an initial waiting period. They are a different type of cover '
+                 'from the one illustrated here; the example premium was calculated before medical underwriting. This '
+                 'discussion concerns obtaining new cover, not an automatic loss of an existing valid policy simply '
+                 'because health later worsens.'
+             ),
+             ['mh_o50', 'steve_history']),
+            # 28
+            ('What if a health question is answered wrongly?',
+             (
+                 'The law expects reasonable care, not perfection. Under the Consumer Insurance (Disclosure and '
+                 'Representations) Act 2012, a consumer buying insurance wholly or mainly for non-business purposes '
+                 'must take reasonable care not to make a misrepresentation. The old duty to volunteer everything has '
+                 'gone.\n\nAn inaccurate answer alone does not establish a right to reduce or refuse a claim. The '
+                 'insurer must show a qualifying misrepresentation: a failure to take reasonable care which caused it '
+                 'to enter the contract, or to do so on terms it would not otherwise have accepted. If the consumer '
+                 "took reasonable care, the Act's misrepresentation remedies do not apply.\n\nWhat the insurer can do "
+                 'depends on how the wrong answer was made:\n\n- **Deliberate or reckless:** the insurer can cancel the '
+                 'policy and refuse all claims. It can keep the premiums, unless that would be unfair.\n- **Careless:** '
+                 'the remedy is proportionate.\n  - If the insurer would never have offered cover, it can cancel and '
+                 'return the premiums.\n  - If it would have offered different terms, it can treat the policy as on '
+                 'those terms.\n  - If it would have charged more, it can pay a proportion of a claim.'
+             ),
+             ['cidra1to5', 'cidrasch1']),
+            # 29
+            ('What happens if the insurer fails?',
+             (
+                 'The Financial Services Compensation Scheme lists eligible whole of life assurance claims among those '
+                 'it protects at 100%. To be eligible, the insurer that failed must have been regulated by the '
+                 'Prudential Regulation Authority.'
+             ),
+             ['fscs_ins']),
+            # 30
+            ('Why does a whole generation distrust whole of life assurance?',
+             (
+                 "This is Steve's account, from working in the industry since 1980.\n\n- **The original job.** Whole of "
+                 'life assurance has a long history of providing money on death, including for estate liabilities. '
+                 'That basic purpose should be distinguished from the investment-linked designs discussed below.\n- '
+                 '**The unit-linked era.** From the 1960s the unit-linked life companies sold whole of life as an '
+                 'investment with a death benefit attached. Among them were Abbey Life, founded in 1961, and Hambro '
+                 'Life, founded in 1970 and renamed Allied Dunbar in 1985.\n- **What went wrong.** Premiums were '
+                 'reviewable and cover could be cut. Some policies lapsed with nothing to show for years of premiums.\n'
+                 '- **When.** Many were sold before the Financial Services Act 1986 brought in new rules on selling '
+                 "investments, from 29 April 1988.\n\nReview problems did not end with the initial sale. The FCA's "
+                 'December 2022 letter and September 2023 life-insurance priorities described large increases in '
+                 'reviewable whole of life premiums and the difficult choice between paying more and reducing cover.'
+             ),
+             ['fsa1986', 'si1988', 'ch_abbey', 'ch_ad', 'vdh2023', 'fca_dearceo22', 'fca_pri23', 'steve_history']),
+            # 31
+            ('What has changed?',
+             (
+                 'A whole of life policy with guaranteed level premiums and guaranteed level cover provides the '
+                 'following contractual terms:\n\n- the premium is fixed from day one;\n- the cover is not cut;\n- the '
+                 'policy pays whenever death occurs, subject to its terms and payment of premiums when due.\n\nThe '
+                 'Financial Ombudsman Service says it receives very few complaints about non-reviewable policies. '
+                 "Reviewable policies still exist, so the type matters.\n\nIn Steve's experience, genuine guaranteed "
+                 'whole of life has slowly returned since the early 2000s, and sales have grown sharply in recent '
+                 'years.'
+             ),
+             ['fos', 'steve_86_exp']),
+            # 32
+            ('Who was James Dodson?',
+             (
+                 'James Dodson was the mathematician who worked out the level premium system, the way whole of life '
+                 'assurance is still priced today. The Amicable Society admitted no one over 45, and it refused him '
+                 'admission. He died in 1757, before the Equitable Society he had planned opened its doors in 1762, '
+                 'leaving three children unprovided for. Steve has written about him in his LinkedIn article The '
+                 'Pastor Who Tried to Prove God and Accidentally Predicted Death.'
+             ),
+             ['dnb', 'actuary']),
+        ],
+        "articles": [
+            ("certainties", "How whole of life was hijacked in the 1980s, and Certainty³: guaranteed income funding guaranteed premiums."),
+            ("days86", "The history: Abbey Life, Hambro Life and the first era of mis-selling."),
+            ("pastor", "James Dodson, the Amicable Society and the level premium."),
+        ],
+        "keywords": ["whole of life assurance", "whole of life insurance", "life insurance in trust", "insurable interest", "normal expenditure out of income", "joint life second death", "Statement of Practice E4", "section 167", "Trust Registration Service", "guaranteed premiums"],
     },
 ]

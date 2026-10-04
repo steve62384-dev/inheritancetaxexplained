@@ -19,7 +19,7 @@ import os
 import re
 from datetime import date
 
-from guides import GUIDES as ALL_GUIDES
+from guides import GUIDES as ALL_GUIDES, WOL_GUIDE_RELEASE
 
 # Draft guides are built only when INCLUDE_DRAFTS=1, so a publishable build never links to an unapproved page.
 INCLUDE_DRAFTS = os.environ.get("INCLUDE_DRAFTS") == "1"
@@ -40,6 +40,10 @@ CII_TITLES = "https://www.cii.co.uk/about-us/professional-standards/using-cii-de
 CIRM_REGISTER = "https://www.regulated-professions.service.gov.uk/professions/chartered-insurance-risk-manager"
 STEP_SITE = "https://www.step.org/"
 TODAY = date(2026, 10, 3)
+WOL_GUIDE_SLUG = "whole-of-life-assurance/guide"
+WOL_GUIDE_IN_BUILD = any(g["slug"] == WOL_GUIDE_SLUG for g in GUIDES)
+if WOL_GUIDE_IN_BUILD:
+    TODAY = date.fromisoformat(WOL_GUIDE_RELEASE)  # the home, about and corrections pages list the new guide
 REVIEWED = date(2026, 10, 1)
 AS_AT = "1 October 2026"
 NOTE_DATE = "1 October 2026"
@@ -317,6 +321,130 @@ SOURCES = {
     "steve_example": ("Steve's analysis", "The worked example: arithmetic on the stated assumptions", None),
     "steve_history": ("Steve's experience", "Steve Hunt, in UK financial services since 1980", None),
 }
+
+
+# Added for the whole of life guide (guide 3). Each link opened and checked on 4 October 2026.
+IHTM = "https://www.gov.uk/hmrc-internal-manuals/inheritance-tax-manual/"
+LAWCOM_II = ("https://cdn.websitebuilder.service.justice.gov.uk/uploads/sites/54/2026/01/"
+             "cp201_extract_insurable_interest.pdf")
+LAWCOM_II_NAME = "Law Commission: Insurable interest, the current law (consultation paper 201, Part 11, reissued 2015)"
+SOURCES.update({
+    # Law
+    "ihta5_4": ("Law", "Inheritance Tax Act 1984, s.5(4)", f"{LEG}/ukpga/1984/51/section/5"),
+    "ihta20": ("Law", "Inheritance Tax Act 1984, s.20", f"{LEG}/ukpga/1984/51/section/20"),
+    "ihta21_134": ("Law", "Inheritance Tax Act 1984, s.21(1), (3) and (4)", f"{LEG}/ukpga/1984/51/section/21"),
+    "ihta21_2": ("Law", "Inheritance Tax Act 1984, s.21(2)", f"{LEG}/ukpga/1984/51/section/21"),
+    "ihta43": ("Law", "Inheritance Tax Act 1984, s.43", f"{LEG}/ukpga/1984/51/section/43"),
+    "ihta58": ("Law", "Inheritance Tax Act 1984, s.58", f"{LEG}/ukpga/1984/51/section/58"),
+    "ihta64": ("Law", "Inheritance Tax Act 1984, s.64", f"{LEG}/ukpga/1984/51/section/64"),
+    "ihta65": ("Law", "Inheritance Tax Act 1984, s.65", f"{LEG}/ukpga/1984/51/section/65"),
+    "ihta66": ("Law", "Inheritance Tax Act 1984, s.66", f"{LEG}/ukpga/1984/51/section/66"),
+    "ihta67": ("Law", "Inheritance Tax Act 1984, s.67", f"{LEG}/ukpga/1984/51/section/67"),
+    "ihta68": ("Law", "Inheritance Tax Act 1984, s.68", f"{LEG}/ukpga/1984/51/section/68"),
+    "ihta69": ("Law", "Inheritance Tax Act 1984, s.69", f"{LEG}/ukpga/1984/51/section/69"),
+    "ihta160": ("Law", "Inheritance Tax Act 1984, s.160", f"{LEG}/ukpga/1984/51/section/160"),
+    "ihta167": ("Law", "Inheritance Tax Act 1984, s.167", f"{LEG}/ukpga/1984/51/section/167"),
+    "ihta167_15": ("Law", "Inheritance Tax Act 1984, s.167, particularly s.167(1) and (5)",
+                   f"{LEG}/ukpga/1984/51/section/167"),
+    "ihtasch1": ("Law", "Inheritance Tax Act 1984, Sch. 1", f"{LEG}/ukpga/1984/51/schedule/1"),
+    "mwpa11": ("Law", "Married Women's Property Act 1882, s.11", f"{LEG}/ukpga/Vict/45-46/75/section/11"),
+    "cpa70": ("Law", "Civil Partnership Act 2004, s.70", f"{LEG}/ukpga/2004/33/section/70"),
+    "cidra1to5": ("Law", "Consumer Insurance (Disclosure and Representations) Act 2012, ss.1 to 5",
+                  f"{LEG}/ukpga/2012/6/contents"),
+    "cidrasch1": ("Law", "Consumer Insurance (Disclosure and Representations) Act 2012, Sch. 1",
+                  f"{LEG}/ukpga/2012/6/schedule/1"),
+    "ittoia484": ("Law", "Income Tax (Trading and Other Income) Act 2005, s.484", f"{LEG}/ukpga/2005/5/section/484"),
+    "ittoia485": ("Law", "Income Tax (Trading and Other Income) Act 2005, s.485", f"{LEG}/ukpga/2005/5/section/485"),
+    "ittoia493": ("Law", "Income Tax (Trading and Other Income) Act 2005, s.493", f"{LEG}/ukpga/2005/5/section/493"),
+    "tcga210": ("Law", "Taxation of Chargeable Gains Act 1992, s.210", f"{LEG}/ukpga/1992/12/section/210"),
+    "icta266": ("Law", "Income and Corporation Taxes Act 1988, s.266(3)(c)", f"{LEG}/ukpga/1988/1/section/266"),
+    "mlr45": ("Law", "Money Laundering Regulations 2017, reg. 45", f"{LEG}/uksi/2017/692/regulation/45"),
+    "mlr45ZA": ("Law", "Money Laundering Regulations 2017, reg. 45ZA", f"{LEG}/uksi/2017/692/regulation/45ZA"),
+    "mlrsch3A": ("Law", "Money Laundering Regulations 2017, Sch. 3A, paras 4 and 8", f"{LEG}/uksi/2017/692/schedule/3A"),
+    # HMRC
+    "ihtm14180": ("HMRC", "HMRC Inheritance Tax Manual, IHTM14180 (small gifts)", IHTM + "ihtm14180"),
+    "ihtm14235": ("HMRC", "HMRC Inheritance Tax Manual, IHTM14235 (normal expenditure: life policy linked with an annuity)",
+                  IHTM + "ihtm14235"),
+    "ihtm14241": ("HMRC", "HMRC Inheritance Tax Manual, IHTM14241 (the meaning of normal)", IHTM + "ihtm14241"),
+    "ihtm14242": ("HMRC", "HMRC Inheritance Tax Manual, IHTM14242 (a pattern of expenditure)", IHTM + "ihtm14242"),
+    "ihtm14244": ("HMRC", "HMRC Inheritance Tax Manual, IHTM14244 (HMRC's account of the case Bennett v IRC [1995])",
+                  IHTM + "ihtm14244"),
+    "ihtm14250": ("HMRC", "HMRC Inheritance Tax Manual, IHTM14250 (out of income)", IHTM + "ihtm14250"),
+    "ihtm14255": ("HMRC", "HMRC Inheritance Tax Manual, IHTM14255 (standard of living)", IHTM + "ihtm14255"),
+    "ihtm16030": ("HMRC", "HMRC Inheritance Tax Manual, IHTM16030 (what is a trust?)", IHTM + "ihtm16030"),
+    "ihtm20012": ("HMRC", "HMRC Inheritance Tax Manual, IHTM20012 (life policies and Inheritance Tax)", IHTM + "ihtm20012"),
+    "ihtm20029": ("HMRC", "HMRC Inheritance Tax Manual, IHTM20029 (form IHT410 enquiries: open market value)",
+                  IHTM + "ihtm20029"),
+    "ihtm20045": ("HMRC", "HMRC Inheritance Tax Manual, IHTM20045 (premiums paid for someone else's benefit)",
+                  IHTM + "ihtm20045"),
+    "ihtm20241": ("HMRC", "HMRC Inheritance Tax Manual, IHTM20241 (the section 167 special rule)", IHTM + "ihtm20241"),
+    "ihtm20251": ("HMRC", "HMRC Inheritance Tax Manual, IHTM20251 (a policy for someone else from the start)",
+                  IHTM + "ihtm20251"),
+    "ihtm20374": ("HMRC", "HMRC Inheritance Tax Manual, IHTM20374 (life policy linked with an annuity: the statutory position)", IHTM + "ihtm20374"),
+    "ihtm20376": ("HMRC", "HMRC Inheritance Tax Manual, IHTM20376 (annuity and policy issued by different companies)", IHTM + "ihtm20376"),
+    "ihtm42081": ("HMRC", "HMRC Inheritance Tax Manual, IHTM42081 (ten-year anniversary: introduction)", IHTM + "ihtm42081"),
+    "iptm3515": ("HMRC", "HMRC Insurance Policyholder Taxation Manual, IPTM3515 (the value of a policy on death)",
+                 "https://www.gov.uk/hmrc-internal-manuals/insurance-policyholder-taxation-manual/iptm3515"),
+    "trsm23010": ("HMRC", "HMRC Trust Registration Service Manual, TRSM23010 (excluded express trusts: introduction)",
+                  "https://www.gov.uk/hmrc-internal-manuals/trust-registration-service-manual/trsm23010"),
+    "trsm23030": ("HMRC", "HMRC Trust Registration Service Manual, TRSM23030 (excluded express trusts: insurance policies)",
+                  "https://www.gov.uk/hmrc-internal-manuals/trust-registration-service-manual/trsm23030"),
+    "iht410": ("HMRC", "GOV.UK: form IHT410, life assurance and annuities",
+               "https://www.gov.uk/government/publications/inheritance-tax-life-assurance-and-annuities-iht410"),
+    "govtrusts": ("HMRC", "GOV.UK: Trusts and Inheritance Tax", "https://www.gov.uk/guidance/trusts-and-inheritance-tax"),
+    "govtrusts2": ("HMRC", "GOV.UK: Trusts and taxes, Trusts and Inheritance Tax",
+                   "https://www.gov.uk/trusts-taxes/trusts-and-inheritance-tax"),
+    # Provider evidence (held on file, not published)
+    "q_wol_aug": ("Provider evidence", "Indicative standard-rate whole of life comparison, 10 August 2026, "
+                  "non-underwritten and nil commission, held on file (the calculations use the stated monthly "
+                  "premium)", None),
+    # Published sources
+    "mh_life": ("Published source", "MoneyHelper: What is life insurance?",
+                "https://www.moneyhelper.org.uk/en/everyday-money/insurance/what-is-life-insurance"),
+    "mh_trust": ("Published source", "MoneyHelper: How to get your finances in order before you die",
+                 "https://www.moneyhelper.org.uk/en/family-and-care/death-and-bereavement/"
+                 "putting-your-financial-affairs-in-order-if-you-get-ill-or-die-making-a-will-and-more"),
+    "lawcom_ii_7": ("Published source", LAWCOM_II_NAME + ", paras 11.72 to 11.75 (Reed v Royal Exchange "
+                    "Assurance (1795) and Griffiths v Fleming [1909], cited at para 11.72)", LAWCOM_II),
+    "lawcom_ii_8": ("Published source", LAWCOM_II_NAME + ", paras 11.73 to 11.76, citing Halford v Kymer (1830)",
+                    LAWCOM_II),
+    "lawcom_ii_9": ("Published source", LAWCOM_II_NAME + ", para 11.36, citing Dalby v India and London Life "
+                    "Assurance Company (1854)", LAWCOM_II),
+    "lawcom_proj": ("Published source", "Law Commission: Insurable interest project page",
+                    "https://lawcom.gov.uk/project/insurance-contract-law-insurable-interest/"),
+    "fca_ppc": ("Published source", "FCA Handbook Glossary: pure protection contract",
+                "https://www.handbook.fca.org.uk/handbook/glossary/G935.html"),
+    "fca_perg": ("Published source", "FCA Perimeter Guidance, PERG 2 Annex 2 (regulated activities and contracts of "
+                 "insurance)", "https://www.handbook.fca.org.uk/handbook/PERG/2/Annex2.html"),
+    "mh_o50": ("Published source", "MoneyHelper: Life insurance for over 50s",
+               "https://www.moneyhelper.org.uk/en/family-and-care/death-and-bereavement/"
+               "over-50s-life-insurance-is-it-worth-it"),
+    "fscs_ins": ("Published source", "Financial Services Compensation Scheme: Insurance",
+                 "https://www.fscs.org.uk/what-we-cover/insurance/"),
+    "fca_dearceo22": ("Published source", "FCA: Dear CEO letter to life insurers, 14 December 2022",
+                      "https://www.fca.org.uk/publication/correspondence/"
+                      "dear-ceo-letter-expectations-life-insurers-cost-of-living.pdf"),
+    "fca_pri23": ("Published source", "FCA: Insurance market priorities 2023 to 2025, 20 September 2023",
+                  "https://www.fca.org.uk/publication/correspondence/life-insurance-market-priorities-2023.pdf"),
+    "hansard1984": ("Published source", "Hansard, House of Commons, 13 March 1984: Budget statement, savings and "
+                    "investment", "https://api.parliament.uk/historic-hansard/commons/1984/mar/13/savings-and-investment"),
+    "ch_abbey": ("Published source", "Companies House: Abbey Life Assurance Company Limited (00710383)",
+                 "https://find-and-update.company-information.service.gov.uk/company/00710383"),
+    "ch_ad": ("Published source", "Companies House: Allied Dunbar Assurance plc (00865292)",
+              "https://find-and-update.company-information.service.gov.uk/company/00865292"),
+    "vdh2023": ("Published source", "Arjen van der Heide, Dealing in Uncertainty (Bristol University Press, 2023), "
+                "chapter 3", "https://www.cambridge.org/core/books/dealing-in-uncertainty/"
+                "shifting-boundaries-between-insurance-and-finance/358F5532AC6BB53FD7995A951D891746"),
+    # Steve
+    "steve_cert": ("Steve's analysis", "There are two certainties in life (LinkedIn article)",
+                   ARTICLES["certainties"][1]),
+    "steve_cert_exp": ("Steve's experience", "There are two certainties in life (LinkedIn article)",
+                       ARTICLES["certainties"][1]),
+    "steve_86": ("Steve's analysis", "86 days, 10 hours, 5 minutes and 42 seconds (LinkedIn article)",
+                 ARTICLES["days86"][1]),
+    "steve_86_exp": ("Steve's experience", "86 days, 10 hours, 5 minutes and 42 seconds (LinkedIn article)",
+                     ARTICLES["days86"][1]),
+})
 
 if INCLUDE_EVIDENCE:
     SOURCES["q_nominees"] = ("Provider evidence",
@@ -806,7 +934,9 @@ VIDEOS = [
             "generational wealth transfer. Video, key facts and full transcript by Steve Hunt ACII TEP."
         ),
         "published": "2026-10-01",
-        "modified": "2026-10-03",
+        "modified": WOL_GUIDE_RELEASE,
+        "modified_without_guide": "2026-10-03",
+        "guide": (WOL_GUIDE_SLUG, "Whole of life assurance: every question answered"),
         "published_iso": "2026-10-01T07:06:59+01:00",
         "seconds": 783,
         "duration_iso": "PT13M3S",
@@ -1167,6 +1297,22 @@ CORRECTIONS_LOG = [
         ]),
     ]),
 ]
+
+if WOL_GUIDE_IN_BUILD:
+    CORRECTIONS_LOG.insert(0, (f"{date.fromisoformat(WOL_GUIDE_RELEASE).day} "
+                               f"{date.fromisoformat(WOL_GUIDE_RELEASE):%B %Y}",
+                               "A new guide was published, and the whole of life video page gained links to it. "
+                               "No answers on the existing pages were changed.", [
+        (WOL_GUIDE_SLUG, [
+            "Published: Whole of life assurance: every question answered. A guide of 32 questions drawn from Steve's "
+            "LinkedIn articles and the video, each answer with its sources: premiums, insurable interest, trusts and "
+            "inheritance tax, the tax on the payout, a dated example quotation and the history.",
+        ]),
+        ("whole-of-life-assurance", [
+            "Guide links were added near the top, below the questions and under the related articles. The existing "
+            "answers, key facts and transcript were unchanged.",
+        ]),
+    ]))
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -1756,6 +1902,90 @@ def slugify(text):
     return s[:70].rstrip("-")
 
 
+# Guide answers can hold more than one paragraph, simple lists and a table. Plain one-paragraph answers render
+# exactly as before.
+BOLD = re.compile(r"\*\*(.+?)\*\*")
+GUIDE_TABLE_CSS = """
+.tablewrap{overflow-x:auto;margin:1em 0 .4em}
+table.figures{border-collapse:collapse;width:100%;font-size:.95rem}
+table.figures th,table.figures td{border-bottom:1px solid var(--rule);padding:8px 10px;text-align:left;vertical-align:top}
+table.figures thead th{border-bottom:2px solid var(--gold)}
+"""
+
+
+def rich_inline(s):
+    out, pos = [], 0
+    for m in BOLD.finditer(s):
+        out.append(esc(s[pos:m.start()]))
+        out.append(f"<strong>{esc(m.group(1))}</strong>")
+        pos = m.end()
+    out.append(esc(s[pos:]))
+    return "".join(out)
+
+
+def rich_blocks(text):
+    """Split rich text into ('p', text), ('ul', [(item, [subitems])]) and ('table', [rows]) blocks."""
+    blocks = []
+    for raw in text.split("\n\n"):
+        lines = raw.split("\n")
+        if all(ln.startswith("|") for ln in lines):
+            rows = [[c.strip() for c in ln.strip().strip("|").split("|")] for ln in lines]
+            assert set(rows[1][0]) <= set("-:"), raw
+            blocks.append(("table", [rows[0]] + rows[2:]))
+        elif all(ln.startswith("- ") or ln.startswith("  - ") for ln in lines):
+            items = []
+            for ln in lines:
+                if ln.startswith("  - "):
+                    items[-1][1].append(ln[4:])
+                else:
+                    items.append((ln[2:], []))
+            blocks.append(("ul", items))
+        else:
+            assert "\n" not in raw, raw
+            blocks.append(("p", raw))
+    return blocks
+
+
+def rich_html(text):
+    out = []
+    for kind, val in rich_blocks(text):
+        if kind == "p":
+            out.append(f"<p>{rich_inline(val)}</p>")
+        elif kind == "ul":
+            lis = []
+            for item, subs in val:
+                sub = ("<ul>" + "".join(f"<li>{rich_inline(s)}</li>" for s in subs) + "</ul>") if subs else ""
+                lis.append(f"<li>{rich_inline(item)}{sub}</li>")
+            out.append("<ul>" + "".join(lis) + "</ul>")
+        else:
+            head, rows = val[0], val[1:]
+            out.append('<div class="tablewrap"><table class="figures"><thead><tr>'
+                       + "".join(f'<th scope="col">{rich_inline(c)}</th>' for c in head) + "</tr></thead><tbody>"
+                       + "".join("<tr>" + "".join(f"<td>{rich_inline(c)}</td>" for c in r) + "</tr>" for r in rows)
+                       + "</tbody></table></div>")
+    return "\n".join(out)
+
+
+def rich_plain(text):
+    """The same words as plain text, for structured data. A table row reads 'Heading: value; ...'."""
+    parts = []
+    for kind, val in rich_blocks(text):
+        if kind == "p":
+            parts.append(BOLD.sub(r"\1", val))
+        elif kind == "ul":
+            for item, subs in val:
+                parts.append(BOLD.sub(r"\1", item))
+                parts += [BOLD.sub(r"\1", s) for s in subs]
+        else:
+            head, rows = val[0], val[1:]
+            parts += ["; ".join(f"{h}: {c}" for h, c in zip(head, r)) + "." for r in rows]
+    return " ".join(parts)
+
+
+def guide_has_table(g):
+    return any(kind == "table" for _, a, _ in g["qa"] for kind, _ in rich_blocks(a))
+
+
 def guide_ld(g):
     url = f"{SITE}/{g['slug']}/"
     parent = next(v for v in VIDEOS if v["slug"] == g["parent"])
@@ -1764,7 +1994,7 @@ def guide_ld(g):
         "@id": f"{url}#faq",
         "mainEntity": [
             {"@type": "Question", "name": q, "url": f"{url}#{slugify(q)}",
-             "acceptedAnswer": dict({"@type": "Answer", "text": a},
+             "acceptedAnswer": dict({"@type": "Answer", "text": rich_plain(a)},
                                     **({"citation": [source_ld(k) for k in unique(ks)]} if ks else {}))}
             for q, a, ks in g["qa"]
         ],
@@ -1807,13 +2037,14 @@ def guide_page(g):
         f'<li><a href="#{slugify(q)}">{esc(q)}</a></li>' for q, _, _ in g["qa"]
     )
     qa_html = "\n".join(
-        f'<h3 id="{slugify(q)}">{esc(q)}</h3>\n<p>{esc(a)}</p>\n{sources_html(ks)}' for q, a, ks in g["qa"]
+        f'<h3 id="{slugify(q)}">{esc(q)}</h3>\n{rich_html(a)}\n{sources_html(ks)}' for q, a, ks in g["qa"]
     )
     articles_html = "\n".join(
         f'<li><a href="{ARTICLES[k][1]}" target="_blank" rel="noopener">{esc(ARTICLES[k][0])}</a> {esc(note)}</li>'
         for k, note in g["articles"]
     )
     ld = ld_script(guide_ld(g))
+    css = CSS + (GUIDE_TABLE_CSS if guide_has_table(g) else "")
     return f"""<!doctype html>
 <html lang="en-GB">
 <head>
@@ -1835,7 +2066,7 @@ def guide_page(g):
 <meta name="twitter:title" content="{esc(g['title'])}">
 <meta name="twitter:description" content="{esc(g['seo_description'])}">
 <meta name="twitter:image" content="{thumb}">
-<style>{CSS}</style>
+<style>{css}</style>
 {ld}
 </head>
 <body>
@@ -1845,7 +2076,7 @@ def guide_page(g):
 <p class="kicker">Guide &middot; Inheritance tax explained</p>
 <h1>{esc(g['title'])}</h1>
 <p class="byline">By <a href="#about-the-author">Steve Hunt ACII TEP</a> &middot; Published {pub_text} &middot; <a href="{CORRECTIONS_PATH}">Last reviewed {nice_date(date.fromisoformat(g['reviewed']))}</a> &middot; {len(g['qa'])} questions</p>
-<p>{esc(g['intro'])}</p>
+{rich_html(g['intro'])}
 
 <section class="answer" id="short-answer">
 <h2>The short answer</h2>
