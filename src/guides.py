@@ -1089,7 +1089,7 @@ GUIDES.append({
         "risks and the protections. Every answer links to the law."
     ),
     "published": ER_GUIDE_RELEASE,
-    "modified": "2026-10-24",  # 24 October 2026: link to the new video added; answers unchanged
+    "modified": "2026-10-29",  # 29 October 2026: April 2027 savings rate 24% after Budget 2026 (was 22%)
     "reviewed": "2026-10-14",
     "intro": (
         "This guide answers the questions people ask about using equity release to pay an income, and what it "
@@ -1228,10 +1228,10 @@ GUIDES.append({
              "The taxed slice is savings income. The insurer must take 20% off it before paying her: 20% of "
              "£197.45 is £39.49 a month. If she pays no tax at all, she can ask to be paid gross on HMRC form R89. "
              "Depending on her other income and allowances, she may pay less tax, or none. The tax taken off is not "
-             "necessarily her final bill.\n\nFrom 6 April 2027 the basic rate on savings income rises to 22%. On her "
-             "£197.45 slice, that is about £4 a month more tax."
+             "necessarily her final bill.\n\nBudget 2026, on 28 October 2026, set the basic rate on savings income at 24% "
+             "from 6 April 2027. On her £197.45 slice, that is about £8 a month more tax."
          ),
-         ["ittoia422", "ita18", "ita901", "r89", "fa2026s5"]),
+         ["ittoia422", "ita18", "ita901", "r89", "budget2026_annexA"]),
         # 11
         ("What does the lifetime mortgage cost?",
          (

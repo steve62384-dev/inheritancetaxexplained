@@ -48,6 +48,8 @@ REVIEWED = date(2026, 10, 1)
 # Video 4, equity release and inheritance tax. Its page carries its own review date (reviewed_date).
 ER_VIDEO_RELEASE = "2026-10-24"
 ER_VIDEO_PUBLISHED_ISO = "2026-10-24T15:17:30+01:00"  # made Public on YouTube at this time
+HIP3_VIDEO_RELEASE = "2026-10-29"
+HIP3_VIDEO_PUBLISHED_ISO = "2026-10-29T06:27:00+00:00"  # made Public on YouTube at this time
 AS_AT = "1 October 2026"
 NOTE_DATE = "1 October 2026"
 # Date of the consistency pass after Clara's release review (R01 to R08). New notes carry it;
@@ -102,6 +104,10 @@ ARTICLES = {
     "taboo": (
         "Inheritance Tax... Can Equity Release Really Help? Taboo For Decades, But Is It Time?",
         "https://www.linkedin.com/pulse/inheritance-tax-can-equity-release-really-help-taboo-hunt-acii-tep-yympe/",
+    ),
+    "mansion": (
+        "The government is about to launch its own equity release scheme. It's called the mansion tax.",
+        "https://www.linkedin.com/pulse/government-launch-its-own-equity-release-scheme-tax-hunt-acii-tep-ywf9e/",
     ),
 }
 
@@ -1453,6 +1459,304 @@ VIDEOS = [
                      "home income plan", "HIP 2.0", "residence nil rate band taper", "care fees home income plan",
                      "Equity Release Council standards", "inheritance tax", "Roy Jenkins voluntary levy"],
     },
+    {
+        "slug": "smart-home-income-plan",
+        "id": "bcnDKvDHad0",
+        "number": 5,
+        "title": "What is a smart home income plan? UK inheritance tax explained",
+        "short_title": "Smart home income plan (HIP 3.0)",
+        "seo_title": "What is a smart home income plan? UK inheritance tax explained",
+        "seo_description": "A home income plan with a dial: a lifetime mortgage buys a purchased life annuity, and the "
+                           "interest is paid or rolled up to hold a UK estate just under £2 million.",
+        "meta_description": (
+            "What is a smart home income plan (HIP 3.0)? A lifetime mortgage buys a purchased life annuity, and each "
+            "year the interest is paid or rolled up to hold a UK estate just under £2 million, where the residence nil "
+            "rate band starts to taper. The dial, the £1.95 million target, the mansion tax and its deferral scheme, "
+            "the risks. Video, key facts and full transcript by Steve Hunt ACII TEP."
+        ),
+        "published": HIP3_VIDEO_RELEASE,
+        "modified": HIP3_VIDEO_RELEASE,
+        "published_iso": HIP3_VIDEO_PUBLISHED_ISO,
+        "seconds": 1074,
+        "duration_iso": "PT17M54S",
+        "duration_text": "18 min",
+        "as_at": "29 October 2026",
+        "reviewed_date": date(2026, 10, 29),
+        "short_answer": [
+            "A smart home income plan is a home income plan with a dial. A lifetime mortgage buys a purchased life "
+            "annuity, and each year the interest is either paid or left to roll up, to hold the estate just under "
+            "£2 million. In the UK, £2 million is the line where the residence nil rate band starts to be taken away. "
+            "Steve Hunt calls it HIP 3.0. Smart home income plan is his own name for the idea: it uses products you "
+            "can buy today, but it is not a product in its own right.",
+            "Between £2 million and £2.7 million, every extra £1 in a widow's estate costs 60p in tax on 2026/27 "
+            "rules, so every £1 the plan brings the estate down saves 60p. But the family still inherits less, "
+            "because the money has been spent. In Steve's UK worked example, Mrs Miggins, 85, sets her dial at "
+            "£1.95 million. The mansion tax part covers England only: the High Value Council Tax Surcharge and its "
+            "deferral scheme were confirmed on 28 October 2026.",
+        ],
+        "short_sources": ["steve_hip3_article", "ihta8D", "ihtm46023", "steve_hip3_example", "hvcts2026"],
+        "chapters": [
+            (0, "What is a smart home income plan?"),
+            (28, "The short answer"),
+            (87, "What were HIP 1.0 and HIP 2.0, and what does HIP 3.0 add?"),
+            (172, "Why does £2 million matter for inheritance tax?"),
+            (269, "How does the smart home income plan dial work?"),
+            (386, "Why set the dial at £1.95 million, not £2 million?"),
+            (448, "How much can rolling up the interest cool the estate?"),
+            (524, "Does a smart home income plan work for a smaller house?"),
+            (568, "What is the mansion tax, and can it be deferred?"),
+            (679, "Is deferring the mansion tax better than a smart home income plan?"),
+            (735, "How could an 85-year-old spend the income?"),
+            (891, "What are the risks, and who does it not suit?"),
+            (977, "So, can a smart home income plan cut inheritance tax?"),
+            (1029, "Roy Jenkins on inheritance tax"),
+        ],
+        "key_facts": [
+            ("A smart home income plan, which Steve calls HIP 3.0, adds a dial to a plan that is more than 50 years "
+             "old. The first home income plans, in the 1970s, used a mortgage to buy an annuity, and the annuity paid "
+             "the interest: HIP 1.0. In the late 1980s the money went into investment bonds instead, and many older "
+             "people were badly hurt. HIP 2.0, the subject of Steve's last video, is a lifetime mortgage that buys a "
+             "purchased life annuity, with today's Equity Release Council protections.",
+             ["steve_history", "erc", "steve_hip3_article"]),
+            ("Above £2 million, the residence nil rate band is reduced by £1 for every £2 (Inheritance Tax Act 1984, "
+             "s.8D). The band is £175,000 each, and a widow can also claim her late husband's unused band, so she can "
+             "have up to £350,000. With the ordinary nil rate band of £325,000 each, a widow can leave up to £1 million "
+             "free of inheritance tax. These bands are frozen until April 2031.",
+             ["ihta8D", "ihtm46023", "ihta8A", "ihtm46040", "fa2021s86", "fa2026s72", "budget2026_annexA"]),
+            ("From 6 April 2027, most unused pension funds count as part of the estate for inheritance tax under the "
+             "Finance Act 2026, so they also count towards the £2 million line.",
+             ["fa2026s66", "fa2026s71", "ihtm46023"]),
+            ("While the band is being taken away, every extra £1 in the estate costs 60p: 40p of inheritance tax, plus "
+             "20p for the lost band. With the full £350,000 band, it is all gone once the estate reaches £2.7 million.",
+             ["ihta8D", "steve_hip3_example"]),
+            ("The dial. Mrs Miggins sets it at £1.95 million. Her estate is her house, plus her savings, minus her "
+             "lifetime mortgage: after the £500,000 lifetime mortgage in Steve's last video, about £2.1 million, so "
+             "she starts about £150,000 too hot. When house prices rise, she lets the interest roll up. When they "
+             "fall, she pays the interest, and perhaps some of the loan, out of her annuity income, by spending less "
+             "that year. Paying from her savings would not help, because her savings and her debt would go down "
+             "together. Once a year, with a fresh valuation, she and her adviser check the dial.",
+             ["steve_hip3_example"]),
+            ("The plan needs a lifetime mortgage that lets her pay in some years and not in others. Since March 2022, "
+             "the Equity Release Council's standards have given new lifetime mortgages the right to make penalty-free "
+             "payments, subject to the lender's rules.",
+             ["erc_repay", "erc"]),
+            ("Why £1.95 million and not £2 million: the tax is not fair in both directions. £100,000 too cold, below "
+             "£2 million, and the family loses £60,000, because £40,000 of it would have gone in inheritance tax "
+             "anyway. £100,000 too hot, above £2 million, and the family keeps only £40,000: inheritance tax takes "
+             "£40,000 and the lost band another £20,000. So the dial is set on the cool side, with £50,000 of room "
+             "for a surveyor's rounding.",
+             ["ihta8D", "steve_hip3_example"]),
+            ("Rolling up the interest only cools the estate by the interest added. On £500,000 at an assumed fixed "
+             "rate of 6% a year, that is about £30,000 of debt in the first year, while a £2.5 million house rising "
+             "by 2.5% gains £62,500. A further advance can buy a second annuity: money spent on an annuity that stops "
+             "when she dies leaves her estate the day it is spent, but any guaranteed payments still due after her "
+             "death count in her estate. The lender has to agree, there are fees, and the extra income has to be spent.",
+             ["steve_hip3_example", "ihtm20634"]),
+            ("For a £1.5 million house, the dial can be set at £950,000, just under the £1 million a widow can leave "
+             "free of inheritance tax with both sets of allowances, so no inheritance tax is due. Below £1 million "
+             "there is no tax to share a fall in house prices, so a cold snap costs the family the full amount, and "
+             "paying the interest matters more.",
+             ["ihta8A", "ihtm46040", "steve_hip3_example"]),
+            ("The mansion tax is the High Value Council Tax Surcharge. From April 2028, owners of homes in England "
+             "worth £2 million or more, valued at April 2026, pay a yearly charge on top of their council tax: £2,500 "
+             "from £2 million, £3,500 from £2.5 million, £5,000 from £3.5 million and £7,500 from £5 million, going "
+             "up each year with inflation from 2029-30. It is charged on the value of the house, with nothing taken "
+             "off for a mortgage.",
+             ["hvcts2026", "budget2026_ootlar"]),
+            ("On 28 October 2026 the government confirmed that an owner can defer the surcharge if household income "
+             "is £35,000 or less, or savings are £16,000 or less, or someone in the household meets the disability "
+             "rules. Interest is added, and the bill is paid when the house changes hands. The law will be in the "
+             "Finance Bill 2026-27, and the rate of interest has not been set.",
+             ["hvcts2026", "budget2026_ootlar"]),
+            ("The income. In Steve's last video, £500,000 bought Mrs Miggins a purchased life annuity of £76,747.44 a "
+             "year (an illustration dated 12 October 2026): £6,356.13 a month after the tax deducted, on 2026/27 "
+             "rules. Budget 2026 set the basic rate on savings income at 24% from 6 April 2027, so the tax on the "
+             "taxable part goes up by about £8 a month. Most of each payment is her own capital coming back, which is "
+             "not income for the normal expenditure out of income exemption (Inheritance Tax Act 1984, s.21(3)), so "
+             "gifts of it come under the seven year rule.",
+             ["q_aviva_pla", "ittoia717", "budget2026_annexA", "ihta21_134", "ihtm14250", "ihta3A"]),
+            ("Paying family to care. Pay for real care at the going rate is not a gift for inheritance tax "
+             "(Inheritance Tax Act 1984, s.10), but it is taxable income for the carer. It has to be real work, "
+             "written down, at the going rate, and paid by bank transfer: pay far above the going rate is a gift. "
+             "Paying family carers can make her an employer, with payroll, National Insurance and pension duties. "
+             "Pension money is locked away until 57 from 6 April 2028. Agency live-in care costs about £1,200 to "
+             "£1,750 a week in 2026.",
+             ["ihta10", "govuk_employ_home", "fa2022s10", "trustontap2026"]),
+            ("The risks. Not every lifetime mortgage lets you pay in some years and not others. After the 30 day "
+             "cancellation period the annuity cannot be cashed in. The income is level, and prices will rise. In roll-up "
+             "years the debt grows, with interest on interest, and in England the home income plan rule for care fees "
+             "only ignores interest that is actually paid. It needs an adviser, a fresh valuation and an honest look "
+             "at the dial every year. It does not suit anyone in poor health, because purchased life annuities are not "
+             "offered on impaired life terms, younger people, or anyone who would rather downsize. The lifetime "
+             "mortgage's no negative equity guarantee means the estate can never owe more than the house sells for.",
+             ["erc_repay", "cobs152", "is1987s9p17", "care2014s1p20", "steve_market", "erc"]),
+        ],
+        "assumptions": (
+            "Mrs Miggins is made up, but her numbers are real. She is 85, a widow in good health, in the family home "
+            "in England, worth £2.5 million. Her estate is her house, plus her savings, minus the £500,000 lifetime "
+            "mortgage from Steve's last video: about £2.1 million. The annuity figures come from a UK annuity "
+            "provider's illustration dated 12 October 2026, not a personal quote, and rates change. The 6% fixed "
+            "lifetime mortgage rate and the 2.5% rise in house prices are assumptions. The tax figures use UK rules "
+            "for 2026/27, and assume she can claim her late husband's full unused nil rate band and residence nil "
+            "rate band, and the home goes to her children or grandchildren. The mansion tax covers England only, and "
+            "so does the care fees rule: Wales, Scotland and Northern Ireland have their own rules."
+        ),
+        "faq": [
+            ("What is a smart home income plan?",
+             "A smart home income plan is a home income plan with a dial. A lifetime mortgage buys a purchased life "
+             "annuity. Each year the interest is either paid or left to roll up, to hold the estate just under "
+             "£2 million. In the UK, £2 million is the line where the residence nil rate band starts to be taken "
+             "away. Steve Hunt calls it HIP 3.0. Smart home income plan is his own name for the idea: it uses "
+             "products you can buy today, but it is not a product in its own right. The example uses UK tax rules "
+             "for 2026/27.",
+             ["steve_hip3_article", "ihta8D", "steve_hip3_example"]),
+            ("What were HIP 1.0 and HIP 2.0, and what does HIP 3.0 add?",
+             "HIP 3.0 adds a dial to a plan that is more than 50 years old. The first home income plans were sold in "
+             "the 1970s: you took a mortgage on your house and bought an annuity with the money, the annuity paid the "
+             "interest, and the rest was yours to spend. Call that HIP 1.0. In the late 1980s the money went into "
+             "investment bonds instead of annuities. The bonds fell, the interest rolled up, and many older people "
+             "were badly hurt. HIP 2.0, the subject of Steve's last video, is a lifetime mortgage that buys a "
+             "purchased life annuity: a guaranteed income for life, bought with your own money, with no investment "
+             "bonds and today's Equity Release Council protections. HIP 3.0, the smart home income plan, adds the dial.",
+             ["steve_history", "erc", "steve_hip3_article"]),
+            ("Why does £2 million matter for inheritance tax?",
+             "Above £2 million, the residence nil rate band is taken away at £1 for every £2, under section 8D of the "
+             "Inheritance Tax Act 1984. The residence nil rate band is the extra tax-free amount for a home left to "
+             "children or grandchildren: £175,000 each, and a widow can also claim her late husband's unused band, so "
+             "up to £350,000. With the ordinary nil rate band of £325,000 each, a widow can leave up to £1 million free "
+             "of inheritance tax. These bands are frozen until April 2031. From 6 April 2027, most unused pension "
+             "funds also count towards the £2 million, under the Finance Act 2026. While the band is being taken "
+             "away, every extra £1 in the estate costs 60p in tax: 40p of inheritance tax, plus 20p for the lost "
+             "band. With the full £350,000 band, it is all gone once the estate reaches £2.7 million.",
+             ["ihta8D", "ihtm46023", "ihta8A", "ihtm46040", "fa2021s86", "fa2026s72", "budget2026_annexA", "fa2026s66", "fa2026s71"]),
+            ("How does the smart home income plan dial work?",
+             "Mrs Miggins sets her dial to £1.95 million, just under the £2 million line, like the dial on a "
+             "thermostat. Her estate is her house, plus her savings, minus her lifetime mortgage. After the £500,000 "
+             "lifetime mortgage in Steve's last video, that came to about £2.1 million, so she starts about £150,000 "
+             "too hot. When house prices go up, her estate runs hot, so she lets the interest roll up: the debt "
+             "grows, and her estate cools down. When house prices fall, her estate runs cold, so she pays the "
+             "interest, and perhaps some of the loan, out of her annuity income, by spending less that year. Paying it "
+             "from her savings would not help, because her savings and her debt would go down together. Once a year, "
+             "with a fresh valuation, she and her adviser check the dial. It needs a lifetime mortgage that lets her "
+             "pay in some years and not in others: since March 2022 the Equity Release Council's standards have given "
+             "new lifetime mortgages the right to make penalty-free payments, subject to the lender's rules.",
+             ["steve_hip3_example", "erc_repay"]),
+            ("Why set the dial at £1.95 million and not £2 million?",
+             "Because the tax is not fair in both directions. If her estate runs £100,000 too cold, below £2 million, "
+             "her family loses £60,000, not the full £100,000, because £40,000 of it would have gone in inheritance "
+             "tax anyway. If her estate runs £100,000 too hot, above £2 million, her family keeps only £40,000: "
+             "inheritance tax takes £40,000 and the lost residence nil rate band takes another £20,000. So the dial is "
+             "set on the cool side, with £50,000 of room for a surveyor's rounding.",
+             ["ihta8D", "steve_hip3_example"]),
+            ("How much can rolling up the interest cool the estate?",
+             "Only by the amount of interest added, so the size of the mortgage matters. On a £500,000 lifetime "
+             "mortgage at an assumed fixed rate of 6% a year, rolling up adds about £30,000 of debt in the first year. "
+             "If a £2.5 million house goes up by 2.5% that year, it gains £62,500, so the dial on its own cannot keep "
+             "up. She can then take a further advance on her lifetime mortgage and buy a second annuity. Money spent "
+             "on an annuity that stops when she dies leaves her estate the day it is spent. If the annuity has a "
+             "guarantee period, any payments still due after she dies do count in her estate. The lender has to "
+             "agree, there are fees, and she has to spend the extra income: if it sits in the bank, the estate warms "
+             "up again.",
+             ["steve_hip3_example", "ihtm20634"]),
+            ("Does a smart home income plan work for a smaller house?",
+             "Yes, and it can work even better. Take a £1.5 million house and set the dial at £950,000, just under the "
+             "£1 million a widow can leave free of inheritance tax with both sets of allowances. Keep the estate "
+             "there, and the family pays no inheritance tax at all. The catch: below £1 million there is no tax to "
+             "share a fall in house prices, so a cold snap costs the family the full amount, and paying the interest "
+             "matters more.",
+             ["ihta8A", "ihtm46040", "steve_hip3_example"]),
+            ("What is the mansion tax, and can it be deferred?",
+             "The mansion tax is the government's High Value Council Tax Surcharge. From April 2028, owners of homes in "
+             "England worth £2 million or more, valued at April 2026, will pay a yearly charge on top of their council "
+             "tax: £2,500 from £2 million, £3,500 from £2.5 million, £5,000 from £3.5 million and £7,500 from "
+             "£5 million, going up each year with inflation from 2029-30. It is charged on the value of the house, "
+             "with nothing taken off for a mortgage, so a smart home income plan can bring her estate under £2 million "
+             "for inheritance tax and she still pays the surcharge on her £2.5 million house. On 28 October 2026 the "
+             "government confirmed that an owner can defer it if household income is £35,000 or less, or savings are "
+             "£16,000 or less, or someone in the household meets the disability rules. Interest is added, and the "
+             "bill is paid when the house changes hands. The law will be in the Finance Bill 2026-27, and the rate of "
+             "interest has not been set yet.",
+             ["hvcts2026", "budget2026_ootlar"]),
+            ("Is deferring the mansion tax better than a smart home income plan?",
+             "Deferring the mansion tax only puts the bill off, with interest. Ten years at £3,500 is £35,000 before "
+             "interest and inflation, taken out of the house when she dies, and to qualify she has to keep her income "
+             "or her savings low. With a smart home income plan, her annuity income is well over £35,000 and her "
+             "savings are over £16,000, so she would not qualify to defer: she pays the surcharge out of her income "
+             "instead, and spends the rest. Both plans build up a debt against her house. Only one gives her an "
+             "income to live on now.",
+             ["hvcts2026", "steve_hip3_example"]),
+            ("How could an 85-year-old spend the income?",
+             "The income has to be spent, or given away, for the plan to work: if she saves it, it goes back into her "
+             "estate. In Steve's last video, £500,000 bought Mrs Miggins a purchased life annuity of £76,747.44 a year, "
+             "in an illustration dated 12 October 2026: £6,356.13 a month after the tax deducted, on 2026/27 rules. "
+             "Budget 2026 set the basic rate on savings income at 24% from 6 April 2027, so the tax on the taxable "
+             "part goes up by about £8 a month. Be careful with giving it away: most of each payment is her own "
+             "capital coming back, and under section 21(3) of the Inheritance Tax Act 1984 that part is not income for "
+             "the normal expenditure out of income exemption, so gifts of it come under the seven year rule. At 85, "
+             "living alone in a big house, many people need some live-in care, which costs about £1,200 to £1,750 a "
+             "week through an agency in 2026. The care can come from the family: pay for real care at the going rate "
+             "is not a gift for inheritance tax, under section 10 of the Inheritance Tax Act 1984. It is taxable "
+             "income for the carers, and they can pay some of it into a pension. It has to be real work, written "
+             "down, at the going rate, and paid by bank transfer. Paying family carers can make her an employer, with "
+             "payroll, National Insurance and pension duties, and pension money is locked away until 57 from April 2028.",
+             ["q_aviva_pla", "budget2026_annexA", "ihta21_134", "ihtm14250", "ihta3A", "trustontap2026", "ihta10",
+              "govuk_employ_home", "fa2022s10"]),
+            ("What are the risks, and who does a smart home income plan not suit?",
+             "Not every lifetime mortgage lets you pay in some years and not others, and the plan only works with one "
+             "that does. After the 30 day cancellation period, the annuity cannot be cashed in. The income is level, "
+             "and prices will rise. In a year when the interest rolls up, the debt grows, with interest on interest, "
+             "and in England the home income plan rule for care fees only ignores interest that is actually paid: "
+             "the Income Support (General) Regulations 1987, Schedule 9, paragraph 17, carried across by England's "
+             "care charging regulations of 2014. It needs an adviser, a fresh valuation and an honest look at the "
+             "dial every year: set and forget will not do. It does not suit anyone in poor health, because purchased "
+             "life annuities are not offered on impaired life terms; younger people, because the annuity pays less; "
+             "or anyone who would rather downsize. The lifetime mortgage's no negative equity guarantee means the "
+             "estate can never owe more than the house sells for.",
+             ["erc_repay", "cobs152", "is1987s9p17", "care2014s1p20", "steve_market", "erc"]),
+            ("So, can a smart home income plan cut inheritance tax?",
+             "Yes. For an estate a little over £2 million, every £1 it brings the estate down saves 60p in tax, on "
+             "2026/27 rules. But the family still inherits less, because the money has been spent. With the mansion "
+             "tax deferral, she qualifies by staying poor, the government sets the interest rate, and the bill lands "
+             "when the house changes hands. With a smart home income plan, she sets the temperature, she checks it "
+             "once a year with her adviser, and she spends the income now. Tax rules can change, and how they apply "
+             "depends on your own circumstances. This is education only. It is not advice.",
+             ["ihta8D", "steve_hip3_example", "hvcts2026"]),
+            ("Who called inheritance tax a voluntary levy paid by those who distrust their heirs?",
+             "Roy Jenkins, in the House of Commons on 19 March 1986, in the debate on the 1986 Budget. That "
+             "Budget took most lifetime gifts out of capital transfer tax, which he saw as a return to death "
+             "duties. Of that tax he said: \"If people die old, it is, broadly speaking, a voluntary levy paid by "
+             "those who distrust their heirs more than they dislike the Inland Revenue.\" The words are in "
+             "Hansard, volume 94, column 325. The Finance Act 1986 renamed capital transfer tax as inheritance "
+             "tax.",
+             ["hansard1986", "fa1986s100", "ihta3A"]),
+        ],
+        "articles": [
+            ("mansion", "The mansion tax deferral scheme against a smart home income plan: who holds the dial, and "
+                        "who pays the interest."),
+            ("taboo", "HIP 2.0: Mrs Miggins, 85, a lifetime mortgage that buys a purchased life annuity."),
+        ],
+        "related": [("Previous video", "equity-release-and-inheritance-tax",
+                     "Can equity release reduce inheritance tax? UK worked example")],
+        "legislation": "Inheritance Tax Act 1984, s.3A, s.8A, s.8D, s.10 and s.21(3); Finance Act 2026, ss.66 to 71; "
+                       "Finance Act 2022, s.10; Income Tax (Trading and Other Income) Act 2005, ss.717 to 724; Income "
+                       "Support (General) Regulations 1987, Sch. 9, para. 17; Care and Support (Charging and Assessment "
+                       "of Resources) Regulations 2014, Sch. 1, para. 20.",
+        "notes": [
+            {"phrase": "when talking about inheritance tax,",
+             "kind": "Source note",
+             "date": date(2026, 10, 29),
+             "text": "Hansard, House of Commons, 19 March 1986, volume 94, column 325, in the debate on the 1986 "
+                     "Budget. That Budget took most lifetime gifts out of capital transfer tax, which Roy Jenkins "
+                     "saw as a return to death duties, and the Finance Act 1986 renamed the tax inheritance tax. "
+                     "His words: \"If people die old, it is, broadly speaking, a voluntary levy paid by those who "
+                     "distrust their heirs more than they dislike the Inland Revenue.\"",
+             "sources": ["hansard1986", "fa1986s100"]},
+        ],
+        "transcript_file": "v5_transcript.tsv",
+        "keywords": ["smart home income plan", "HIP 3.0", "home income plan", "equity release inheritance tax",
+                     "residence nil rate band taper", "£2 million inheritance tax", "mansion tax",
+                     "High Value Council Tax Surcharge deferral", "purchased life annuity", "lifetime mortgage"],
+    },
 ]
 
 # The equity release video replaces the home page's last-updated date, and the whole of life page gains a
@@ -1463,6 +1767,50 @@ for _v in VIDEOS:
         _v["related"] = _v["related"] + [("Next video", "equity-release-and-inheritance-tax",
                                           "Can equity release reduce inheritance tax? UK worked example")]
         _v["modified"] = ER_VIDEO_RELEASE
+
+
+# The smart home income plan video (video 5) moves the home page date on, the equity release page gains a "Next video"
+# link, and Budget 2026 (28 October 2026) changed the April 2027 savings basic rate from 22% to 24%.
+TODAY = max(TODAY, date.fromisoformat(HIP3_VIDEO_RELEASE))
+for _v in VIDEOS:
+    if _v["slug"] == "equity-release-and-inheritance-tax":
+        _v["related"] = _v["related"] + [("Next video", "smart-home-income-plan",
+                                          "What is a smart home income plan? UK inheritance tax explained")]
+        _v["modified"] = HIP3_VIDEO_RELEASE
+        _old_kf = ("bill. From 6 April 2027 the basic rate on savings income goes up to 22%, about £4 a month more if "
+                   "all of the taxable slice is taxed at that rate.")
+        _new_kf = ("bill. Budget 2026, on 28 October 2026, set the basic rate on savings income at 24% from 6 April "
+                   "2027, about £8 a month more if all of the taxable slice is taxed at that rate.")
+        _kf = []
+        for _t, _src in _v["key_facts"]:
+            if _old_kf in _t:
+                _t = _t.replace(_old_kf, _new_kf)
+                _src = [x for x in _src if x != "fa2026s5"] + ["budget2026_annexA"]
+            _kf.append((_t, _src))
+        assert _kf != _v["key_facts"], "savings rate key fact not found"
+        _v["key_facts"] = _kf
+        _old_fq = ("From 6 April 2027, the basic rate on savings income goes up to 22%. If all of the taxable slice is "
+                   "taxed at that rate, that is about £4 a month more.")
+        _new_fq = ("Budget 2026, on 28 October 2026, set the basic rate on savings income at 24% from 6 April 2027. "
+                   "If all of the taxable slice is taxed at that rate, that is about £8 a month more.")
+        _fq = []
+        for _q, _t, _src in _v["faq"]:
+            if _old_fq in _t:
+                _t = _t.replace(_old_fq, _new_fq)
+                _src = [x for x in _src if x != "fa2026s5"] + ["budget2026_annexA"]
+            _fq.append((_q, _t, _src))
+        assert _fq != _v["faq"], "savings rate answer not found"
+        _v["faq"] = _fq
+        _v["notes"] = _v["notes"] + [
+            {"phrase": "From 6 April 2027, the basic rate on savings income goes up to 22%.",
+             "kind": "Correction",
+             "date": date(2026, 10, 29),
+             "text": "Recorded on 24 October 2026, when the planned rate was 22% (Finance Act 2026, s.5). Budget 2026, "
+                     "on 28 October 2026, set the basic rate on savings income at 24% from 6 April 2027. On the "
+                     "illustration, that is about £8 a month more tax, not about £4, if all of the taxable slice is "
+                     "taxed at that rate.",
+             "sources": ["budget2026_annexA", "fa2026s5"]},
+        ]
 
 # Drop links to guides that are not in this build (drafts), and keep those pages' dates as they were.
 _LIVE_GUIDE_SLUGS = {g["slug"] for g in GUIDES}
@@ -1637,6 +1985,28 @@ CORRECTIONS_LOG.insert(0, ("24 October 2026",
     ]),
     ("whole-of-life-assurance", [
         "A Next video link was added. The answers, key facts and transcript were unchanged.",
+    ]),
+]))
+
+CORRECTIONS_LOG.insert(0, ("29 October 2026",
+                           "A new video page was published, and the equity release video page gained a link to it. "
+                           "Budget 2026 changed the April 2027 savings basic rate from 22% to 24%, so one key fact and "
+                           "one answer on the equity release video page, and one answer in the equity release guide, "
+                           "were updated. No other figures changed.", [
+    ("smart-home-income-plan", [
+        "Published: What is a smart home income plan? UK inheritance tax explained. The page has the short answer, key "
+        "facts, 13 questions with their sources and the full transcript. A dated source note beside Roy Jenkins's "
+        "words gives the Hansard reference.",
+    ]),
+    ("equity-release-and-inheritance-tax", [
+        "A Next video link was added. Budget 2026, on 28 October 2026, set the basic rate on savings income at 24% "
+        "from 6 April 2027, not 22%, so the key fact and the answer on how purchased life annuity income is taxed now "
+        "say 24% and about £8 a month, not about £4. The video and its transcript were recorded on 24 October 2026 "
+        "and still say 22%: a dated correction note sits beside those words.",
+    ]),
+    ("equity-release-and-inheritance-tax/guide", [
+        "The answer on what changes in April 2027 now says 24% and about £8 a month more tax, not 22% and about £4, "
+        "after Budget 2026. The other answers were unchanged.",
     ]),
 ]))
 
@@ -1972,6 +2342,35 @@ SOURCES.update({
     "hansard1986": ("Published source", "Hansard, House of Commons, 19 March 1986, vol. 94, col. 325: Budget debate "
                     "(Roy Jenkins, the \"voluntary levy\")",
                     "https://api.parliament.uk/historic-hansard/commons/1986/mar/19/budget-resolutions-and-economic-situation"),
+})
+
+# Added for the smart home income plan video (video 5). Each link opened and checked on 28 and 29 October 2026.
+SOURCES.update({
+    "fa2022s10": ("Law", "Finance Act 2022, s.10 (normal minimum pension age 57 from 6 April 2028)",
+                  f"{LEG}/ukpga/2022/3/section/10"),
+    "ihtm20634": ("HMRC", "HMRC Inheritance Tax Manual, IHTM20634 (annuities which continue after the death)",
+                  IHTM + "ihtm20634"),
+    "govuk_employ_home": ("HMRC", "GOV.UK: Employing someone to work in your home",
+                          "https://www.gov.uk/au-pairs-employment-law"),
+    "budget2026_ootlar": ("Published source", "HM Treasury: Budget 2026, Overview of Tax Legislation and Rates, 28 October "
+                          "2026, paragraph 1.22 (High Value Council Tax Surcharge, Finance Bill 2026-27, from April 2028)",
+                          "https://www.gov.uk/government/publications/budget-2026-overview-of-tax-legislation-and-rates-ootlar/"
+                          "budget-2026-overview-of-tax-legislation-and-rates-ootlar"),
+    "budget2026_annexA": ("Published source", "HM Treasury: Budget 2026, Overview of Tax Legislation and Rates, Annex A, rates "
+                          "and allowances, 28 October 2026 (savings basic rate 24% from 6 April 2027; nil rate band "
+                          "£325,000; residence nil rate band £175,000)",
+                          "https://www.gov.uk/government/publications/budget-2026-overview-of-tax-legislation-and-rates-ootlar/"
+                          "annex-a-rates-and-allowances"),
+    "hvcts2026": ("Published source", "GOV.UK: High Value Council Tax Surcharge, updated 28 October 2026 (bands, April 2026 "
+                  "valuation, inflation uprating from 2029-30, deferral)",
+                  "https://www.gov.uk/government/publications/high-value-council-tax-surcharge/high-value-council-tax-surcharge"),
+    "trustontap2026": ("Published source", "TrustonTap: How much does live-in care cost in 2026? (24 August 2026): typically "
+                       "£1,200 to £1,750 a week",
+                       "https://www.trustontap.com/home-care-planning/how-much-does-live-in-care-cost/"),
+    "steve_hip3_article": ("Steve's analysis", "The government is about to launch its own equity release scheme. It's called "
+                           "the mansion tax. (LinkedIn article, 28 October 2026)", ARTICLES["mansion"][1]),
+    "steve_hip3_example": ("Steve's analysis", "The smart home income plan dial: Steve's arithmetic on the stated assumptions",
+                           None),
 })
 
 
