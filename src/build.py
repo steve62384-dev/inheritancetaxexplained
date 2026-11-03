@@ -2014,6 +2014,208 @@ CORRECTIONS_LOG.insert(0, ("29 October 2026",
 # Helpers
 # ---------------------------------------------------------------------------
 
+
+# ---- Video 6 ----
+SOURCES.update({
+    "itepa579CZA": ("Law", "Income Tax (Earnings and Pensions) Act 2003, s.579CZA", f"{LEG}/ukpga/2003/1/section/579CZA"),
+    "ihtm17071": ("HMRC", "HMRC Inheritance Tax Manual, IHTM17071",
+                  "https://www.gov.uk/hmrc-internal-manuals/inheritance-tax-manual/ihtm17071"),
+    "hmrc_policy2025": ("HMRC", "HMRC policy paper: Inheritance Tax on unused pension funds and death benefits, 26 November 2025",
+                        "https://www.gov.uk/government/publications/inheritance-tax-unused-pension-funds-and-death-benefits/"
+                        "inheritance-tax-unused-pension-funds-and-death-benefits"),
+    "v6_example": ("Steve's analysis", "The Miggins worked example in video 6: arithmetic on the stated assumptions", None),
+})
+
+V6_VIDEO_RELEASE = "2026-11-03"
+V6_VIDEO_PUBLISHED_ISO = "2026-11-03T17:34:51+00:00"  # went Public on YouTube 3 November 2026, 17:34:51 UK
+V6_VIDEO_ID = "VIgCxPcDMRk"
+
+V6_ENTRY = {
+        "slug": "how-much-of-my-pension-will-be-taxed-when-i-die",
+        "id": V6_VIDEO_ID,
+        "number": 6,
+        "title": "How much of my pension will be taxed when I die? A 103% UK example",
+        "short_title": "How much of my pension will be taxed when I die?",
+        "seo_title": "How much of my pension will be taxed when I die? A 103% UK example",
+        "seo_description": "From 6 April 2027 most unused UK pensions count for inheritance tax. In one made-up family a "
+                           "£500,000 pension costs £516,000 in tax: 103%.",
+        "meta_description": (
+            "How much of your pension will be taxed when you die? From 6 April 2027 most unused UK pensions count for "
+            "inheritance tax, and at 75 or over your family pays income tax too. A worked example where a £500,000 "
+            "pension costs £516,000 in tax (103%), the sharing rule, and how one name on the expression of wish form "
+            "could have made it nought. Video, key facts and full transcript by Steve Hunt ACII TEP."
+        ),
+        "published": V6_VIDEO_RELEASE,
+        "modified": V6_VIDEO_RELEASE,
+        "published_iso": V6_VIDEO_PUBLISHED_ISO,
+        "seconds": 1030,
+        "duration_iso": "PT17M10S",
+        "duration_text": "17 min",
+        "as_at": "2 November 2026",
+        "reviewed_date": date(2026, 11, 3),
+        "short_answer": [
+            "How much of your pension is taxed when you die depends on two things: when you die, and how old you are. "
+            "From 6 April 2027, in the UK, most pensions you have not spent count as part of your estate for "
+            "inheritance tax. If you die at 75 or over, your family also pays income tax on what they draw out.",
+            "In Steve's made-up example, with real numbers for the 2026/27 tax year, a £500,000 pension ends up costing "
+            "one family £516,000 in tax: 103% of the pension. One name on the expression of wish form, added before "
+            "6 April 2027, could have made it nought.",
+        ],
+        "short_sources": ["ihta150A", "fa2026s66", "fa2026s71", "itepa579CZA", "ihta265", "v6_example"],
+        "chapters": [
+            (0, "How much of my pension will be taxed when I die?"),
+            (46, "The short answer"),
+            (106, "Will my pension count for inheritance tax when I die?"),
+            (212, "How much inheritance tax will my pension pay?"),
+            (278, "Will my family pay income tax on my pension as well?"),
+            (340, "How can the tax on a pension come to more than 100%?"),
+            (442, "What does the Miggins family actually pay?"),
+            (655, "Why is it 103% and not the 67% in the papers?"),
+            (743, "Can one name on my expression of wish form change this?"),
+            (842, "What's the catch?"),
+            (929, "What can I check today?"),
+            (980, "Roy Jenkins, and the next question: nominees' annuities"),
+        ],
+        "key_facts": [
+            ("From 6 April 2027, most unused pension funds and pension death benefits count as part of the estate for "
+             "inheritance tax. The Finance Act 2026 added section 150A to the Inheritance Tax Act 1984, which calls them "
+             "notional pension property. Death in service lump sums and some pensions paid to dependants are excluded.",
+             ["ihta150A", "fa2026s66", "fa2026s71", "tn"]),
+            ("A pension that goes to a husband, wife, civil partner or charity is normally free of inheritance tax "
+             "(sections 18 and 23). Tax may then be due when the second of the couple dies.",
+             ["ihta18", "ihta23"]),
+            ("The pension pays its share of the whole estate's tax bill, in proportion to its value (section 265). "
+             "Steve calls this the sharing rule. The executors, or the family, can ask the provider to pay the "
+             "pension's share with a payment notice under section 226B: within 35 days, and only if the share is "
+             "£1,000 or more.",
+             ["ihta265", "ihta226B", "tn2_amount"]),
+            ("If the person dies at 75 or over, the family pays income tax at their own rate on what they draw "
+             "(Income Tax (Earnings and Pensions) Act 2003, section 579CZA covers the under 75 exemption). The "
+             "inheritance tax paid out of the pension is not taxed again as income (section 567B).",
+             ["itepa579CZA", "ptm072430", "itepa567B"]),
+            ("HMRC estimates that in 2027/28 about 10,500 estates will pay inheritance tax that would not have before, "
+             "and about 38,500 will pay more: 49,000 estates in the first year.",
+             ["hmrc_policy2025"]),
+            ("While Mum is alive, the trustees can only pay a grown-up child a pension in their own name if the child "
+             "is named on the form (Finance Act 2004, Schedule 28, paragraph 27A). Changing a form that does not bind "
+             "the trustees is not a gift for inheritance tax (IHTM17052 and IHTM17071).",
+             ["fa2004p27A", "ihtm17052", "ihtm17071"]),
+        ],
+        "assumptions": (
+            "The Miggins family are made up, but their numbers are real. Mr Miggins is 70, seriously ill, with a "
+            "£500,000 personal pension he has never touched. He dies in January 2027 aged 71; his form says \"Wife\". "
+            "Mrs Miggins leaves the money in the pension and dies in 2029 aged 76. Her other estate is £2 million, most "
+            "of it the house, which goes to their daughter Amy. She has her own and her husband's full nil rate bands "
+            "and residence nil rate bands. Amy is 45, lives in England, earns £100,000 and draws £24,000 a year for 15 "
+            "years. The tax figures use UK rules and bands for 2026/27, with no growth. Scottish income tax rates are "
+            "different."
+        ),
+        "faq": [
+            ("How much of my pension will be taxed when I die?",
+             "It depends on when you die and how old you are. From 6 April 2027 most unused UK pensions count for "
+             "inheritance tax, and if you die at 75 or over your family also pays income tax on what they draw. In "
+             "Steve's made-up example, with real 2026/27 numbers, a £500,000 pension costs one family £516,000 in tax, "
+             "or 103%.",
+             ["ihta150A", "fa2026s71", "itepa579CZA", "v6_example"]),
+            ("Will my pension count for inheritance tax when I die?",
+             "Yes, if you die on or after 6 April 2027. Most pensions you have not spent count in your estate, "
+             "including money in drawdown you have not taken out. Before that date most pensions where the trustees "
+             "decide who is paid sit outside your estate. This is about personal and workplace pension pots; the State "
+             "Pension works differently. A pension that goes to a husband, wife, civil partner or charity is normally "
+             "free of inheritance tax.",
+             ["ihta150A", "fa2026s66", "fa2026s71", "ihta18", "ihta23", "tn"]),
+            ("How much inheritance tax will my pension pay?",
+             "Your pension pays its share of the whole estate's tax bill, in proportion to its value, under section 265 "
+             "of the Inheritance Tax Act 1984. If your pension is one fifth of your estate, it pays one fifth of the "
+             "bill. HMRC's Technical Note 2 (27 August 2026) says the same. The provider pays the pension's share "
+             "within 35 days of a payment notice, if it is £1,000 or more.",
+             ["ihta265", "ihta226B", "tn2_amount"]),
+            ("Will my family pay income tax on my pension as well?",
+             "Yes, if you die at 75 or over. Money drawn from an inherited pension is tax free if the person it came "
+             "from died under 75; if they died at 75 or over, every pound drawn counts as the family member's own "
+             "taxable income. At the Budget on 28 October 2026 the government said it is removing the old two-year "
+             "time limit for payments from that date; the law is still to come.",
+             ["itepa579CZA", "ptm072430", "itepa567B", "budget2026_ootlar"]),
+            ("How can the tax on a pension come to more than 100%?",
+             "In Steve's example Mr Miggins dies in January 2027 at 71, with \"Wife\" on his form, so there is no tax "
+             "then. Mrs Miggins leaves the money in the pension and dies in 2029 at 76. Now her inherited pension "
+             "counts in her estate, which HMRC's Technical Note 2 confirms, and because she died over 75 their "
+             "daughter Amy pays income tax on every pound she draws.",
+             ["tn2_beneficiary", "ihta150A", "itepa579CZA", "v6_example"]),
+            ("What does the Miggins family actually pay?",
+             "£516,000 on a £500,000 pension: £300,000 of extra inheritance tax and £216,000 of income tax. With the "
+             "pension her estate is £2.5 million, so £250,000 of residence nil rate band is lost (section 8D) and the "
+             "tax rises from £400,000 to £700,000. The pension pays one fifth, £140,000, leaving £360,000 for Amy. "
+             "Drawing £24,000 a year on top of £100,000, she pays an effective 60% (Income Tax Act 2007, section 35): "
+             "£216,000.",
+             ["ihta8D", "ihta265", "ita35", "itrates", "v6_example"]),
+            ("Why is it 103% and not the 67% in the papers?",
+             "Most headlines take 40% inheritance tax off the pension, then 45% income tax off what is left: 67%. Here "
+             "three things work together: the £2 million taper, Amy's 60% rate and the sharing rule. The pension added "
+             "£300,000 to the bill but paid only £140,000, so £160,000 more was left in it, and Amy pays 60% on that "
+             "too. If the pension had paid the full £300,000, the total would be £420,000, or 84%.",
+             ["ihta8D", "ihta265", "ita35", "v6_example"]),
+            ("Can one name on my expression of wish form change this?",
+             "Yes, if you die before 6 April 2027 and under 75. While your wife is alive, the trustees can only pay a "
+             "grown-up child a pension in their own name if you named them on the form. With \"Amy, daughter, 10%\" "
+             "added, the trustees could pay Amy directly: no inheritance tax, no income tax, and nothing in Mum's "
+             "estate. Changing a form that does not bind the trustees is not a gift for inheritance tax.",
+             ["fa2004p27A", "ihtm17052", "ihtm17071", "v6_example"]),
+            ("What's the catch?",
+             "There are six. The nought needs death before 6 April 2027 and under 75. The trustees decide. Not every "
+             "pension offers a pension to a named child. If the children are paid, the husband or wife may get less. "
+             "Whatever Amy still has in the pension when she dies counts in her own estate. And the 103% depends on "
+             "the numbers; Scottish income tax rates are different.",
+             ["fa2004p27A", "ihta150A", "fa2026s71", "v6_example"]),
+            ("What can I check today?",
+             "Check who is named on your expression of wish form for every pension you have. Ask your provider for a "
+             "copy, ask whether they can pay your children a pension in their own name, not just a lump sum, and "
+             "follow your provider's form.",
+             ["fa2004p27A", "v6_example"]),
+        ],
+        "articles": [],
+        "related": [("Previous video", "smart-home-income-plan",
+                     "What is a smart home income plan? UK inheritance tax explained"),
+                    ("Earlier video", "pensions-and-inheritance-tax-from-april-2027",
+                     "How will your pension be taxed when you die after April 2027?"),
+                    ("Next question", "nominees-annuity",
+                     "Nominees' annuity: what is it, how does it work, and what's the catch?")],
+        "legislation": "Inheritance Tax Act 1984, s.8D, s.18, s.23, s.150A, s.226B and s.265; Finance Act 2026, ss.66 to "
+                       "71; Income Tax (Earnings and Pensions) Act 2003, ss.567B, 579A and 579CZA; Income Tax Act 2007, "
+                       "s.35; Finance Act 2004, Sch. 28, para. 27A.",
+        "notes": [
+            {"phrase": "will die before April 2027.",
+             "kind": "Note",
+             "date": date(2026, 11, 3),
+             "text": "The time limit is for the nought in this video: it needs the person to die before 6 April 2027 "
+                     "and under 75. From 6 April 2027, most unused pensions count in the estate for inheritance tax.",
+             "sources": ["ihta150A", "fa2026s71"]},
+            {"phrase": "when he was talking about inheritance tax,",
+             "kind": "Source note",
+             "date": date(2026, 11, 3),
+             "text": "Hansard, House of Commons, 19 March 1986, volume 94, column 325, in the debate on the 1986 "
+                     "Budget. His words: \"If people die old, it is, broadly speaking, a voluntary levy paid by those "
+                     "who distrust their heirs more than they dislike the Inland Revenue.\"",
+             "sources": ["hansard1986", "fa1986s100"]},
+        ],
+        "transcript_file": "v6_transcript.tsv",
+        "keywords": ["pensions and inheritance tax", "inheritance tax on pensions 2027", "pension death benefits tax",
+                     "expression of wish form", "pension age 75 rule", "sharing rule section 265",
+                     "residence nil rate band taper", "103% tax on a pension", "notional pension property"],
+}
+VIDEOS.append(V6_ENTRY)
+
+# Video 6 (pensions, the 103% example) moves the home page date on, and the smart home income plan page gains a
+# "Next video" link.
+TODAY = max(TODAY, date.fromisoformat(V6_VIDEO_RELEASE))
+for _v in VIDEOS:
+    if _v["slug"] == "smart-home-income-plan":
+        _v["related"] = _v["related"] + [("Next video", "how-much-of-my-pension-will-be-taxed-when-i-die",
+                                          "How much of my pension will be taxed when I die? A 103% UK example")]
+        _v["modified"] = V6_VIDEO_RELEASE
+
+
+
 def esc(s):
     # Escape &, <, > and double quotes only; apostrophes stay readable.
     return html.escape(s, quote=False).replace('"', "&quot;")
