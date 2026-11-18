@@ -2225,7 +2225,7 @@ SOURCES.update({
 })
 
 V7_VIDEO_RELEASE = "2026-11-18"
-V7_VIDEO_PUBLISHED_ISO = "2026-11-18T16:00:00+00:00"  # provisional: set to the exact time once the video is Public on YouTube
+V7_VIDEO_PUBLISHED_ISO = "2026-11-18T19:07:00+00:00"  # went Public on YouTube 18 November 2026, 19:07 UK
 V7_VIDEO_ID = "IBs2DcZ0LQ8"
 V7_TITLE = "What is a nominees' annuity? Inheritance tax from April 2027"
 
