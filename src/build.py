@@ -2215,6 +2215,230 @@ for _v in VIDEOS:
         _v["modified"] = V6_VIDEO_RELEASE
 
 
+# ---- Video 7 ----
+SOURCES.update({
+    "fa2004s278B": ("Law", "Finance Act 2004, s.278B", f"{LEG}/ukpga/2004/12/section/278B"),
+    "itepa579A": ("Law", "Income Tax (Earnings and Pensions) Act 2003, s.579A", f"{LEG}/ukpga/2003/1/section/579A"),
+    "itepa579D": ("Law", "Income Tax (Earnings and Pensions) Act 2003, s.579D", f"{LEG}/ukpga/2003/1/section/579D"),
+    "ihta12": ("Law", "Inheritance Tax Act 1984, s.12", f"{LEG}/ukpga/1984/51/section/12"),
+    "v7_example": ("Steve's analysis", "The Mr Miggins worked example in video 7: arithmetic on the stated assumptions", None),
+})
+
+V7_VIDEO_RELEASE = "2026-11-18"
+V7_VIDEO_PUBLISHED_ISO = "2026-11-18T16:00:00+00:00"  # provisional: set to the exact time once the video is Public on YouTube
+V7_VIDEO_ID = "IBs2DcZ0LQ8"
+V7_TITLE = "What is a nominees' annuity? Inheritance tax from April 2027"
+
+V7_ENTRY = {
+        "slug": "what-is-a-nominees-annuity",
+        "id": V7_VIDEO_ID,
+        "number": 7,
+        "title": V7_TITLE,
+        "short_title": "What is a nominees' annuity?",
+        "seo_title": V7_TITLE,
+        "seo_description": "A nominees' annuity is an income for life paid to someone you choose after you die. Bought "
+                           "with your own annuity, it is left out of pension inheritance tax.",
+        "meta_description": (
+            "What is a nominees' annuity? A pension income for life paid to someone you choose after you die, also "
+            "called a non-dependent annuity. From 6 April 2027 a nominees' annuity bought together with your own "
+            "lifetime annuity is left out of the UK inheritance tax charge on pensions. The income tax rules, a worked "
+            "example, the six catches and the open question of whether buying one is a gift. Video, key facts and "
+            "full transcript by Steve Hunt ACII TEP."
+        ),
+        "published": V7_VIDEO_RELEASE,
+        "modified": V7_VIDEO_RELEASE,
+        "published_iso": V7_VIDEO_PUBLISHED_ISO,
+        "seconds": 894,
+        "duration_iso": "PT14M54S",
+        "duration_text": "15 min",
+        "as_at": "18 November 2026",
+        "reviewed_date": date(2026, 11, 18),
+        "guide": ("nominees-annuity/guide", "The nominees' annuity: every question answered"),
+        "short_answer": [
+            "A nominees' annuity is a pension income for life, paid by an insurance company to someone you choose "
+            "after you die, such as a grown-up son or daughter. Some insurers call it a non-dependent annuity, also "
+            "spelt non-dependant annuity.",
+            "In the UK, from 6 April 2027, a nominees' annuity bought together with your own lifetime annuity is left "
+            "out of the new inheritance tax charge on pensions. Your son or daughter still pays income tax on it, "
+            "unless you die before 75.",
+        ],
+        "short_sources": ["fa2004p27AA", "ihta150A", "fa2026s66", "fa2026s71", "itepa579A", "itepa646B"],
+        "chapters": [
+            (0, "Can a nominees' annuity cut your inheritance tax bill?"),
+            (26, "The short answer"),
+            (63, "What is a nominees' annuity?"),
+            (146, "Is a non-dependent annuity the same as a nominees' annuity?"),
+            (191, "What changes for pensions and inheritance tax on 6 April 2027?"),
+            (311, "Is a nominees' annuity free of inheritance tax from April 2027?"),
+            (388, "What does bought together mean?"),
+            (429, "Does my son or daughter pay income tax on a nominees' annuity?"),
+            (504, "What do the numbers look like?"),
+            (617, "What are the catches?"),
+            (680, "Is buying a nominees' annuity a gift for inheritance tax?"),
+            (773, "What are the three questions to keep apart?"),
+            (849, "Roy Jenkins, and the next question: whole of life assurance"),
+        ],
+        "key_facts": [
+            ("A nominees' annuity is an annuity paid to a nominee of a pension member: someone the member chooses who "
+             "is not a dependant. It is defined in the Finance Act 2004, Schedule 28, paragraph 27AA. In pension law "
+             "the dependants are a husband, wife or civil partner, a child under 23, or someone who depended on the "
+             "member for money (paragraph 15).",
+             ["fa2004p27AA", "fa2004p15"]),
+            ("Paragraph 27AA allows two ways of buying one: together with the member's own lifetime annuity, while "
+             "the member is alive, or after the member's death, with pension money that is left over.",
+             ["fa2004p27AA"]),
+            ("From 6 April 2027, most unused pension money and most pension death benefits count as part of the "
+             "estate for inheritance tax. The Finance Act 2026, section 66, added section 150A to the Inheritance Tax "
+             "Act 1984, and section 71 applies it to deaths on or after 6 April 2027.",
+             ["ihta150A", "fa2026s66", "fa2026s71"]),
+            ("Section 150A(6)(c) leaves out \"a dependants' annuity, or a nominees' annuity, that was purchased "
+             "together with a lifetime annuity payable to the member\". A nominees' annuity bought after the member's "
+             "death, with leftover pension money, does not get this exclusion.",
+             ["ihta150A", "fa2026s66"]),
+            ("Bought together means linked when the member's own annuity is bought: one joint life annuity, or two "
+             "separate annuities bought no more than seven days apart (Finance Act 2004, section 278B).",
+             ["fa2004s278B"]),
+            ("If the member dies at 75 or over, the nominee pays income tax on each payment at their own rate (Income "
+             "Tax (Earnings and Pensions) Act 2003, sections 579A and 579D). If the member dies before 75, the "
+             "payments from a nominees' annuity bought together with the member's own annuity can be free of income "
+             "tax (section 646B(3)), subject to conditions.",
+             ["itepa579A", "itepa579D", "itepa646B"]),
+            ("Whether buying a nominees' annuity is a gift for inheritance tax has no definitive legal answer yet. "
+             "The rules that matter are sections 3, 10 and 12(2ZA) of the Inheritance Tax Act 1984. The Supreme Court "
+             "case HMRC v Parry [2020] UKSC 35 did not decide the point.",
+             ["ihta3", "ihta10", "ihta12", "parry"]),
+        ],
+        "assumptions": (
+            "Mr Miggins and his daughter Amy are made up. The tax rates in their story are real. Mr Miggins is 80 and "
+            "a widower, and his estate is already well over his inheritance tax allowances. He wants to leave "
+            "£100,000 of pension money to Amy, who pays income tax at 40% on all of it. He dies after 6 April 2027. "
+            "The example has no investment growth. How much income a nominees' annuity pays depends on the insurer's "
+            "terms on the day the annuity is bought. Income tax rates in Scotland are different."
+        ),
+        "faq": [
+            ("What is a nominees' annuity?",
+             "A nominees' annuity is an income for life that is paid to your nominee after you die. It is a pension "
+             "death benefit, and it is paid by an insurance company. A nominee is a person you choose who is not "
+             "your dependant, most often a grown-up son or daughter. The law that defines a nominees' annuity is the "
+             "Finance Act 2004, Schedule 28, paragraph 27AA. It can be bought together with your own lifetime "
+             "annuity, or after you die with pension money that is left over.",
+             ["fa2004p27AA", "fa2004p15"]),
+            ("Is a non-dependent annuity the same as a nominees' annuity?",
+             "Yes. A non-dependent annuity is the name some insurers use for a nominees' annuity. It is the same "
+             "thing. In pension law, your dependants are your husband, wife or civil partner, a child under 23, or "
+             "someone who depended on you for money (Finance Act 2004, Schedule 28, paragraph 15). A nominee is "
+             "someone who is not on that list, so an annuity for a nominee is an annuity for a non-dependant.",
+             ["fa2004p15", "fa2004p27AA"]),
+            ("What changes for pensions and inheritance tax on 6 April 2027?",
+             "From 6 April 2027, most unused pension money and most pension death benefits count as part of your "
+             "estate for inheritance tax. The Finance Act 2026, section 66, puts a new section 150A into the "
+             "Inheritance Tax Act 1984, and section 71 applies the change to deaths on or after 6 April 2027. If your "
+             "estate is big enough to pay inheritance tax, the rate on the taxable part is 40%. If you die aged 75 or "
+             "over, your son or daughter also pays income tax on the pension money they receive.",
+             ["fa2026s66", "ihta150A", "fa2026s71", "ihtasch1", "itepa579A", "itepa567B", "fa2026s70"]),
+            ("Is a nominees' annuity free of inheritance tax from April 2027?",
+             "A nominees' annuity bought together with your own lifetime annuity is left out of the new pension "
+             "inheritance tax charge when you die. A nominees' annuity bought any other way is not. Section "
+             "150A(6)(c) of the Inheritance Tax Act 1984 lists \"a dependants' annuity, or a nominees' annuity, that "
+             "was purchased together with a lifetime annuity payable to the member\". A nominees' annuity bought "
+             "after you die, with your leftover pension money, does not get this exclusion.",
+             ["ihta150A", "fa2026s66"]),
+            ("What does bought together mean?",
+             "Bought together means the nominees' annuity is linked to your own lifetime annuity when you buy it. It "
+             "cannot be added years later. The two can be one joint life annuity, or two separate annuities bought no "
+             "more than seven days apart (Finance Act 2004, section 278B).",
+             ["fa2004s278B", "ihta150A"]),
+            ("Does my son or daughter pay income tax on a nominees' annuity?",
+             "It depends on your age when you die. If you die aged 75 or over, your son or daughter pays income tax "
+             "on each payment, at their own rate, as the payments arrive (Income Tax (Earnings and Pensions) Act "
+             "2003, sections 579A and 579D). If you die before 75, the payments from a nominees' annuity bought "
+             "together with your own annuity can be free of income tax (section 646B(3)). There are conditions.",
+             ["itepa579A", "itepa579D", "itepa646B"]),
+            ("What do the numbers look like?",
+             "In Steve's made-up example, Mr Miggins is 80 and dies after 6 April 2027 with £100,000 still in his "
+             "pension pot. Inheritance tax at 40% takes £40,000 and leaves £60,000. His daughter Amy then pays 40% "
+             "income tax on the £60,000, which is £24,000, so she is left with about £36,000. If Mr Miggins had "
+             "bought a nominees' annuity for Amy together with his own lifetime annuity, there would be no pension "
+             "pot left to tax, and Amy would pay income tax on each payment as it arrives.",
+             ["ihta150A", "ihtasch1", "itepa579A", "v7_example"]),
+            ("What are the catches?",
+             "There are six. The nominees' annuity has to be bought together with your own lifetime annuity. Once "
+             "the cooling off period has passed, an annuity usually cannot be changed, cancelled or cashed in. Your "
+             "own income is lower. If your son or daughter dies before you, the nominee's part usually just stops, "
+             "depending on the contract. Not every annuity provider offers a nominees' annuity, and some insurers "
+             "set a minimum age for the nominee. And there is an open legal question about gifts.",
+             ["fa2004s278B", "q_age40", "steve_history"]),
+            ("Is buying a nominees' annuity a gift for inheritance tax?",
+             "There is no definitive legal answer yet. Section 150A deals with what happens when you die. It does "
+             "not settle whether buying the nominees' annuity in the first place was a gift, which the Inheritance "
+             "Tax Act 1984 calls a transfer of value (section 3(1)). Sections 10 and 12(2ZA) also matter, and the "
+             "Supreme Court case HMRC v Parry [2020] UKSC 35 did not decide the point. If buying one were treated as "
+             "a gift, the usual seven year rule for gifts would apply (section 3A).",
+             ["ihta3", "ihta10", "ihta12", "parry", "ihta3A"]),
+            ("What are the three questions to keep apart?",
+             "One: is the nominees' annuity counted for inheritance tax when you die? For one bought together with "
+             "your own lifetime annuity, the law says no, from 6 April 2027. Two: does your son or daughter pay "
+             "income tax on it? Yes if you die at 75 or over, and it can be tax free if you die before 75. Three: "
+             "was buying it a gift? The law has not settled that yet.",
+             ["ihta150A", "itepa579A", "itepa646B", "ihta3"]),
+        ],
+        "articles": [
+            ("oneword", "The Mr Miggins and Amy nominees' annuity figures."),
+            ("jail", "Is buying one a gift? The full detail."),
+        ],
+        "related": [("Previous video", "how-much-of-my-pension-will-be-taxed-when-i-die",
+                     "How much of my pension will be taxed when I die? A 103% UK example"),
+                    ("Earlier video", "nominees-annuity",
+                     "Nominees' annuity: what is it, how does it work, and what's the catch?"),
+                    ("Next question", "whole-of-life-assurance",
+                     "Whole of life assurance: what is it, why does a whole generation distrust it, and what has changed?")],
+        "legislation": "Finance Act 2004, Sch. 28, paras 15 and 27AA, and s.278B; Inheritance Tax Act 1984, ss.3, 3A, "
+                       "10, 12(2ZA) and 150A; Finance Act 2026, ss.66, 70 and 71; Income Tax (Earnings and Pensions) "
+                       "Act 2003, ss.567B, 579A, 579D and 646B.",
+        "notes": [
+            {"phrase": "when he was talking about inheritance tax,",
+             "kind": "Source note",
+             "date": date(2026, 11, 18),
+             "text": "Hansard, House of Commons, 19 March 1986, volume 94, column 325, in the debate on the 1986 "
+                     "Budget. His words: \"If people die old, it is, broadly speaking, a voluntary levy paid by those "
+                     "who distrust their heirs more than they dislike the Inland Revenue.\"",
+             "sources": ["hansard1986", "fa1986s100"]},
+        ],
+        "transcript_file": "v7_transcript.tsv",
+        "keywords": ["nominees' annuity", "non-dependent annuity", "non-dependant annuity",
+                     "inheritance tax on pensions 2027", "section 150A", "joint life annuity",
+                     "pension death benefits", "annuity for a son or daughter"],
+}
+VIDEOS.append(V7_ENTRY)
+
+# Video 7 (what is a nominees' annuity) moves the home page date on. The video 6 page gains a "Next video" link and
+# the first nominees' annuity video page gains a "Newer video" link.
+TODAY = max(TODAY, date.fromisoformat(V7_VIDEO_RELEASE))
+for _v in VIDEOS:
+    if _v["slug"] == "how-much-of-my-pension-will-be-taxed-when-i-die":
+        _v["related"] = _v["related"] + [("Next video", "what-is-a-nominees-annuity", V7_TITLE)]
+        _v["modified"] = V7_VIDEO_RELEASE
+    if _v["slug"] == "nominees-annuity":
+        _v["related"] = _v["related"] + [("Newer video", "what-is-a-nominees-annuity", V7_TITLE)]
+        _v["modified"] = V7_VIDEO_RELEASE
+
+CORRECTIONS_LOG.insert(0, ("18 November 2026",
+                           "A new video page was published, and two earlier video pages gained a link to it. No "
+                           "answers changed.", [
+    ("what-is-a-nominees-annuity", [
+        "Published: What is a nominees' annuity? Inheritance tax from April 2027. The page has the short answer, key "
+        "facts, 10 questions with their sources and the full transcript. A dated source note beside Roy Jenkins's "
+        "words gives the Hansard reference.",
+    ]),
+    ("how-much-of-my-pension-will-be-taxed-when-i-die", [
+        "A Next video link was added. The answers, key facts and transcript were unchanged.",
+    ]),
+    ("nominees-annuity", [
+        "A Newer video link was added. The answers, key facts and transcript were unchanged.",
+    ]),
+]))
+
+
 
 def esc(s):
     # Escape &, <, > and double quotes only; apostrophes stay readable.
