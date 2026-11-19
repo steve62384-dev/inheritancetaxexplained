@@ -2438,6 +2438,36 @@ CORRECTIONS_LOG.insert(0, ("18 November 2026",
     ]),
 ]))
 
+# 19 November 2026: a dated note on the nominee's minimum age (age 40), beside the catch in the video 7 transcript.
+V7_AGE_NOTE_DATE = "2026-11-19"
+SOURCES.update({
+    "v7_age40": ("Provider evidence", "Insurers' written answers on the nominee's minimum age and their reinsurance "
+                 "terms, July to October 2026, held on file", None),
+})
+for _v in VIDEOS:
+    if _v["slug"] == "what-is-a-nominees-annuity":
+        _v["notes"] = _v["notes"] + [
+            {"phrase": "Some insurers also set a minimum age for the nominee.",
+             "kind": "Note",
+             "date": date(2026, 11, 19),
+             "text": "At the time of writing, no annuity provider Steve has checked will take a nominee under age "
+                     "40. The law sets no minimum age for a nominee. Steve understands from the insurers that the "
+                     "age 40 limit comes from their reinsurance terms, so the limit could change.",
+             "sources": ["v7_age40", "fa2004p27A", "fa2004p27AA"]},
+        ]
+        _v["modified"] = V7_AGE_NOTE_DATE
+TODAY = max(TODAY, date.fromisoformat(V7_AGE_NOTE_DATE))
+CORRECTIONS_LOG.insert(0, ("19 November 2026",
+                           "A dated note on the nominee's minimum age was added to one video page. No answers "
+                           "changed.", [
+    ("what-is-a-nominees-annuity", [
+        "A dated note was added to the transcript, beside the words \"Some insurers also set a minimum age for the "
+        "nominee\". The note says that, at the time of writing, no annuity provider Steve has checked will take a "
+        "nominee under age 40, that the law sets no minimum age, and that the limit could change. The answers, key "
+        "facts and the words of the transcript were unchanged.",
+    ]),
+]))
+
 
 
 def esc(s):
