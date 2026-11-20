@@ -2833,7 +2833,7 @@ SOURCES.update({
 def header_html():
     return f"""<header class="site"><div class="wrap">
 <a class="brand" href="/">{esc(SITE_NAME)} <span>by Steve Hunt ACII TEP</span></a>
-<nav><a href="/">Home</a><a href="/pensions-and-inheritance-tax-from-april-2027/">Pensions and IHT 2027</a><a href="/nominees-annuity/">Nominees' annuity</a><a href="/whole-of-life-assurance/">Whole of life</a><a href="{ABOUT_PATH}">About Steve</a></nav>
+<nav><a href="/">Home</a><a href="/pensions-and-inheritance-tax-from-april-2027/">Pensions and IHT 2027</a><a href="/nominees-annuity/">Nominees' annuity</a><a href="/whole-of-life-assurance/">Whole of life</a><a href="/pensions-and-inheritance-tax-from-april-2027/for-accountants/">For accountants</a><a href="{ABOUT_PATH}">About Steve</a></nav>
 </div></header>"""
 
 
@@ -4350,7 +4350,7 @@ def accountants_page():
 {header_html()}
 <main class="wrap">
 <article>
-<p class="kicker">For accountants</p>
+<p class="kicker">For accountants &middot; The law and the sums &middot; <a href="{TOOL_PATH}">The tool box</a></p>
 <h1>{esc(ACC_TITLE)}</h1>
 <p class="byline">By <a href="{ABOUT_PATH}">Steve Hunt ACII TEP</a> &middot; Published {published} &middot; Last updated {ACC_UPDATED} &middot; The law on this page was read at source on {ACC_READ}</p>
 
@@ -4626,7 +4626,7 @@ def tool_box_page():
 {header_html()}
 <main class="wrap">
 <article>
-<p class="kicker">For accountants</p>
+<p class="kicker">For accountants &middot; <a href="{ACC_PATH}">The law and the sums</a> &middot; The tool box</p>
 <h1>{esc(TOOL_TITLE)}</h1>
 <p class="byline">By <a href="{ABOUT_PATH}">Steve Hunt ACII TEP</a> &middot; Published {published} &middot; The law on this page was read at source on {ACC_READ}</p>
 
