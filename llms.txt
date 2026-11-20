@@ -28,6 +28,7 @@ X: https://x.com/SHunt_ACII_TEP
 ## For accountants
 
 - [Pensions and inheritance tax from 6 April 2027: what UK accountants need to know](https://inheritancetaxexplained.co.uk/pensions-and-inheritance-tax-from-april-2027/for-accountants/): For deaths on or after 6 April 2027, most unused pension funds and pension death benefits count as part of the estate for UK inheritance tax. The pension is only charged its share of the estate's bill. The rest falls on the non-pension assets, which can mean the family home.
+- [Inheritance tax on a pension from 6 April 2027: the tool box, in numbers](https://inheritancetaxexplained.co.uk/pensions-and-inheritance-tax-from-april-2027/tool-box/): Ten headline planning tools for inheritance tax on a pension from 6 April 2027, in numbers. Each tool has its conditions and the law beside it.
 
 ## Sources and corrections
 

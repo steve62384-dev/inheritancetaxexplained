@@ -18,6 +18,7 @@ Website: https://inheritancetaxexplained.co.uk/
 ## For accountants
 
 - [Pensions and inheritance tax from 6 April 2027: what UK accountants need to know](https://inheritancetaxexplained.co.uk/pensions-and-inheritance-tax-from-april-2027/for-accountants/), with a one page factsheet to download, in numbers or in words
+- [Inheritance tax on a pension from 6 April 2027: the tool box, in numbers](https://inheritancetaxexplained.co.uk/pensions-and-inheritance-tax-from-april-2027/tool-box/), ten headline planning tools, each with its conditions and the law
 
 ## Sources and corrections
 
