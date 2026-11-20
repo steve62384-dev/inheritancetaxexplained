@@ -3902,6 +3902,7 @@ SOURCES.update({
     "fa2026sch12": ("Law", "Finance Act 2026, Schedule 12", f"{LEG}/ukpga/2026/11/schedule/12"),
     "ihta106": ("Law", "Inheritance Tax Act 1984, s.106", f"{LEG}/ukpga/1984/51/section/106"),
     "fa1986sch20": ("Law", "Finance Act 1986, Schedule 20, paragraph 6", f"{LEG}/ukpga/1986/41/schedule/20"),
+    "fa1986s102B": ("Law", "Finance Act 1986, s.102B", f"{LEG}/ukpga/1986/41/section/102B"),
     "ihta117": ("Law", "Inheritance Tax Act 1984, s.117", f"{LEG}/ukpga/1984/51/section/117"),
     "q_acc_wol": ("Provider evidence", "Whole of life quotation, 13 November 2026: £200,000 of cover, man aged "
                   "65, non-smoker, held on file", None),
@@ -4039,8 +4040,8 @@ def _fig_table(rows, caption=None, lined=False):
 
 ACC_TOOLS = [
     ("Whole of Life Assurance (WOL)", "£400 a month today, £200,000 in trust for heirs tomorrow (man of 65).",
-     'The policy is written in trust, so the payout goes to the trust for the heirs. Each premium is a gift. Premiums are normally covered by the £3,000 annual exemption (section 19) or by the exemption for normal expenditure out of income (section 21). A premium that neither exemption covers is a lifetime gift.',
-     ['q_acc_wol', 'ihta19', 'ihta21']),
+     'The policy is written in trust, so the payout goes to the trust for the heirs. Each premium is a gift. At £400 a month the premiums come to £4,800 a year, which is more than the £3,000 annual exemption (section 19), so they rely on the exemption for normal expenditure out of income (section 21). Where an annuity has also been bought on the same life, the premiums count as normal expenditure only if the annuity and the policy are shown not to be associated operations (section 21(2)). A premium that no exemption covers is a lifetime gift into the trust.',
+     ['q_acc_wol', 'ihta19', 'ihta21', 'ihta21_2']),
     ("Nominees' Annuity", "£500,000 of pension buys about £29,000 a year (man of 80), carrying on in full to his "
      "daughter of 45. May count as a lifetime gift with a 7-year clock. Providers currently need the nominee to be "
      "40 or over. NEOI can also be used when Dad receives his income.",
@@ -4057,11 +4058,11 @@ ACC_TOOLS = [
     ("Main property into trust", "£300,000 of the home into an Interest in Possession Trust is out of the estate "
      "after seven years, when set up correctly. That saves £120,000 of IHT. The £12,000 a year rent also leaves the "
      "estate.",
-     'A lifetime gift into this kind of trust is not a potentially exempt transfer (section 3A). It is a chargeable transfer when it is made. Kept within the £325,000 nil rate band, with no other chargeable gifts in the seven years before, no inheritance tax is due on the way in, and after seven years the gift no longer counts (section 7). The trust is within the relevant property rules, with a charge at each ten-year anniversary and when property leaves the trust (sections 64 and 65). If the giver goes on living in the home, a full market rent must be paid for the share given away. If it is not, the gift with reservation rules treat that share as still in the estate (Finance Act 1986, section 102 and Schedule 20, paragraph 6).',
-     ['ihta3A', 'ihta7', 'ihta64', 'ihta65', 'fa1986s102', 'fa1986sch20', 'steve_acc_tools']),
+     'A lifetime gift into this kind of trust is not a potentially exempt transfer (section 3A). It is a chargeable transfer when it is made. Kept within the £325,000 nil rate band, with no other chargeable gifts in the seven years before, no inheritance tax is due on the way in, and after seven years the gift no longer counts (section 7). The trust is within the relevant property rules, with a charge at each ten-year anniversary and when property leaves the trust (sections 64 and 65). If the giver goes on living in the home, a full market rent must be paid for the share given away. If it is not, the gift with reservation rules treat that share as still in the estate (Finance Act 1986, sections 102 and 102B, and Schedule 20, paragraph 6).',
+     ['ihta3A', 'ihta7', 'ihta64', 'ihta65', 'fa1986s102', 'fa1986s102B', 'fa1986sch20', 'steve_acc_tools']),
     ("Purchased Life Annuity", "£500,000 of own funds buys a woman of 85 about £77,000 a year for life. No 7-year "
      "clock.",
-     'Buying an annuity from an insurer at the going rate is a purchase and not a gift, so the price paid is not a transfer of value (section 10). An annuity with no guarantee stops at death. The tax-free capital part of each payment is not income for the normal expenditure out of income exemption (section 21(3)), so gifts of that part come under the 7-year rule.',
+     'Buying an annuity from an insurer at the going rate is a purchase and not a gift, so the price paid is not a transfer of value (section 10). An annuity with no guarantee stops at death. The tax-free capital part of each payment is not income for the normal expenditure out of income exemption (section 21(3)), so gifts of that part need another exemption or come under the 7-year rule.',
      ['q_acc_pla', 'ihta10', 'ihta21_134', 'ihta3A']),
     ("Home Income Plan", "borrow on the home to buy an income for life via a Purchased Life Annuity and hold the "
      "estate at £2 million, where the next £700,000 is taxed at 60%.",
@@ -4069,7 +4070,7 @@ ACC_TOOLS = [
      ['ihta8D', 'rnrb', 'steve_acc_tools']),
     ("BPR and APR", "100% relief on the first £2.5 million per person, 50% above, where two years can apply and not "
      "seven.",
-     'The £2.5 million is one allowance for business property and agricultural property together (Finance Act 2026, Schedule 12, new section 124D). Qualifying property above the allowance gets 50% relief. Business property must normally have been owned for two years (section 106). Agricultural property must have been occupied by the owner for two years, or owned for seven years and farmed throughout by the owner or someone else (section 117).',
+     'The £2.5 million is one allowance for business property and agricultural property together (Finance Act 2026, Schedule 12, new section 124D). Qualifying property above the allowance gets 50% relief. The unused allowance of a husband, wife or civil partner who died first can be transferred (new section 124E). Business property must normally have been owned for two years (section 106). Agricultural property must have been occupied by the owner for two years, or owned for seven years and farmed throughout by the owner or someone else (section 117).',
      ['fa2026sch12', 'ihta106', 'ihta117']),
     ("Pure gifting", "£3,000 a year is exempt. Gifts above the allowances carry a 7-year clock, so better to have "
      "the cover in place first.",
