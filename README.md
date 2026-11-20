@@ -15,6 +15,10 @@ Website: https://inheritancetaxexplained.co.uk/
 - [Nominees' annuity: what is it, how does it work, and what's the catch?](https://inheritancetaxexplained.co.uk/nominees-annuity/)
 - [Whole of life assurance: what is it, why does a whole generation distrust it, and what has changed?](https://inheritancetaxexplained.co.uk/whole-of-life-assurance/)
 
+## For accountants
+
+- [Pensions and inheritance tax from 6 April 2027: what UK accountants need to know](https://inheritancetaxexplained.co.uk/pensions-and-inheritance-tax-from-april-2027/for-accountants/), with a one page factsheet to download, in numbers or in words
+
 ## Sources and corrections
 
 - [Sources, method and corrections](https://inheritancetaxexplained.co.uk/sources-and-corrections/)
