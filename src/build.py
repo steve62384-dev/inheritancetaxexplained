@@ -3855,18 +3855,26 @@ ACC_TITLE = "Pensions and inheritance tax from 6 April 2027: what UK accountants
 ACC_PUBLISHED = os.environ.get("ACC_PUBLISHED", "2026-11-20")  # set to the real go-live date when published
 ACC_CHECKED = "20 November 2026"  # the law on this page is described as at this date
 ACC_READ = "19 and 20 November 2026"  # the dates the law on this page was read at source
+ACC_UPDATED = "20 November 2026"  # the date of the last change to this page
 ACC_PDF_NUM_NAME = "pensions-and-inheritance-tax-from-6-april-2027-one-page-factsheet-for-accountants-in-numbers.pdf"
 ACC_PDF_WORDS_NAME = "pensions-and-inheritance-tax-from-6-april-2027-one-page-factsheet-for-accountants-in-words.pdf"
 ACC_PDF_NUM = f"/downloads/{ACC_PDF_NUM_NAME}"
 ACC_PDF_WORDS = f"/downloads/{ACC_PDF_WORDS_NAME}"
-ACC_DESC = ("From 6 April 2027 most unused pension funds count for UK inheritance tax. Worked examples, who pays, "
-            "the law with links and a one page factsheet.")
+ACC_DESC = ("From 6 April 2027 most unused pension funds count for UK inheritance tax (Finance Act 2026). Worked "
+            "examples, payment notices, deadlines and the law.")
 ACC_SHORT = ("For deaths on or after 6 April 2027, most unused pension funds and pension death benefits count as "
              "part of the estate for UK inheritance tax. The pension is only charged its share of the estate's "
              "bill. The rest falls on the non-pension assets, which can mean the family home.")
 ACC_LEAD = ("For deaths on or after 6 April 2027, most unused pension funds and pension death benefits count as part "
-            "of the estate for UK inheritance tax (IHT). A pension left to a husband, wife, civil partner or charity "
-            "is normally still free of inheritance tax.")
+            "of the estate for UK inheritance tax (IHT), under the Finance Act 2026. A pension left to a husband, "
+            "wife, civil partner or charity is normally still free of inheritance tax.")
+ACC_LEAD2 = ("The pension scheme pays only the pension's own share of the estate's inheritance tax bill, and only "
+             "when it is given a payment notice. The rest of the bill falls on the non-pension assets, which can "
+             "mean the family home.")
+ACC_TIMELINE = ("The pension scheme has 28 days from a request to give the personal representatives the value of "
+                "the pension. The inheritance tax is due by the end of the sixth month after the month of death, "
+                "with interest after that. The scheme has 35 days to pay its share once it is given a payment "
+                "notice. A withholding notice lasts no longer than 15 months after the end of the month of death.")
 ACC_BUDGET = [
     ("Prospective personal representatives.", "People who expect to be the personal representatives will be able to "
      "direct a pension scheme administrator to pay the inheritance tax due on the pension to HMRC, when certain "
@@ -3880,7 +3888,8 @@ ACC_BUDGET = [
     ("Lump sums over the allowance.", "Where the member died under 75 and a lump sum death benefit is more than the "
      "lump sum and death benefit allowance, the tax on the excess will be assessed and collected through a new "
      "stand-alone process, charged on the beneficiary at their marginal rate. The income tax relief for inheritance "
-     "tax paid on the same money is kept."),
+     "tax paid on the same money is kept. The change has retrospective effect for relevant lump sum death benefits "
+     "paid on or after 6 April 2024. The inheritance tax parts apply to deaths on or after 6 April 2027."),
 ]
 
 SOURCES.update({
@@ -3892,6 +3901,7 @@ SOURCES.update({
     "fa2004s160": ("Law", "Finance Act 2004, s.160", f"{LEG}/ukpga/2004/12/section/160"),
     "fa2026sch12": ("Law", "Finance Act 2026, Schedule 12", f"{LEG}/ukpga/2026/11/schedule/12"),
     "ihta106": ("Law", "Inheritance Tax Act 1984, s.106", f"{LEG}/ukpga/1984/51/section/106"),
+    "fa1986sch20": ("Law", "Finance Act 1986, Schedule 20, paragraph 6", f"{LEG}/ukpga/1986/41/schedule/20"),
     "ihta117": ("Law", "Inheritance Tax Act 1984, s.117", f"{LEG}/ukpga/1984/51/section/117"),
     "q_acc_wol": ("Provider evidence", "Whole of life quotation, 13 November 2026: £200,000 of cover, man aged "
                   "65, non-smoker, held on file", None),
@@ -3997,6 +4007,11 @@ ol.ask li{margin:.7em 0;font-size:1.05rem}
 .btn.small{padding:8px 16px;font-size:.92rem}
 ul.law li{margin:.55em 0}
 ol.tools .src{margin:.3em 0 0}
+ol.tools .cond{margin:.35em 0 .2em;font-size:.95rem;color:var(--muted);max-width:none}
+.keyfacts{background:#fff;border:1px solid var(--rule);border-radius:4px;padding:12px 20px;margin:1.4em 0}
+.keyfacts h2{border:0;margin:.2em 0 .4em;padding:0;font-size:1.2rem}
+.keyfacts li{margin:.4em 0}
+.one{background:var(--ivory);border-left:4px solid var(--gold);padding:10px 16px;margin:1em 0;max-width:none}
 .dl{background:#fff;border:1px solid var(--rule);border-left:5px solid var(--gold);border-radius:4px;padding:14px 20px;margin:1.2em 0 1.6em}
 .dl p{margin:.4em 0;max-width:none}
 .dl .note{margin-top:.8em}
@@ -4024,38 +4039,48 @@ def _fig_table(rows, caption=None, lined=False):
 
 ACC_TOOLS = [
     ("Whole of Life Assurance (WOL)", "£400 a month today, £200,000 in trust for heirs tomorrow (man of 65).",
-     ["q_acc_wol"]),
+     'The policy is written in trust, so the payout goes to the trust for the heirs. Each premium is a gift. Premiums are normally covered by the £3,000 annual exemption (section 19) or by the exemption for normal expenditure out of income (section 21). A premium that neither exemption covers is a lifetime gift.',
+     ['q_acc_wol', 'ihta19', 'ihta21']),
     ("Nominees' Annuity", "£500,000 of pension buys about £29,000 a year (man of 80), carrying on in full to his "
      "daughter of 45. May count as a lifetime gift with a 7-year clock. Providers currently need the nominee to be "
      "40 or over. NEOI can also be used when Dad receives his income.",
-     ["q_acc_na", "q_age40", "ihta150A", "ihta3A", "ihta7", "ihta21", "steve_pet"]),
+     "The annuity for the nominee is left out of the estate at death only where it was bought together with the member's own lifetime annuity (section 150A). Whether buying one counts as a lifetime gift is not settled: HMRC has not said and no court has ruled, so the 7-year point is Steve's analysis. The minimum age of 40 is the practice of the insurers that quoted. It is not a rule of law.",
+     ['q_acc_na', 'q_age40', 'ihta150A', 'ihta3A', 'ihta7', 'ihta21', 'steve_pet']),
     ("Impaired Life Annuity", "also takes funds out of the estate immediately and again Normal Expenditure out of "
      "Income (NEOI gifting surplus income) can also be used. Either as gifts as cash or into a trust",
-     ["ihta21"]),
+     'A lifetime annuity with no guarantee period and no value protection stops at death, so no fund is left to count. A guarantee period or value protection leaves a payment that needs its own inheritance tax assessment. Gifts of the income are exempt only if they meet the three tests in line 4.',
+     ['ihta21', 'tn']),
     ("Normal Expenditure out of Income (NEOI)", "£10,000 a year given from surplus income is £100,000 out of the "
      "estate in ten years, with no 7-year clock.",
-     ["ihta21", "steve_acc_tools"]),
+     "Three tests, and all three must be met: the gift is part of the giver's normal expenditure, it is made out of income, and the giver is left with enough income to keep up the usual standard of living (section 21).",
+     ['ihta21', 'steve_acc_tools']),
     ("Main property into trust", "£300,000 of the home into an Interest in Possession Trust is out of the estate "
      "after seven years, when set up correctly. That saves £120,000 of IHT. The £12,000 a year rent also leaves the "
      "estate.",
-     ["steve_acc_tools"]),
+     'A lifetime gift into this kind of trust is not a potentially exempt transfer (section 3A). It is a chargeable transfer when it is made. Kept within the £325,000 nil rate band, with no other chargeable gifts in the seven years before, no inheritance tax is due on the way in, and after seven years the gift no longer counts (section 7). The trust is within the relevant property rules, with a charge at each ten-year anniversary and when property leaves the trust (sections 64 and 65). If the giver goes on living in the home, a full market rent must be paid for the share given away. If it is not, the gift with reservation rules treat that share as still in the estate (Finance Act 1986, section 102 and Schedule 20, paragraph 6).',
+     ['ihta3A', 'ihta7', 'ihta64', 'ihta65', 'fa1986s102', 'fa1986sch20', 'steve_acc_tools']),
     ("Purchased Life Annuity", "£500,000 of own funds buys a woman of 85 about £77,000 a year for life. No 7-year "
      "clock.",
-     ["q_acc_pla"]),
+     'Buying an annuity from an insurer at the going rate is a purchase and not a gift, so the price paid is not a transfer of value (section 10). An annuity with no guarantee stops at death. The tax-free capital part of each payment is not income for the normal expenditure out of income exemption (section 21(3)), so gifts of that part come under the 7-year rule.',
+     ['q_acc_pla', 'ihta10', 'ihta21_134', 'ihta3A']),
     ("Home Income Plan", "borrow on the home to buy an income for life via a Purchased Life Annuity and hold the "
      "estate at £2 million, where the next £700,000 is taxed at 60%.",
-     ["ihta8D", "rnrb", "steve_acc_tools"]),
+     'The 60% is 40% inheritance tax plus the loss of £1 of residence nil rate band for every £2 of estate over £2,000,000 (section 8D). With two residence nil rate bands of £175,000 the band runs from £2,000,000 to £2,700,000, so the figure needs both bands to be available. How the loan and the annuity are treated depends on the plan.',
+     ['ihta8D', 'rnrb', 'steve_acc_tools']),
     ("BPR and APR", "100% relief on the first £2.5 million per person, 50% above, where two years can apply and not "
      "seven.",
-     ["fa2026sch12", "ihta106", "ihta117"]),
+     'The £2.5 million is one allowance for business property and agricultural property together (Finance Act 2026, Schedule 12, new section 124D). Qualifying property above the allowance gets 50% relief. Business property must normally have been owned for two years (section 106). Agricultural property must have been occupied by the owner for two years, or owned for seven years and farmed throughout by the owner or someone else (section 117).',
+     ['fa2026sch12', 'ihta106', 'ihta117']),
     ("Pure gifting", "£3,000 a year is exempt. Gifts above the allowances carry a 7-year clock, so better to have "
      "the cover in place first.",
-     ["ihta19", "ihta3A", "ihta7"]),
+     'A gift to a person is a potentially exempt transfer: no inheritance tax if the giver lives seven years. A gift into most trusts is a chargeable transfer when it is made (section 3A). The tax on a gift that fails tapers after three years (section 7).',
+     ['ihta19', 'ihta3A', 'ihta7']),
     ("Business owners", "where there is a business, the business can fund the life insurance: relevant life cover, "
      "key person cover and registered group life (death in service) cover, which can start with just two lives and "
      "stays outside IHT after April 2027. Where cash flow is tight, the company's own pension scheme (a SSAS) can "
      "pay the group life premiums out of pension money.",
-     []),
+     "Qualifying death in service benefits are left out of the estate (section 150A). Key person cover pays the company, not the family. The points about two lives, and about a SSAS paying the premiums, come from Steve's experience of how these schemes are set up and not from an Act. Each needs its own advice.",
+     ['ihta150A', 'tn334', 'steve_history']),
 ]
 
 ACC_QUESTIONS = [
@@ -4078,7 +4103,7 @@ ACC_PASTE = [
 ]
 
 ACC_FAQ = [
-    ("What changes for pensions and inheritance tax on 6 April 2027?", ACC_LEAD,
+    ("What changes for pensions and inheritance tax on 6 April 2027?", ACC_LEAD + " " + ACC_LEAD2,
      ["ihta150A", "fa2026s66", "fa2026s71", "ihta18", "ihta23", "tn"]),
     ("Does the pension pay the inheritance tax it causes?",
      "No. The pension is only charged its share of the whole estate's inheritance tax bill, in proportion to its "
@@ -4086,7 +4111,8 @@ ACC_FAQ = [
      "pension is charged one third of it, £66,667. The other £133,333 falls on the non-pension assets.",
      ["ihta265", "ihta226B", "tn732", "steve_example"]),
     ("Can the pension scheme pay the whole inheritance tax bill?",
-     "No. A payment notice cannot be for more than the tax and interest due on the pension in that scheme. "
+     "No. A payment notice cannot be for more than the tax, with interest, due on the pension in that scheme, or "
+     "more than the benefits the scheme has still to pay out. "
      "Inheritance tax paid under a payment notice is an authorised payment, and there is no authorised way for the "
      "scheme to pay the tax on the other assets direct to HMRC. The scheme cannot be told to pay more than the "
      "pension's share, and it cannot choose to pay more as an authorised payment. The family can draw benefits from "
@@ -4101,6 +4127,8 @@ ACC_FAQ = [
      "tax is about £292,000. That is about £712,000 of tax on a £700,000 pension, with no growth and at today's "
      "tax rates.",
      ["ihta8D", "ihta265", "itepa579CZA", "ita35", "steve_example"]),
+    ("When is the inheritance tax on a pension due, and what are the deadlines?", ACC_TIMELINE,
+     ["si2026818", "ihta226", "ihta233", "payiht", "ihta226B", "ihta226A"]),
     ("What did the Budget of 28 October 2026 change for pensions and inheritance tax?",
      "Four changes were announced, all due in Finance Bill 2026-27 and none yet law. " +
      " ".join(f"{h} {t}" for h, t in ACC_BUDGET),
@@ -4112,7 +4140,8 @@ def accountants_ld():
     url = ACC_URL
     keys = unique(k for _, _, ks in ACC_FAQ for k in ks)
     keys = unique(keys + ["ihta8A", "ihta7", "ihta226A", "ihta227", "fa2026s67", "itepa567B", "hmrc_2yr",
-                          "ootlar_pensions", "si2026818", "ppi2025"] + [k for _, _, ks in ACC_TOOLS for k in ks])
+                          "ootlar_pensions", "si2026818", "ppi2025", "hmrc_policy2025"]
+                  + [k for _, _, _, ks in ACC_TOOLS for k in ks])
     faq = {
         "@type": "FAQPage",
         "@id": f"{url}#faq",
@@ -4236,7 +4265,9 @@ def accountants_page():
         ("Total tax caused by the £700,000 pension", _gbp(f["worst_total"]), "sum"),
     ], caption="Where the £712,000 falls", lined=True)
 
-    tools = "\n".join(f"<li><strong>{esc(n)}</strong> ~ {esc(t)}{sources_html(ks, tag='div')}</li>" for n, t, ks in ACC_TOOLS)
+    tools = "\n".join(f"<li><strong>{esc(n)}</strong> ~ {esc(t)}<p class=\"cond\"><strong>The conditions.</strong> {esc(c)}</p>"
+                      f"{sources_html(ks, tag='div')}</li>" for n, t, c, ks in ACC_TOOLS)
+    faq_html = "\n".join(f"<h3>{esc(q)}</h3>\n<p>{esc(a_)}</p>\n{sources_html(ks)}" for q, a_, ks in ACC_FAQ)
     asks = "\n".join(f"<li>{esc(q)}</li>" for q in ACC_QUESTIONS)
     paste = "\n".join(f"<p>{esc(p_)}</p>" for p_ in ACC_PASTE)
     law = [
@@ -4248,10 +4279,12 @@ def accountants_page():
         ("ihta265", "the tax on an estate is attributed to each part in proportion to its value."),
         ("fa2026s67", "rewrites section 210 of the Inheritance Tax Act 1984: who is liable for the tax on the "
                       "pension."),
-        ("ihta226A", "withholding notices: no more than 50% of a beneficiary's entitlement is paid out, for up to "
-                     "15 months."),
-        ("ihta226B", "payment notices: at least £1,000, no more than the tax and interest due on the pension in "
-                     "that scheme, paid within 35 days."),
+        ("ihta226A", "withholding notices: no more than 50% of a beneficiary's entitlement is paid out, until 15 "
+                     "months after the end of the month of death at the latest. Excluded and exempt benefits are "
+                     "outside the limit."),
+        ("ihta226B", "payment notices: at least £1,000, no more than the tax and interest the person giving the "
+                     "notice is liable for on the pension, and no more than the benefits still to be paid; paid "
+                     "within 35 days."),
         ("ihta227", "tax on land can be paid by ten equal yearly instalments."),
         ("ihta8A", "the unused nil rate band of a husband, wife or civil partner who died first can be claimed on "
                    "the second death."),
@@ -4265,7 +4298,10 @@ def accountants_page():
                       "charged on it, where its conditions are met."),
         ("ita35", "the personal allowance falls by £1 for every £2 of adjusted net income over £100,000."),
         ("si2026818", "the timetable for a pension scheme to give the personal representatives the value of the "
-                      "pension: within 28 days of a valid request."),
+                      "pension: within 28 days of a request. A provisional estimate is allowed, with the actual "
+                      "value within 14 days of being ascertained."),
+        ("ihta226", "inheritance tax is due six months after the end of the month of death."),
+        ("ihta233", "interest on inheritance tax paid late."),
     ]
     law_html = "\n".join(f"<li>{source_link(k)}: {esc(t)}</li>" for k, t in law)
     hmrc = ["tn", "tn22", "tn732", "tn2_validity", "tn2_beneficiary", "tn8", "tn1124", "ootlar_pensions",
@@ -4302,19 +4338,33 @@ def accountants_page():
 <article>
 <p class="kicker">For accountants</p>
 <h1>{esc(ACC_TITLE)}</h1>
-<p class="byline">By <a href="{ABOUT_PATH}">Steve Hunt ACII TEP</a> &middot; Published {published} &middot; The law on this page was read at source on {ACC_READ}</p>
+<p class="byline">By <a href="{ABOUT_PATH}">Steve Hunt ACII TEP</a> &middot; Published {published} &middot; Last updated {ACC_UPDATED} &middot; The law on this page was read at source on {ACC_READ}</p>
 
+<section class="answer" id="short-answer">
+<h2>What changes for pensions and inheritance tax on 6 April 2027?</h2>
+<p>{esc(ACC_LEAD)}</p>
+<p>{esc(ACC_LEAD2)}</p>
+<p>Add the income tax on what the family then draws and, in a worst case, the total tax can be more than the pension was worth.</p>
+</section>
 <div class="dl" id="download">
 <p class="dl-h">The one page factsheet for accountants, to print or pass on</p>
 <p class="dl-b"><a class="btn" href="{ACC_PDF_NUM}">Download the factsheet in numbers (PDF)</a> <a class="btn" href="{ACC_PDF_WORDS}">Download the factsheet in words (PDF)</a></p>
 <p class="note">The two examples, the worst case and the tool box on one side of A4. Two versions: the tool box in numbers, or the tool box in words.</p>
 </div>
 
-<section class="answer" id="short-answer">
-<h2>What changes for pensions and inheritance tax on 6 April 2027?</h2>
-<p>{esc(ACC_LEAD)}</p>
-<p>The pension is only charged its share of the estate's inheritance tax bill. The rest of the bill falls on the non-pension assets, which can mean the family home.</p>
-<p>Add the income tax on what the family then draws and, in a worst case, the total tax can be more than the pension was worth.</p>
+<section class="keyfacts" id="key-facts">
+<h2>Key facts: pensions and inheritance tax from 6 April 2027</h2>
+<ul>
+<li><strong>Start date.</strong> Deaths on or after 6 April 2027 (Finance Act 2026, section 71).</li>
+<li><strong>What counts.</strong> Most unused pension funds and pension death benefits, including money left in drawdown. The Act calls the value "notional pension property".</li>
+<li><strong>What is left out.</strong> Dependants' scheme pensions, dependants' or nominees' annuities bought together with the member's own lifetime annuity, and qualifying death in service benefits.</li>
+<li><strong>Still exempt.</strong> A pension left to a husband, wife, civil partner or charity.</li>
+<li><strong>The pension's share.</strong> The tax on an estate is shared between its parts in proportion to their values (Inheritance Tax Act 1984, section 265).</li>
+<li><strong>Who pays.</strong> The personal representatives are liable. The pension scheme pays its share direct to HMRC within 35 days of a payment notice for at least £1,000 (section 226B).</li>
+<li><strong>When.</strong> Inheritance tax is due by the end of the sixth month after the month of death. Interest runs after that.</li>
+<li><strong>How many estates.</strong> HMRC estimates that in 2027/28 about 10,500 estates will pay inheritance tax that would not have before, and about 38,500 will pay more.</li>
+</ul>
+{sources_html(["fa2026s71", "ihta150A", "tn331", "tn332", "tn333", "tn334", "ihta18", "ihta23", "ihta265", "fa2026s67", "ihta226B", "ihta226", "ihta233", "payiht", "hmrc_policy2025"])}
 </section>
 <p>From 6th April 2027 over £1 tn... of pension funds will come 'in scope' of IHT in the UK. <strong>That is One Trillion Pounds.</strong></p>
 <p class="note">{esc(TRILLION_TEXT)}</p>
@@ -4323,19 +4373,23 @@ def accountants_page():
 <nav class="toc" aria-label="On this page">
 <p>On this page</p>
 <ol>
+<li><a href="#short-answer">What changes on 6 April 2027?</a></li>
 <li><a href="#download">Download the one page factsheet, in numbers or in words</a></li>
+<li><a href="#key-facts">Key facts</a></li>
 <li><a href="#examples">Two of the most common examples</a></li>
 <li><a href="#worst-case">How can the tax be more than the pension was worth?</a></li>
-<li><a href="#tool-box">The tool box, in numbers</a></li>
 <li><a href="#technical-brief">The technical brief</a>
 <ol>
 <li><a href="#workings">How is the inheritance tax on a pension worked out?</a></li>
 <li><a href="#left-out">Which pension death benefits are left out, and what is exempt?</a></li>
 <li><a href="#whole-bill">Who pays the tax, and can the pension scheme pay the whole bill?</a></li>
+<li><a href="#timeline">When is the tax due? A timeline</a></li>
 <li><a href="#worst-case-workings">The worst case: how is the £712,000 worked out?</a></li>
 <li><a href="#budget-2026">What did the Budget of 28 October 2026 change?</a></li>
+<li><a href="#tool-box">What can be done? The tool box, in numbers</a></li>
 <li><a href="#three-questions">Three questions for your next client meeting</a></li>
 <li><a href="#newsletter">A paragraph for your client newsletter</a></li>
+<li><a href="#faq">Questions and answers</a></li>
 <li><a href="#the-law">The law, with links</a></li>
 </ol></li>
 </ol>
@@ -4347,6 +4401,8 @@ def accountants_page():
 {ex1}
 {ex2}
 </div>
+<p class="one"><strong>Example 1 in short.</strong> With a £1,000,000 estate and £500,000 of pensions, the inheritance tax on the second death rises from nil to {_gbp(f['e1_after'])} for a death on or after 6 April 2027. The pension scheme pays {_gbp(f['e1_share'])} of it. The other {_gbp(f['e1_rest'])} falls on the non-pension assets.</p>
+<p class="one"><strong>Example 2 in short.</strong> With a £2,000,000 estate and £700,000 of pensions, the inheritance tax rises from {_gbp(f['e2_before'])} to {_gbp(f['e2_after'])}. The pension scheme pays {_gbp(f['e2_share'])}. The other {_gbp(f['e2_rest'])} falls on the non-pension assets.</p>
 {sources_html(["ihta150A", "ihta265", "ihta8A", "ihta8D", "ihta7", "steve_example"])}
 
 <h2 id="worst-case">How can the tax be more than the pension was worth?</h2>
@@ -4361,27 +4417,17 @@ def accountants_page():
 <p class="big">This can result in MORE TAX than the pension was worth!</p>
 <p>Example 2: £420,000 of extra IHT, plus about £292,000 of income tax over 20 years, is about £712,000 of tax on a £700,000 pension (no growth, today's tax rates).</p>
 </div>
+<p class="one"><strong>The worst case in short.</strong> On the facts of Example 2, a £700,000 pension can cause about £712,000 of tax: {_gbp(f['e2_extra'])} of extra inheritance tax, plus about £292,000 of income tax paid by the daughter on what she draws over 20 years.</p>
 <p class="note">The workings are in <a href="#worst-case-workings">the technical brief</a> further down this page.</p>
 {sources_html(["ihta8D", "ihta265", "itepa579CZA", "ita35", "steve_example"])}
 
-<h2 id="tool-box">The tool box, in numbers</h2>
-<p class="note">The life cover and annuity figures are real quotes from October and November 2026. The other figures are examples. The ten tools below are headlines. Each has conditions of its own, and whether a tool fits depends on the client's facts.</p>
-<ol class="tools">
-{tools}
-</ol>
-<p class="note">More on this site: <a href="/whole-of-life-assurance/">whole of life assurance</a>, <a href="/nominees-annuity/">the nominees' annuity</a>, <a href="/equity-release-and-inheritance-tax/">equity release and inheritance tax</a> and <a href="/pensions-and-inheritance-tax-from-april-2027/guide/">every question on pensions and inheritance tax from April 2027</a>.</p>
-
-<div class="dl">
-<p class="dl-h">All of the above on one page, to print or pass on</p>
-<p class="dl-b"><a class="btn" href="{ACC_PDF_NUM}">Download the factsheet in numbers (PDF)</a> <a class="btn" href="{ACC_PDF_WORDS}">Download the factsheet in words (PDF)</a></p>
-</div>
-
 <div class="brief">
-<h2 id="technical-brief">The technical brief</h2>
-<p>The rest of this page is the detail behind the one page factsheet: the workings, who pays, what the Budget changed and the law, with links.</p>
+<h2 id="technical-brief">The technical brief: how inheritance tax on a pension works from 6 April 2027</h2>
+<p>The rest of this page is the detail behind the one page factsheet: the workings, who pays, the deadlines, what the Budget changed, the tool box and the law, with links.</p>
 </div>
 
 <h2 id="workings">How is the inheritance tax on a pension worked out?</h2>
+<p>The pension's value is added to the rest of the estate, the inheritance tax is worked out on the total, and the bill is then shared between the pension and the other assets in proportion to their values (section 265).</p>
 <p>Before 6 April 2027 a pension with discretionary death benefits normally sits outside the estate, and the examples assume that. In Example 1 the £1,000,000 estate is covered by £1,000,000 of allowances, so there is no inheritance tax. For a death on or after 6 April 2027 the pension is added in.</p>
 {work1}
 <p>In Example 2 the pension does two things. It is taxed itself, and it takes the estate over £2,000,000, so the residence nil rate bands are lost as well. The extra £420,000 is {_gbp(f['e2_direct'])} of tax on the pension itself (40% of £700,000) plus {_gbp(f['e2_rnrb'])} from the lost residence nil rate bands (40% of £350,000).</p>
@@ -4403,17 +4449,29 @@ def accountants_page():
 {sources_html(["ihta18", "ihta23"])}
 
 <h2 id="whole-bill">Who pays the inheritance tax on a pension, and can the scheme pay the whole bill?</h2>
-<p><strong>Who is liable.</strong> The personal representatives are liable for the inheritance tax on the pension. A person in whom the pension property is vested, such as a beneficiary who receives it, is liable too. The scheme's trustees are not liable. The scheme administrator is liable only where a benefit is paid in breach of a withholding notice, or where the administrator fails to act on a payment notice (Inheritance Tax Act 1984, section 210, as rewritten by the Finance Act 2026, section 67).</p>
+<p><strong>Who is liable.</strong> The personal representatives are liable for the inheritance tax on the pension. A person in whom the pension property is vested, such as a beneficiary who receives it, is liable too. The trustees of a registered pension scheme are not liable as trustees. A trustee who is also the scheme administrator can still be liable as scheme administrator. The scheme administrator is liable only where a benefit is paid in breach of a withholding notice, or where the administrator fails to act on a payment notice (Inheritance Tax Act 1984, section 210, as rewritten by the Finance Act 2026, section 67).</p>
 <p><strong>Can the pension scheme pay the whole inheritance tax bill? No.</strong> The tax on an estate is attributed to its parts in proportion to their values (section 265). In the two examples the whole estate is taxable, so the pension bears its share and no more.</p>
-<p><strong>The payment notice.</strong> The personal representatives, or a beneficiary, can give the scheme administrator a payment notice. The notice must be for at least £1,000. It cannot be for more than the tax and interest due on the pension in that scheme. The scheme administrator then has 35 days to pay HMRC (section 226B).</p>
+<p><strong>The payment notice.</strong> The personal representatives, or a beneficiary, can give the scheme administrator a payment notice. The notice must be for at least £1,000. It cannot be for more than the tax, with interest, that the person giving the notice is liable for on the pension in that scheme. It also cannot be for more than the benefits the scheme has still to pay out. The scheme administrator then has 35 days to pay HMRC (section 226B).</p>
 <p><strong>Why the scheme cannot pay more.</strong> Inheritance tax paid under section 226B is an authorised payment (Finance Act 2004, section 164). There is no authorised way for the scheme to pay the tax on the house or the other assets direct to HMRC. A payment the law does not authorise is not void, but it carries an unauthorised payment charge (sections 160 and 208). So the scheme cannot be told to pay more than the pension's share, and it cannot choose to pay more as an authorised payment.</p>
 <p><strong>Where the rest of the money comes from.</strong> The family can still use the pension to help with the rest of the bill. They draw benefits from what is left in the pension and pay the tax themselves. Where the member died at 75 or over, what they draw is taxed as their income first.</p>
-<p><strong>The withholding notice.</strong> The personal representatives, or people who expect to be the personal representatives, can also give the scheme administrator a withholding notice. While the notice runs, the scheme may not pay any beneficiary more than 50% of their entitlement. The notice ends when the tax and interest are paid, when it is withdrawn, or 15 months after the end of the month of death, whichever comes first (section 226A).</p>
+<p><strong>The withholding notice.</strong> The personal representatives, or people who expect to be the personal representatives, can also give the scheme administrator a withholding notice. While the notice runs, the scheme may not pay any beneficiary more than 50% of their entitlement. The limit does not apply to an excluded benefit or an exempt benefit, for example a benefit going to a husband, wife, civil partner or charity (section 226A(6)). The notice ends when the tax and interest are paid, when it is withdrawn, or 15 months after the end of the month of death, whichever comes first (section 226A).</p>
 <p><strong>Instalments.</strong> Inheritance tax on a house can be paid by ten equal yearly instalments, with interest, if the person paying elects. If the house is sold, the unpaid tax falls due at once (section 227). HMRC's technical note rules out instalments for the pension itself.</p>
 <p>The new pension sections (210, 226A and 226B) apply only to deaths on or after 6 April 2027, so no court has yet ruled on them.</p>
 {sources_html(["fa2026s67", "ihta265", "ihta226A", "ihta226B", "ihta227", "fa2004s160", "fa2004s164", "fa2004s208", "tn22", "tn732", "tn2_validity", "tn1124", "payiht"])}
 
+<h2 id="timeline">When is the inheritance tax on a pension due? A timeline for the executor and the accountant</h2>
+<p>{esc(ACC_TIMELINE)}</p>
+<ul class="law">
+<li><strong>Within 28 days of a request.</strong> The scheme administrator gives the personal representatives the value of the pension. The value can be a provisional estimate. The actual value then follows within 14 days of being ascertained.</li>
+<li><strong>By the end of the sixth month after the month of death.</strong> The inheritance tax is due. Interest runs on tax paid after that.</li>
+<li><strong>Within 35 days of a payment notice.</strong> The scheme administrator pays the pension's share to HMRC.</li>
+<li><strong>Until 15 months after the end of the month of death, at the latest.</strong> A withholding notice can hold back all but 50% of a beneficiary's entitlement.</li>
+<li><strong>Over ten years.</strong> Tax on a house can be paid by ten equal yearly instalments, with interest. Instalments are not available for the pension itself.</li>
+</ul>
+{sources_html(["si2026818", "ihta226", "ihta233", "payiht", "ihta226B", "ihta226A", "ihta227", "tn1124"])}
+
 <h2 id="worst-case-workings">The worst case: how is the £712,000 worked out?</h2>
+<p>The £712,000 is {_gbp(f['e2_extra'])} of extra inheritance tax plus about £292,000 of income tax paid by the daughter on what she draws from the pension over 20 years.</p>
 {worst_work}
 <p><strong>Why 60%?</strong> Between £100,000 and £125,140 of adjusted net income, the personal allowance falls by £1 for every £2 (Income Tax Act 2007, section 35). Each extra £1 is taxed at 40%, and also loses 50p of allowance, which costs another 20p. That is 60p in the £1. The rates are today's rates (2026/27) for England, Wales and Northern Ireland. Scotland has its own rates.</p>
 {worst_split}
@@ -4432,6 +4490,13 @@ def accountants_page():
 </ul>
 {sources_html(["ootlar_pensions", "hmrc_2yr", "ihtasch1A"])}
 
+<h2 id="tool-box">What can be done about inheritance tax on a pension? The tool box, in numbers</h2>
+<p class="note">The life cover and annuity figures are real quotes from October and November 2026. The other figures are examples. The ten tools below are headlines, as they appear on the one page factsheet. The conditions and the law are set out under each one. Whether a tool fits depends on the client's facts.</p>
+<ol class="tools">
+{tools}
+</ol>
+<p class="note">More on this site: <a href="/whole-of-life-assurance/">whole of life assurance</a>, <a href="/nominees-annuity/">the nominees' annuity</a>, <a href="/equity-release-and-inheritance-tax/">equity release and inheritance tax</a> and <a href="/pensions-and-inheritance-tax-from-april-2027/guide/">every question on pensions and inheritance tax from April 2027</a>.</p>
+
 <h2 id="three-questions">Three questions for your next client meeting</h2>
 <ol class="ask">
 {asks}
@@ -4444,6 +4509,14 @@ def accountants_page():
 {paste}
 </div>
 <p><button class="btn small" type="button" onclick="navigator.clipboard.writeText(document.getElementById('paste-text').innerText.trim()).then(()=>{{this.textContent='Copied'}})">Copy the paragraph</button></p>
+
+<h2 id="faq">Pensions and inheritance tax from 6 April 2027: questions and answers</h2>
+{faq_html}
+
+<div class="dl">
+<p class="dl-h">The examples, the worst case and the tool box on one page, to print or pass on</p>
+<p class="dl-b"><a class="btn" href="{ACC_PDF_NUM}">Download the factsheet in numbers (PDF)</a> <a class="btn" href="{ACC_PDF_WORDS}">Download the factsheet in words (PDF)</a></p>
+</div>
 
 <h2 id="the-law">The law, with links</h2>
 <p>Each link opens the section on legislation.gov.uk. The sections added by the Finance Act 2026 apply to deaths on or after 6 April 2027.</p>
@@ -4474,12 +4547,17 @@ def accountants_page():
 
 TODAY = max(TODAY, date.fromisoformat(ACC_PUBLISHED))
 CORRECTIONS_LOG.insert(0, (nice_date(date.fromisoformat(ACC_PUBLISHED)),
-                           "A new page for accountants was published. No answers changed.", [
+                           "A new page for accountants was published, and tightened the same day. No answers on other pages changed.", [
     (ACC_SLUG, [
         "Published: a page for UK accountants on pensions and inheritance tax from 6 April 2027. It sets out two "
         "worked examples with their workings, why the pension scheme cannot pay the whole inheritance tax bill, a "
         "worst case, a tool box in numbers, three questions for a client meeting, a paragraph for a client newsletter, "
         "a one page factsheet to download in numbers or in words, and the law with links.",
+        "Changed the same day, after the live page was checked by five AI assistants. The wording on who is liable, "
+        "on the payment notice and on the withholding notice was made more exact. A start date was added to the "
+        "Budget change on lump sums. Key facts, a timeline and a questions and answers section were added. The tool "
+        "box was moved below the technical brief, with the conditions and the law added under each of its ten "
+        "lines. No figure changed.",
     ]),
 ]))
 
