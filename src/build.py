@@ -3442,6 +3442,7 @@ def home_page():
 </div>
 <p><a href="{PLAYLIST}" target="_blank" rel="noopener">The series playlist on YouTube</a> &middot; <a href="{LINKEDIN}" target="_blank" rel="noopener">Steve's LinkedIn articles</a></p>
 {guides_only_html}
+{accountants_home_html()}
 {author_box()}
 <p class="disclaimer">Everything on this site is education only. It is not advice, not a personal recommendation, and not an invitation to do business. Tax rules change, and nothing here takes account of your circumstances.</p>
 </main>
@@ -3463,6 +3464,7 @@ def corrections_page():
     titles = {v["slug"]: v["short_title"] for v in VIDEOS}
     log_html = []
     titles.update({g["slug"]: g["short_title"] for g in GUIDES})
+    titles[ACC_SLUG] = ACC_SHORT_TITLE
     if INCLUDE_EVIDENCE:
         titles[EVIDENCE_SLUG] = "Nominees' annuity quotations"
     for when, intro, groups in CORRECTIONS_LOG:
@@ -3839,10 +3841,654 @@ def not_found_page():
 """
 
 
+# ---------------------------------------------------------------------------
+# The page for accountants. Drafted 19 November 2026 from Steve's one page factsheet (version 4).
+# Version 3, 20 November 2026: KISS on top with two downloads (numbers and words), the tool box in numbers
+# with a source beside each figure, and the technical brief underneath.
+# The words of the two examples, the worst case panel and the tool box are Steve's own, unchanged.
+# ---------------------------------------------------------------------------
+ACC_SLUG = "pensions-and-inheritance-tax-from-april-2027/for-accountants"
+ACC_PATH = f"/{ACC_SLUG}/"
+ACC_URL = f"{SITE}{ACC_PATH}"
+ACC_SHORT_TITLE = "Pensions and inheritance tax: for accountants"
+ACC_TITLE = "Pensions and inheritance tax from 6 April 2027: what UK accountants need to know"
+ACC_PUBLISHED = os.environ.get("ACC_PUBLISHED", "2026-11-20")  # set to the real go-live date when published
+ACC_CHECKED = "20 November 2026"  # the law on this page is described as at this date
+ACC_READ = "19 and 20 November 2026"  # the dates the law on this page was read at source
+ACC_PDF_NUM_NAME = "pensions-and-inheritance-tax-from-6-april-2027-one-page-factsheet-for-accountants-in-numbers.pdf"
+ACC_PDF_WORDS_NAME = "pensions-and-inheritance-tax-from-6-april-2027-one-page-factsheet-for-accountants-in-words.pdf"
+ACC_PDF_NUM = f"/downloads/{ACC_PDF_NUM_NAME}"
+ACC_PDF_WORDS = f"/downloads/{ACC_PDF_WORDS_NAME}"
+ACC_DESC = ("From 6 April 2027 most unused pension funds count for UK inheritance tax. Worked examples, who pays, "
+            "the law with links and a one page factsheet.")
+ACC_SHORT = ("For deaths on or after 6 April 2027, most unused pension funds and pension death benefits count as "
+             "part of the estate for UK inheritance tax. The pension is only charged its share of the estate's "
+             "bill. The rest falls on the non-pension assets, which can mean the family home.")
+ACC_LEAD = ("For deaths on or after 6 April 2027, most unused pension funds and pension death benefits count as part "
+            "of the estate for UK inheritance tax (IHT). A pension left to a husband, wife, civil partner or charity "
+            "is normally still free of inheritance tax.")
+ACC_BUDGET = [
+    ("Prospective personal representatives.", "People who expect to be the personal representatives will be able to "
+     "direct a pension scheme administrator to pay the inheritance tax due on the pension to HMRC, when certain "
+     "conditions are met. From 6 April 2027."),
+    ("Gifts to charity.", "Those administering the estate will be able to choose whether the pension counts in the "
+     "general part of the estate or as a separate part, when working out the lower 36% rate of inheritance tax for "
+     "an estate that leaves enough to charity. From 6 April 2027."),
+    ("The two-year rule.", "Pension death benefits that would be free of income tax will no longer become taxable "
+     "just because they are paid more than two years after the scheme administrator learned of the death. For "
+     "payments made on or after 28 October 2026."),
+    ("Lump sums over the allowance.", "Where the member died under 75 and a lump sum death benefit is more than the "
+     "lump sum and death benefit allowance, the tax on the excess will be assessed and collected through a new "
+     "stand-alone process, charged on the beneficiary at their marginal rate. The income tax relief for inheritance "
+     "tax paid on the same money is kept."),
+]
+
+SOURCES.update({
+    "ihta227": ("Law", "Inheritance Tax Act 1984, s.227", f"{LEG}/ukpga/1984/51/section/227"),
+    "ootlar_pensions": ("HMRC", "HMRC: Budget 2026, overview of tax legislation and rates, 28 October 2026, "
+                        "paragraphs 1.17, 1.18 and 1.27",
+                        "https://www.gov.uk/government/publications/budget-2026-overview-of-tax-legislation-and-rates-"
+                        "ootlar/budget-2026-overview-of-tax-legislation-and-rates-ootlar"),
+    "fa2004s160": ("Law", "Finance Act 2004, s.160", f"{LEG}/ukpga/2004/12/section/160"),
+    "fa2026sch12": ("Law", "Finance Act 2026, Schedule 12", f"{LEG}/ukpga/2026/11/schedule/12"),
+    "ihta106": ("Law", "Inheritance Tax Act 1984, s.106", f"{LEG}/ukpga/1984/51/section/106"),
+    "ihta117": ("Law", "Inheritance Tax Act 1984, s.117", f"{LEG}/ukpga/1984/51/section/117"),
+    "q_acc_wol": ("Provider evidence", "Whole of life quotation, 13 November 2026: £200,000 of cover, man aged "
+                  "65, non-smoker, held on file", None),
+    "q_acc_na": ("Provider evidence", "Nominees' annuity quotation, 11 November 2026: £500,000 buys £29,179.80 a "
+                 "year, man aged 80, carrying on in full to a daughter aged 45, held on file", None),
+    "q_acc_pla": ("Provider evidence", "Purchased life annuity illustration, 12 October 2026: £500,000 buys "
+                  "£76,747.44 a year, woman aged 85, held on file", None),
+    "steve_acc_tools": ("Steve's analysis", "The tool box figures: arithmetic on the stated example figures", None),
+    "fa2004s164": ("Law", "Finance Act 2004, s.164", f"{LEG}/ukpga/2004/12/section/164"),
+    "fa2004s208": ("Law", "Finance Act 2004, s.208", f"{LEG}/ukpga/2004/12/section/208"),
+    "hmrc_2yr": ("HMRC", "HMRC policy paper, 28 October 2026: tax treatment of pension and lump sum death benefits "
+                 "under the two-year rule",
+                 "https://www.gov.uk/government/publications/income-tax-removing-the-pensions-tax-two-year-rule/"
+                 "tax-treatment-of-pension-and-lump-sum-death-benefits-under-the-two-year-rule"),
+})
+
+
+def _gbp(n):
+    return "£" + f"{int(round(n)):,}"
+
+
+def acc_figures():
+    """Every figure on the page, worked from the inputs, so the build fails if a figure drifts."""
+    nrb, rnrb = 325_000, 175_000
+
+    def iht(estate):
+        r = max(0, 2 * rnrb - max(0, estate - 2_000_000) / 2)  # taper: £1 lost for every £2 over £2 million
+        return max(0, estate - 2 * nrb - r) * 0.40
+
+    f = {}
+    # Example 1
+    f["e1_before"] = iht(1_000_000)
+    f["e1_after"] = iht(1_500_000)
+    f["e1_share"] = f["e1_after"] * 500_000 / 1_500_000
+    f["e1_rest"] = f["e1_after"] - f["e1_share"]
+    # Example 2
+    f["e2_before"] = iht(2_000_000)
+    f["e2_after"] = iht(2_700_000)
+    f["e2_extra"] = f["e2_after"] - f["e2_before"]
+    f["e2_pct"] = 700_000 / 2_700_000 * 100
+    f["e2_share"] = f["e2_after"] * 700_000 / 2_700_000
+    f["e2_rest"] = f["e2_after"] - f["e2_share"]
+    f["e2_rest_more"] = f["e2_rest"] - f["e2_before"]
+    f["e2_direct"] = 700_000 * 0.40          # tax on the pension itself
+    f["e2_rnrb"] = 2 * rnrb * 0.40           # tax from the lost residence nil rate bands
+    assert round(f["e2_direct"] + f["e2_rnrb"]) == round(f["e2_extra"]) == 420_000
+    # Worst case, on Example 2
+    f["left"] = 700_000 - round(f["e2_share"])
+    f["yearly"] = f["left"] / 20
+    assert f["yearly"] <= 25_140  # every £1 drawn sits inside the £100,000 to £125,140 band
+    f["yearly_tax"] = f["yearly"] * 0.60
+    f["it20"] = f["left"] * 0.60
+    f["worst_total"] = f["e2_extra"] + f["it20"]
+    f["basic"] = f["left"] * 0.20
+    f["lump_it"] = 25_140 * 0.60 + (f["left"] - 25_140) * 0.45
+    f["lump_total"] = f["e2_extra"] + f["lump_it"]
+    expect = {"e1_before": 0, "e1_after": 200_000, "e1_share": 66_667, "e1_rest": 133_333,
+              "e2_before": 400_000, "e2_after": 820_000, "e2_extra": 420_000, "e2_share": 212_593,
+              "e2_rest": 607_407, "e2_rest_more": 207_407, "left": 487_407, "yearly": 24_370,
+              "yearly_tax": 14_622, "it20": 292_444, "worst_total": 712_444, "basic": 97_481,
+              "lump_it": 223_104, "lump_total": 643_104}
+    for k, v in expect.items():
+        assert round(f[k]) == v, (k, f[k], v)
+    assert f"{f['e2_pct']:.2f}" == "25.93"
+    return f
+
+
+ACC_CSS = """
+:root{--red:#A3261D}
+.toc{background:#fff;border:1px solid var(--rule);border-radius:4px;padding:12px 18px;margin:1.4em 0}
+.toc p{margin:0 0 .3em;font-weight:600;color:var(--navy)}
+.toc ol{margin:0;padding-left:1.3em}
+.toc li{margin:.25em 0}
+.exnote{color:var(--muted);font-style:italic;font-size:.95rem}
+.exgrid{display:grid;grid-template-columns:1fr;gap:18px;margin:1.2em 0}
+@media(min-width:720px){.exgrid{grid-template-columns:1fr 1fr}}
+.ex{border:1px solid var(--rule);border-radius:6px;background:#fff;padding:0 16px 14px}
+.ex h3{margin:0 -16px 12px;padding:10px 16px;background:var(--ivory);border-bottom:1px solid var(--rule);font-size:1.12rem;border-radius:6px 6px 0 0}
+.ex p{margin:.55em 0;max-width:none}
+.crit{font-weight:700;color:var(--navy);margin:1.1em 0 .4em!important;letter-spacing:.02em}
+.tablewrap{overflow-x:auto;margin:.8em 0 .4em}
+table.fig{border-collapse:collapse;width:100%;font-size:.97rem;margin:.2em 0 .6em}
+table.fig caption{caption-side:top;text-align:left;font-weight:700;color:var(--navy);padding:0 0 .35em}
+table.fig th{text-align:left;font-weight:400;padding:6px 10px 6px 0;vertical-align:top}
+table.fig td{text-align:right;padding:6px 0;white-space:nowrap;font-variant-numeric:tabular-nums;vertical-align:top}
+table.fig.lined th,table.fig.lined td{border-bottom:1px solid var(--rule)}
+table.fig tr.red th,table.fig tr.red td{color:var(--red);font-weight:700}
+table.fig tr.sum th,table.fig tr.sum td{font-weight:700;border-top:2px solid var(--gold);border-bottom:0}
+table.fig th small{display:block;color:var(--muted);font-size:.88em}
+.worst{background:var(--ivory);border-left:5px solid var(--red);padding:14px 20px;margin:1.3em 0}
+.worst h3{margin:0 0 .3em}
+.worst ol{margin:.3em 0 .2em;padding-left:1.3em}
+.worst li{margin:.25em 0}
+.worst .big{color:var(--red);font-weight:700;font-size:1.3rem;line-height:1.3;font-family:Caladea,Cambria,Georgia,serif;margin:.8em 0 .3em}
+.worst p{margin:.4em 0}
+ol.tools{padding-left:1.4em}
+ol.tools li{margin:.75em 0}
+ol.ask li{margin:.7em 0;font-size:1.05rem}
+.paste{border:1px dashed var(--gold);background:#fff;padding:14px 18px;margin:1em 0;border-radius:4px}
+.paste p{margin:.5em 0;max-width:none}
+.btn{display:inline-block;background:var(--navy);color:var(--ivory);padding:12px 22px;border-radius:4px;text-decoration:none;font-weight:600;border:0;font:inherit;font-weight:600;cursor:pointer}
+.btn:hover{background:var(--navy2);color:var(--ivory)}
+.btn.small{padding:8px 16px;font-size:.92rem}
+ul.law li{margin:.55em 0}
+ol.tools .src{margin:.3em 0 0}
+.dl{background:#fff;border:1px solid var(--rule);border-left:5px solid var(--gold);border-radius:4px;padding:14px 20px;margin:1.2em 0 1.6em}
+.dl p{margin:.4em 0;max-width:none}
+.dl .note{margin-top:.8em}
+.dl .dl-h{font-weight:700;color:var(--navy);font-size:1.12rem}
+.dl .dl-b{display:flex;flex-wrap:wrap;gap:12px;margin-top:.7em}
+.brief{border-top:3px solid var(--gold);margin-top:3em;padding-top:.2em}
+.brief h2{border-top:0;padding-top:0;margin-top:1em}
+"""
+
+
+def _fig_table(rows, caption=None, lined=False):
+    out = ['<div class="tablewrap"><table class="fig' + (" lined" if lined else "") + '">']
+    if caption:
+        out.append(f"<caption>{esc(caption)}</caption>")
+    for row in rows:
+        label, amount = row[0], row[1]
+        cls = row[2] if len(row) > 2 else ""
+        small = row[3] if len(row) > 3 else ""
+        sm = f"<small>{esc(small)}</small>" if small else ""
+        out.append(f'<tr{(" class=" + chr(34) + cls + chr(34)) if cls else ""}><th scope="row">{esc(label)}{sm}</th>'
+                   f"<td>{esc(amount)}</td></tr>")
+    out.append("</table></div>")
+    return "\n".join(out)
+
+
+ACC_TOOLS = [
+    ("Whole of Life Assurance (WOL)", "£400 a month today, £200,000 in trust for heirs tomorrow (man of 65).",
+     ["q_acc_wol"]),
+    ("Nominees' Annuity", "£500,000 of pension buys about £29,000 a year (man of 80), carrying on in full to his "
+     "daughter of 45. May count as a lifetime gift with a 7-year clock. Providers currently need the nominee to be "
+     "40 or over. NEOI can also be used when Dad receives his income.",
+     ["q_acc_na", "q_age40", "ihta150A", "ihta3A", "ihta7", "ihta21", "steve_pet"]),
+    ("Impaired Life Annuity", "also takes funds out of the estate immediately and again Normal Expenditure out of "
+     "Income (NEOI gifting surplus income) can also be used. Either as gifts as cash or into a trust",
+     ["ihta21"]),
+    ("Normal Expenditure out of Income (NEOI)", "£10,000 a year given from surplus income is £100,000 out of the "
+     "estate in ten years, with no 7-year clock.",
+     ["ihta21", "steve_acc_tools"]),
+    ("Main property into trust", "£300,000 of the home into an Interest in Possession Trust is out of the estate "
+     "after seven years, when set up correctly. That saves £120,000 of IHT. The £12,000 a year rent also leaves the "
+     "estate.",
+     ["steve_acc_tools"]),
+    ("Purchased Life Annuity", "£500,000 of own funds buys a woman of 85 about £77,000 a year for life. No 7-year "
+     "clock.",
+     ["q_acc_pla"]),
+    ("Home Income Plan", "borrow on the home to buy an income for life via a Purchased Life Annuity and hold the "
+     "estate at £2 million, where the next £700,000 is taxed at 60%.",
+     ["ihta8D", "rnrb", "steve_acc_tools"]),
+    ("BPR and APR", "100% relief on the first £2.5 million per person, 50% above, where two years can apply and not "
+     "seven.",
+     ["fa2026sch12", "ihta106", "ihta117"]),
+    ("Pure gifting", "£3,000 a year is exempt. Gifts above the allowances carry a 7-year clock, so better to have "
+     "the cover in place first.",
+     ["ihta19", "ihta3A", "ihta7"]),
+    ("Business owners", "where there is a business, the business can fund the life insurance: relevant life cover, "
+     "key person cover and registered group life (death in service) cover, which can start with just two lives and "
+     "stays outside IHT after April 2027. Where cash flow is tight, the company's own pension scheme (a SSAS) can "
+     "pay the group life premiums out of pension money.",
+     []),
+]
+
+ACC_QUESTIONS = [
+    "What are all of the client's pensions worth today, added together?",
+    "What is the whole estate worth once the pensions are added in? Watch for £2 million, where the residence nil "
+    "rate band starts to be lost.",
+    "Where will the cash come from to pay the inheritance tax that falls on the non-pension assets?",
+]
+
+ACC_PASTE = [
+    "Pensions and inheritance tax: the rules change on 6 April 2027.",
+    "For deaths on or after that date, most unused pension funds count as part of a person's estate for "
+    "inheritance tax. Take a "
+    "married couple whose home and savings come to £1,000,000, with pensions of £500,000 on top. On the second "
+    "death today, the inheritance tax could be nil. From 6 April 2027 it could be £200,000.",
+    "The pension scheme only pays the pension's share of that bill, about £67,000. The other £133,000 has to come "
+    "from the rest of the estate, which can mean the family home.",
+    "The example assumes the home is left to the children and all allowances are unused. Source: Steve Hunt ACII "
+    "TEP, inheritancetaxexplained.co.uk. General information, not personal advice.",
+]
+
+ACC_FAQ = [
+    ("What changes for pensions and inheritance tax on 6 April 2027?", ACC_LEAD,
+     ["ihta150A", "fa2026s66", "fa2026s71", "ihta18", "ihta23", "tn"]),
+    ("Does the pension pay the inheritance tax it causes?",
+     "No. The pension is only charged its share of the whole estate's inheritance tax bill, in proportion to its "
+     "value. With a £1,000,000 estate and a £500,000 pension, all of it taxable, the bill is £200,000 and the "
+     "pension is charged one third of it, £66,667. The other £133,333 falls on the non-pension assets.",
+     ["ihta265", "ihta226B", "tn732", "steve_example"]),
+    ("Can the pension scheme pay the whole inheritance tax bill?",
+     "No. A payment notice cannot be for more than the tax and interest due on the pension in that scheme. "
+     "Inheritance tax paid under a payment notice is an authorised payment, and there is no authorised way for the "
+     "scheme to pay the tax on the other assets direct to HMRC. The scheme cannot be told to pay more than the "
+     "pension's share, and it cannot choose to pay more as an authorised payment. The family can draw benefits from "
+     "what is left in the pension and pay the rest of the bill themselves.",
+     ["ihta226B", "fa2004s160", "fa2004s164", "fa2004s208", "tn732", "tn2_validity"]),
+    ("Which pension death benefits are left out of inheritance tax from 6 April 2027?", EXCLUSIONS_TEXT,
+     EXCLUSIONS_SOURCES),
+    ("How can the tax be more than the pension was worth?",
+     "In a worst case, the pension causes extra inheritance tax and the family then pays income tax on what they "
+     "draw. With a £2,000,000 estate and a £700,000 pension, the extra inheritance tax is £420,000. If the parent "
+     "who dies last is 75 or over, and a daughter earning £100,000 draws the rest over 20 years at 60%, the income "
+     "tax is about £292,000. That is about £712,000 of tax on a £700,000 pension, with no growth and at today's "
+     "tax rates.",
+     ["ihta8D", "ihta265", "itepa579CZA", "ita35", "steve_example"]),
+    ("What did the Budget of 28 October 2026 change for pensions and inheritance tax?",
+     "Four changes were announced, all due in Finance Bill 2026-27 and none yet law. " +
+     " ".join(f"{h} {t}" for h, t in ACC_BUDGET),
+     ["ootlar_pensions", "hmrc_2yr"]),
+]
+
+
+def accountants_ld():
+    url = ACC_URL
+    keys = unique(k for _, _, ks in ACC_FAQ for k in ks)
+    keys = unique(keys + ["ihta8A", "ihta7", "ihta226A", "ihta227", "fa2026s67", "itepa567B", "hmrc_2yr",
+                          "ootlar_pensions", "si2026818", "ppi2025"] + [k for _, _, ks in ACC_TOOLS for k in ks])
+    faq = {
+        "@type": "FAQPage",
+        "@id": f"{url}#faq",
+        "mainEntity": [
+            {"@type": "Question", "name": q,
+             "acceptedAnswer": {"@type": "Answer", "text": a, "citation": [source_ld(k) for k in unique(ks)]}}
+            for q, a, ks in ACC_FAQ
+        ],
+    }
+    page = {
+        "@type": ["WebPage", "LearningResource", "Article"],
+        "@id": url,
+        "url": url,
+        "name": ACC_TITLE,
+        "headline": ACC_TITLE,
+        "description": ACC_DESC,
+        "inLanguage": "en-GB",
+        "isPartOf": {"@id": f"{SITE}/#website"},
+        "author": {"@id": f"{SITE}/#steve-hunt"},
+        "publisher": {"@id": f"{SITE}/#steve-hunt"},
+        "datePublished": ACC_PUBLISHED,
+        "dateModified": ACC_PUBLISHED,
+        "lastReviewed": ACC_PUBLISHED,
+        "reviewedBy": {"@id": f"{SITE}/#steve-hunt"},
+        "publishingPrinciples": CORRECTIONS_URL,
+        "mainEntity": {"@id": f"{url}#faq"},
+        "learningResourceType": "Reference guide",
+        "audience": {"@type": "Audience", "audienceType": "UK accountants and tax advisers"},
+        "about": [{"@type": "Thing", "name": n} for n in
+                  ("Inheritance tax", "Pensions and inheritance tax from 6 April 2027", "Unused pension funds",
+                   "Residence nil rate band")],
+        "keywords": "pensions and inheritance tax 2027, accountants, unused pension funds, residence nil rate "
+                    "band taper, payment notice, section 226B, section 265",
+        "encoding": [
+            {"@type": "MediaObject", "contentUrl": f"{SITE}{ACC_PDF_NUM}", "encodingFormat": "application/pdf",
+             "name": "Pensions and inheritance tax from 6 April 2027: one page factsheet for accountants, in numbers"},
+            {"@type": "MediaObject", "contentUrl": f"{SITE}{ACC_PDF_WORDS}", "encodingFormat": "application/pdf",
+             "name": "Pensions and inheritance tax from 6 April 2027: one page factsheet for accountants, in words"},
+        ],
+        "citation": [source_ld(k) for k in keys],
+    }
+    return {"@context": "https://schema.org", "@graph": [website_ld(), person_ld(), page, faq]}
+
+
+def accountants_home_html():
+    return (f'<h2 id="for-accountants" style="border:0;margin-top:1.6em">For accountants</h2>\n'
+            f'<p><a href="{ACC_PATH}">{esc(ACC_TITLE)}</a>: two worked examples, the workings, the law with links, '
+            f"three questions for the next client meeting and a one page factsheet to download, in numbers or in words.</p>\n")
+
+
+def accountants_page():
+    f = acc_figures()
+    url = ACC_URL
+    seo_title = "Pensions and inheritance tax 2027: guide for UK accountants"
+    assert len(seo_title) <= 60 and len(ACC_DESC) <= 155, (len(seo_title), len(ACC_DESC))
+    published = nice_date(date.fromisoformat(ACC_PUBLISHED))
+
+    ex1 = f"""<section class="ex">
+<h3>Example 1 &nbsp; Mr and Mrs £1m estate</h3>
+{_fig_table([("Current estate EXCLUDING pension", "£1,000,000"), ("Combined DC pensions Mr & Mrs", "£500,000"),
+             ("IHT Prior to April 2027", "£0"), ("IHT post April 2027", "£200,000", "red")])}
+<p class="crit">THIS IS THE CRITICAL PART…</p>
+<p>The pension does not pay / cover the £200,000</p>
+<p><strong><em>IT IS ONLY CHARGED ITS SHARE</em></strong> based on the whole estate.</p>
+<p>The pension is 1/3 of the whole estate so is only charged 1/3 of the IHT bill: <strong>{_gbp(f['e1_share'])}</strong></p>
+<p>The remaining <strong>{_gbp(f['e1_rest'])}</strong> comes from the NON-PENSION ASSETS and if that is the house then the house may have to be sold.</p>
+</section>"""
+    ex2 = f"""<section class="ex">
+<h3>Example 2 &nbsp; Mr and Mrs £2m estate</h3>
+{_fig_table([("Current estate EXCLUDING pension", "£2,000,000"), ("Combined DC pensions Mr & Mrs", "£700,000"),
+             ("IHT Prior to April 2027", "£400,000"), ("IHT post April 2027", "£820,000", "red")])}
+<p><strong>And the total loss of the Residence Nil Rate Band (RNRB)</strong></p>
+<p class="crit">THIS IS THE CRITICAL PART…</p>
+<p>The pension does not pay / cover the £420,000 it is responsible for</p>
+<p><strong><em>IT IS ONLY CHARGED ITS SHARE</em></strong> based on the whole estate.</p>
+<p>The pension is 25.93% of the whole estate so is only charged 25.93% of the IHT bill: <strong>{_gbp(f['e2_share'])}</strong></p>
+<p>The remaining <strong>{_gbp(f['e2_rest'])}</strong> comes from the NON-PENSION ASSETS. That is {_gbp(f['e2_rest_more'])} more than the £400,000 before.</p>
+</section>"""
+
+    work1 = _fig_table([
+        ("Estate excluding pension", "£1,000,000"),
+        ("Pensions", "£500,000"),
+        ("Whole estate from 6 April 2027", "£1,500,000", "sum"),
+        ("Less two nil rate bands", "£650,000", "", "2 × £325,000"),
+        ("Less two residence nil rate bands", "£350,000", "", "2 × £175,000"),
+        ("Taxable", "£500,000", "sum"),
+        ("Inheritance tax at 40%", _gbp(f["e1_after"]), "red"),
+        ("The pension's share", _gbp(f["e1_share"]), "", "£500,000 ÷ £1,500,000 = 1/3 of the bill"),
+        ("Falls on the non-pension assets", _gbp(f["e1_rest"]), "", "the other 2/3 of the bill"),
+    ], caption="Example 1: the workings", lined=True)
+    work2 = _fig_table([
+        ("Estate excluding pension", "£2,000,000"),
+        ("Pensions", "£700,000"),
+        ("Whole estate from 6 April 2027", "£2,700,000", "sum"),
+        ("Less two nil rate bands", "£650,000", "", "2 × £325,000"),
+        ("Less residence nil rate bands", "£0", "",
+         "£1 is lost for every £2 over £2,000,000, so the whole £350,000 is lost at £2,700,000"),
+        ("Taxable", "£2,050,000", "sum"),
+        ("Inheritance tax at 40%", _gbp(f["e2_after"]), "red"),
+        ("Inheritance tax before April 2027", _gbp(f["e2_before"]), "",
+         "£2,000,000 less £1,000,000 of allowances, at 40%"),
+        ("Extra inheritance tax caused by the pension", _gbp(f["e2_extra"]), "sum"),
+        ("The pension's share", _gbp(f["e2_share"]), "",
+         "£700,000 ÷ £2,700,000 = 7/27, or 25.93%, of the £820,000 bill"),
+        ("Falls on the non-pension assets", _gbp(f["e2_rest"]), "", "the other 74.07% of the bill"),
+    ], caption="Example 2: the workings", lined=True)
+
+    worst_work = _fig_table([
+        ("Pension at death", "£700,000"),
+        ("Less the pension's share of the inheritance tax", _gbp(f["e2_share"]), "",
+         "paid by the scheme direct to HMRC"),
+        ("Left in the pension for Daughter", _gbp(f["left"]), "sum"),
+        ("Drawn over 20 tax years, each year", _gbp(f["yearly"])),
+        ("Income tax at 60%, each year", _gbp(f["yearly_tax"])),
+        ("Income tax over 20 years", _gbp(f["it20"]), "red"),
+    ], caption="The income tax: the workings", lined=True)
+    worst_split = _fig_table([
+        ("Inheritance tax paid out of the pension", _gbp(f["e2_share"])),
+        ("Extra inheritance tax that falls on the non-pension assets", _gbp(f["e2_rest_more"])),
+        ("Income tax paid by Daughter on what she draws", _gbp(f["it20"])),
+        ("Total tax caused by the £700,000 pension", _gbp(f["worst_total"]), "sum"),
+    ], caption="Where the £712,000 falls", lined=True)
+
+    tools = "\n".join(f"<li><strong>{esc(n)}</strong> ~ {esc(t)}{sources_html(ks, tag='div')}</li>" for n, t, ks in ACC_TOOLS)
+    asks = "\n".join(f"<li>{esc(q)}</li>" for q in ACC_QUESTIONS)
+    paste = "\n".join(f"<p>{esc(p_)}</p>" for p_ in ACC_PASTE)
+    law = [
+        ("ihta150A", "brings most unused pension funds and pension death benefits into the estate, and lists what "
+                     "is left out."),
+        ("fa2026s71", "the change applies to deaths on or after 6 April 2027."),
+        ("ihta18", "the exemption for a husband, wife or civil partner."),
+        ("ihta23", "the exemption for gifts to charity."),
+        ("ihta265", "the tax on an estate is attributed to each part in proportion to its value."),
+        ("fa2026s67", "rewrites section 210 of the Inheritance Tax Act 1984: who is liable for the tax on the "
+                      "pension."),
+        ("ihta226A", "withholding notices: no more than 50% of a beneficiary's entitlement is paid out, for up to "
+                     "15 months."),
+        ("ihta226B", "payment notices: at least £1,000, no more than the tax and interest due on the pension in "
+                     "that scheme, paid within 35 days."),
+        ("ihta227", "tax on land can be paid by ten equal yearly instalments."),
+        ("ihta8A", "the unused nil rate band of a husband, wife or civil partner who died first can be claimed on "
+                   "the second death."),
+        ("ihta8D", "the residence nil rate band, and its taper above £2 million."),
+        ("fa2004s160", "the payments a registered pension scheme is authorised to make."),
+        ("fa2004s164", "the list of authorised payments, which includes inheritance tax paid under section 226B."),
+        ("fa2004s208", "the tax charge on an unauthorised payment."),
+        ("itepa579CZA", "drawdown income paid to a beneficiary is free of income tax where the member died under "
+                        "75 and the conditions are met."),
+        ("itepa567B", "relief so that inheritance tax borne on the pension can be taken off before income tax is "
+                      "charged on it, where its conditions are met."),
+        ("ita35", "the personal allowance falls by £1 for every £2 of adjusted net income over £100,000."),
+        ("si2026818", "the timetable for a pension scheme to give the personal representatives the value of the "
+                      "pension: within 28 days of a valid request."),
+    ]
+    law_html = "\n".join(f"<li>{source_link(k)}: {esc(t)}</li>" for k, t in law)
+    hmrc = ["tn", "tn22", "tn732", "tn2_validity", "tn2_beneficiary", "tn8", "tn1124", "ootlar_pensions",
+            "hmrc_2yr", "rnrb", "payiht", "itrates"]
+    budget = "\n".join(f"<li><strong>{esc(h)}</strong> {esc(t)}</li>" for h, t in ACC_BUDGET)
+    hmrc_html = "\n".join(f"<li>{source_link(k)}</li>" for k in hmrc)
+    for k, _ in law:
+        assert SOURCES[k][0] == "Law", k
+    for k in hmrc:
+        assert SOURCES[k][0] == "HMRC", k
+
+    return f"""<!doctype html>
+<html lang="en-GB">
+<head>
+{HEAD_COMMON}<title>{esc(seo_title)}</title>
+<meta name="description" content="{esc(ACC_DESC)}">
+<meta name="author" content="{esc(AUTHOR)}">
+<link rel="canonical" href="{url}">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="{esc(SITE_NAME)}">
+<meta property="og:title" content="{esc(ACC_TITLE)}">
+<meta property="og:description" content="{esc(ACC_DESC)}">
+<meta property="og:url" content="{url}">
+<meta property="og:image" content="{SITE}/images/pensions-and-inheritance-tax-from-april-2027.jpg">
+<meta property="og:locale" content="en_GB">
+<meta property="article:published_time" content="{ACC_PUBLISHED}">
+<meta name="twitter:card" content="summary_large_image">
+<style>{CSS}{ACC_CSS}</style>
+{ld_script(accountants_ld())}
+</head>
+<body>
+{header_html()}
+<main class="wrap">
+<article>
+<p class="kicker">For accountants</p>
+<h1>{esc(ACC_TITLE)}</h1>
+<p class="byline">By <a href="{ABOUT_PATH}">Steve Hunt ACII TEP</a> &middot; Published {published} &middot; The law on this page was read at source on {ACC_READ}</p>
+
+<div class="dl" id="download">
+<p class="dl-h">The one page factsheet for accountants, to print or pass on</p>
+<p class="dl-b"><a class="btn" href="{ACC_PDF_NUM}">Download the factsheet in numbers (PDF)</a> <a class="btn" href="{ACC_PDF_WORDS}">Download the factsheet in words (PDF)</a></p>
+<p class="note">The two examples, the worst case and the tool box on one side of A4. Two versions: the tool box in numbers, or the tool box in words.</p>
+</div>
+
+<section class="answer" id="short-answer">
+<h2>What changes for pensions and inheritance tax on 6 April 2027?</h2>
+<p>{esc(ACC_LEAD)}</p>
+<p>The pension is only charged its share of the estate's inheritance tax bill. The rest of the bill falls on the non-pension assets, which can mean the family home.</p>
+<p>Add the income tax on what the family then draws and, in a worst case, the total tax can be more than the pension was worth.</p>
+</section>
+<p>From 6th April 2027 over £1 tn... of pension funds will come 'in scope' of IHT in the UK. <strong>That is One Trillion Pounds.</strong></p>
+<p class="note">{esc(TRILLION_TEXT)}</p>
+{sources_html(["ihta150A", "fa2026s66", "fa2026s71", "ihta18", "ihta23", "ppi2025", "pa1trn"])}
+
+<nav class="toc" aria-label="On this page">
+<p>On this page</p>
+<ol>
+<li><a href="#download">Download the one page factsheet, in numbers or in words</a></li>
+<li><a href="#examples">Two of the most common examples</a></li>
+<li><a href="#worst-case">How can the tax be more than the pension was worth?</a></li>
+<li><a href="#tool-box">The tool box, in numbers</a></li>
+<li><a href="#technical-brief">The technical brief</a>
+<ol>
+<li><a href="#workings">How is the inheritance tax on a pension worked out?</a></li>
+<li><a href="#left-out">Which pension death benefits are left out, and what is exempt?</a></li>
+<li><a href="#whole-bill">Who pays the tax, and can the pension scheme pay the whole bill?</a></li>
+<li><a href="#worst-case-workings">The worst case: how is the £712,000 worked out?</a></li>
+<li><a href="#budget-2026">What did the Budget of 28 October 2026 change?</a></li>
+<li><a href="#three-questions">Three questions for your next client meeting</a></li>
+<li><a href="#newsletter">A paragraph for your client newsletter</a></li>
+<li><a href="#the-law">The law, with links</a></li>
+</ol></li>
+</ol>
+</nav>
+
+<h2 id="examples">Two of the most common examples</h2>
+<p class="exnote">Both examples assume a married couple, the second death, the home left to the children and all allowances unused.</p>
+<div class="exgrid">
+{ex1}
+{ex2}
+</div>
+{sources_html(["ihta150A", "ihta265", "ihta8A", "ihta8D", "ihta7", "steve_example"])}
+
+<h2 id="worst-case">How can the tax be more than the pension was worth?</h2>
+<div class="worst">
+<h3>Worst case. If:</h3>
+<ol>
+<li>The parent who dies last is 75 or over</li>
+<li>Daughter draws the pension as income, about £24,000 a year</li>
+<li>Daughter already earns £100,000, so every £1 drawn is taxed at 60%</li>
+<li>The estate is over £2 million, as in Example 2</li>
+</ol>
+<p class="big">This can result in MORE TAX than the pension was worth!</p>
+<p>Example 2: £420,000 of extra IHT, plus about £292,000 of income tax over 20 years, is about £712,000 of tax on a £700,000 pension (no growth, today's tax rates).</p>
+</div>
+<p class="note">The workings are in <a href="#worst-case-workings">the technical brief</a> further down this page.</p>
+{sources_html(["ihta8D", "ihta265", "itepa579CZA", "ita35", "steve_example"])}
+
+<h2 id="tool-box">The tool box, in numbers</h2>
+<p class="note">The life cover and annuity figures are real quotes from October and November 2026. The other figures are examples. The ten tools below are headlines. Each has conditions of its own, and whether a tool fits depends on the client's facts.</p>
+<ol class="tools">
+{tools}
+</ol>
+<p class="note">More on this site: <a href="/whole-of-life-assurance/">whole of life assurance</a>, <a href="/nominees-annuity/">the nominees' annuity</a>, <a href="/equity-release-and-inheritance-tax/">equity release and inheritance tax</a> and <a href="/pensions-and-inheritance-tax-from-april-2027/guide/">every question on pensions and inheritance tax from April 2027</a>.</p>
+
+<div class="dl">
+<p class="dl-h">All of the above on one page, to print or pass on</p>
+<p class="dl-b"><a class="btn" href="{ACC_PDF_NUM}">Download the factsheet in numbers (PDF)</a> <a class="btn" href="{ACC_PDF_WORDS}">Download the factsheet in words (PDF)</a></p>
+</div>
+
+<div class="brief">
+<h2 id="technical-brief">The technical brief</h2>
+<p>The rest of this page is the detail behind the one page factsheet: the workings, who pays, what the Budget changed and the law, with links.</p>
+</div>
+
+<h2 id="workings">How is the inheritance tax on a pension worked out?</h2>
+<p>Before 6 April 2027 a pension with discretionary death benefits normally sits outside the estate, and the examples assume that. In Example 1 the £1,000,000 estate is covered by £1,000,000 of allowances, so there is no inheritance tax. For a death on or after 6 April 2027 the pension is added in.</p>
+{work1}
+<p>In Example 2 the pension does two things. It is taxed itself, and it takes the estate over £2,000,000, so the residence nil rate bands are lost as well. The extra £420,000 is {_gbp(f['e2_direct'])} of tax on the pension itself (40% of £700,000) plus {_gbp(f['e2_rnrb'])} from the lost residence nil rate bands (40% of £350,000).</p>
+{work2}
+<h3 id="assumptions">The facts behind the two examples</h3>
+<ul>
+<li>The first of the couple to die left everything to the survivor, including the pension. No inheritance tax was paid then and no allowance was used. The estate of the first to die was under £2 million.</li>
+<li>The survivor still holds both pensions at the second death. An inherited pension that is still in drawdown counts in the survivor's estate.</li>
+<li>The home is worth at least £350,000 and goes to the children or grandchildren.</li>
+<li>The unused allowances of the first to die are claimed on the second death. No gifts were made in the seven years before it.</li>
+<li>The whole estate is taxable, so the tax is shared in proportion to value. Where part of the estate is exempt or gets a relief, for example a share left to a charity, the shares change.</li>
+</ul>
+{sources_html(["ihta8A", "ihta8D", "ihta7", "ihta265", "ihta18", "tn2_beneficiary", "rnrb", "steve_example"])}
+
+<h2 id="left-out">Which pension death benefits are left out, and what is exempt?</h2>
+<p>{esc(EXCLUSIONS_TEXT)}</p>
+{sources_html(EXCLUSIONS_SOURCES)}
+<p>A pension that goes to a husband, wife, civil partner or charity is normally free of inheritance tax (sections 18 and 23). Tax may then be due when the second of the couple dies, as in the two examples.</p>
+{sources_html(["ihta18", "ihta23"])}
+
+<h2 id="whole-bill">Who pays the inheritance tax on a pension, and can the scheme pay the whole bill?</h2>
+<p><strong>Who is liable.</strong> The personal representatives are liable for the inheritance tax on the pension. A person in whom the pension property is vested, such as a beneficiary who receives it, is liable too. The scheme's trustees are not liable. The scheme administrator is liable only where a benefit is paid in breach of a withholding notice, or where the administrator fails to act on a payment notice (Inheritance Tax Act 1984, section 210, as rewritten by the Finance Act 2026, section 67).</p>
+<p><strong>Can the pension scheme pay the whole inheritance tax bill? No.</strong> The tax on an estate is attributed to its parts in proportion to their values (section 265). In the two examples the whole estate is taxable, so the pension bears its share and no more.</p>
+<p><strong>The payment notice.</strong> The personal representatives, or a beneficiary, can give the scheme administrator a payment notice. The notice must be for at least £1,000. It cannot be for more than the tax and interest due on the pension in that scheme. The scheme administrator then has 35 days to pay HMRC (section 226B).</p>
+<p><strong>Why the scheme cannot pay more.</strong> Inheritance tax paid under section 226B is an authorised payment (Finance Act 2004, section 164). There is no authorised way for the scheme to pay the tax on the house or the other assets direct to HMRC. A payment the law does not authorise is not void, but it carries an unauthorised payment charge (sections 160 and 208). So the scheme cannot be told to pay more than the pension's share, and it cannot choose to pay more as an authorised payment.</p>
+<p><strong>Where the rest of the money comes from.</strong> The family can still use the pension to help with the rest of the bill. They draw benefits from what is left in the pension and pay the tax themselves. Where the member died at 75 or over, what they draw is taxed as their income first.</p>
+<p><strong>The withholding notice.</strong> The personal representatives, or people who expect to be the personal representatives, can also give the scheme administrator a withholding notice. While the notice runs, the scheme may not pay any beneficiary more than 50% of their entitlement. The notice ends when the tax and interest are paid, when it is withdrawn, or 15 months after the end of the month of death, whichever comes first (section 226A).</p>
+<p><strong>Instalments.</strong> Inheritance tax on a house can be paid by ten equal yearly instalments, with interest, if the person paying elects. If the house is sold, the unpaid tax falls due at once (section 227). HMRC's technical note rules out instalments for the pension itself.</p>
+<p>The new pension sections (210, 226A and 226B) apply only to deaths on or after 6 April 2027, so no court has yet ruled on them.</p>
+{sources_html(["fa2026s67", "ihta265", "ihta226A", "ihta226B", "ihta227", "fa2004s160", "fa2004s164", "fa2004s208", "tn22", "tn732", "tn2_validity", "tn1124", "payiht"])}
+
+<h2 id="worst-case-workings">The worst case: how is the £712,000 worked out?</h2>
+{worst_work}
+<p><strong>Why 60%?</strong> Between £100,000 and £125,140 of adjusted net income, the personal allowance falls by £1 for every £2 (Income Tax Act 2007, section 35). Each extra £1 is taxed at 40%, and also loses 50p of allowance, which costs another 20p. That is 60p in the £1. The rates are today's rates (2026/27) for England, Wales and Northern Ireland. Scotland has its own rates.</p>
+{worst_split}
+<p>The £712,000 is not all taken from the pension: about £207,000 of it is extra inheritance tax on the other assets. The example shows how far the tax can go on these facts. Change the facts and the figure changes:</p>
+<ul>
+<li>If all of Daughter's pension income is taxed at 20%, the income tax is about {_gbp(round(f['basic'], -3))}, against about £292,000.</li>
+<li>If Daughter takes all {_gbp(f['left'])} in one tax year on top of her £100,000, the income tax is about {_gbp(round(f['lump_it'], -3))} and the total is about {_gbp(round(f['lump_total'], -3))}.</li>
+<li>If the parent who dies last is under 75, Daughter normally pays no income tax on drawdown income. Lump sums have their own allowance.</li>
+</ul>
+{sources_html(["itepa579CZA", "itepa567B", "ita35", "ihta226B", "itrates", "tn8", "steve_example"])}
+
+<h2 id="budget-2026">What did the Budget of 28 October 2026 change?</h2>
+<p>The main change, pensions counting for inheritance tax, was made law by the Finance Act 2026. The Budget of 28 October 2026 announced four further changes. None of the four is law yet. All are due in Finance Bill 2026-27.</p>
+<ul class="law">
+{budget}
+</ul>
+{sources_html(["ootlar_pensions", "hmrc_2yr", "ihtasch1A"])}
+
+<h2 id="three-questions">Three questions for your next client meeting</h2>
+<ol class="ask">
+{asks}
+</ol>
+<p>Then run the same three questions on yourself.</p>
+
+<h2 id="newsletter">A paragraph for your client newsletter</h2>
+<p>You are welcome to paste this into a client newsletter or email as it stands. Please keep the source line.</p>
+<div class="paste" id="paste-text">
+{paste}
+</div>
+<p><button class="btn small" type="button" onclick="navigator.clipboard.writeText(document.getElementById('paste-text').innerText.trim()).then(()=>{{this.textContent='Copied'}})">Copy the paragraph</button></p>
+
+<h2 id="the-law">The law, with links</h2>
+<p>Each link opens the section on legislation.gov.uk. The sections added by the Finance Act 2026 apply to deaths on or after 6 April 2027.</p>
+<ul class="law">
+{law_html}
+</ul>
+<h3>HMRC's published guidance</h3>
+<ul class="law">
+{hmrc_html}
+</ul>
+<p class="note">How the sources on this site are labelled, and what has been corrected: <a href="{CORRECTIONS_PATH}">sources, method and corrections</a>.</p>
+
+<div class="related">
+<p><strong>More on pensions and inheritance tax</strong></p>
+<p><a href="/pensions-and-inheritance-tax-from-april-2027/">How will your pension be taxed when you die after April 2027?</a> The video, key facts and full transcript.</p>
+<p><a href="/pensions-and-inheritance-tax-from-april-2027/guide/">Pensions and inheritance tax from April 2027: every question answered</a>, each answer with its sources.</p>
+<p><a href="/how-much-of-my-pension-will-be-taxed-when-i-die/">How much of my pension will be taxed when I die?</a></p>
+</div>
+</article>
+{author_box()}
+<p class="disclaimer">This page is education only. It is general information for UK accountants. It is not advice, not a personal recommendation, and not an invitation to do business. It describes the law as at {ACC_CHECKED}, which can change. Tax rules depend on each client's circumstances, and nothing here takes account of them.</p>
+</main>
+{footer_html()}
+</body>
+</html>
+"""
+
+
+TODAY = max(TODAY, date.fromisoformat(ACC_PUBLISHED))
+CORRECTIONS_LOG.insert(0, (nice_date(date.fromisoformat(ACC_PUBLISHED)),
+                           "A new page for accountants was published. No answers changed.", [
+    (ACC_SLUG, [
+        "Published: a page for UK accountants on pensions and inheritance tax from 6 April 2027. It sets out two "
+        "worked examples with their workings, why the pension scheme cannot pay the whole inheritance tax bill, a "
+        "worst case, a tool box in numbers, three questions for a client meeting, a paragraph for a client newsletter, "
+        "a one page factsheet to download in numbers or in words, and the law with links.",
+    ]),
+]))
+
+
 def sitemap():
     urls = ([(SITE + "/", TODAY.isoformat())]
             + [(f"{SITE}/{v['slug']}/", v["modified"]) for v in VIDEOS]
             + [(f"{SITE}/{g['slug']}/", g["modified"]) for g in GUIDES]
+            + [(ACC_URL, ACC_PUBLISHED)]
             + [(ABOUT_URL, TODAY.isoformat())]
             + ([(EVIDENCE_URL, EVIDENCE_PUBLISHED)] if INCLUDE_EVIDENCE else [])
             + [(CORRECTIONS_URL, TODAY.isoformat())])
@@ -3880,6 +4526,8 @@ def llms_txt():
     lines += ["", "## Guides: one subject, every question answered, with sources", ""]
     for g in GUIDES:
         lines.append(f"- [{g['title']}]({SITE}/{g['slug']}/): {g['short_answer'][0]}")
+    lines += ["", "## For accountants", "",
+              f"- [{ACC_TITLE}]({ACC_URL}): {ACC_SHORT}"]
     lines += [
         "",
         "## Sources and corrections",
@@ -3930,6 +4578,7 @@ def main():
         write(f"{g['slug']}/index.html", guide_page(g))
     write(f"{CORRECTIONS_SLUG}/index.html", corrections_page())
     write(f"{ABOUT_SLUG}/index.html", about_page())
+    write(f"{ACC_SLUG}/index.html", accountants_page())
     if INCLUDE_EVIDENCE:
         write(f"{EVIDENCE_SLUG}/index.html", evidence_page())
     write("404.html", not_found_page())
@@ -3940,6 +4589,11 @@ def main():
     os.makedirs(os.path.join(OUT, "images"), exist_ok=True)
     for fn in os.listdir(os.path.join(HERE, "static", "images")):
         shutil.copy(os.path.join(HERE, "static", "images", fn), os.path.join(OUT, "images", fn))
+    os.makedirs(os.path.join(OUT, "downloads"), exist_ok=True)
+    for fn in os.listdir(os.path.join(HERE, "static", "downloads")):
+        shutil.copy(os.path.join(HERE, "static", "downloads", fn), os.path.join(OUT, "downloads", fn))
+    for _fn in (ACC_PDF_NUM_NAME, ACC_PDF_WORDS_NAME):
+        assert os.path.exists(os.path.join(OUT, "downloads", _fn)), "factsheet PDF missing: " + _fn
     # sanity checks
     for root, _, files in os.walk(OUT):
         for fn in files:
