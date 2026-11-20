@@ -3844,8 +3844,7 @@ def not_found_page():
 
 # ---------------------------------------------------------------------------
 # The page for accountants. Drafted 19 November 2026 from Steve's one page factsheet (version 4).
-# Version 3, 20 November 2026: KISS on top with two downloads (numbers and words), the tool box in numbers
-# with a source beside each figure, and the technical brief underneath.
+# 20 November 2026: KISS on top with one download, the tool box in words, and the technical brief underneath.
 # The words of the two examples, the worst case panel and the tool box are Steve's own, unchanged.
 # ---------------------------------------------------------------------------
 ACC_SLUG = "pensions-and-inheritance-tax-from-april-2027/for-accountants"
@@ -3857,17 +3856,15 @@ ACC_PUBLISHED = os.environ.get("ACC_PUBLISHED", "2026-11-20")  # set to the real
 ACC_CHECKED = "20 November 2026"  # the law on this page is described as at this date
 ACC_READ = "19 and 20 November 2026"  # the dates the law on this page was read at source
 ACC_UPDATED = "20 November 2026"  # the date of the last change to this page
-ACC_PDF_NUM_NAME = "pensions-and-inheritance-tax-from-6-april-2027-one-page-factsheet-for-accountants-in-numbers.pdf"
 ACC_PDF_WORDS_NAME = "pensions-and-inheritance-tax-from-6-april-2027-one-page-factsheet-for-accountants-in-words.pdf"
-ACC_PDF_NUM = f"/downloads/{ACC_PDF_NUM_NAME}"
 TOOL_SLUG = "pensions-and-inheritance-tax-from-april-2027/tool-box"
 TOOL_PATH = f"/{TOOL_SLUG}/"
 TOOL_URL = f"{SITE}{TOOL_PATH}"
 TOOL_SHORT_TITLE = "Pensions and inheritance tax: the tool box"
-TOOL_TITLE = "Inheritance tax on a pension from 6 April 2027: the tool box, in numbers"
-TOOL_DESC = ("Ten headline ways to plan for inheritance tax on a pension from 6 April 2027, in numbers, each with "
+TOOL_TITLE = "Inheritance tax on a pension from 6 April 2027: the tool box"
+TOOL_DESC = ("Ten headline ways to plan for inheritance tax on a pension from 6 April 2027, each with "
              "its conditions and the law. For UK accountants.")
-TOOL_SHORT = ("Ten headline planning tools for inheritance tax on a pension from 6 April 2027, in numbers. Each "
+TOOL_SHORT = ("Ten headline planning tools for inheritance tax on a pension from 6 April 2027. Each "
               "tool has its conditions and the law beside it.")
 TOOL_LEAD = ("This page sets out ten headline tools for planning around inheritance tax on a pension from 6 April "
              "2027: whole of life assurance in trust, a nominees' annuity, an impaired life annuity, gifts out of "
@@ -3918,13 +3915,6 @@ SOURCES.update({
     "fa1986sch20": ("Law", "Finance Act 1986, Schedule 20, paragraph 6", f"{LEG}/ukpga/1986/41/schedule/20"),
     "fa1986s102B": ("Law", "Finance Act 1986, s.102B", f"{LEG}/ukpga/1986/41/section/102B"),
     "ihta117": ("Law", "Inheritance Tax Act 1984, s.117", f"{LEG}/ukpga/1984/51/section/117"),
-    "q_acc_wol": ("Provider evidence", "Whole of life quotation, 13 November 2026: £200,000 of cover, man aged "
-                  "65, non-smoker, held on file", None),
-    "q_acc_na": ("Provider evidence", "Nominees' annuity quotation, 11 November 2026: £500,000 buys £29,179.80 a "
-                 "year, man aged 80, carrying on in full to a daughter aged 45, held on file", None),
-    "q_acc_pla": ("Provider evidence", "Purchased life annuity illustration, 12 October 2026: £500,000 buys "
-                  "£76,747.44 a year, woman aged 85, held on file", None),
-    "steve_acc_tools": ("Steve's analysis", "The tool box figures: arithmetic on the stated example figures", None),
     "fa2004s164": ("Law", "Finance Act 2004, s.164", f"{LEG}/ukpga/2004/12/section/164"),
     "fa2004s208": ("Law", "Finance Act 2004, s.208", f"{LEG}/ukpga/2004/12/section/208"),
     "hmrc_2yr": ("HMRC", "HMRC policy paper, 28 October 2026: tax treatment of pension and lump sum death benefits "
@@ -4053,41 +4043,39 @@ def _fig_table(rows, caption=None, lined=False):
 
 
 ACC_TOOLS = [
-    ("Whole of Life Assurance (WOL)", "£400 a month today, £200,000 in trust for heirs tomorrow (man of 65).",
-     'The policy is written in trust, so the payout goes to the trust for the heirs. Each premium is a gift. At £400 a month the premiums come to £4,800 a year, which is more than the £3,000 annual exemption (section 19), so they rely on the exemption for normal expenditure out of income (section 21). Where an annuity has also been bought on the same life, the premiums count as normal expenditure only if the annuity and the policy are shown not to be associated operations (section 21(2)). A premium that no exemption covers is a lifetime gift into the trust.',
-     ['q_acc_wol', 'ihta19', 'ihta21', 'ihta21_2']),
-    ("Nominees' Annuity", "£500,000 of pension buys about £29,000 a year (man of 80), carrying on in full to his "
-     "daughter of 45. May count as a lifetime gift with a 7-year clock. Providers currently need the nominee to be "
-     "40 or over. NEOI can also be used when Dad receives his income.",
+    ("Whole of Life Assurance (WOL)", "provides cover when needed and is wealth transfer. Premiums paid today will go in trust to heirs tomorrow.",
+     'The policy is written in trust, so the payout goes to the trust for the heirs. Each premium is a gift. Premiums above the £3,000 annual exemption (section 19) rely on the exemption for normal expenditure out of income (section 21). Where an annuity has also been bought on the same life, the premiums count as normal expenditure only if the annuity and the policy are shown not to be associated operations (section 21(2)). A premium that no exemption covers is a lifetime gift into the trust.',
+     ['ihta19', 'ihta21', 'ihta21_2']),
+    ("Nominees' Annuity", "using pension that was earmarked for the kids. Takes big amounts out of the estate, but "
+     "buying one may count as a lifetime gift with a 7-year clock. Providers currently need the nominee to be 40 or "
+     "over. Normal Expenditure out of Income (NEOI gifting surplus income) can also be used.",
      "The annuity for the nominee is left out of the estate at death only where it was bought together with the member's own lifetime annuity (section 150A). Whether buying one counts as a lifetime gift is not settled: HMRC has not said and no court has ruled, so the 7-year point is Steve's analysis. The minimum age of 40 is the practice of the insurers that quoted. It is not a rule of law.",
-     ['q_acc_na', 'q_age40', 'ihta150A', 'ihta3A', 'ihta7', 'ihta21', 'steve_pet']),
+     ['q_age40', 'ihta150A', 'ihta3A', 'ihta7', 'ihta21', 'steve_pet']),
     ("Impaired Life Annuity", "also takes funds out of the estate immediately and again Normal Expenditure out of "
      "Income (NEOI gifting surplus income) can also be used. Either as gifts as cash or into a trust",
      'A lifetime annuity with no guarantee period and no value protection stops at death, so no fund is left to count. A guarantee period or value protection leaves a payment that needs its own inheritance tax assessment. Gifts of the income are exempt only if they meet the three tests in line 4.',
      ['ihta21', 'tn']),
-    ("Normal Expenditure out of Income (NEOI)", "£10,000 a year given from surplus income is £100,000 out of the "
-     "estate in ten years, with no 7-year clock.",
+    ("Normal Expenditure out of Income (NEOI)", "genuine regular gifts from surplus income are outside the estate "
+     "immediately, with no 7-year clock.",
      "Three tests, and all three must be met: the gift is part of the giver's normal expenditure, it is made out of income, and the giver is left with enough income to keep up the usual standard of living (section 21).",
-     ['ihta21', 'steve_acc_tools']),
-    ("Main property into trust", "£300,000 of the home into an Interest in Possession Trust is out of the estate "
-     "after seven years, when set up correctly. That saves £120,000 of IHT. The £12,000 a year rent also leaves the "
-     "estate.",
+     ['ihta21']),
+    ("Main property into trust", "using an Interest in Possession Trust, part of the property value put into trust "
+     "can be out of the estate after seven years, when set up correctly.",
      'A lifetime gift into this kind of trust is not a potentially exempt transfer (section 3A). It is a chargeable transfer when it is made. Kept within the £325,000 nil rate band, with no other chargeable gifts in the seven years before, no inheritance tax is due on the way in, and after seven years the gift no longer counts (section 7). The trust is within the relevant property rules, with a charge at each ten-year anniversary and when property leaves the trust (sections 64 and 65). If the giver goes on living in the home, a full market rent must be paid for the share given away. If it is not, the gift with reservation rules treat that share as still in the estate (Finance Act 1986, sections 102 and 102B, and Schedule 20, paragraph 6).',
-     ['ihta3A', 'ihta7', 'ihta64', 'ihta65', 'fa1986s102', 'fa1986s102B', 'fa1986sch20', 'steve_acc_tools']),
-    ("Purchased Life Annuity", "£500,000 of own funds buys a woman of 85 about £77,000 a year for life. No 7-year "
-     "clock.",
+     ['ihta3A', 'ihta7', 'ihta64', 'ihta65', 'fa1986s102', 'fa1986s102B', 'fa1986sch20']),
+    ("Purchased Life Annuity", "for those in good health where own funds are used to buy an annuity which again "
+     "takes assets immediately out of the estate with no 7-year clock.",
      'Buying an annuity from an insurer at the going rate is a purchase and not a gift, so the price paid is not a transfer of value (section 10). An annuity with no guarantee stops at death. The tax-free capital part of each payment is not income for the normal expenditure out of income exemption (section 21(3)), so gifts of that part need another exemption or come under the 7-year rule.',
-     ['q_acc_pla', 'ihta10', 'ihta21_134', 'ihta3A']),
-    ("Home Income Plan", "borrow on the home to buy an income for life via a Purchased Life Annuity and hold the "
-     "estate at £2 million, where the next £700,000 is taxed at 60%.",
-     'The 60% is 40% inheritance tax plus the loss of £1 of residence nil rate band for every £2 of estate over £2,000,000 (section 8D). With two residence nil rate bands of £175,000 the band runs from £2,000,000 to £2,700,000, so the figure needs both bands to be available. How the loan and the annuity are treated depends on the plan.',
-     ['ihta8D', 'rnrb', 'steve_acc_tools']),
-    ("BPR and APR", "100% relief on the first £2.5 million per person, 50% above, where two years can apply and not "
-     "seven.",
+     ['ihta10', 'ihta21_134', 'ihta3A']),
+    ("Home Income Plan", "using the main residence to provide an income for life and potentially keeping the "
+     "estate value at the desired amount",
+     'Why the estate value matters: above £2,000,000 an estate loses £1 of residence nil rate band for every £2 (section 8D). With 40% inheritance tax, that makes an effective 60% on the estate between £2,000,000 and £2,700,000, where two residence nil rate bands of £175,000 are available. How the loan and the annuity are treated depends on the plan.',
+     ['ihta8D', 'rnrb']),
+    ("BPR and APR", "using a business or agricultural property to secure assets up to £2.5 million where two years "
+     "can apply and not seven.",
      'The £2.5 million is one allowance for business property and agricultural property together (Finance Act 2026, Schedule 12, new section 124D). Qualifying property above the allowance gets 50% relief. The unused allowance of a husband, wife or civil partner who died first can be transferred (new section 124E). Business property must normally have been owned for two years (section 106). Agricultural property must have been occupied by the owner for two years, or owned for seven years and farmed throughout by the owner or someone else (section 117).',
      ['fa2026sch12', 'ihta106', 'ihta117']),
-    ("Pure gifting", "£3,000 a year is exempt. Gifts above the allowances carry a 7-year clock, so better to have "
-     "the cover in place first.",
+    ("Pure gifting", "gifts above the allowances carry a 7-year clock",
      'A gift to a person is a potentially exempt transfer: no inheritance tax if the giver lives seven years. A gift into most trusts is a chargeable transfer when it is made (section 3A). The tax on a gift that fails tapers after three years (section 7).',
      ['ihta19', 'ihta3A', 'ihta7']),
     ("Business owners", "where there is a business, the business can fund the life insurance: relevant life cover, "
@@ -4190,10 +4178,8 @@ def accountants_ld():
         "keywords": "pensions and inheritance tax 2027, accountants, unused pension funds, residence nil rate "
                     "band taper, payment notice, section 226B, section 265",
         "encoding": [
-            {"@type": "MediaObject", "contentUrl": f"{SITE}{ACC_PDF_NUM}", "encodingFormat": "application/pdf",
-             "name": "Pensions and inheritance tax from 6 April 2027: one page factsheet for accountants, in numbers"},
             {"@type": "MediaObject", "contentUrl": f"{SITE}{ACC_PDF_WORDS}", "encodingFormat": "application/pdf",
-             "name": "Pensions and inheritance tax from 6 April 2027: one page factsheet for accountants, in words"},
+             "name": "Pensions and inheritance tax from 6 April 2027: one page factsheet for accountants"},
         ],
         "citation": [source_ld(k) for k in keys],
     }
@@ -4203,7 +4189,7 @@ def accountants_ld():
 def accountants_home_html():
     return (f'<h2 id="for-accountants" style="border:0;margin-top:1.6em">For accountants</h2>\n'
             f'<p><a href="{ACC_PATH}">{esc(ACC_TITLE)}</a>: two worked examples, the workings, the law with links, '
-            f"three questions for the next client meeting and a one page factsheet to download, in numbers or in words.</p>\n"
+            f"three questions for the next client meeting and a one page factsheet to download.</p>\n"
             f'<p><a href="{TOOL_PATH}">{esc(TOOL_TITLE)}</a>: ten headline planning tools, each with its conditions '
             f"and the law.</p>\n")
 
@@ -4362,8 +4348,8 @@ def accountants_page():
 </section>
 <div class="dl" id="download">
 <p class="dl-h">The one page factsheet for accountants, to print or pass on</p>
-<p class="dl-b"><a class="btn" href="{ACC_PDF_NUM}">Download the factsheet in numbers (PDF)</a> <a class="btn" href="{ACC_PDF_WORDS}">Download the factsheet in words (PDF)</a></p>
-<p class="note">The two examples, the worst case and the tool box on one side of A4. Two versions: the tool box in numbers, or the tool box in words.</p>
+<p class="dl-b"><a class="btn" href="{ACC_PDF_WORDS}">Download the one page factsheet (PDF)</a></p>
+<p class="note">The two examples, the worst case and the tool box on one side of A4.</p>
 </div>
 
 <section class="keyfacts" id="key-facts">
@@ -4388,7 +4374,7 @@ def accountants_page():
 <p>On this page</p>
 <ol>
 <li><a href="#short-answer">What changes on 6 April 2027?</a></li>
-<li><a href="#download">Download the one page factsheet, in numbers or in words</a></li>
+<li><a href="#download">Download the one page factsheet</a></li>
 <li><a href="#key-facts">Key facts</a></li>
 <li><a href="#examples">Two of the most common examples</a></li>
 <li><a href="#worst-case">How can the tax be more than the pension was worth?</a></li>
@@ -4505,7 +4491,7 @@ def accountants_page():
 {sources_html(["ootlar_pensions", "hmrc_2yr", "ihtasch1A"])}
 
 <h2 id="tool-box">What can be done about inheritance tax on a pension?</h2>
-<p>The planning tools have a page of their own: <a href="{TOOL_PATH}">the tool box, in numbers</a>. The tool box sets out ten headline tools, from whole of life assurance in trust to business and agricultural property relief. Each tool has its conditions and the law beside it. The same ten lines are on the one page factsheet.</p>
+<p>The planning tools have a page of their own: <a href="{TOOL_PATH}">the tool box</a>. The tool box sets out ten headline tools, from whole of life assurance in trust to business and agricultural property relief. Each tool has its conditions and the law beside it. The same ten lines are on the one page factsheet.</p>
 
 <h2 id="three-questions">Three questions for your next client meeting</h2>
 <ol class="ask">
@@ -4525,7 +4511,7 @@ def accountants_page():
 
 <div class="dl">
 <p class="dl-h">The examples, the worst case and the tool box on one page, to print or pass on</p>
-<p class="dl-b"><a class="btn" href="{ACC_PDF_NUM}">Download the factsheet in numbers (PDF)</a> <a class="btn" href="{ACC_PDF_WORDS}">Download the factsheet in words (PDF)</a></p>
+<p class="dl-b"><a class="btn" href="{ACC_PDF_WORDS}">Download the one page factsheet (PDF)</a></p>
 </div>
 
 <h2 id="the-law">The law, with links</h2>
@@ -4587,10 +4573,10 @@ def tool_box_ld():
     items = {
         "@type": "ItemList",
         "@id": f"{TOOL_URL}#tools",
-        "name": "The tool box, in numbers",
+        "name": "The tool box",
         "numberOfItems": len(ACC_TOOLS),
         "itemListElement": [
-            {"@type": "ListItem", "position": i, "name": n, "description": f"{t} The conditions. {c}"}
+            {"@type": "ListItem", "position": i, "name": n, "description": f"{t.rstrip('.')}. The conditions. {c}"}
             for i, (n, t, c, _) in enumerate(ACC_TOOLS, 1)
         ],
     }
@@ -4598,7 +4584,7 @@ def tool_box_ld():
 
 
 def tool_box_page():
-    seo_title = "Inheritance tax on a pension: the tool box, in numbers"
+    seo_title = "Inheritance tax on a pension from 2027: the tool box"
     assert len(seo_title) <= 60 and len(TOOL_DESC) <= 155, (len(seo_title), len(TOOL_DESC))
     published = nice_date(date.fromisoformat(ACC_PUBLISHED))
     tools = "\n".join(f"<li><strong>{esc(n)}</strong> ~ {esc(t)}<p class=\"cond\"><strong>The conditions.</strong> {esc(c)}</p>"
@@ -4633,12 +4619,12 @@ def tool_box_page():
 <section class="answer" id="short-answer">
 <h2>What can be done about inheritance tax on a pension from 6 April 2027?</h2>
 <p>{esc(TOOL_LEAD)}</p>
-<p>The ten lines below are the tool box from the one page factsheet for accountants, in numbers. Under each line are the conditions and the law. Whether a tool fits depends on the client's facts.</p>
+<p>The ten lines below are the tool box from the one page factsheet for accountants. Under each line are the conditions and the law. Whether a tool fits depends on the client's facts.</p>
 </section>
 <p>The law behind the tax, with worked examples, is on its own page: <a href="{ACC_PATH}">{esc(ACC_TITLE)}</a>.</p>
 
-<h2 id="tools">The tool box, in numbers</h2>
-<p class="note">The life cover and annuity figures are real quotes from October and November 2026. The other figures are examples. The ten tools are headlines, as they appear on the one page factsheet.</p>
+<h2 id="tools">The tool box</h2>
+<p class="note">The ten tools are headlines, as they appear on the one page factsheet.</p>
 <ol class="tools">
 {tools}
 </ol>
@@ -4646,8 +4632,8 @@ def tool_box_page():
 
 <div class="dl" id="download">
 <p class="dl-h">The one page factsheet for accountants, to print or pass on</p>
-<p class="dl-b"><a class="btn" href="{ACC_PDF_NUM}">Download the factsheet in numbers (PDF)</a> <a class="btn" href="{ACC_PDF_WORDS}">Download the factsheet in words (PDF)</a></p>
-<p class="note">Two worked examples, the worst case and the tool box on one side of A4. Two versions: the tool box in numbers, or the tool box in words.</p>
+<p class="dl-b"><a class="btn" href="{ACC_PDF_WORDS}">Download the one page factsheet (PDF)</a></p>
+<p class="note">Two worked examples, the worst case and the tool box on one side of A4.</p>
 </div>
 
 <p class="note">How the sources on this site are labelled, and what has been corrected: <a href="{CORRECTIONS_PATH}">sources, method and corrections</a>.</p>
@@ -4671,18 +4657,21 @@ CORRECTIONS_LOG.insert(0, (nice_date(date.fromisoformat(ACC_PUBLISHED)),
     (ACC_SLUG, [
         "Published: a page for UK accountants on pensions and inheritance tax from 6 April 2027. It sets out two "
         "worked examples with their workings, why the pension scheme cannot pay the whole inheritance tax bill, a "
-        "worst case, a tool box in numbers, three questions for a client meeting, a paragraph for a client newsletter, "
-        "a one page factsheet to download in numbers or in words, and the law with links.",
+        "worst case, a tool box, three questions for a client meeting, a paragraph for a client newsletter, "
+        "a one page factsheet to download, and the law with links.",
         "Changed the same day, after the live page was checked by five AI assistants. The wording on who is liable, "
         "on the payment notice and on the withholding notice was made more exact. A start date was added to the "
         "Budget change on lump sums. Key facts, a timeline and a questions and answers section were added. The tool "
         "box was moved to a page of its own, with the conditions and the law added under each of its ten lines. No "
         "figure changed.",
+        "Changed again the same day: the one page factsheet became a single download, with the tool box in words.",
     ]),
     (TOOL_SLUG, [
-        "Published: the tool box for accountants, in numbers. Ten headline planning tools for inheritance tax on a "
+        "Published: the tool box for accountants. Ten headline planning tools for inheritance tax on a "
         "pension from 6 April 2027, each with its conditions and the law beside it. The ten lines are the tool box "
         "from the one page factsheet.",
+        "Changed the same day: the ten lines of the tool box were changed from figures to words, as they appear "
+        "on the one page factsheet. Two of the notes under the lines were reworded to match.",
     ]),
 ]))
 
@@ -4797,7 +4786,7 @@ def main():
     os.makedirs(os.path.join(OUT, "downloads"), exist_ok=True)
     for fn in os.listdir(os.path.join(HERE, "static", "downloads")):
         shutil.copy(os.path.join(HERE, "static", "downloads", fn), os.path.join(OUT, "downloads", fn))
-    for _fn in (ACC_PDF_NUM_NAME, ACC_PDF_WORDS_NAME):
+    for _fn in (ACC_PDF_WORDS_NAME,):
         assert os.path.exists(os.path.join(OUT, "downloads", _fn)), "factsheet PDF missing: " + _fn
     # sanity checks
     for root, _, files in os.walk(OUT):
