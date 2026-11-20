@@ -3465,6 +3465,7 @@ def corrections_page():
     log_html = []
     titles.update({g["slug"]: g["short_title"] for g in GUIDES})
     titles[ACC_SLUG] = ACC_SHORT_TITLE
+    titles[TOOL_SLUG] = TOOL_SHORT_TITLE
     if INCLUDE_EVIDENCE:
         titles[EVIDENCE_SLUG] = "Nominees' annuity quotations"
     for when, intro, groups in CORRECTIONS_LOG:
@@ -3859,6 +3860,19 @@ ACC_UPDATED = "20 November 2026"  # the date of the last change to this page
 ACC_PDF_NUM_NAME = "pensions-and-inheritance-tax-from-6-april-2027-one-page-factsheet-for-accountants-in-numbers.pdf"
 ACC_PDF_WORDS_NAME = "pensions-and-inheritance-tax-from-6-april-2027-one-page-factsheet-for-accountants-in-words.pdf"
 ACC_PDF_NUM = f"/downloads/{ACC_PDF_NUM_NAME}"
+TOOL_SLUG = "pensions-and-inheritance-tax-from-april-2027/tool-box"
+TOOL_PATH = f"/{TOOL_SLUG}/"
+TOOL_URL = f"{SITE}{TOOL_PATH}"
+TOOL_SHORT_TITLE = "Pensions and inheritance tax: the tool box"
+TOOL_TITLE = "Inheritance tax on a pension from 6 April 2027: the tool box, in numbers"
+TOOL_DESC = ("Ten headline ways to plan for inheritance tax on a pension from 6 April 2027, in numbers, each with "
+             "its conditions and the law. For UK accountants.")
+TOOL_SHORT = ("Ten headline planning tools for inheritance tax on a pension from 6 April 2027, in numbers. Each "
+              "tool has its conditions and the law beside it.")
+TOOL_LEAD = ("This page sets out ten headline tools for planning around inheritance tax on a pension from 6 April "
+             "2027: whole of life assurance in trust, a nominees' annuity, an impaired life annuity, gifts out of "
+             "income, part of the home in trust, a purchased life annuity, a home income plan, business and "
+             "agricultural property relief, outright gifts, and cover paid for by a business.")
 ACC_PDF_WORDS = f"/downloads/{ACC_PDF_WORDS_NAME}"
 ACC_DESC = ("From 6 April 2027 most unused pension funds count for UK inheritance tax (Finance Act 2026). Worked "
             "examples, payment notices, deadlines and the law.")
@@ -4141,8 +4155,7 @@ def accountants_ld():
     url = ACC_URL
     keys = unique(k for _, _, ks in ACC_FAQ for k in ks)
     keys = unique(keys + ["ihta8A", "ihta7", "ihta226A", "ihta227", "fa2026s67", "itepa567B", "hmrc_2yr",
-                          "ootlar_pensions", "si2026818", "ppi2025", "hmrc_policy2025"]
-                  + [k for _, _, _, ks in ACC_TOOLS for k in ks])
+                          "ootlar_pensions", "si2026818", "ppi2025", "hmrc_policy2025"])
     faq = {
         "@type": "FAQPage",
         "@id": f"{url}#faq",
@@ -4190,7 +4203,9 @@ def accountants_ld():
 def accountants_home_html():
     return (f'<h2 id="for-accountants" style="border:0;margin-top:1.6em">For accountants</h2>\n'
             f'<p><a href="{ACC_PATH}">{esc(ACC_TITLE)}</a>: two worked examples, the workings, the law with links, '
-            f"three questions for the next client meeting and a one page factsheet to download, in numbers or in words.</p>\n")
+            f"three questions for the next client meeting and a one page factsheet to download, in numbers or in words.</p>\n"
+            f'<p><a href="{TOOL_PATH}">{esc(TOOL_TITLE)}</a>: ten headline planning tools, each with its conditions '
+            f"and the law.</p>\n")
 
 
 def accountants_page():
@@ -4266,8 +4281,6 @@ def accountants_page():
         ("Total tax caused by the £700,000 pension", _gbp(f["worst_total"]), "sum"),
     ], caption="Where the £712,000 falls", lined=True)
 
-    tools = "\n".join(f"<li><strong>{esc(n)}</strong> ~ {esc(t)}<p class=\"cond\"><strong>The conditions.</strong> {esc(c)}</p>"
-                      f"{sources_html(ks, tag='div')}</li>" for n, t, c, ks in ACC_TOOLS)
     faq_html = "\n".join(f"<h3>{esc(q)}</h3>\n<p>{esc(a_)}</p>\n{sources_html(ks)}" for q, a_, ks in ACC_FAQ)
     asks = "\n".join(f"<li>{esc(q)}</li>" for q in ACC_QUESTIONS)
     paste = "\n".join(f"<p>{esc(p_)}</p>" for p_ in ACC_PASTE)
@@ -4387,7 +4400,7 @@ def accountants_page():
 <li><a href="#timeline">When is the tax due? A timeline</a></li>
 <li><a href="#worst-case-workings">The worst case: how is the £712,000 worked out?</a></li>
 <li><a href="#budget-2026">What did the Budget of 28 October 2026 change?</a></li>
-<li><a href="#tool-box">What can be done? The tool box, in numbers</a></li>
+<li><a href="#tool-box">What can be done? The tool box has a page of its own</a></li>
 <li><a href="#three-questions">Three questions for your next client meeting</a></li>
 <li><a href="#newsletter">A paragraph for your client newsletter</a></li>
 <li><a href="#faq">Questions and answers</a></li>
@@ -4424,7 +4437,7 @@ def accountants_page():
 
 <div class="brief">
 <h2 id="technical-brief">The technical brief: how inheritance tax on a pension works from 6 April 2027</h2>
-<p>The rest of this page is the detail behind the one page factsheet: the workings, who pays, the deadlines, what the Budget changed, the tool box and the law, with links.</p>
+<p>The rest of this page is the detail behind the one page factsheet: the workings, who pays, the deadlines, what the Budget changed and the law, with links.</p>
 </div>
 
 <h2 id="workings">How is the inheritance tax on a pension worked out?</h2>
@@ -4491,12 +4504,8 @@ def accountants_page():
 </ul>
 {sources_html(["ootlar_pensions", "hmrc_2yr", "ihtasch1A"])}
 
-<h2 id="tool-box">What can be done about inheritance tax on a pension? The tool box, in numbers</h2>
-<p class="note">The life cover and annuity figures are real quotes from October and November 2026. The other figures are examples. The ten tools below are headlines, as they appear on the one page factsheet. The conditions and the law are set out under each one. Whether a tool fits depends on the client's facts.</p>
-<ol class="tools">
-{tools}
-</ol>
-<p class="note">More on this site: <a href="/whole-of-life-assurance/">whole of life assurance</a>, <a href="/nominees-annuity/">the nominees' annuity</a>, <a href="/equity-release-and-inheritance-tax/">equity release and inheritance tax</a> and <a href="/pensions-and-inheritance-tax-from-april-2027/guide/">every question on pensions and inheritance tax from April 2027</a>.</p>
+<h2 id="tool-box">What can be done about inheritance tax on a pension?</h2>
+<p>The planning tools have a page of their own: <a href="{TOOL_PATH}">the tool box, in numbers</a>. The tool box sets out ten headline tools, from whole of life assurance in trust to business and agricultural property relief. Each tool has its conditions and the law beside it. The same ten lines are on the one page factsheet.</p>
 
 <h2 id="three-questions">Three questions for your next client meeting</h2>
 <ol class="ask">
@@ -4535,6 +4544,7 @@ def accountants_page():
 <p><a href="/pensions-and-inheritance-tax-from-april-2027/">How will your pension be taxed when you die after April 2027?</a> The video, key facts and full transcript.</p>
 <p><a href="/pensions-and-inheritance-tax-from-april-2027/guide/">Pensions and inheritance tax from April 2027: every question answered</a>, each answer with its sources.</p>
 <p><a href="/how-much-of-my-pension-will-be-taxed-when-i-die/">How much of my pension will be taxed when I die?</a></p>
+<p><a href="{TOOL_PATH}">{esc(TOOL_TITLE)}</a>. Ten headline planning tools, each with its conditions and the law.</p>
 </div>
 </article>
 {author_box()}
@@ -4546,9 +4556,118 @@ def accountants_page():
 """
 
 
+
+
+def tool_box_ld():
+    keys = unique([k for _, _, _, ks in ACC_TOOLS for k in ks])
+    page = {
+        "@type": ["WebPage", "LearningResource", "Article"],
+        "@id": TOOL_URL,
+        "url": TOOL_URL,
+        "name": TOOL_TITLE,
+        "headline": TOOL_TITLE,
+        "description": TOOL_DESC,
+        "inLanguage": "en-GB",
+        "isPartOf": {"@id": f"{SITE}/#website"},
+        "author": {"@id": f"{SITE}/#steve-hunt"},
+        "publisher": {"@id": f"{SITE}/#steve-hunt"},
+        "datePublished": ACC_PUBLISHED,
+        "dateModified": ACC_PUBLISHED,
+        "lastReviewed": ACC_PUBLISHED,
+        "reviewedBy": {"@id": f"{SITE}/#steve-hunt"},
+        "publishingPrinciples": CORRECTIONS_URL,
+        "learningResourceType": "Reference guide",
+        "audience": {"@type": "Audience", "audienceType": "UK accountants and tax advisers"},
+        "about": [{"@type": "Thing", "name": n} for n in
+                  ("Inheritance tax", "Pensions and inheritance tax from 6 April 2027", "Inheritance tax planning")],
+        "isRelatedTo": {"@id": ACC_URL},
+        "mainEntity": {"@id": f"{TOOL_URL}#tools"},
+        "citation": [source_ld(k) for k in keys],
+    }
+    items = {
+        "@type": "ItemList",
+        "@id": f"{TOOL_URL}#tools",
+        "name": "The tool box, in numbers",
+        "numberOfItems": len(ACC_TOOLS),
+        "itemListElement": [
+            {"@type": "ListItem", "position": i, "name": n, "description": f"{t} The conditions. {c}"}
+            for i, (n, t, c, _) in enumerate(ACC_TOOLS, 1)
+        ],
+    }
+    return {"@context": "https://schema.org", "@graph": [website_ld(), person_ld(), page, items]}
+
+
+def tool_box_page():
+    seo_title = "Inheritance tax on a pension: the tool box, in numbers"
+    assert len(seo_title) <= 60 and len(TOOL_DESC) <= 155, (len(seo_title), len(TOOL_DESC))
+    published = nice_date(date.fromisoformat(ACC_PUBLISHED))
+    tools = "\n".join(f"<li><strong>{esc(n)}</strong> ~ {esc(t)}<p class=\"cond\"><strong>The conditions.</strong> {esc(c)}</p>"
+                      f"{sources_html(ks, tag='div')}</li>" for n, t, c, ks in ACC_TOOLS)
+    return f"""<!doctype html>
+<html lang="en-GB">
+<head>
+{HEAD_COMMON}<title>{esc(seo_title)}</title>
+<meta name="description" content="{esc(TOOL_DESC)}">
+<meta name="author" content="{esc(AUTHOR)}">
+<link rel="canonical" href="{TOOL_URL}">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="{esc(SITE_NAME)}">
+<meta property="og:title" content="{esc(TOOL_TITLE)}">
+<meta property="og:description" content="{esc(TOOL_DESC)}">
+<meta property="og:url" content="{TOOL_URL}">
+<meta property="og:image" content="{SITE}/images/pensions-and-inheritance-tax-from-april-2027.jpg">
+<meta property="og:locale" content="en_GB">
+<meta property="article:published_time" content="{ACC_PUBLISHED}">
+<meta name="twitter:card" content="summary_large_image">
+<style>{CSS}{ACC_CSS}</style>
+{ld_script(tool_box_ld())}
+</head>
+<body>
+{header_html()}
+<main class="wrap">
+<article>
+<p class="kicker">For accountants</p>
+<h1>{esc(TOOL_TITLE)}</h1>
+<p class="byline">By <a href="{ABOUT_PATH}">Steve Hunt ACII TEP</a> &middot; Published {published} &middot; The law on this page was read at source on {ACC_READ}</p>
+
+<section class="answer" id="short-answer">
+<h2>What can be done about inheritance tax on a pension from 6 April 2027?</h2>
+<p>{esc(TOOL_LEAD)}</p>
+<p>The ten lines below are the tool box from the one page factsheet for accountants, in numbers. Under each line are the conditions and the law. Whether a tool fits depends on the client's facts.</p>
+</section>
+<p>The law behind the tax, with worked examples, is on its own page: <a href="{ACC_PATH}">{esc(ACC_TITLE)}</a>.</p>
+
+<h2 id="tools">The tool box, in numbers</h2>
+<p class="note">The life cover and annuity figures are real quotes from October and November 2026. The other figures are examples. The ten tools are headlines, as they appear on the one page factsheet.</p>
+<ol class="tools">
+{tools}
+</ol>
+<p class="note">More on this site: <a href="/whole-of-life-assurance/">whole of life assurance</a>, <a href="/nominees-annuity/">the nominees' annuity</a>, <a href="/equity-release-and-inheritance-tax/">equity release and inheritance tax</a> and <a href="/pensions-and-inheritance-tax-from-april-2027/guide/">every question on pensions and inheritance tax from April 2027</a>.</p>
+
+<div class="dl" id="download">
+<p class="dl-h">The one page factsheet for accountants, to print or pass on</p>
+<p class="dl-b"><a class="btn" href="{ACC_PDF_NUM}">Download the factsheet in numbers (PDF)</a> <a class="btn" href="{ACC_PDF_WORDS}">Download the factsheet in words (PDF)</a></p>
+<p class="note">Two worked examples, the worst case and the tool box on one side of A4. Two versions: the tool box in numbers, or the tool box in words.</p>
+</div>
+
+<p class="note">How the sources on this site are labelled, and what has been corrected: <a href="{CORRECTIONS_PATH}">sources, method and corrections</a>.</p>
+
+<div class="related">
+<p><strong>More on pensions and inheritance tax</strong></p>
+<p><a href="{ACC_PATH}">{esc(ACC_TITLE)}</a>. Worked examples, who pays, the deadlines and the law, with links.</p>
+<p><a href="/pensions-and-inheritance-tax-from-april-2027/guide/">Pensions and inheritance tax from April 2027: every question answered</a>, each answer with its sources.</p>
+</div>
+</article>
+{author_box()}
+<p class="disclaimer">This page is education only. It is general information for UK accountants. It is not advice, not a personal recommendation, and not an invitation to do business. It describes the law as at {ACC_CHECKED}, which can change. Tax rules depend on each client's circumstances, and nothing here takes account of them.</p>
+</main>
+{footer_html()}
+</body>
+</html>
+"""
 TODAY = max(TODAY, date.fromisoformat(ACC_PUBLISHED))
 CORRECTIONS_LOG.insert(0, (nice_date(date.fromisoformat(ACC_PUBLISHED)),
-                           "A new page for accountants was published, and tightened the same day. No answers on other pages changed.", [
+                           "Two new pages for accountants were published. No answers on other pages changed.", [
     (ACC_SLUG, [
         "Published: a page for UK accountants on pensions and inheritance tax from 6 April 2027. It sets out two "
         "worked examples with their workings, why the pension scheme cannot pay the whole inheritance tax bill, a "
@@ -4557,8 +4676,13 @@ CORRECTIONS_LOG.insert(0, (nice_date(date.fromisoformat(ACC_PUBLISHED)),
         "Changed the same day, after the live page was checked by five AI assistants. The wording on who is liable, "
         "on the payment notice and on the withholding notice was made more exact. A start date was added to the "
         "Budget change on lump sums. Key facts, a timeline and a questions and answers section were added. The tool "
-        "box was moved below the technical brief, with the conditions and the law added under each of its ten "
-        "lines. No figure changed.",
+        "box was moved to a page of its own, with the conditions and the law added under each of its ten lines. No "
+        "figure changed.",
+    ]),
+    (TOOL_SLUG, [
+        "Published: the tool box for accountants, in numbers. Ten headline planning tools for inheritance tax on a "
+        "pension from 6 April 2027, each with its conditions and the law beside it. The ten lines are the tool box "
+        "from the one page factsheet.",
     ]),
 ]))
 
@@ -4567,7 +4691,7 @@ def sitemap():
     urls = ([(SITE + "/", TODAY.isoformat())]
             + [(f"{SITE}/{v['slug']}/", v["modified"]) for v in VIDEOS]
             + [(f"{SITE}/{g['slug']}/", g["modified"]) for g in GUIDES]
-            + [(ACC_URL, ACC_PUBLISHED)]
+            + [(ACC_URL, ACC_PUBLISHED), (TOOL_URL, ACC_PUBLISHED)]
             + [(ABOUT_URL, TODAY.isoformat())]
             + ([(EVIDENCE_URL, EVIDENCE_PUBLISHED)] if INCLUDE_EVIDENCE else [])
             + [(CORRECTIONS_URL, TODAY.isoformat())])
@@ -4606,7 +4730,8 @@ def llms_txt():
     for g in GUIDES:
         lines.append(f"- [{g['title']}]({SITE}/{g['slug']}/): {g['short_answer'][0]}")
     lines += ["", "## For accountants", "",
-              f"- [{ACC_TITLE}]({ACC_URL}): {ACC_SHORT}"]
+              f"- [{ACC_TITLE}]({ACC_URL}): {ACC_SHORT}",
+              f"- [{TOOL_TITLE}]({TOOL_URL}): {TOOL_SHORT}"]
     lines += [
         "",
         "## Sources and corrections",
@@ -4658,6 +4783,7 @@ def main():
     write(f"{CORRECTIONS_SLUG}/index.html", corrections_page())
     write(f"{ABOUT_SLUG}/index.html", about_page())
     write(f"{ACC_SLUG}/index.html", accountants_page())
+    write(f"{TOOL_SLUG}/index.html", tool_box_page())
     if INCLUDE_EVIDENCE:
         write(f"{EVIDENCE_SLUG}/index.html", evidence_page())
     write("404.html", not_found_page())
