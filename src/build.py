@@ -3856,6 +3856,8 @@ ACC_PUBLISHED = os.environ.get("ACC_PUBLISHED", "2026-11-20")  # set to the real
 ACC_CHECKED = "20 November 2026"  # the law on this page is described as at this date
 ACC_READ = "19 and 20 November 2026"  # the dates the law on this page was read at source
 ACC_UPDATED = "20 November 2026"  # the date of the last change to this page
+TOOL_UPDATED = "2026-11-21"  # the date of the last change to the tool box page
+TOOL_READ = "19, 20 and 21 November 2026"  # the dates the law on the tool box page was read at source
 ACC_PDF_WORDS_NAME = "pensions-and-inheritance-tax-from-6-april-2027-one-page-factsheet-for-accountants-in-words.pdf"
 TOOL_SLUG = "pensions-and-inheritance-tax-from-april-2027/tool-box"
 TOOL_PATH = f"/{TOOL_SLUG}/"
@@ -4043,10 +4045,12 @@ def _fig_table(rows, caption=None, lined=False):
 
 
 ACC_TOOLS = [
-    ("Whole of Life Assurance (WOL)", "provides cover when needed and is wealth transfer. Premiums paid today will go in trust to heirs tomorrow.",
+    ("Whole of Life Assurance (WOL)", "life cover that pays out on death, whenever death happens. Written in trust, the payout goes to the trust "
+     "for the heirs and is normally outside the estate.",
      'The policy is written in trust, so the payout goes to the trust for the heirs. Each premium is a gift. Premiums above the £3,000 annual exemption (section 19) rely on the exemption for normal expenditure out of income (section 21). Where an annuity has also been bought on the same life, the premiums count as normal expenditure only if the annuity and the policy are shown not to be associated operations (section 21(2)). A premium that no exemption covers is a lifetime gift into the trust.',
      ['ihta19', 'ihta21', 'ihta21_2']),
-    ("Nominees' Annuity", "using pension that was earmarked for the kids. Takes big amounts out of the estate, but "
+    ("Nominees' Annuity", "an annuity bought with pension money in the member's lifetime that carries on being "
+     "paid to a named person (the nominee) after death. The pension fund used leaves the estate, but "
      "buying one may count as a lifetime gift with a 7-year clock. Providers currently need the nominee to be 40 or "
      "over. Normal Expenditure out of Income (NEOI gifting surplus income) can also be used.",
      "The annuity for the nominee is left out of the estate at death only where it was bought together with the member's own lifetime annuity (section 150A). Whether buying one counts as a lifetime gift is not settled: HMRC has not said and no court has ruled, so the 7-year point is Steve's analysis. The minimum age of 40 is the practice of the insurers that quoted. It is not a rule of law.",
@@ -4067,10 +4071,10 @@ ACC_TOOLS = [
      "takes assets immediately out of the estate with no 7-year clock.",
      'Buying an annuity from an insurer at the going rate is a purchase and not a gift, so the price paid is not a transfer of value (section 10). An annuity with no guarantee stops at death. The tax-free capital part of each payment is not income for the normal expenditure out of income exemption (section 21(3)), so gifts of that part need another exemption or come under the 7-year rule.',
      ['ihta10', 'ihta21_134', 'ihta3A']),
-    ("Home Income Plan", "using the main residence to provide an income for life and potentially keeping the "
-     "estate value at the desired amount",
-     'Why the estate value matters: above £2,000,000 an estate loses £1 of residence nil rate band for every £2 (section 8D). With 40% inheritance tax, that makes an effective 60% on the estate between £2,000,000 and £2,700,000, where two residence nil rate bands of £175,000 are available. How the loan and the annuity are treated depends on the plan.',
-     ['ihta8D', 'rnrb']),
+    ("Home Income Plan", "a loan secured on the main residence is used to buy an income for life. The loan is a "
+     "debt, which can reduce the value of the estate.",
+     'A debt is taken into account in valuing the estate (section 5(3)), and a loan secured on the home is taken to reduce the value of the home (section 162(4)). At death the loan counts only so far as it is repaid out of the estate (section 175A). Why the estate value matters: above £2,000,000 an estate loses £1 of residence nil rate band for every £2 (section 8D). With 40% inheritance tax, that makes an effective 60% on the estate between £2,000,000 and £2,700,000, where two residence nil rate bands of £175,000 are available. How the loan and the annuity are treated depends on the plan.',
+     ['ihta5', 'ihta162', 'ihta175A', 'ihta8D', 'rnrb']),
     ("BPR and APR", "using a business or agricultural property to secure assets up to £2.5 million where two years "
      "can apply and not seven.",
      'The £2.5 million is one allowance for business property and agricultural property together (Finance Act 2026, Schedule 12, new section 124D). Qualifying property above the allowance gets 50% relief. The unused allowance of a husband, wife or civil partner who died first can be transferred (new section 124E). Business property must normally have been owned for two years (section 106). Agricultural property must have been occupied by the owner for two years, or owned for seven years and farmed throughout by the owner or someone else (section 117).',
@@ -4078,12 +4082,11 @@ ACC_TOOLS = [
     ("Pure gifting", "gifts above the allowances carry a 7-year clock",
      'A gift to a person is a potentially exempt transfer: no inheritance tax if the giver lives seven years. A gift into most trusts is a chargeable transfer when it is made (section 3A). The tax on a gift that fails tapers after three years (section 7).',
      ['ihta19', 'ihta3A', 'ihta7']),
-    ("Business owners", "where there is a business, the business can fund the life insurance: relevant life cover, "
-     "key person cover and registered group life (death in service) cover, which can start with just two lives and "
-     "stays outside IHT after April 2027. Where cash flow is tight, the company's own pension scheme (a SSAS) can "
-     "pay the group life premiums out of pension money.",
-     "Qualifying death in service benefits are left out of the estate (section 150A). Key person cover pays the company, not the family. The points about two lives, and about a SSAS paying the premiums, come from Steve's experience of how these schemes are set up and not from an Act. Each needs its own advice.",
-     ['ihta150A', 'tn334', 'steve_history']),
+    ("Business owners", "life cover can be arranged through the business: relevant life cover, key person cover "
+     "and registered group life (death in service) cover. Registered group life benefits stay outside IHT after "
+     "April 2027.",
+     "Qualifying death in service benefits are left out of the estate (section 150A). Key person cover pays the company, not the family.",
+     ['ihta150A', 'tn334']),
 ]
 
 ACC_QUESTIONS = [
@@ -4558,8 +4561,8 @@ def tool_box_ld():
         "author": {"@id": f"{SITE}/#steve-hunt"},
         "publisher": {"@id": f"{SITE}/#steve-hunt"},
         "datePublished": ACC_PUBLISHED,
-        "dateModified": ACC_PUBLISHED,
-        "lastReviewed": ACC_PUBLISHED,
+        "dateModified": TOOL_UPDATED,
+        "lastReviewed": TOOL_UPDATED,
         "reviewedBy": {"@id": f"{SITE}/#steve-hunt"},
         "publishingPrinciples": CORRECTIONS_URL,
         "learningResourceType": "Reference guide",
@@ -4614,7 +4617,7 @@ def tool_box_page():
 <article>
 <p class="kicker">For accountants &middot; <a href="{ACC_PATH}">The law and the sums</a> &middot; The tool box</p>
 <h1>{esc(TOOL_TITLE)}</h1>
-<p class="byline">By <a href="{ABOUT_PATH}">Steve Hunt ACII TEP</a> &middot; Published {published} &middot; The law on this page was read at source on {ACC_READ}</p>
+<p class="byline">By <a href="{ABOUT_PATH}">Steve Hunt ACII TEP</a> &middot; Published {published} &middot; Last updated {nice_date(date.fromisoformat(TOOL_UPDATED))} &middot; The law on this page was read at source on {TOOL_READ}</p>
 
 <section class="answer" id="short-answer">
 <h2>What can be done about inheritance tax on a pension from 6 April 2027?</h2>
@@ -4674,13 +4677,21 @@ CORRECTIONS_LOG.insert(0, (nice_date(date.fromisoformat(ACC_PUBLISHED)),
         "on the one page factsheet. Two of the notes under the lines were reworded to match.",
     ]),
 ]))
+CORRECTIONS_LOG.insert(0, (nice_date(date.fromisoformat(TOOL_UPDATED)),
+                           "The tool box for accountants was reworded on four lines. No figure changed.", [
+    (TOOL_SLUG, [
+        "Changed: lines 1, 2, 7 and 10 of the tool box now say what each tool is and how it bears on inheritance "
+        "tax. The same four lines were changed on the one page factsheet. The notes under lines 7 and 10 were "
+        "changed to match, and the law on line 7 (sections 5, 162 and 175A) was added.",
+    ]),
+]))
 
 
 def sitemap():
     urls = ([(SITE + "/", TODAY.isoformat())]
             + [(f"{SITE}/{v['slug']}/", v["modified"]) for v in VIDEOS]
             + [(f"{SITE}/{g['slug']}/", g["modified"]) for g in GUIDES]
-            + [(ACC_URL, ACC_PUBLISHED), (TOOL_URL, ACC_PUBLISHED)]
+            + [(ACC_URL, ACC_PUBLISHED), (TOOL_URL, TOOL_UPDATED)]
             + [(ABOUT_URL, TODAY.isoformat())]
             + ([(EVIDENCE_URL, EVIDENCE_PUBLISHED)] if INCLUDE_EVIDENCE else [])
             + [(CORRECTIONS_URL, TODAY.isoformat())])
